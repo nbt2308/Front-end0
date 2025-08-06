@@ -1,4 +1,6 @@
 import 'react-pro-sidebar/dist/scss/styles.scss';
+import { Link } from 'react-router-dom';
+import './SideBar.scss';
 import {
     ProSidebar,
     Menu,
@@ -8,8 +10,8 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import { FaReact, FaTachometerAlt, FaGem, FaGithub, FaRegLaughWink } from 'react-icons/fa';
-import { MdDashboardCustomize } from "react-icons/md";
+import { FaReact} from 'react-icons/fa';
+import { MdDashboardCustomize,MdOutlineManageSearch } from "react-icons/md";
 import sidebar_bg from '../../assets/images/bg2.jpg';
 const SideBar = (props) => {
     const { collapsed, rtl, toggled, handleToggleSidebar } = props;
@@ -45,21 +47,24 @@ const SideBar = (props) => {
                 <Menu iconShape="circle">
                     <MenuItem
                         icon={<MdDashboardCustomize />}
-                        // suffix={<span className="badge red">new</span>}
+                    // suffix={<span className="badge red">new</span>}
                     >
 
                         Dashboard
+                         <Link to="/admin" />
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}> components</MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <SubMenu
-                        suffix={<span className="badge yellow">3</span>}
-                        icon={<FaRegLaughWink />}
+                        icon={<MdOutlineManageSearch />}
+                        title={"Features"}
                     >
-                        <MenuItem> 1</MenuItem>
-                        <MenuItem> 2</MenuItem>
-                        <MenuItem> 3</MenuItem>
+                        <MenuItem>
+                            Users management
+                            <Link to="/admin/manage-users" />
+                        </MenuItem>
+                        <MenuItem> Quizs management</MenuItem>
+                        <MenuItem> Questions management</MenuItem>
                     </SubMenu>
 
                 </Menu>
@@ -73,14 +78,14 @@ const SideBar = (props) => {
                     }}
                 >
                     <a
-                        href="https://github.com/azouaoui-med/react-pro-sidebar"
+                        href="https://github.com/nbt2308"
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"
                     >
-                        <FaGithub />
+
                         <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                            viewsource
+                            &copy;NBT
                         </span>
                     </a>
                 </div>
