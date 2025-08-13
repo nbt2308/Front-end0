@@ -1,0 +1,116 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .login-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 500px;
+        height: 600px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+        
+
+        .login-title {
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .social-links {
+            margin: 10px;
+
+            a {
+            
+                border: 1px solid #DDDDDD;
+                border-radius: 50%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 5px;
+                height: 40px;
+                width: 40px;
+                color: #000;
+            }
+        }
+
+        .divider {
+            display: flex;
+            align-self: center;
+            justify-content: center;
+
+            span {
+                font-size: .875rem;
+                padding: 8px 24px;
+                text-transform: capitalize;
+                color: #000000;
+                font-weight: 500;
+            }
+
+        }
+
+        .form-login{
+            
+            width: 300px;
+            .form-group{
+                label{
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                input{
+                    margin-bottom: 10px;
+                }
+            }
+
+            .forgot-password-label{
+                a{
+                    text-decoration: none;
+                    &:hover{
+                        color: #000;
+                    }
+                }
+            }
+
+            .btn-login{
+                display: flex;
+                justify-content: center;
+                margin: 20px 0;
+                button{
+                    width: 100%;
+                    border-radius: 20px;
+                    &:hover{
+                        background-color: #08378e;
+                    }
+                }
+            }
+
+            .sign-up{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                a{
+                    text-decoration: none;
+                    &:hover{
+                        color: #000;
+                    }
+                }
+            }
+            .btn-goBack{
+                
+                margin: 10px 0;
+                border-radius: 20px;
+                background-color: #0d6efd;
+                color: #fff;
+                &:hover{
+                        background-color: #08378e;
+                    }
+            }
+
+            
+        }
+        
+    }
+    
+}

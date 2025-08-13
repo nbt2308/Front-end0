@@ -1,0 +1,165 @@
+.manageUsers-container {
+    .manageUsers-title {
+        margin-left: 20px;
+        margin-top: 50px;
+        font-size: 1.5rem;
+        font-weight: 700;
+    } 
+
+    .Users-content {
+        margin: 50px 20px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        height: 100vh;
+
+        .Add-users {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .search-bar {
+            width: 180px;
+            margin-left: 20px;
+            margin-top: 20px;
+
+            .search-users {
+                height: 50px;
+                border-radius: 30px;
+
+            }
+        }
+    }
+}
+
+
+
+
+
+.btn-showModal {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    padding: 8px 10px;
+    background-color: #0d6efd;
+    transition: 0.2s ease-out;
+
+    &:hover {
+        background-color: #08378e;
+        transition: 0.2s ease-in;
+    }
+}
+
+.modal-add-user {
+    .image-preview {
+        height: 150px;
+        border: 1px dashed #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .label-uploadFile {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: fit-content;
+        border: none;
+        padding: 3px 10px;
+        border-radius: 5px;
+        background-color: #0d6efd;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.2s ease-out;
+
+        &:hover {
+            background-color: #08378e;
+            transition: 0.2s ease-in;
+        }
+    }
+}
+
+.modal-view-user {
+
+    .user-container {
+        margin: 3px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        height: 420px;
+
+        .user-image {
+            border: 1px solid #ccc;
+            width: 200px;
+            height: 150px;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+
+            background-color: #f0f0f0;
+
+            img {
+                object-fit: cover;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        .user-infor-content {
+            height: 225px;
+            margin: 0 20px 20px 20px;
+
+            .user-name {
+                display: flex;
+                justify-content: center;
+
+                span {
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+            }
+
+            .user-infor {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    font-size: 20px;
+                    margin-top: 20px;
+
+                    .icon {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+.modal-delete-user {
+    .modal-header {
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap:5px;
+
+            .icon {
+                color: red;
+            }
+        }
+    }
+    .modal-body{
+        input{
+            margin-top: 10px;
+        }
+    }
+}

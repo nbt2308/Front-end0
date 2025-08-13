@@ -23,6 +23,10 @@
             border: 2px solid blue;
             left: 270px;
             right: 0;
+            .btn-collapse{
+                user-select: none;
+            }
+            
         }
 
         .Admin-main {
@@ -30,7 +34,7 @@
             position: relative;
             top: 100px;
             margin-left: 270px;
-            min-height: calc(100vh - 135px);
+            min-height: calc(100vh - 40px);
         }
     }
 
