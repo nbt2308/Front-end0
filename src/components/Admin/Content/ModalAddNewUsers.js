@@ -8,9 +8,10 @@ import Row from 'react-bootstrap/Row';
 import { FaPlusCircle, FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/apiService';
+import { validateEmail, validatePassword, validateUsername } from '../../../utils/validators';
 const AddUsers = (props) => {
     const [show, setShow] = useState(false);
-    const {setCurrentPage,fetchListUsersWithPaginate}=props
+    const { setCurrentPage, fetchListUsersWithPaginate } = props
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -29,7 +30,7 @@ const AddUsers = (props) => {
     const [Role, setRole] = useState("USER");
     const [Image, setImage] = useState("");
     const [PreviewImage, setPreviewImage] = useState("");
-
+    
     const handleChangeImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImage(URL.createObjectURL(event.target.files[0]));
@@ -38,27 +39,26 @@ const AddUsers = (props) => {
 
         }
     }
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
-    const handleSubmit = async () => {
+    const handleSubmit = async (event) => {
         //validate
         const isInvalidEmail = validateEmail(Email);
+        const isInvalidPassword = validatePassword(Password);
+        const isInvalidUsername = validateUsername(Username);
         if (!isInvalidEmail) {
             toast.error("Invalid Email");
             return;
         }
-        if (!Password) {
-            toast.error("Invalid Password");
+        if (!isInvalidPassword) {
+            toast.error("Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.");
             return;
         }
-
-        //
-        let data = await postCreateNewUser(Email,Password,Username,Role,Image);
+        if (!isInvalidUsername) {
+            toast.error("Username must be at least 5 characters long");
+            return;
+        }
+        
+        //call apis
+        let data = await postCreateNewUser(Email, Password, Username, Role, Image);
 
         if (data && data.EC === 0) {
             toast.success(data.EM);
@@ -144,7 +144,7 @@ const AddUsers = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={() => { handleSubmit() }}>
+                    <Button variant="primary" onClick={(event) => { handleSubmit(event) }}>
                         Save
                     </Button>
                 </Modal.Footer>

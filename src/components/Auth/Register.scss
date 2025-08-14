@@ -1,21 +1,21 @@
-.login-container {
+.register-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .login-content {
+    .register-content {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         width: 500px;
-        height: 600px;
+        height: 700px;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
             0 10px 10px rgba(0, 0, 0, 0.22);
 
 
-        .login-title {
+        .register-title {
             font-size: 30px;
             font-weight: 700;
         }
@@ -52,7 +52,7 @@
 
         }
 
-        .form-login {
+        .form-register {
 
             width: 300px;
 
@@ -64,20 +64,13 @@
 
                 input {
                     margin-bottom: 10px;
+
                 }
             }
 
-            .forgot-password-label {
-                a {
-                    text-decoration: none;
 
-                    &:hover {
-                        color: #000;
-                    }
-                }
-            }
 
-            .btn-login {
+            .btn-register {
                 display: flex;
                 justify-content: center;
                 margin: 20px 0;
@@ -92,12 +85,12 @@
                 }
             }
 
-            .sign-up {
+            .sign-in {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
 
-                .btn-signup {
+                .btn-signin {
                     text-decoration: none;
                     color: rgb(13 110 253);
 
