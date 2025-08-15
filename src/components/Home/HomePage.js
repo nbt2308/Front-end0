@@ -1,9 +1,11 @@
+// import { Nav } from 'react-bootstrap';
 import videoHomePage from '../../assets/video/homepage.mp4';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import {  useNavigate } from "react-router-dom"
 const HomePage = () => {
-    // const isAuthenticated = useSelector(state => state.user.userReducer.isAuthenticated);
-    // const account = useSelector(state => state.user.userReducer.account);
-    
+    const isAuthenticated = useSelector(state => state?.isAuthenticated);
+    // const account = useSelector(state => state?.account);
+    const Navigate=useNavigate();
 
     return (
         <>
@@ -22,7 +24,14 @@ const HomePage = () => {
                         <span className='bottom'>Attract Customer And Increase Time & Brand Recall With Polls, Quizzes, & More.</span>
                     </div>
                     <hr className="hr" />
-                    <div className='homepage-btn'><button>Get started - it's FREE </button></div>
+                    <div className='homepage-btn'>
+                        {isAuthenticated===false?
+                        <button onClick={()=>{Navigate("/login")}}>Get started - it's FREE </button>
+                        :
+                        <button onClick={()=>{Navigate("/users")}}> Doing Quiz Now</button>
+                    }
+                        
+                    </div>
                 </div>
                 <div className='video-container'>
                     <video autoPlay muted loop >
