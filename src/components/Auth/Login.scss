@@ -81,13 +81,31 @@
                 display: flex;
                 justify-content: center;
                 margin: 20px 0;
-
+                
                 button {
                     width: 100%;
                     border-radius: 20px;
 
                     &:hover {
                         background-color: #08378e;
+                    }
+                    .loading-icon{
+                    color: #ffffff;
+                    margin-right: 3px;
+                    animation: spin 1s infinite linear;
+                    }
+                    @keyframes spin {
+                        from{
+                            transform: scale(1) rotate(0deg);
+                        }
+                        to{
+                            transform: scale(1) rotate(360deg);
+                        }
+                    }
+                    &:disabled{
+                        background-color: #a0a0a0;
+                        color: #DDDDDD;
+                        cursor: no-drop;
                     }
                 }
             }

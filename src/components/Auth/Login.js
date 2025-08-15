@@ -6,11 +6,15 @@ import { useState } from 'react';
 import { postLoginUser } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { validateEmail, validatePassword } from '../../utils/validators';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../../redux/actions/userAction';
+import { ImSpinner6 } from "react-icons/im";
 const Login = () => {
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
+    const [isLoadingLogin,setIsLoadingLogin]=useState(false);
     const Navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const handleLogin = async () => {
         //validate
         const isInvalidEmail = validateEmail(Email);
@@ -23,13 +27,18 @@ const Login = () => {
             toast.error("Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.");
             return;
         }
-
+        setIsLoadingLogin(true)
         let data = await postLoginUser(Email, Password);
         if (data && data.EC === 0) {
+            dispatch(doLogin.loginSuccess(data.DT));
             toast.success(data.EM);
+            setIsLoadingLogin(false)
+            Navigate("/");
+
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);
+            setIsLoadingLogin(false)
         }
 
     }
@@ -81,7 +90,8 @@ const Login = () => {
                                 type='button'
                                 className='btn btn-primary '
                                 onClick={() => { handleLogin() }}
-                            >SIGN IN</button>
+                                disabled={isLoadingLogin}
+                            >{isLoadingLogin===true&&<ImSpinner6 className='loading-icon'/>}<span>SIGN IN</span></button>
                         </div>
                         <div className="sign-up">
                             <span>Don't have an account? </span>
