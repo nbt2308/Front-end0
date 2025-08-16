@@ -25,7 +25,7 @@ const ListQuiz = () => {
             {
                 arrQuiz && arrQuiz.length > 0 &&
                 arrQuiz.map((item, index) => {
-                    console.log('item:', item);
+                    
 
                     return (
                         <div key={`${index}-quiz`} className="card" style={{ width: "18rem" }}>
@@ -33,7 +33,7 @@ const ListQuiz = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Quiz {+`${index}` + 1}</h5>
                                 <p className="card-text">{`${item.description}`}</p>
-                                <button className="btn btn-primary" onClick={() => { Navigate(`/quiz/${item.id}`) }}>Start now</button>
+                                <button className="btn btn-primary" onClick={() => { Navigate(`/quiz/${item.id}`,{state:{title:item.description}}) }}>Start now</button>
                             </div>
                         </div>
                     )
