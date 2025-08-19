@@ -16,7 +16,7 @@ const HomePage = () => {
                         <br />
                         Read Our <a href="/">Success Stories</a>
                     </div>
-                    <div className='homepage-maintitle'>Quizs</div>
+                    <div className='homepage-maintitle'>Quiz</div>
                     <hr className="hr" />
                     <div className='homepage-sidetitle'>
                         <span className='top'>Push Your Limits And Spark Curiosity With Thousands Of Fun And Challenging Questions</span>

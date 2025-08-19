@@ -1,21 +1,22 @@
 .detail-quiz-container {
     .detail-quiz-header {
-        
+
         height: 70px;
         display: flex;
         gap: 20px;
         align-items: center;
 
-        button{
-            margin-left:20px ;
+        button {
+            margin-left: 20px;
         }
-        h1{
+
+        h1 {
             font-size: 35px;
         }
     }
 
     .quiz-content {
-        
+
         height: 100vh;
 
         display: flex;
@@ -26,14 +27,16 @@
             width: 70%;
             margin: 20px;
             height: 600px;
+
             .question-container {
                 height: 90%;
-                
+
 
                 .question-image {
                     height: 300px;
                     display: flex;
                     justify-content: center;
+
                     img {
                         margin: 20px;
                         max-width: 100%;
@@ -44,18 +47,21 @@
                 .question-content {
                     display: flex;
                     justify-content: center;
-                    span{
+
+                    span {
                         font-size: 25px;
                         font-weight: 600;
                     }
                 }
-                .answer{
+
+                .answer {
                     margin-left: 30px;
                     margin-top: 30px;
                     font-size: 20px;
                     font-weight: 400;
-                    .form-check{
-                        input{
+
+                    .form-check {
+                        input {
                             border: 1px solid;
                         }
                     }
@@ -67,8 +73,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                
-                
+
+
             }
         }
 
@@ -77,5 +83,41 @@
             border: 1px solid green;
             width: 30%;
         }
+    }
+}
+
+.modal-show-result {
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: red;
+        }
+
+        .result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            p {
+                font-size: 20px;
+                font-weight: 600;
+                margin: 0;
+
+            }
+
+            .counter-result {
+                font-size: 30px;
+                font-weight: 700;
+                color: red;
+            }
+        }
+
     }
 }

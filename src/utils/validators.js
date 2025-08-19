@@ -18,4 +18,10 @@ const validatePassword=(Password) =>{
 const validateUsername=(Username)=>{
     return Username.length>4;
 }
-export { validateEmail ,validatePassword,validateUsername}
+const validateNameQuiz=(name)=>{
+    return name.length>5;
+}
+export { validateEmail ,validatePassword,validateUsername,
+        validateNameQuiz
+
+}

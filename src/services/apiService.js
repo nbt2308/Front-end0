@@ -28,21 +28,53 @@ const getUsersWithPaginate = (page, limit) => {
     return axios.get(`/api/v1/participant?page=${page}&limit=${limit}`);
 }
 const postLoginUser = (Email, Password) => {
-    return axios.post(`/api/v1/login`, { email: Email, password: Password,delay:3000 });
+    return axios.post(`/api/v1/login`, { email: Email, password: Password, delay: 3000 });
 }
 const postRegisterUser = (Email, Username, Password) => {
     return axios.post(`/api/v1/register`, { email: Email, username: Username, password: Password });
 }
-const getQuizByUser=()=>{
+
+//Quiz user
+const getQuizByUser = () => {
     return axios.get('/api/v1/quiz-by-participant')
 }
-const getDataQuiz=(quizID)=>{
-    return axios.get(`/api/v1/questions-by-quiz?quizId=${quizID}`)
+const getDataQuiz = (quizId) => {
+    return axios.get(`/api/v1/questions-by-quiz?quizId=${quizId}`)
 }
-const postLogout=(Email,refresh_token)=>{
-    return axios.post('/api/v1/logout',{email:Email,refresh_token:refresh_token});
+const postSubmitAnswer = (data) => {
+    return axios.post(`/api/v1/quiz-submit`,{...data})
+}
+const postLogout = (Email, refresh_token) => {
+    return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
+}
+
+//CRUD Quiz Management
+const postCreateNewQuiz = (description,name,difficulty,image) => {
+    const data = new FormData();
+    data.append('description', description);
+    data.append('name', name);
+    data.append('difficulty', difficulty);
+    data.append('quizImage', image);
+    return axios.post('/api/v1/quiz', data);
+}
+const getAllQuizForAdmin = () => {
+    return axios.get('/api/v1/quiz/all');
+}
+const putUpdateQuiz = (id, description, name, difficulty,image) => {
+    const data = new FormData();
+    data.append('id', id);
+    data.append('description', description);
+    data.append('name', name);
+    data.append('difficulty', difficulty);
+    data.append('quizImage', image);
+    return axios.put('/api/v1/quiz', data);
+}
+const deleteQuiz = (ID) => {
+    return axios.delete(`/api/v1/quiz/${ID}`);
 }
 export {
     postCreateNewUser, getAllUsers, putUpdateUser, deleteUser,
-    getUsersWithPaginate, postLoginUser, postRegisterUser,getQuizByUser,getDataQuiz,postLogout
+    getUsersWithPaginate, postLoginUser, postRegisterUser, getQuizByUser, getDataQuiz, postLogout,
+    postSubmitAnswer,postCreateNewQuiz,getAllQuizForAdmin,putUpdateQuiz,deleteQuiz
+
 }

@@ -2,7 +2,7 @@ import AddUsers from "./ModalAddNewUsers";
 import SearchBar from "./SearchBar";
 import './ManageUsers.scss';
 import { useEffect, useState } from "react";
-import { getAllUsers, getUsersWithPaginate } from "../../../services/apiService";
+import { getAllUsers, getUsersWithPaginate } from "../../../../services/apiService";
 import ModalUpdateUser from "./ModalUpdateUser"
 import ModalViewUsers from "./ModalViewUsers"
 import ModalDeleteUser from './ModalDeleteUser'
@@ -62,7 +62,7 @@ const ManageUsers = (props) => {
     return (
         <div className="manageUsers-container">
             <div className="manageUsers-title">
-                Users management
+                Users Management
             </div>
             <div className="Users-content">
                 <div className="Add-users">

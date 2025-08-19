@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlusCircle, FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { postCreateNewUser } from '../../../services/apiService';
-import { validateEmail, validatePassword, validateUsername } from '../../../utils/validators';
+import { postCreateNewUser } from '../../../../services/apiService';
+import { validateEmail, validatePassword, validateUsername } from '../../../../utils/validators';
 const AddUsers = (props) => {
     const [show, setShow] = useState(false);
     const { setCurrentPage, fetchListUsersWithPaginate } = props
@@ -30,7 +30,7 @@ const AddUsers = (props) => {
     const [Role, setRole] = useState("USER");
     const [Image, setImage] = useState("");
     const [PreviewImage, setPreviewImage] = useState("");
-    
+
     const handleChangeImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImage(URL.createObjectURL(event.target.files[0]));
@@ -56,10 +56,11 @@ const AddUsers = (props) => {
             toast.error("Username must be at least 5 characters long");
             return;
         }
-        
-        //call apis
-        let data = await postCreateNewUser(Email, Password, Username, Role, Image);
 
+        //call apis
+        let data = await postCreateNewUser(Email, Password, Username, Role, Image); 
+        
+        
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
@@ -124,15 +125,15 @@ const AddUsers = (props) => {
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group className="md-12" controlId="formGridImage">
-                                <Form.Label className='label-uploadFile'><FaPlusCircle className='icon-plus' />Upload Image File</Form.Label>
+                                <Form.Label className='label-uploadFile' for="upload-image"><FaPlusCircle className='icon-plus' />Upload Image File</Form.Label>
                                 <Form.Control
                                     type='file'
                                     hidden
-
+                                    id="upload-image"
                                     onChange={(event) => handleChangeImage(event)}
                                 />
                             </Form.Group>
-                            <Form.Group className="image-preview" controlId="formGridImagePreview">
+                            <Form.Group className="image-preview" controlId="formGridImagePreview" for="upload-image">
                                 {PreviewImage ? <img src={PreviewImage} alt="Preview" /> : <span>Preview Image</span>}
                             </Form.Group>
 

@@ -21,7 +21,7 @@ const TableUserPaginate = (props) => {
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" className="action-col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,15 +35,21 @@ const TableUserPaginate = (props) => {
                                     <td>{item.role}</td>
                                     <td>
                                         <button
-                                            className="btn "
+                                            className="btn btn-view"
                                             onClick={() => handleBtnViewUser(item)}
+                                            type="button"
+                                             data-bs-toggle="tooltip" data-bs-placement="top" title="View"
                                         ><FaEye /></button>
                                         <button
-                                            className="btn mx-3"
+                                            className="btn mx-3 btn-edit"
                                             onClick={() => handleBtnUpdateUser(item)}
+                                            type="button"
+                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                         ><FaPen /></button>
-                                        <button className="btn"
+                                        <button className="btn btn-delete"
                                             onClick={() => handleBtnDeleteUser(item)}
+                                            type="button"
+                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                                         ><FaTrashAlt /></button>
                                     </td>
                                 </tr>

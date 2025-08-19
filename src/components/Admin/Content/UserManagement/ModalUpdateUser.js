@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlusCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { putUpdateUser } from '../../../services/apiService';
+import { putUpdateUser } from '../../../../services/apiService';
 import _ from 'lodash';
 
 const ModalUpdateUser = (props) => {
