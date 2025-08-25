@@ -21,6 +21,7 @@ const validateUsername=(Username)=>{
 const validateNameQuiz=(name)=>{
     return name.length>5;
 }
+
 export { validateEmail ,validatePassword,validateUsername,
         validateNameQuiz
 

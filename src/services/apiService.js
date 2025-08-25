@@ -1,4 +1,5 @@
 import axios from '../utils/axiosCustomize';
+//user
 const postCreateNewUser = (Email, Password, Username, Role, Image) => {
     const data = new FormData();
     data.append('email', Email);
@@ -33,7 +34,9 @@ const postLoginUser = (Email, Password) => {
 const postRegisterUser = (Email, Username, Password) => {
     return axios.post(`/api/v1/register`, { email: Email, username: Username, password: Password });
 }
-
+const postLogout = (Email, refresh_token) => {
+    return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
+}
 //Quiz user
 const getQuizByUser = () => {
     return axios.get('/api/v1/quiz-by-participant')
@@ -44,9 +47,7 @@ const getDataQuiz = (quizId) => {
 const postSubmitAnswer = (data) => {
     return axios.post(`/api/v1/quiz-submit`,{...data})
 }
-const postLogout = (Email, refresh_token) => {
-    return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
-}
+
 
 //CRUD Quiz Management
 const postCreateNewQuiz = (description,name,difficulty,image) => {
@@ -72,9 +73,44 @@ const putUpdateQuiz = (id, description, name, difficulty,image) => {
 const deleteQuiz = (ID) => {
     return axios.delete(`/api/v1/quiz/${ID}`);
 }
+
+//Quiz Management : assign quiz to user, update QA 
+const postAssignQuiz= (quizId,userId)=>{
+    return axios.post('/api/v1/quiz-assign-to-user', {
+        quizId, userId
+    });
+}
+const getQuizWithQA= (quizId)=>{
+    return axios.get(`api/v1/quiz-with-qa/${quizId}`)
+}
+//Questions management
+const postCreateNewQuestion = (quiz_id,description,questionImage) => {
+    const data = new FormData();
+    data.append('quiz_id', quiz_id);
+    data.append('description', description);
+    data.append('questionImage', questionImage);
+    return axios.post('/api/v1/question', data);
+}
+const postCreateNewAnswer = (description,correct_answer,question_id) => {
+   
+    return axios.post('/api/v1/answer', {
+        description,correct_answer,question_id
+    });
+}
+
+
 export {
-    postCreateNewUser, getAllUsers, putUpdateUser, deleteUser,
-    getUsersWithPaginate, postLoginUser, postRegisterUser, getQuizByUser, getDataQuiz, postLogout,
-    postSubmitAnswer,postCreateNewQuiz,getAllQuizForAdmin,putUpdateQuiz,deleteQuiz
+    postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, postLogout,
+    getUsersWithPaginate, postLoginUser, postRegisterUser,
+    
+    getQuizByUser, getDataQuiz,
+    
+    postSubmitAnswer,postCreateNewQuiz,getAllQuizForAdmin,putUpdateQuiz,deleteQuiz,
+
+    postCreateNewQuestion,postCreateNewAnswer,
+    
+    postAssignQuiz,getQuizWithQA
+
+
 
 }

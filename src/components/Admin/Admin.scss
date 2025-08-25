@@ -1,16 +1,7 @@
 .Admin-container {
     display: flex;
 
-    .Sidebar-container {
-        .pro-sidebar {
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            /* left: 0; */
-            z-index: 1;
-            bottom: 0;
-        }
-    }
+    
 
     .Admin-content {
         display: flex;
@@ -18,11 +9,8 @@
         width: 100%;
 
         .Admin-header {
-            position: fixed;
-            height: 100px;
+            height: 50px;
             border: 2px solid blue;
-            left: 270px;
-            right: 0;
             .btn-collapse{
                 user-select: none;
             }
@@ -30,11 +18,7 @@
         }
 
         .Admin-main {
-            border: 2px solid blue;
-            position: relative;
-            top: 100px;
-            margin-left: 270px;
-            min-height: calc(100vh - 40px);
+            height: calc(100vh - 40px);
         }
     }
 

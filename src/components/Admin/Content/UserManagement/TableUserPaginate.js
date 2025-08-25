@@ -14,14 +14,14 @@ const TableUserPaginate = (props) => {
 
     return (
         <>
-            <table className="table table-hover table-bordered">
+            <table className="table table-hover ">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col" className="action-col">Actions</th>
+                        <th scope="col"><span className="ms-4">ID</span></th>
+                        <th scope="col">USERNAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">ROLE</th>
+                        <th scope="col" className="action-col">ACTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,11 +29,11 @@ const TableUserPaginate = (props) => {
                         listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
                             return (
                                 <tr key={`table-user-${index}`}>
-                                    <td>{item.id}</td>
+                                    <td ><span className="ms-4">{item.id}</span></td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
-                                    <td>
+                                    <td className="action-col">
                                         <button
                                             className="btn btn-view"
                                             onClick={() => handleBtnViewUser(item)}

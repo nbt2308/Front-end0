@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux'
 import {store,persistor} from './redux/store'
-import './styles/global.scss';
+import './styles/App.scss';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'nprogress/nprogress.css';
 import LayOut from './LayOut';
 import { BrowserRouter } from "react-router";
 import { PersistGate } from 'redux-persist/integration/react'
-
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'nprogress/nprogress.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>

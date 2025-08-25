@@ -9,7 +9,7 @@ import { postCreateNewQuiz } from '../../../../services/apiService';
 import { validateNameQuiz } from '../../../../utils/validators';
 import { toast } from 'react-toastify';
 const ModalAddQuiz = (props) => {
-    const { show, setShow } = props;
+    const { show, setShow,fetchListQuiz } = props;
     const handleClose = () => {
         setShow(false);
         setName("")
@@ -50,6 +50,7 @@ const ModalAddQuiz = (props) => {
         if(data && data.EC===0)
         {
             toast.success(data.EM);
+            await fetchListQuiz();
             handleClose();
         }
         if (data && data.EC !== 0) {
