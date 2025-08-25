@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { FaPlusCircle, FaFolderPlus, FaMinusCircle } from "react-icons/fa";
 import Select from 'react-select';
 import _ from 'lodash';
-import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer, getQuizWithQA } from '../../../../services/apiService';
+import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer, getQuizWithQA, postUpsertQA } from '../../../../services/apiService';
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
@@ -84,20 +84,20 @@ const ModalUpdateQA = (props) => {
             for (let i = 0; i < data.length; i++) {
                 let q = data[i];
                 if (q.imageFile) {
-                    q.imageName=`Question-${q.id}.jpg`
+                    q.imageName = `Question-${q.id}.jpg`
                     q.imageFile = await urltoFile(`data:image/jpg;base64,${q.imageFile}`, `Question-${q.id}.jpg`, 'image/jpg')
                 }
                 newQA.push(q);
             }
             setQuestions(newQA);
-            console.log('check new',newQA);
-            
+
 
         }
     }
 
     //convert BASE64 string to file object fuction
-    const urltoFile=(url, filename, mimeType)=> {
+    //works for any type of url, (http url, dataURL, blobURL, etc...)
+    const urltoFile = (url, filename, mimeType) => {
         if (url.startsWith('data:')) {
             var arr = url.split(','),
                 mime = arr[0].match(/:(.*?);/)[1],
@@ -113,6 +113,15 @@ const ModalUpdateQA = (props) => {
         return fetch(url)
             .then(res => res.arrayBuffer())
             .then(buf => new File([buf], filename, { type: mimeType }));
+    }
+    //convert file to base64 fuction
+    const toBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
     }
     const handleAddnRemoveQuestions = (type, id) => {
         if (type === 'ADD') {
@@ -259,44 +268,27 @@ const ModalUpdateQA = (props) => {
             return;
         }
 
-
-        //submit question/answer(but not sequence)
-        // await Promise.all(questions.map(async(question)=>{
-        //     const q= await postCreateNewQuestion(
-        //         +selectedOption.value,
-        //         question.description,
-        //         question.imageFile
-        //     )
-        //     console.log('q',q.DT);
-        //     await Promise.all(question.answers.map(async(answer)=>{
-        //         await postCreateNewAnswer(
-        //             answer.description, answer.isCorrect, q.DT.id
-        //         )
-        //     }))
-
-        // }))
-
-        // toast.success("Create new questions and answers success")
-
-
-        //submit question/answer(sequence)
-        for (const question of questions) {
-            const q = await postCreateNewQuestion(
-                +selectedOption.value,
-                question.description,
-                question.imageFile
-            )
-            for (const answer of question.answers) {
-                await postCreateNewAnswer(
-                    answer.description, answer.isCorrect, q.DT.id
-                )
+        let questionsClone = _.cloneDeep(questions);
+        for (let i = 0; i < questionsClone.length; i++) {
+            if (questionsClone[i].imageFile) {
+                questionsClone[i].imageFile = await toBase64(questionsClone[i].imageFile)
             }
         }
-        toast.success(`Create questions and answers succeed`)
-        setQuestions(initQuestions);
-        setIsValidSelected(true);
 
 
+        let res = await postUpsertQA({
+            quizId: selectedOption.value,
+            questions: questionsClone
+        })
+        console.log('res',res);
+        
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+            handleClose();
+        }
+        if (res && res.EC !== 0) {
+            toast.error(res.EM)
+        }
     }
     const handlePreviewImage = (questionId) => {
         let questionsClone = _.cloneDeep(questions);
@@ -310,6 +302,7 @@ const ModalUpdateQA = (props) => {
         }
 
     }
+
     return (
 
         <Modal show={show} onHide={handleClose} size="xl" backdrop="static" className='modal-updateQA' >
@@ -435,7 +428,7 @@ const ModalUpdateQA = (props) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={() => handleSubmitQuestions()}>
                     Save Changes
                 </Button>
             </Modal.Footer>

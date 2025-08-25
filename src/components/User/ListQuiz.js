@@ -25,8 +25,6 @@ const ListQuiz = () => {
             {
                 arrQuiz && arrQuiz.length > 0 &&
                 arrQuiz.map((item, index) => {
-                    
-
                     return (
                         <div key={`${index}-quiz`} className="card" style={{ width: "18rem" }}>
                             <img className="card-img-top" src={`data:image/jpeg;base64,${item.image}`} alt="Card-image-cap" />
