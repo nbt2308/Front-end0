@@ -215,10 +215,15 @@ const ModalUpdateQA = (props) => {
             setQuestions(questionsClone);
         }
     }
+    console.log('question', questions);
 
     const handleSubmitQuestions = async () => {
         //---validate data---
         //validate select quiz
+        if (_.isEmpty(questions)) {
+            toast.error("Please add questions and answers for this quiz");
+            return;
+        }
         if (_.isEmpty(selectedOption)) {
             setIsValidSelected(false)
             return;
@@ -280,8 +285,8 @@ const ModalUpdateQA = (props) => {
             quizId: selectedOption.value,
             questions: questionsClone
         })
-        console.log('res',res);
-        
+        console.log('res', res);
+
         if (res && res.EC === 0) {
             toast.success(res.EM);
             handleClose();
@@ -331,94 +336,98 @@ const ModalUpdateQA = (props) => {
                             />
                             <div className="invalid-feedback">Please select a quiz</div>
                         </div>
-                        <div className='mt-3'>Add questions</div>
-                        {
-                            questions && questions.length > 0 &&
-                            questions.map((question, index_question) => {
-                                return (
-                                    <div key={question.id} className='q-main mb-4'>
-                                        <div className="questions ">
-                                            <div className="form-floating mt-1 col-6">
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${!question.isValidQuestion ? "is-invalid" : ""}`}
-                                                    placeholder="name@example.com"
-                                                    value={question.description}
-                                                    onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
-                                                />
-                                                <div className="invalid-feedback">Question cannot be empty</div>
-                                                <label >Question {index_question + 1}'s description</label>
-                                            </div>
-                                            <div className='col-2 uploadFile-container' >
-                                                <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />Upload image</label>
-                                                <input
-                                                    type="file"
-                                                    id={`${question.id}`}
-                                                    hidden
-                                                    accept="image/*"
-                                                    onChange={(event) => handleOnchangeImageFile(question.id, event)} />
 
-                                                <div className='file-name'>
-                                                    <span>
-                                                        {question.imageName ?
-                                                            <span onClick={() => handlePreviewImage(question.id)}>
-                                                                {question.imageName}
-                                                            </span>
-                                                            :
-                                                            "0 file is uploaded"}
-                                                    </span>
+                        {
+                            questions && questions.length > 0 ?
+                                questions.map((question, index_question) => {
+                                    return (
+
+                                        <div key={question.id} className='q-main mb-4'>
+                                            <div className='mt-3'>Add questions</div>
+                                            <div className="questions ">
+                                                <div className="form-floating mt-1 col-6">
+                                                    <input
+                                                        type="text"
+                                                        className={`form-control ${!question.isValidQuestion ? "is-invalid" : ""}`}
+                                                        placeholder="name@example.com"
+                                                        value={question.description}
+                                                        onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
+                                                    />
+                                                    <div className="invalid-feedback">Question cannot be empty</div>
+                                                    <label >Question {index_question + 1}'s description</label>
+                                                </div>
+                                                <div className='col-2 uploadFile-container' >
+                                                    <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />Upload image</label>
+                                                    <input
+                                                        type="file"
+                                                        id={`${question.id}`}
+                                                        hidden
+                                                        accept="image/*"
+                                                        onChange={(event) => handleOnchangeImageFile(question.id, event)} />
+
+                                                    <div className='file-name'>
+                                                        <span>
+                                                            {question.imageName ?
+                                                                <span onClick={() => handlePreviewImage(question.id)}>
+                                                                    {question.imageName}
+                                                                </span>
+                                                                :
+                                                                "0 file is uploaded"}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="action-btn">
+                                                    <button className='btn-plus btn' onClick={() => { handleAddnRemoveQuestions("ADD", '') }}><FaPlusCircle /></button>
+                                                    {
+                                                        questions.length > 1
+                                                        &&
+                                                        <button className='btn-minus btn' onClick={() => { handleAddnRemoveQuestions("REMOVE", question.id) }}><FaMinusCircle /></button>
+                                                    }
+
                                                 </div>
                                             </div>
-                                            <div className="action-btn">
-                                                <button className='btn-plus btn' onClick={() => { handleAddnRemoveQuestions("ADD", '') }}><FaPlusCircle /></button>
-                                                {
-                                                    questions.length > 1
-                                                    &&
-                                                    <button className='btn-minus btn' onClick={() => { handleAddnRemoveQuestions("REMOVE", question.id) }}><FaMinusCircle /></button>
-                                                }
+                                            {
+                                                question.answers && question.answers.length > 0 &&
+                                                question.answers.map((answer, index_answer) => {
+                                                    return (
+                                                        <div key={answer.id} className="answers-content mt-3">
 
-                                            </div>
-                                        </div>
-                                        {
-                                            question.answers && question.answers.length > 0 &&
-                                            question.answers.map((answer, index_answer) => {
-                                                return (
-                                                    <div key={answer.id} className="answers-content mt-3">
-
-                                                        <input
-                                                            className="form-check-input"
-                                                            type="checkbox"
-                                                            checked={answer.isCorrect}
-                                                            onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
-                                                        />
-                                                        <div className="form-floating mt-1 ">
                                                             <input
-                                                                type="text"
-                                                                className={`form-control ${!answer.isValidAnswer ? "is-invalid" : ""}`}
-                                                                placeholder="name@example.com"
-                                                                value={answer.description}
-                                                                onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                checked={answer.isCorrect}
+                                                                onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
                                                             />
-                                                            <div className="invalid-feedback">Answer cannot be empty</div>
-                                                            <label >Answer {index_answer + 1}</label>
-                                                        </div>
-                                                        <div className="action-btn">
-                                                            <button className='btn-plus btn' onClick={() => { handleAddnRemoveAnswers("ADD", question.id) }}><FaPlusCircle /></button>
-                                                            {
-                                                                question.answers.length > 1 &&
-                                                                <button className='btn-minus btn' onClick={() => { handleAddnRemoveAnswers("REMOVE", question.id, answer.id) }}><FaMinusCircle /></button>
-                                                            }
+                                                            <div className="form-floating mt-1 ">
+                                                                <input
+                                                                    type="text"
+                                                                    className={`form-control ${!answer.isValidAnswer ? "is-invalid" : ""}`}
+                                                                    placeholder="name@example.com"
+                                                                    value={answer.description}
+                                                                    onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
+                                                                />
+                                                                <div className="invalid-feedback">Answer cannot be empty</div>
+                                                                <label >Answer {index_answer + 1}</label>
+                                                            </div>
+                                                            <div className="action-btn">
+                                                                <button className='btn-plus btn' onClick={() => { handleAddnRemoveAnswers("ADD", question.id) }}><FaPlusCircle /></button>
+                                                                {
+                                                                    question.answers.length > 1 &&
+                                                                    <button className='btn-minus btn' onClick={() => { handleAddnRemoveAnswers("REMOVE", question.id, answer.id) }}><FaMinusCircle /></button>
+                                                                }
+
+                                                            </div>
 
                                                         </div>
+                                                    )
+                                                })
+                                            }
 
-                                                    </div>
-                                                )
-                                            })
-                                        }
-
-                                    </div>
-                                )
-                            })
+                                        </div>
+                                    )
+                                })
+                                :
+                                <p className='noti-emptyQA'>Quiz is empty. Please add questions and answer for this quiz</p>
 
                         }
                     </div>
@@ -428,8 +437,11 @@ const ModalUpdateQA = (props) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => handleSubmitQuestions()}>
-                    Save Changes
+                <Button
+                    variant="primary"
+                    onClick={() => handleSubmitQuestions()}>
+
+                    Submit
                 </Button>
             </Modal.Footer>
             <Lightbox

@@ -143,7 +143,7 @@ const DetailQuiz = (props) => {
 
                 </div>
                 <div className="right-content">
-
+                    
                 </div>
             </div>
             <ModalResult
