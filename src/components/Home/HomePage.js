@@ -6,7 +6,6 @@ const HomePage = () => {
     const isAuthenticated = useSelector(state => state?.isAuthenticated);
     // const account = useSelector(state => state?.account);
     const Navigate=useNavigate();
-
     return (
         <>
             <div className='Homepage-content'>

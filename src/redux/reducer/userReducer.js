@@ -7,6 +7,7 @@ const userReducer = createSlice({
             access_token: '',
             refresh_token: '',
             username: '',
+            email: '',
             image: '',
             role: ''
         },
@@ -14,20 +15,27 @@ const userReducer = createSlice({
     },
     reducers: {
         FETCH_USER_LOGIN_SUCCESS: (state, action) => {
-            
-
             state.account = {
                 ...state.account,
                 ...action.payload
             }
-            state.isAuthenticated=true;
-            
+            state.isAuthenticated = true;
+
         },
-        decrement: (state) => {
-            state.count -= 1;
+        USER_LOGOUT_SUCCESS: (state) => {
+            state.account = {
+                access_token: '',
+                refresh_token: '',
+                username: '',
+                email: '',
+                image: '',
+                role: ''
+
+            }
+            state.isAuthenticated = false
         },
     },
 });
 
-export const { FETCH_USER_LOGIN_SUCCESS , decrement } = userReducer.actions;
+export const { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } = userReducer.actions;
 export default userReducer.reducer;

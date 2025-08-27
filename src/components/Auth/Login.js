@@ -42,6 +42,11 @@ const Login = () => {
         }
 
     }
+    const handleKeyDown=(event)=>{
+        if(event.key==='Enter'){
+            handleLogin();
+        }
+    }
     return (
         <>
             <div className="login-container ">
@@ -80,7 +85,9 @@ const Login = () => {
                                 value={Password}
                                 onChange={(event) => { setPassword(event.target.value) }}
                                 placeholder='Password'
-                                required />
+                                required 
+                                onKeyDown={(event)=>handleKeyDown(event)}
+                                />
                         </div>
 
                         <span className="forgot-password-label  "><a href="/login">Forgot your password?</a></span>
