@@ -1,6 +1,12 @@
 import _ from "lodash"
+import "yet-another-react-lightbox/styles.css";
+import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/plugins/captions.css";
+import { useState } from "react";
 const Questions = (props) => {
     const { data, questionIndex, handleDataCheckbox } = props;
+    const [open, setOpen] = useState(false);
     if (_.isEmpty(data)) {
         return (<></>)
     }
@@ -10,12 +16,36 @@ const Questions = (props) => {
         handleDataCheckbox(answerID, questionID);
 
     }
+   
+    const handlePreviewImage = () => {
+        
+        setOpen(true)
+    }
     return (
         <>
             {
                 data.image ?
                     <div className="question-image">
-                        <img src={`data:image/jpeg;base64,${data.image}`} alt="QuestionImage" />
+                        <img
+                            src={`data:image/jpeg;base64,${data.image}`}
+                            alt="QuestionImage"
+                            onClick={() => handlePreviewImage()} />
+                        <Lightbox
+                            open={open}
+                            close={() => setOpen(false)}
+                            plugins={[ Zoom]}
+                            zoom={{ scrollToZoom: true }}
+                            slides={data.image?[
+                                {
+                                    src: `data:image/jpeg;base64,${data.image}`,
+                                    title: "Preview image",
+                                },
+                            ]: []}
+                            render={{
+                                buttonPrev: () => null, // ẩn nút Prev
+                                buttonNext: () => null, // ẩn nút Next
+                            }}
+                        />
                     </div>
                     :
                     <div className="question-image">

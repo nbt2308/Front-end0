@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { FaPlusCircle, FaFolderPlus, FaMinusCircle } from "react-icons/fa";
 import Select from 'react-select';
 import _ from 'lodash';
-import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer, getQuizWithQA, postUpsertQA } from '../../../../services/apiService';
+import { getAllQuizForAdmin, getQuizWithQA, postUpsertQA } from '../../../../services/apiService';
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
@@ -215,7 +215,6 @@ const ModalUpdateQA = (props) => {
             setQuestions(questionsClone);
         }
     }
-    console.log('question', questions);
 
     const handleSubmitQuestions = async () => {
         //---validate data---
@@ -305,7 +304,7 @@ const ModalUpdateQA = (props) => {
                 title: questionsClone[index].imageName
             })
         }
-
+        
     }
 
     return (

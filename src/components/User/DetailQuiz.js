@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router";
 import { getDataQuiz, postSubmitAnswer } from "../../services/apiService";
-import ModalResult from "./ModalResult";
 import './DetailQuiz.scss';
+import ModalResult from "./ModalResult";
 import Questions from "./Questions";
+import RightContent from "./QuizContent/RightContent";
 import _ from "lodash";
 const DetailQuiz = (props) => {
     const params = useParams();
     const quizId = params.id;
     const location = useLocation();
-    const Navigate=useNavigate();
+    const Navigate = useNavigate();
     const [dataQuiz, setDataQuiz] = useState([]);
     const [index, setIndex] = useState(0);
 
     const [showModalResult, setShowModalResult] = useState(false);
-    const [dataModalResult,setDataModalResult]=useState("");
+    const [dataModalResult, setDataModalResult] = useState("");
     useEffect(() => {
         fetchQuestions();
     }, [quizId])
@@ -82,13 +83,13 @@ const DetailQuiz = (props) => {
             quizId: +quizId,
             answers: []
         }
-        
+
         if (dataQuiz && dataQuiz.length > 0) {
             dataQuiz.forEach(item => {
                 let questionId = item.questionid;
                 let userAnswerId = [];
 
-                //get useruserAnswerId
+                //get userAnswerId
                 item.answerContainer.forEach(answer => {
                     if (answer.isChecked === true) {
                         userAnswerId.push(answer.id);
@@ -101,29 +102,24 @@ const DetailQuiz = (props) => {
                 })
             })
             let res = await postSubmitAnswer(payload);
-            if(res && res.EC===0)
-            {
+            if (res && res.EC === 0) {
                 setShowModalResult(true);
                 setDataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
-                    quizData:res.DT.quizData
+                    quizData: res.DT.quizData
                 })
             }
-            else{
+            else {
 
             }
 
         }
     }
-    
-
-
-
     return (
         <div className="detail-quiz-container">
             <div className="detail-quiz-header">
-                <button className="btn btn-primary" onClick={()=>{Navigate("/")}}>Go to Homepage </button>
+                <button className="btn btn-primary" onClick={() => { Navigate("/") }}>Go to Homepage </button>
                 <h1>Quiz {quizId}: {location?.state?.title}</h1>
             </div>
             <div className="quiz-content">
@@ -143,14 +139,17 @@ const DetailQuiz = (props) => {
 
                 </div>
                 <div className="right-content">
-                    
+                    <RightContent
+                        dataQuiz={dataQuiz}
+                        handleFinish={handleFinish} 
+                        setIndex={setIndex}/>
                 </div>
             </div>
             <ModalResult
                 show={showModalResult}
                 setShow={setShowModalResult}
-                dataModalResult={dataModalResult} 
-                />
+                dataModalResult={dataModalResult}
+            />
         </div>
     )
 }
