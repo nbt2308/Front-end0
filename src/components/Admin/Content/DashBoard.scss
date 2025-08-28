@@ -1,0 +1,98 @@
+.dashboard-container {
+    // background-color:#F6F5F9;
+    height: 100vh;
+
+    .breadcrumb-container {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .dashboard-title {
+        margin-left: 20px;
+        margin-top: 10px;
+        font-size: 1.875rem;
+        font-weight: 700;
+    }
+
+    .dashboard-content {
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-right: 20px;
+
+        .top {
+            .card {
+                display: flex;
+                flex-direction: row;
+                // gap: 50%;
+                align-items: center;
+                // justify-content: space-between;
+
+                .stats {
+                    display: flex;
+                    flex-direction: column;
+
+                    .text-1 {
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+
+                    .text-2 {
+                        font-size: 1.6rem;
+                        font-weight: 700;
+                    }
+                }
+
+                .icon {
+                    display: flex;
+                    justify-content: flex-end;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .bottom {
+            .chart {
+                height: 350px;
+            }
+
+            .others {
+                height: 350px;
+
+                .text-1 {
+                    margin-left: 5px;
+                    margin-bottom: 5px;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+
+                .child {
+                    border: 1px solid #cfcece;
+                    border-radius: 10px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                    height: 10rem;
+
+
+                    .text-1 {
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+
+                    .text-2 {
+                        font-size: 1.6rem;
+                        font-weight: 700;
+                    }
+
+                    .icon {
+                        font-size: 2rem;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+            }
+        }
+
+    }
+}

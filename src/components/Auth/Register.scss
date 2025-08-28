@@ -1,5 +1,22 @@
+.register-main{
+    height: calc(100vh - 0px);
+.languages-change-container{
+    width: fit-content;
+}
+.brand-name {
+        height: 100px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
 .register-container {
-    height: 100vh;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +27,7 @@
         justify-content: center;
         flex-direction: column;
         width: 500px;
-        height: 700px;
+        height: fit-content;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
             0 10px 10px rgba(0, 0, 0, 0.22);
 
@@ -18,10 +35,11 @@
         .register-title {
             font-size: 30px;
             font-weight: 700;
+            
         }
 
         .social-links {
-            margin: 10px;
+            margin-top: 10px;
 
             a {
 
@@ -34,6 +52,10 @@
                 height: 40px;
                 width: 40px;
                 color: #000;
+                &:hover{
+                        background-color: #ccc;
+                        border: 1px solid #b1b1b1;
+                    }
             }
         }
 
@@ -44,7 +66,7 @@
 
             span {
                 font-size: .875rem;
-                padding: 8px 24px;
+                padding: 0px 24px;
                 text-transform: capitalize;
                 color: #000000;
                 font-weight: 500;
@@ -54,7 +76,7 @@
 
         .form-register {
 
-            width: 300px;
+            width: 400px;
 
             .form-group {
                 label {
@@ -118,4 +140,5 @@
 
     }
 
+}
 }

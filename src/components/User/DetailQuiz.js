@@ -38,6 +38,7 @@ const DetailQuiz = (props) => {
                         temp.answers.isChecked = false
                         answerContainer.push(temp.answers)
                     })
+                    answerContainer=_.orderBy(answerContainer,['id'],['asc'])
                     return {
                         questionid: index, answerContainer, questionDescription, image
                     };

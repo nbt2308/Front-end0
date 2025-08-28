@@ -15,9 +15,10 @@ import NotFound from "./components/Error/404NotFound";
 import ManageQuiz from "./components/Admin/Content/QuizManagement/ManageQuiz";
 import ManageQuestions from "./components/Admin/Content/QuestionManagement/ManageQuestions";
 import PrivateRoute from "./routes/PrivateRoute";
+import { Suspense } from 'react';
 const LayOut = (props) => {
     return (
-        <>
+        <Suspense fallback="...is loading">
             <Routes>
                 <Route path="/" element={<App />} >
                     <Route index element={<HomePage />} />
@@ -44,7 +45,7 @@ const LayOut = (props) => {
             </Routes>
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick={false}
@@ -54,7 +55,7 @@ const LayOut = (props) => {
                 pauseOnHover
                 theme="light"
             />
-        </>
+        </Suspense>
     )
 }
 export default LayOut;

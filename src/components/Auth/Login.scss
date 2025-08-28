@@ -1,146 +1,172 @@
-.login-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login-main {
+    height: calc(100vh - 0px);
 
-    .login-content {
+    .languages-change-container {
+        width: fit-content;
+    }
+
+    .brand-name {
+        height: 100px;
+        
         display: flex;
-        align-items: center;
         justify-content: center;
-        flex-direction: column;
-        width: 500px;
-        height: 600px;
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(0, 0, 0, 0.22);
+        align-items: center;
 
-
-        .login-title {
-            font-size: 30px;
-            font-weight: 700;
+        img {
+            max-width: 100%;
+            max-height: 100%;
         }
+    }
 
-        .social-links {
-            margin: 10px;
+    .login-container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        // align-items: center;
 
-            a {
-
-                border: 1px solid #DDDDDD;
-                border-radius: 50%;
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 5px;
-                height: 40px;
-                width: 40px;
-                color: #000;
-            }
-        }
-
-        .divider {
+        .login-content {
             display: flex;
-            align-self: center;
-            justify-content: center;
+            align-items: center;
+            // justify-content: center;
+            flex-direction: column;
+            border-radius: 10px;
+            width: 500px;
+            height: fit-content;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
 
-            span {
-                font-size: .875rem;
-                padding: 8px 24px;
-                text-transform: capitalize;
-                color: #000000;
-                font-weight: 500;
+
+            .login-title {
+                font-size: 30px;
+                font-weight: 700;
             }
+            .social-links {
+                margin-top: 10px;
 
-        }
-
-        .form-login {
-
-            width: 300px;
-
-            .form-group {
-                label {
-                    font-size: 14px;
-                    font-weight: 500;
-                }
-
-                input {
-                    margin-bottom: 10px;
-                }
-            }
-
-            .forgot-password-label {
                 a {
-                    text-decoration: none;
 
-                    &:hover {
-                        color: #000;
+                    border: 1px solid #DDDDDD;
+                    border-radius: 50%;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 5px;
+                    height: 40px;
+                    width: 40px;
+                    color: #000;
+                    &:hover{
+                        background-color: #ccc;
+                        border: 1px solid #b1b1b1;
                     }
                 }
             }
 
-            .btn-login {
+            .divider {
                 display: flex;
+                align-self: center;
                 justify-content: center;
-                margin: 20px 0;
-                
-                button {
-                    width: 100%;
+
+                span {
+                    font-size: .875rem;
+                    padding: 0 24px;
+                    text-transform: capitalize;
+                    color: #000000;
+                    font-weight: 500;
+                }
+
+            }
+
+            .form-login {
+
+                width: 400px;
+
+                .form-group {
+                    label {
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    
+                }
+
+                .forgot-password-label {
+                    a {
+                        text-decoration: none;
+
+                        &:hover {
+                            color: #000;
+                        }
+                    }
+                }
+
+                .btn-login {
+                    display: flex;
+                    justify-content: center;
+                    margin: 20px 0;
+
+                    button {
+                        width: 100%;
+                        border-radius: 20px;
+
+                        &:hover {
+                            background-color: #08378e;
+                        }
+
+                        .loading-icon {
+                            color: #ffffff;
+                            margin-right: 3px;
+                            animation: spin 1s infinite linear;
+                        }
+
+                        @keyframes spin {
+                            from {
+                                transform: scale(1) rotate(0deg);
+                            }
+
+                            to {
+                                transform: scale(1) rotate(360deg);
+                            }
+                        }
+
+                        &:disabled {
+                            background-color: #a0a0a0;
+                            color: #DDDDDD;
+                            cursor: no-drop;
+                        }
+                    }
+                }
+
+                .sign-up {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .btn-signup {
+                        text-decoration: none;
+                        color: rgb(13 110 253);
+
+                        &:hover {
+                            color: #000;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .btn-goBack {
+                    margin: 10px 0;
                     border-radius: 20px;
+                    background-color: #0d6efd;
+                    color: #fff;
 
                     &:hover {
                         background-color: #08378e;
                     }
-                    .loading-icon{
-                    color: #ffffff;
-                    margin-right: 3px;
-                    animation: spin 1s infinite linear;
-                    }
-                    @keyframes spin {
-                        from{
-                            transform: scale(1) rotate(0deg);
-                        }
-                        to{
-                            transform: scale(1) rotate(360deg);
-                        }
-                    }
-                    &:disabled{
-                        background-color: #a0a0a0;
-                        color: #DDDDDD;
-                        cursor: no-drop;
-                    }
                 }
+
+
             }
-
-            .sign-up {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                .btn-signup {
-                    text-decoration: none;
-                    color: rgb(13 110 253);
-
-                    &:hover {
-                        color: #000;
-                        cursor: pointer;
-                    }
-                }
-            }
-
-            .btn-goBack {
-
-                margin: 10px 0;
-                border-radius: 20px;
-                background-color: #0d6efd;
-                color: #fff;
-
-                &:hover {
-                    background-color: #08378e;
-                }
-            }
-
 
         }
 
     }
-
 }

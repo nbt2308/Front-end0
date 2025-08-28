@@ -1,20 +1,66 @@
 .Admin-container {
     display: flex;
-
-    
-
     .Admin-content {
         display: flex;
         flex-direction: column;
         width: 100%;
 
         .Admin-header {
-            height: 50px;
-            border: 2px solid blue;
-            .btn-collapse{
+            height: 80px;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .btn-collapse {
                 user-select: none;
+                cursor: pointer;
+                font-size: 25px;
+                color: #000000;
+                margin-left: 20px;
+                background-color: transparent;
+                
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+
+                &:hover {
+                    color: #818181;
+                    
+                }
             }
-            
+
+            .rightside {
+                display: flex; 
+                align-items: center; 
+                gap: 20px; 
+                .settings {
+                    user-select: none;
+                    cursor: pointer;
+                    color: #000000;
+                    border: none;
+                    border-radius: 12px;
+                    &:hover {
+                        color: #28a745;
+                    }
+
+
+                }
+
+
+                .languages {
+                    border: none;
+                    border-radius: 12px;
+                    padding: 5px 5px;
+                    cursor: pointer;
+                    &:hover {
+                        color: #28a745;
+                        
+                    }
+
+                }
+            }
         }
 
         .Admin-main {

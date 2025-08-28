@@ -1,0 +1,53 @@
+{
+    "homepage": {
+        "header": {
+            "home": "Home",
+            "users": "Users",
+            "admin": "Admin",
+            "login": "Sign in",
+            "signup": "Sign up",
+            "profile": "My account",
+            "logout": "Logout",
+            "vi": "Vietnamese",
+            "en": "English"
+        },
+        "loginPage": {
+            "loginTitle": "Sign in",
+            "divider": "Or use your account",
+            "labelEmail": "Email address",
+            "labelInValidEmail": "Please enter a valid email address.",
+            "labelPassword": "Password",
+            "labelInValidPassword": "Please enter a valid password.",
+            "labelForgotPassword": "Forgot your password?",
+            "buttonSignIn": "SIGN IN",
+            "labelSignUp": "Don't have an account?",
+            "buttonCreateAccount": "Create a new account",
+            "buttonGoToHomePage": "Go to Homepage"
+        },
+        "registerPage": {
+            "registerTitle": "Create a new account",
+            "divider": "Or use your email",
+            "labelUsername": "Username",
+            "labelInvalidUsername": "Username must be at least 5 characters long",
+            "labelConfirmPassword": "Confirm password",
+            "labelInValidPassword": "Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.",
+            "labelInvalidConfirmPassword": "Passwords do not match!",
+            "buttonSignup": "SIGN UP",
+            "labelSignIn": "Already have an Account?",
+            "buttonSignIn": "Login here"
+        },
+        "userStats": {
+            "userstats1": "20M+ Users",
+            "userstats2": "Read Our",
+            "userstats3": " Success Stories"
+        },
+        "sideTitle": {
+            "titletop": "Push Your Limits And Spark Curiosity With Thousands Of Fun And Challenging Questions",
+            "titlebottom": "Attract Customer And Increase Time & Brand Recall With Polls, Quizzes, & More."
+        },
+        "buttonBegin": {
+            "button1": "Get started - it's FREE",
+            "button2": "Doing Quiz Now"
+        }
+    }
+}

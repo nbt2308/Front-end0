@@ -101,6 +101,10 @@ const postCreateNewAnswer = (description,correct_answer,question_id) => {
     });
 }
 
+//Dashboard
+const getDashboard=()=>{
+    return axios.get(`/api/v1/overview`)
+}
 
 export {
     postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, postLogout,
@@ -112,8 +116,9 @@ export {
 
     postCreateNewQuestion,postCreateNewAnswer,
     
-    postAssignQuiz,getQuizWithQA,postUpsertQA
+    postAssignQuiz,getQuizWithQA,postUpsertQA,
 
+    getDashboard
 
 
 }

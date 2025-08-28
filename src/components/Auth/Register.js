@@ -5,12 +5,22 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { postRegisterUser } from '../../services/apiService';
 import { validateEmail, validatePassword, validateUsername } from '../../utils/validators';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import './Register.scss';
+import Language from "../Header/Language";
+import { useTranslation } from 'react-i18next';
+import brandname from "../../assets/images/brandname.png"
 const Register = () => {
+    const { t } = useTranslation();
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
     const [Username, setUsername] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [isValidUsername, setIsValidUsername] = useState(true);
+    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [isValidPassword, setIsValidPassword] = useState(true);
+    const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+
     const Navigate = useNavigate();
 
     const handleRegister = async () => {
@@ -18,23 +28,40 @@ const Register = () => {
         const isInvalidEmail = validateEmail(Email);
         const isInvalidPassword = validatePassword(Password);
         const isInvalidUsername = validateUsername(Username);
+        //validate username
         if (!isInvalidUsername) {
-            toast.error("Username must be at least 5 characters long");
+            
+            setIsValidUsername(false)
             return;
         }
+        else {
+            setIsValidUsername(true);
+        }
+        //validate email
         if (!isInvalidEmail) {
-            toast.error("Invalid Email");
+            setIsValidEmail(false)
             return;
         }
+        else {
+            setIsValidEmail(true);
+        }
+        //validate password
         if (!isInvalidPassword) {
-            toast.error("Password must be at least 5 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+            setIsValidPassword(false)
             return;
         }
+        else {
+            setIsValidPassword(true);
+        }
+        //validate confirm password
         if (confirmPassword !== Password) {
-            toast.error("Passwords do not match!");
+
+            setIsValidConfirmPassword(false)
             return;
         }
-
+        else {
+            setIsValidConfirmPassword(true);
+        }
         let data = await postRegisterUser(Email, Username, Password);
         if (data && data.EC === 0) {
             toast.success(data.EM);
@@ -47,76 +74,103 @@ const Register = () => {
     }
     return (
         <>
-            <div className="register-container ">
 
-                <div className="register-content">
-
-                    <div className="register-title">
-                        <span>Sign up</span>
+            <div className="register-main">
+                <PerfectScrollbar>
+                    <div className='languages-change-container'>
+                        <Language />
                     </div>
-                    <div className="social-links">
-                        <a href='/login'><FaFacebookF /></a>
-                        <a href='/login' className='mx-3'><SiGmail /></a>
-                        <a href='/login'><FaGithub /></a>
+                     <div className='brand-name'><img src={brandname} alt="NBT" /></div>
+                    <div className="register-container ">
+
+                        <div className="register-content">
+
+                            <div className="register-title mt-3">
+                                <span>{t('homepage.registerPage.registerTitle')}</span>
+                            </div>
+                            <div className="social-links">
+                                <a href='/login'><FaFacebookF /></a>
+                                <a href='/login' className='mx-3'><SiGmail /></a>
+                                <a href='/login'><FaGithub /></a>
+
+                            </div>
+                            <div className="divider my-3">
+                                <span>{t('homepage.registerPage.divider')}</span>
+                            </div>
+                            <div className="form-register mx-auto ">
+                                <div className="form-group">
+                                    <div class="form-floating ">
+                                        <input
+                                            type="text"
+                                            className={isValidUsername?'form-control':'form-control is-invalid'}
+                                            value={Username}
+                                            onChange={(event) => { setUsername(event.target.value) }} required
+                                            id="floatingInput"
+                                            placeholder="name@example.com" />
+                                        <label for="floatingInput">{t('homepage.registerPage.labelUsername')}</label>
+                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInvalidUsername')}</div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div class="form-floating ">
+                                        <input type="email"
+                                            className={isValidEmail?'form-control':'form-control is-invalid'}
+                                            value={Email}
+                                            onChange={(event) => { setEmail(event.target.value) }}
+                                            required
+                                            id="floatingInput"
+                                            placeholder="name@example.com" />
+                                        <label for="floatingInput">{t('homepage.loginPage.labelEmail')}</label>
+                                        <div className="invalid-feedback">{t('homepage.loginPage.labelInValidEmail')}</div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+
+                                    <div class="form-floating ">
+                                        <input type="password"
+                                            className={isValidPassword?'form-control':'form-control is-invalid'}
+                                            value={Password}
+                                            onChange={(event) => { setPassword(event.target.value) }}
+                                            required
+                                            id="floatingInput"
+                                            placeholder="name@example.com" />
+                                        <label for="floatingInput">{t('homepage.loginPage.labelPassword')}</label>
+                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInValidPassword')}</div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+
+                                    <div class="form-floating ">
+                                        <input type="password"
+                                            className={isValidConfirmPassword?'form-control':'form-control is-invalid'}
+                                            value={confirmPassword}
+                                            onChange={(event) => { setConfirmPassword(event.target.value) }}
+                                            required
+                                            id="floatingInput"
+                                            placeholder="name@example.com" />
+                                        <label for="floatingInput">{t('homepage.registerPage.labelConfirmPassword')}</label>
+                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInvalidConfirmPassword')}</div>
+                                    </div>
+                                </div>
+                                <div className="btn-register ">
+                                    <button
+                                        type='button'
+                                        className='btn btn-primary '
+                                        onClick={() => { handleRegister() }}
+                                    >{t('homepage.registerPage.buttonSignup')}</button>
+                                </div>
+                                <div className="sign-in">
+                                    <span>{t('homepage.registerPage.labelSignIn')} </span>
+                                    <span className="btn-signin" onClick={() => { Navigate("/login") }}>{t('homepage.registerPage.buttonSignIn')}</span>
+                                </div>
+                                <div className="btn-goBack btn"><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
+                            </div>
+
+
+                        </div>
 
                     </div>
-                    <div className="divider my-3">
-                        <span>Or use your email</span>
-                    </div>
-                    <div className="form-register mx-auto ">
-                        <div className="form-group">
-                            <label className='form-label'>Username</label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                value={Username}
-                                onChange={(event) => { setUsername(event.target.value) }} required />
-                        </div>
-                        <div className="form-group">
-                            <label className='form-label'>Email</label>
-                            <input
-                                type="email"
-                                className='form-control '
-                                value={Email}
-                                onChange={(event) => { setEmail(event.target.value) }}
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label className='form-label'>Password</label>
-                            <input
-                                type="password"
-                                className='form-control'
-                                value={Password}
-                                onChange={(event) => { setPassword(event.target.value) }}
-                                required />
-                        </div>
-                        <div className="form-group">
-                            <label className='form-label'>Confirm Password</label>
-                            <input
-                                type="password"
-                                className='form-control'
-                                value={confirmPassword}
-                                onChange={(event) => { setConfirmPassword(event.target.value) }}
-                                required />
-                        </div>
-                        <div className="btn-register ">
-                            <button
-                                type='button'
-                                className='btn btn-primary '
-                                onClick={() => { handleRegister() }}
-                            >SIGN UP</button>
-                        </div>
-                        <div className="sign-in">
-                            <span>Already have an Account? </span>
-                            <span className="btn-signin" onClick={() => { Navigate("/login") }}>Login here</span>
-                        </div>
-                        <div className="btn-goBack btn"><span onClick={() => { Navigate("/") }}>Go to Homepage</span></div>
-                    </div>
-
-
-                </div>
-
+                </PerfectScrollbar>
             </div>
         </>
     )

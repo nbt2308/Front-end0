@@ -1,0 +1,53 @@
+{
+    "homepage": {
+        "header": {
+            "home": "Trang chủ",
+            "users": "Người dùng",
+            "admin": "Quản trị",
+            "login": "Đăng nhập",
+            "signup": "Đăng ký",
+            "profile": "Trang cá nhân",
+            "logout": "Đăng xuất",
+            "vi": "Tiếng Việt",
+            "en": "Tiếng Anh"
+        },
+        "loginPage": {
+            "loginTitle": "Đăng nhập",
+            "divider": "Or use your account",
+            "labelEmail": "Email address",
+            "labelInValidEmail": "Please enter a valid email address.",
+            "labelPassword": "Password",
+            "labelInValidPassword": "Please enter a valid password.",
+            "labelForgotPassword": "Forgot your password?",
+            "buttonSignIn": "SIGN IN",
+            "labelSignUp": "Don't have an account?",
+            "buttonCreateAccount": "Create a new account",
+            "buttonGoToHomePage": "Go to Homepage"
+        },
+        "registerPage": {
+            "registerTitle": "Create a new account",
+            "divider": "Or use your email",
+            "labelUsername": "Username",
+            "labelInvalidUsername": "Username must be at least 5 characters long",
+            "labelConfirmPassword": "Confirm password",
+            "labelInValidPassword": "Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.",
+            "labelInvalidConfirmPassword": "Passwords do not match!",
+            "buttonSignup": "SIGN UP",
+            "labelSignIn": "Already have an Account?",
+            "buttonSignIn": "Login here"
+        },
+        "userStats": {
+            "userstats1": "Hơn 20 triệu người dùng",
+            "userstats2": "Hãy đọc",
+            "userstats3": " Câu chuyện thành công của chúng tôi "
+        },
+        "sideTitle": {
+            "titletop": "Vượt qua giới hạn của bạn và đánh thức trí tò mò với hàng ngàn câu hỏi hấp dẫn và đầy thách thức",
+            "titlebottom": "Thu hút khách hàng và gia tăng thời gian gắn bó cũng như ghi nhớ thương hiệu với các cuộc thăm dò, bài trắc nghiệm và nhiều hơn nữa."
+        },
+        "buttonBegin": {
+            "button1": "Bắt đầu ngay – Hoàn toàn miễn phí",
+            "button2": "Thử Thách Ngay"
+        }
+    }
+}

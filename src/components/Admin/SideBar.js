@@ -10,7 +10,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from 'react-pro-sidebar';
-import { FaReact } from 'react-icons/fa';
+import { FaReact,FaHome  } from 'react-icons/fa';
 import { MdDashboardCustomize, MdOutlineManageSearch } from "react-icons/md";
 const SideBar = (props) => {
     const { collapsed, rtl, toggled, handleToggleSidebar } = props;
@@ -46,7 +46,7 @@ const SideBar = (props) => {
                 <SidebarContent>
                     <Menu iconShape="circle">
                         <MenuItem
-                            icon={<MdDashboardCustomize />}
+                            icon={<FaHome />}
                         // suffix={<span className="badge red">new</span>}
                         >
 
@@ -57,7 +57,7 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <SubMenu
                             icon={<MdOutlineManageSearch />}
-                            title={"Features"}
+                            title={"Management"}
                         >
                             <MenuItem>
                                 Users management

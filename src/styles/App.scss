@@ -21,6 +21,14 @@ body {
   font-size: 62.5%;
 }
 
+a.dropdown-toggle {
+  font-size: 25px;
+
+  &::after {
+    display: none !important;
+  }
+}
+
 .app-container {
   .header-container {
     position: sticky;
@@ -31,52 +39,119 @@ body {
       height: 95px;
     }
 
-    .btn-login {
-      margin-right: 10px;
-      padding: 0 15px;
-      color: rgb(0, 0, 0);
-      font-weight: 500;
-      border: unset;
-      background: transparent;
-      height: 40px;
-      font-size: 1rem;
 
-      &:hover {
-        color: rgb(67, 185, 105);
-        transition: 0.2s ease-in-out;
-      }
-    }
-
-    .btn-signup {
-      font-size: 1rem;
-      padding: 0 15px;
-      border-radius: 10px;
-      color: rgb(255 255 255);
-      font-weight: 500;
-      border: 2px solid rgb(67, 185, 105);
-      background-color: rgb(67, 185, 105);
-      height: 40px;
-
-      &:hover {
-        background-color: rgb(48, 114, 69);
-        border-color: rgb(48, 114, 69);
-        border-radius: 15px;
-        transition: 0.3s ease-in-out;
-      }
-    }
 
     .navbar {
       .navbar-brand {
         font-size: 2rem;
+        font-weight: 600;
       }
 
       .nav-link {
         font-size: 1.3rem;
 
         &.active {
-          color: rgb(0, 255, 170);
+          color: #28a745;
+        }
+
+        &:hover {
+          color: #28a745;
         }
       }
+
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        /* khoảng cách giữa các nút */
+        font-family: Arial, sans-serif;
+
+        .btn-login {
+          // margin-right: 10px;
+          // padding: 0 15px;
+          // color: rgb(0, 0, 0);
+          // font-weight: 500;
+          // background: transparent;
+          // height: 40px;
+          // font-size: 1rem;
+          // border: 2px solid #28a745;
+          // background: transparent;
+          padding: 8px 20px;
+          border: 2px solid #28a745;
+          background: transparent;
+          color: #28a745;
+          border-radius: 8px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: #28a745;
+            color: white;
+          }
+        }
+
+        .btn-signup {
+          // font-size: 1rem;
+          // padding: 0 15px;
+          // border-radius: 10px;
+          // color: rgb(255 255 255);
+          // font-weight: 500;
+          // border: 2px solid rgb(67, 185, 105);
+          // background-color: rgb(67, 185, 105);
+          // height: 40px;
+
+          padding: 8px 20px;
+          border: 2px solid #28a745;
+          background: #28a745;
+          color: #ffffff;
+          border-radius: 8px;
+          font-size: 16px;
+          transition: all 0.2s ease;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.2s ease;
+
+          // &:hover {
+          //   background-color: rgb(48, 114, 69);
+          //   border-color: rgb(48, 114, 69);
+          //   border-radius: 15px;
+          //   transition: 0.3s ease-in-out;
+          // }
+          &:hover {
+            background: #218838;
+            /* xanh đậm hơn */
+          }
+        }
+
+
+        .settings {
+          
+          /* màu nền ban đầu */
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            color: #28a745;
+          }
+        }
+
+
+        .languages {
+          cursor: pointer;
+          background-color: transparent;
+          border: none;
+          border-radius: 12px;
+
+
+          &:hover {
+            color: #28a745;
+          }
+        }
+      }
+
     }
   }
 
@@ -93,7 +168,7 @@ body {
       height: calc(100vh - 100px);
       scroll-behavior: smooth;
       width: 100%;
-      
+
 
       .Homepage-content {
         display: flex;
@@ -172,6 +247,7 @@ body {
           margin: 50px 0 0 50px;
           display: flex;
           justify-content: center;
+
           video {
             height: 500px;
             width: 500px;
