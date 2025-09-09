@@ -3,10 +3,15 @@ import { useParams, useLocation, useNavigate } from "react-router";
 import { getDataQuiz, postSubmitAnswer } from "../../services/apiService";
 import './DetailQuiz.scss';
 import ModalResult from "./ModalResult";
+import ModalConfirmSelect from "./ModalConfirmSelect";
+import ModalConfirmQuit from "./ModalConfirmQuit";
 import Questions from "./Questions";
 import RightContent from "./QuizContent/RightContent";
 import _ from "lodash";
+import { CiLogout } from "react-icons/ci";
+import { useTranslation } from 'react-i18next';
 const DetailQuiz = (props) => {
+    const { t } = useTranslation();
     const params = useParams();
     const quizId = params.id;
     const location = useLocation();
@@ -14,8 +19,17 @@ const DetailQuiz = (props) => {
     const [dataQuiz, setDataQuiz] = useState([]);
     const [index, setIndex] = useState(0);
 
+    const [showModalConfirmSelect, setShowModalConfirmSelect] = useState(false);
+    const [showModalConfirmQuit, setShowModalConfirmQuit] = useState(false);
     const [showModalResult, setShowModalResult] = useState(false);
     const [dataModalResult, setDataModalResult] = useState("");
+
+    const [check, setCheck] = useState({
+        isQuit: false,
+        isFinish: false,
+        isShowAnswer: false,
+        onTimeUp: false
+    })
     useEffect(() => {
         fetchQuestions();
     }, [quizId])
@@ -36,9 +50,10 @@ const DetailQuiz = (props) => {
                             image = temp.image
                         }
                         temp.answers.isChecked = false
+                        temp.answers.isCorrect = false
                         answerContainer.push(temp.answers)
                     })
-                    answerContainer=_.orderBy(answerContainer,['id'],['asc'])
+                    answerContainer = _.orderBy(answerContainer, ['id'], ['asc'])
                     return {
                         questionid: index, answerContainer, questionDescription, image
                     };
@@ -79,7 +94,14 @@ const DetailQuiz = (props) => {
         }
 
     }
-    const handleFinish = async () => {
+    const handleQuit = () => {
+        setShowModalConfirmQuit(true);
+    }
+    const handleCheck = () => {
+        setShowModalConfirmSelect(true);
+
+    }
+    const handleFinishResult = async () => {
         let payload = {
             quizId: +quizId,
             answers: []
@@ -104,12 +126,39 @@ const DetailQuiz = (props) => {
             })
             let res = await postSubmitAnswer(payload);
             if (res && res.EC === 0) {
-                setShowModalResult(true);
+
                 setDataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
                     quizData: res.DT.quizData
                 })
+                setShowModalResult(true);
+                
+
+
+                //update dataquiz with correct answer
+                if (res.DT && res.DT.quizData) {
+                    let dataQuizClone = _.cloneDeep(dataQuiz);
+                    let a = res.DT.quizData;
+                    for (let q of a) {
+                        for (let i = 0; i < dataQuizClone.length; i++) {
+                            if (+q.questionId === +dataQuizClone[i].questionid) {
+                                //update answer
+                                let newAnswer = [];
+                                for (let j = 0; j < dataQuizClone[i].answerContainer.length; j++) {
+                                    let s = q.systemAnswers.find(item => +item.id === +dataQuizClone[i].answerContainer[j].id)
+                                    if (s) {
+                                        dataQuizClone[i].answerContainer[j].isCorrect = true;
+                                    }
+                                    newAnswer.push(dataQuizClone[i].answerContainer[j])
+                                }
+                                dataQuizClone[i].answerContainer = newAnswer
+                            }
+                        }
+                    }
+                    setDataQuiz(dataQuizClone);
+                }
+
             }
             else {
 
@@ -117,11 +166,12 @@ const DetailQuiz = (props) => {
 
         }
     }
+
     return (
         <div className="detail-quiz-container">
             <div className="detail-quiz-header">
-                <button className="btn btn-primary" onClick={() => { Navigate("/") }}>Go to Homepage </button>
-                <h1>Quiz {quizId}: {location?.state?.title}</h1>
+                <button className="btn btn-danger" onClick={() => { handleQuit() }}><CiLogout className="icon" /> </button>
+                <h1>{location?.state?.title}</h1>
             </div>
             <div className="quiz-content">
                 <div className="left-content">
@@ -129,27 +179,53 @@ const DetailQuiz = (props) => {
                         <Questions
                             questionIndex={index}
                             handleDataCheckbox={handleDataCheckbox}
-                            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
+                            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+                            check={check}
+                        />
 
                     </div>
                     <div className="footer">
-                        <button className="btn btn-secondary" onClick={() => { handlePrev() }}>Prev</button>
-                        <button className="btn btn-primary mx-3" onClick={() => { handleNext() }}>Next</button>
-                        <button className="btn btn-warning" onClick={() => { handleFinish() }}>Finish</button>
+                        <button className="btn btn-secondary" onClick={() => { handlePrev() }}>{t('usersPage.buttonPrev')}</button>
+                        <button className="btn btn-primary mx-3" onClick={() => { handleNext() }}>{t('usersPage.buttonNext')}</button>
+                        <button
+                            className="btn btn-warning"
+                            onClick={() => { handleCheck() }}
+                            disabled={check.isFinish}
+                        >
+                            {t('usersPage.buttonFinish')}
+                        </button>
                     </div>
 
                 </div>
                 <div className="right-content">
                     <RightContent
                         dataQuiz={dataQuiz}
-                        handleFinish={handleFinish} 
-                        setIndex={setIndex}/>
+                        handleFinishResult={handleFinishResult}
+                        setIndex={setIndex}
+                        check={check} 
+                         setCheck={setCheck}/>
                 </div>
             </div>
             <ModalResult
                 show={showModalResult}
                 setShow={setShowModalResult}
                 dataModalResult={dataModalResult}
+                check={check}
+                setCheck={setCheck}
+            />
+            <ModalConfirmSelect
+                show={showModalConfirmSelect}
+                setShowModalResult={setShowModalResult}
+                setShow={setShowModalConfirmSelect}
+                check={check}
+                setCheck={setCheck}
+                handleFinishResult={handleFinishResult}
+            />
+            <ModalConfirmQuit
+                show={showModalConfirmQuit}
+                setShow={setShowModalConfirmQuit}
+                setCheck={setCheck}
+                check={check}
             />
         </div>
     )

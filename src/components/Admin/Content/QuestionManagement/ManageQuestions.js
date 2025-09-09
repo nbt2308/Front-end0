@@ -1,6 +1,8 @@
 import Select from 'react-select';
 import { FaPlusCircle, FaFolderPlus, FaMinusCircle } from "react-icons/fa";
 import { useState, useEffect } from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import "./ManageQuestions.scss"
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
@@ -10,8 +12,12 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/captions.css";
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer } from '../../../../services/apiService';
+import { useOutletContext } from 'react-router-dom';
 const ManageQuestions = (props) => {
+    const { darkMode } = useOutletContext();
+    const { t } = useTranslation();
     const [initQuestions, setInitQuestions] = useState([
         {
             id: uuidv4(),
@@ -120,7 +126,7 @@ const ManageQuestions = (props) => {
             questionsClone[index].imageFile = event.target.files[0];
             questionsClone[index].imageName = event.target.files[0].name;
             setQuestions(questionsClone);
-            toast.success("Upload image success. Click image's name to preview");
+            toast.success(`${t('adminPage.quizzesManagement.modalUpsertQA.previewImage')}`);
         }
     }
 
@@ -145,58 +151,56 @@ const ManageQuestions = (props) => {
             setQuestions(questionsClone);
         }
     }
-
-    const handleSubmitQuestions = async () => {
-        //---validate data---
+    const handleValidate = () => {
         //validate select quiz
+        if (_.isEmpty(questions)) {
+            toast.error(`${t('adminPage.quizzesManagement.modalUpsertQA.emptyQA')}`);
+            return;
+        }
         if (_.isEmpty(selectedOption)) {
             setIsValidSelected(false)
             return;
         }
-        else{
+        else {
             setIsValidSelected(true)
         }
-
-
-        //validate questions
+        // validate questions
         let updatedQuestions = _.cloneDeep(questions);
-        let isValidQuestion_flag = true;
+        let isValid = true;
         for (let i = 0; i < updatedQuestions.length; i++) {
             if (!updatedQuestions[i].description) {
-                isValidQuestion_flag = false;
+
                 updatedQuestions[i].isValidQuestion = false;
-                break;
+                isValid = false;
             } else {
                 updatedQuestions[i].isValidQuestion = true;
             }
 
         }
-        if (isValidQuestion_flag === false) {
-            setQuestions(updatedQuestions);
-            return;
-        }
+
 
         //validate answers
-        let isValidAnswer_flag = true;
         for (let i = 0; i < updatedQuestions.length; i++) {
             for (let j = 0; j < updatedQuestions[i].answers.length; j++) {
                 if (!updatedQuestions[i].answers[j].description) {
-                    isValidAnswer_flag = false;
+
                     updatedQuestions[i].answers[j].isValidAnswer = false
-                    break;
+                    isValid = false
+
                 }
                 else {
                     updatedQuestions[i].answers[j].isValidAnswer = true
                 }
             }
-            if (isValidAnswer_flag === false)
-                break;
+
         }
 
-        if (isValidAnswer_flag === false) {
-            setQuestions(updatedQuestions)
-            return;
-        }
+        setQuestions(updatedQuestions)
+        return isValid;
+    };
+    const handleSubmitQuestions = async () => {
+        //---validate data---
+        if (!handleValidate()) return;
 
 
         //submit question/answer(but not sequence)
@@ -231,7 +235,7 @@ const ManageQuestions = (props) => {
                 )
             }
         }
-        toast.success(`Create questions and answers succeed`)
+        toast.success(`${t("adminPage.questionsManagement.createSucceed")}`)
         setQuestions(initQuestions);
         setIsValidSelected(true);
 
@@ -249,15 +253,63 @@ const ManageQuestions = (props) => {
         }
 
     }
+    const getCustomStyles = (darkMode) => ({
+        menuPortal: base => ({ ...base, zIndex: 9999 }),
+        control: (base) => ({
+            ...base,
+            backgroundColor: darkMode ? "#0d305a" : "#fff",
+            color: darkMode ? "#fff" : "#000",
+            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            boxShadow: "none",
+            ":hover": {
+                borderColor: darkMode ? "#63a4ff" : "#888",
+            },
+        }),
+        menu: (base) => ({
+            ...base,
+            backgroundColor: darkMode ? "#0d305a" : "#fff",
+            color: darkMode ? "#fff" : "#000",
+        }),
+        option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isSelected
+                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                : state.isFocused
+                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
+                    : (darkMode ? "#0d305a" : "#fff"),
+            color: darkMode ? "#fff" : "#000",
+            cursor: "pointer",
+        }),
+        singleValue: (base) => ({
+            ...base,
+            color: darkMode ? "#fff" : "#000",
+        }),
+        placeholder: (base) => ({
+            ...base,
+            color: darkMode ? "#bbb" : "#666",
+        }),
+    });
     return (
-        <div className="manageQuestions-container">
-            <div className="manageQuestions-title">
-                Questions Management
+        <div className={darkMode ? "manageQuestions-container light" : "manageQuestions-container dark"}>
+            <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
+                <div className="manageQuestions-title">
+                    {t('adminPage.questionsManagement.title')}
+                </div>
+                <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
+
+                    <ol className="breadcrumb">
+                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
+                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
+                        <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.questionsManagement')}</li>
+                    </ol>
+
+                </div>
             </div>
-            <div className="questions-content">
+
+            <div className={darkMode ? "questions-content light-card" : "questions-content dark-card"}>
                 <div className='mt-4 ms-4'>
                     <div className="questions-select col-6 form-group" >
-                        <label >Select quiz</label>
+                        <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
                         <Select
                             className={`${isValidSelected ? "" : "is-invalid"}`}
                             classNamePrefix="react-select"
@@ -269,32 +321,35 @@ const ManageQuestions = (props) => {
                             options={listQuiz}
                             menuPortalTarget={document.body}
                             required
-                            styles={{
-                                menuPortal: base => ({ ...base, zIndex: 9999 })
-                            }}
+                            styles={getCustomStyles(!darkMode)}
                         />
-                        <div className="invalid-feedback">Please select a quiz</div>
+                        <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                     </div>
-                    <div className='mt-3'>Add questions</div>
                     {
                         questions && questions.length > 0 &&
                         questions.map((question, index_question) => {
                             return (
                                 <div key={question.id} className='q-main mb-4'>
+                                    <div className='mt-3'>{t('adminPage.quizzesManagement.modalUpsertQA.addQuestions')}</div>
+
                                     <div className="questions ">
-                                        <div className="form-floating mt-1 col-6">
-                                            <input
-                                                type="text"
-                                                className={`form-control ${!question.isValidQuestion ? "is-invalid" : ""}`}
-                                                placeholder="name@example.com"
+                                        <FloatingLabel
+                                            label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')}`}
+                                            className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
+                                        >
+                                            <Form.Control
+                                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                placeholder="Name"
                                                 value={question.description}
                                                 onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
-                                            />
-                                            <div className="invalid-feedback">Question cannot be empty</div>
-                                            <label >Question {index_question + 1}'s description</label>
-                                        </div>
+                                                isInvalid={!question.isValidQuestion}
+                                                required />
+                                            <Form.Control.Feedback type="invalid">
+                                                {t('adminPage.quizzesManagement.modalUpsertQA.invalidQuestion')}
+                                            </Form.Control.Feedback>
+                                        </FloatingLabel>
                                         <div className='col-2 uploadFile-container' >
-                                            <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />Upload image</label>
+                                            <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />{t('adminPage.quizzesManagement.modalUpsertQA.uploadImage')}</label>
                                             <input
                                                 type="file"
                                                 id={`${question.id}`}
@@ -309,7 +364,7 @@ const ManageQuestions = (props) => {
                                                             {question.imageName}
                                                         </span>
                                                         :
-                                                        "0 file is uploaded"}
+                                                        `${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`}
                                                 </span>
                                             </div>
                                         </div>
@@ -335,17 +390,21 @@ const ManageQuestions = (props) => {
                                                         checked={answer.isCorrect}
                                                         onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
                                                     />
-                                                    <div className="form-floating mt-1 ">
-                                                        <input
-                                                            type="text"
-                                                            className={`form-control ${!answer.isValidAnswer ? "is-invalid" : ""}`}
-                                                            placeholder="name@example.com"
+                                                    <FloatingLabel
+                                                        label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')}`}
+                                                        className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
+                                                    >
+                                                        <Form.Control
+                                                            className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                            placeholder="Name"
                                                             value={answer.description}
                                                             onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
-                                                        />
-                                                        <div className="invalid-feedback">Answer cannot be empty</div>
-                                                        <label >Answer {index_answer + 1}</label>
-                                                    </div>
+                                                            isInvalid={!answer.isValidAnswer}
+                                                            required />
+                                                        <Form.Control.Feedback type="invalid">
+                                                            {t('adminPage.quizzesManagement.modalUpsertQA.invalidAnswer')}
+                                                        </Form.Control.Feedback>
+                                                    </FloatingLabel>
                                                     <div className="action-btn">
                                                         <button className='btn-plus btn' onClick={() => { handleAddnRemoveAnswers("ADD", question.id) }}><FaPlusCircle /></button>
                                                         {
@@ -371,7 +430,7 @@ const ManageQuestions = (props) => {
                             <button
                                 className='btn btn-primary mb-4 btn-save-questions'
                                 onClick={() => handleSubmitQuestions()}
-                            >Save questions</button>
+                            > {t('adminPage.questionsManagement.save')}</button>
                         </div>
                     }
 

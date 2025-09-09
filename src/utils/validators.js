@@ -15,7 +15,7 @@ const validatePassword=(Password) =>{
 
 }
 const validateUsername=(Username)=>{
-    return Username.length>4;
+    return Username.length>4 && Username.length<20;
 }
 const validateNameQuiz=(name)=>{
     return name.length>5;

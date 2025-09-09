@@ -1,13 +1,21 @@
 .detail-quiz-container {
+    background-color: #cbc8bd;
     .detail-quiz-header {
 
         height: 70px;
         display: flex;
         gap: 20px;
         align-items: center;
+        background-color:#e5e3db;
 
         button {
             margin-left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon{
+                font-size: 1.3rem;
+            }
         }
 
         h1 {
@@ -27,7 +35,7 @@
             width: 70%;
             margin: 20px;
             height: 600px;
-
+            background-color: #fff;
             .question-container {
                 height: 90%;
 
@@ -52,6 +60,7 @@
                     span {
                         font-size: 25px;
                         font-weight: 600;
+                        user-select: none;
                     }
                 }
 
@@ -65,7 +74,18 @@
                         input {
                             border: 1px solid;
                         }
+                        
+                        .correct{
+                            color: green;
+                            font-size: 25px;
+                            margin-left: 3px;
+                        }
+                        .incorrect{
+                            color: red;
+                            font-size: 25px;
+                        }
                     }
+
                 }
             }
 
@@ -85,7 +105,7 @@
             border-radius: 20px;
             height: 600px;
             width: 30%;
-
+            background-color: #fff;
             .timer-container {
                 display: flex;
                 align-items: center;
@@ -93,7 +113,7 @@
                 height: 100px;
                 margin: 0 20px 0 20px;
                 border-bottom: 2px solid #000000;
-
+                user-select: none;
                 .timer {
                     font-size: 30px;
                     font-weight: 700;
@@ -117,6 +137,7 @@
                     justify-content: center;
                     align-items: center;
                     cursor: pointer;
+                    user-select: none;
                     &:hover{
                         border:1px solid rgb(142, 142, 142);
                         color: rgb(0, 0, 0);
@@ -169,5 +190,13 @@
             }
         }
 
+    }
+}
+.modal-confirm{
+    .modal-body{
+        span{
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
     }
 }

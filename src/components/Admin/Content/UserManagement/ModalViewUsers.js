@@ -4,9 +4,10 @@ import Modal from 'react-bootstrap/Modal';
 import { FiMail } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import _ from 'lodash';
-
+import { useTranslation } from 'react-i18next';
 const ModalViewUsers = (props) => {
-    const {  show, setShow, dataView,resetViewData } = props
+    const {  show, setShow, dataView,resetViewData,darkMode } = props
+    const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
         setEmail("");
@@ -39,10 +40,10 @@ const ModalViewUsers = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} dialogClassName="modal-10w" backdrop="static" className='modal-view-user'>
-                <Modal.Header closeButton>
-                    <Modal.Title>Personal Details</Modal.Title>
+                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                    <Modal.Title>{t('adminPage.usersManagement.modalViewUsers.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
                     <div className="user-container">
                         <div className="user-image">
                             <img src={Image} alt="imageUser" />

@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react"
 
 const CountDownTimer = (props) => {
-    const { onTimeUp } = props
-    const [count, setCount] = useState(300)
-
+    const { onTimeUp,check } = props
+    const [count, setCount] = useState(10)
+    
+    
     useEffect(() => {
+        if(check.onTimeUp===true){
+            setCount(0);
+            return;
+        }
         if (count === 0) {
             onTimeUp();
             return;
         }
-
 
         const timer = setInterval(() => {
             setCount(count - 1)

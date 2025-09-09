@@ -16,31 +16,40 @@ import ManageQuiz from "./components/Admin/Content/QuizManagement/ManageQuiz";
 import ManageQuestions from "./components/Admin/Content/QuestionManagement/ManageQuestions";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from 'react';
+import Test from "./components/Admin/Content/UserManagement/Test";
+import AccountProfile from "./components/Admin/Content/AccountProfile";
+import LoadingSpinner from "./components/LoadingLanguage/Loading"
+import useDarkMode from "use-dark-mode";
 const LayOut = (props) => {
+    const darkMode = useDarkMode(false, {
+        storageKey: 'theme', // lưu theme trong localStorage
+    });
     return (
-        <Suspense fallback="...is loading">
+        <Suspense fallback={<LoadingSpinner />}>
             <Routes>
-                <Route path="/" element={<App />} >
+                <Route path="/" element={<App darkMode={darkMode}/>} >
                     <Route index element={<HomePage />} />
                     <Route path="/users" element={
                         <PrivateRoute>
                             <ListQuiz />
                         </PrivateRoute>
                     } />
+                    <Route path="/test" element={<Test />} />
                 </Route>
                 <Route path="/quiz/:id" element={<DetailQuiz />} />
                 <Route path="/admin" element={
                     <PrivateRoute>
-                        <Admin />
+                        <Admin darkMode={darkMode}/>
                     </PrivateRoute>
                 } >
                     <Route index element={<DashBoard />} />
                     <Route path="manage-users" element={<ManageUsers />} />
                     <Route path="manage-quizzes" element={<ManageQuiz />} />
                     <Route path="manage-questions" element={<ManageQuestions />} />
+                    <Route path="account" element={<AccountProfile />} />
                 </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login darkMode={darkMode}/>} />
+                <Route path="/register" element={<Register darkMode={darkMode}/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <ToastContainer

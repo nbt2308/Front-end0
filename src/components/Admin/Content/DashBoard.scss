@@ -4,25 +4,74 @@
 
     .breadcrumb-container {
         margin-left: 20px;
-        margin-top: 10px;
+        margin-right: 20px;
+
+        height: 80px;
+        // border: 1px solid #ccc;
+        // background-color: #ccc;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+        .dashboard-title {
+            margin-left: 20px;
+            // margin-top: 10px;
+            font-size: 1.875rem;
+            font-weight: 600;
+        }
+
+        .nav-breadcrumb {
+            font-size: 1rem;
+            margin-right: 20px;
+
+            .breadcrumb {
+                margin-bottom: 0;
+
+                .breadcrumb-item {
+                    &::before{
+                        color:#ccc6c6
+                    }
+                    a {
+                        .basic-light {
+                            color: #0d6efd
+                        }
+
+                        .basic-dark {
+                            color: #0066ff
+                        }
+
+                        text-decoration: none;
+
+                        .active-light {
+                            color: #212529bf
+                        }
+
+                        .active-dark {
+                            color: #989898
+                        }
+                    }
+
+                }
+            }
+        }
+
+
     }
 
-    .dashboard-title {
-        margin-left: 20px;
-        margin-top: 10px;
-        font-size: 1.875rem;
-        font-weight: 700;
-    }
+
 
     .dashboard-content {
         margin-left: 20px;
         margin-top: 20px;
         margin-right: 20px;
-
+        
         .top {
             .card {
                 display: flex;
                 flex-direction: row;
+                border: none;
                 // gap: 50%;
                 align-items: center;
                 // justify-content: space-between;
@@ -47,16 +96,31 @@
                     justify-content: flex-end;
                     font-size: 1.5rem;
                 }
+
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
             }
         }
 
         .bottom {
             .chart {
                 height: 350px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+                border: none;
+
+                .text-1 {
+                    margin-left: 5px;
+                    margin-bottom: 5px;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+
+
             }
 
             .others {
                 height: 350px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+                border: none;
 
                 .text-1 {
                     margin-left: 5px;
@@ -95,4 +159,27 @@
         }
 
     }
+}
+
+.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark {
+    background-color: #071e34ff;
+    color: #cfcfcf;
+}
+
+.dark-card {
+    background-color: #0b335c;
+    color: #cfcfcf;
+
+}
+
+.hover-bar {
+    &:hover {
+        background-color: #0091ff;
+    }
+
 }

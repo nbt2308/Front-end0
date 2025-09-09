@@ -30,12 +30,17 @@ const userReducer = createSlice({
                 email: '',
                 image: '',
                 role: ''
-
             }
             state.isAuthenticated = false
         },
+        UPDATE_ACCOUNT: (state, action) => {
+            state.account = {
+                ...state.account,
+                ...action.payload,   // merge nhiều key-value vào state.account
+            };
+        }
     },
 });
 
-export const { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } = userReducer.actions;
+export const { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS,UPDATE_ACCOUNT } = userReducer.actions;
 export default userReducer.reducer;

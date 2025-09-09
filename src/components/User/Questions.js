@@ -4,9 +4,13 @@ import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/captions.css";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { FaCheck } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 const Questions = (props) => {
-    const { data, questionIndex, handleDataCheckbox } = props;
+    const { data, questionIndex, handleDataCheckbox,check } = props;
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
     if (_.isEmpty(data)) {
         return (<></>)
     }
@@ -54,23 +58,36 @@ const Questions = (props) => {
             }
 
             <div className="question-content">
-                <span>Question {questionIndex + 1}: {data.questionDescription}</span>
+                <span>{t('usersPage.question')} {questionIndex + 1}: {data.questionDescription}</span>
             </div>
             <div className="answer">
                 {data.answerContainer && data.answerContainer.length &&
                     data.answerContainer.map((answer, index) => {
                         return (
                             <div key={`answer-${index}`} className="a-child">
-                                <div class="form-check">
+                                <div class="form-check" >
                                     <input
                                         className="form-check-input"
                                         type="checkbox"
                                         checked={answer.isChecked}
+                                        disabled={check.isShowAnswer}
                                         onChange={(event) => { handleCheckbox(event, answer.id, data.questionid) }}
                                     />
                                     <label className="form-check-label" >
                                         {answer.description}
                                     </label>
+                                    {
+                                        check.isShowAnswer===true&&
+                                        <>
+                                        {
+                                            answer.isCorrect===true&& <FaCheck className="correct"/>
+                                        }
+                                        {
+                                            answer.isChecked===true &&answer.isCorrect===false&& <IoClose className="incorrect"/>
+
+                                        }
+                                        </>
+                                    }
                                 </div>
 
                             </div>

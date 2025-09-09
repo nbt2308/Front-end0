@@ -1,0 +1,165 @@
+.personal-details-container {
+    display: flex;
+    gap: 10px;
+    // flex-wrap:wrap ;
+    justify-content: center;
+
+    .upload-file-container {
+        // height: 400px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+        .upload-image-profile {
+            width: 15rem;
+            height: 100%;
+
+
+
+
+            .filepond {
+                margin: 10px;
+            }
+
+            .btn-edit {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+
+
+    .personal-details-content {
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 600;
+
+        }
+
+        .footer {
+
+            display: flex;
+            justify-content: right;
+            gap: 20px
+        }
+    }
+
+
+}
+
+.change-password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .form-change-password {
+        width: 30rem;
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        // justify-content: center;
+        .change-password-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .change-password-content {
+            width: 80%;
+
+            .footer {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.table-history-container {
+    height: 32.375rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+
+    .title {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .table-content {
+
+        height: 27rem;
+
+        th.th-dark {
+            background-color: #0e4c8a;
+            color: #cfcfcf;
+        }
+
+        th.th-light {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}
+
+.light {
+    background-color: #ffffff ;
+    color: #000000;
+}
+
+.dark {
+    background-color: #082440 ;
+    color: #cfcfcf;
+}
+
+.dark-card {
+    background-color: #0b335c ;
+    color: #cfcfcf ;
+
+}
+
+.floating-light {
+
+
+    label {
+        color: #333; // label sáng
+
+    }
+
+    select.form-select {
+        background-color: #fff;
+        color: #000;
+        border-color: #dee2e6;
+
+        &:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
+        }
+    }
+}
+
+.floating-dark {
+
+
+    label {
+        color: #dddddd; // label tối
+        background-color: transparent;
+    }
+
+    select.form-select {
+        background-color: #0b335c;
+        color: #cfcfcf;
+        border-color: #ffffff;
+
+        &:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(144, 202, 249, 0.25);
+        }
+    }
+}

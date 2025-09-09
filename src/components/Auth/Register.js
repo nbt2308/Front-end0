@@ -8,149 +8,214 @@ import { validateEmail, validatePassword, validateUsername } from '../../utils/v
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import './Register.scss';
 import Language from "../Header/Language";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import { useTranslation } from 'react-i18next';
 import brandname from "../../assets/images/brandname.png"
-const Register = () => {
+import useDarkMode from "use-dark-mode";
+import { IoIosMoon } from "react-icons/io";
+import { AiFillSun } from "react-icons/ai";
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from "../../assets/images/NBT.svg"
+import gg from "../../assets/images/2.svg"
+import fb from "../../assets/images/3.svg"
+import gh from "../../assets/images/gh.svg"
+const Register = (props) => {
     const { t } = useTranslation();
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
-    const [Username, setUsername] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [isValidUsername, setIsValidUsername] = useState(true);
-    const [isValidEmail, setIsValidEmail] = useState(true);
-    const [isValidPassword, setIsValidPassword] = useState(true);
-    const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+    const { darkMode } = props;
 
     const Navigate = useNavigate();
 
+    //define state
+    const [form, setForm] = useState({
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        Username: "",
+    });
+
+    const [errors, setErrors] = useState({
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        Username: "",
+    });
+
+    const [showErrors, setShowErrors] = useState({
+        Email: false,
+        Password: false,
+        Username: false,
+        ConfirmPassword: false,
+    });
+    const handleValidate = () => {
+        const newErrors = {
+            Email: "",
+            Password: "",
+            Username: "",
+            ConfirmPassword: "",
+        };
+
+        if (!form.Email) {
+            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
+        } else if (!validateEmail(form.Email)) {
+            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
+        }
+        if (!form.Password) {
+            newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
+        } else if (!validatePassword(form.Password)) {
+            newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword')}`;
+        }
+        if (!form.Username) {
+            newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername1')}`;
+        } else if (!validateUsername(form.Username)) {
+            newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername')}`;
+        }
+        if (form.ConfirmPassword !== form.Password) {
+            newErrors.ConfirmPassword = `${t('homepage.registerPage.labelInvalidConfirmPassword')}`;
+        }
+
+        setErrors(newErrors);
+        setShowErrors({
+            Email: !!newErrors.Email,
+            Password: !!newErrors.Password,
+            Username: !!newErrors.Username,
+            ConfirmPassword: !!newErrors.ConfirmPassword
+        });
+
+        return !Object.values(newErrors).some(Boolean); // hợp lệ nếu không có error nào
+    };
+    const handleChange = (field, value) => {
+        setForm(prev => ({ ...prev, [field]: value }));
+
+        if (showErrors[field]) {
+            setShowErrors(prev => ({ ...prev, [field]: false }));
+        }
+    };
     const handleRegister = async () => {
         //validate
-        const isInvalidEmail = validateEmail(Email);
-        const isInvalidPassword = validatePassword(Password);
-        const isInvalidUsername = validateUsername(Username);
-        //validate username
-        if (!isInvalidUsername) {
-            
-            setIsValidUsername(false)
-            return;
-        }
-        else {
-            setIsValidUsername(true);
-        }
-        //validate email
-        if (!isInvalidEmail) {
-            setIsValidEmail(false)
-            return;
-        }
-        else {
-            setIsValidEmail(true);
-        }
-        //validate password
-        if (!isInvalidPassword) {
-            setIsValidPassword(false)
-            return;
-        }
-        else {
-            setIsValidPassword(true);
-        }
-        //validate confirm password
-        if (confirmPassword !== Password) {
-
-            setIsValidConfirmPassword(false)
-            return;
-        }
-        else {
-            setIsValidConfirmPassword(true);
-        }
-        let data = await postRegisterUser(Email, Username, Password);
+        if (!handleValidate()) return;
+        let data = await postRegisterUser(form.Email, form.Username, form.Password);
         if (data && data.EC === 0) {
-            toast.success(data.EM);
+            toast.success(`${t('homepage.registerPage.registerSucceed')}`);
             Navigate("/login");
         }
         if (data && data.EC !== 0) {
-            toast.error(data.EM);
+            toast.error(`${t('homepage.registerPage.registerFail')}`);
         }
 
+    }
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleRegister();
+        }
+    }
+    const handleChangeLight = () => {
+        darkMode.enable();
+    }
+    const handleChangeDark = () => {
+        darkMode.disable();
     }
     return (
         <>
 
-            <div className="register-main">
+            <div className={darkMode.value ? "register-main main-container-light" : "register-main main-container-dark"}>
                 <PerfectScrollbar>
                     <div className='languages-change-container'>
-                        <Language />
+                        <Language darkMode={darkMode.value} />
+                        <NavDropdown
+                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />}
+                            id="basic-nav-dropdown"
+                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
+
+                        </NavDropdown>
                     </div>
-                     <div className='brand-name'><img src={brandname} alt="NBT" /></div>
+                    <div className='brand-name'><img src={logo} alt="NBT" /></div>
                     <div className="register-container ">
 
-                        <div className="register-content">
+                        <div className={darkMode.value ? "register-content light" : "register-content dark-card"}>
 
                             <div className="register-title mt-3">
                                 <span>{t('homepage.registerPage.registerTitle')}</span>
                             </div>
-                            <div className="social-links">
-                                <a href='/login'><FaFacebookF /></a>
-                                <a href='/login' className='mx-3'><SiGmail /></a>
-                                <a href='/login'><FaGithub /></a>
+                            <div className={darkMode.value ? "social-links-light" : "social-links-dark"}>
+                                <a href='/login'><img src={fb} alt="facebook" /></a>
+                                <a href='/login' className='mx-3'><img src={gg} alt="google" /></a>
+                                <a href='/login'><img src={gh} alt="github" /></a>
 
                             </div>
-                            <div className="divider my-3">
+                            <div className={darkMode.value ? "divider-light my-3" : "divider-dark my-3"}>
                                 <span>{t('homepage.registerPage.divider')}</span>
                             </div>
                             <div className="form-register mx-auto ">
                                 <div className="form-group">
-                                    <div class="form-floating ">
-                                        <input
+                                    <FloatingLabel
+                                        label={t('homepage.registerPage.labelUsername')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
                                             type="text"
-                                            className={isValidUsername?'form-control':'form-control is-invalid'}
-                                            value={Username}
-                                            onChange={(event) => { setUsername(event.target.value) }} required
-                                            id="floatingInput"
-                                            placeholder="name@example.com" />
-                                        <label for="floatingInput">{t('homepage.registerPage.labelUsername')}</label>
-                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInvalidUsername')}</div>
-                                    </div>
+                                            placeholder="name@example.com"
+                                            value={form.Username}
+                                            onChange={e => handleChange("Username", e.target.value)}
+                                            isInvalid={showErrors.Username}
+                                            required
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Username}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-floating ">
-                                        <input type="email"
-                                            className={isValidEmail?'form-control':'form-control is-invalid'}
-                                            value={Email}
-                                            onChange={(event) => { setEmail(event.target.value) }}
+                                    <FloatingLabel
+                                        label={t('adminPage.usersManagement.modalAddUsers.email')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="name@example.com"
+                                            value={form.Email}
+                                            onChange={e => handleChange("Email", e.target.value)}
+                                            isInvalid={showErrors.Email}
                                             required
-                                            id="floatingInput"
-                                            placeholder="name@example.com" />
-                                        <label for="floatingInput">{t('homepage.loginPage.labelEmail')}</label>
-                                        <div className="invalid-feedback">{t('homepage.loginPage.labelInValidEmail')}</div>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-
-                                    <div class="form-floating ">
-                                        <input type="password"
-                                            className={isValidPassword?'form-control':'form-control is-invalid'}
-                                            value={Password}
-                                            onChange={(event) => { setPassword(event.target.value) }}
-                                            required
-                                            id="floatingInput"
-                                            placeholder="name@example.com" />
-                                        <label for="floatingInput">{t('homepage.loginPage.labelPassword')}</label>
-                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInValidPassword')}</div>
-                                    </div>
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
                                 <div className="form-group">
 
-                                    <div class="form-floating ">
-                                        <input type="password"
-                                            className={isValidConfirmPassword?'form-control':'form-control is-invalid'}
-                                            value={confirmPassword}
-                                            onChange={(event) => { setConfirmPassword(event.target.value) }}
+                                    <FloatingLabel
+                                        label={t('adminPage.usersManagement.modalAddUsers.password')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Password"
+                                            value={form.Password}
+                                            onChange={e => handleChange("Password", e.target.value)}
+                                            isInvalid={showErrors.Password}
+
                                             required
-                                            id="floatingInput"
-                                            placeholder="name@example.com" />
-                                        <label for="floatingInput">{t('homepage.registerPage.labelConfirmPassword')}</label>
-                                        <div className="invalid-feedback">{t('homepage.registerPage.labelInvalidConfirmPassword')}</div>
-                                    </div>
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
+                                    </FloatingLabel>
+                                </div>
+                                <div className="form-group">
+
+                                    <FloatingLabel
+                                        label={t('homepage.registerPage.labelConfirmPassword')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="ConfirmPassword"
+                                            value={form.ConfirmPassword}
+                                            onChange={e => handleChange("ConfirmPassword", e.target.value)}
+                                            isInvalid={showErrors.ConfirmPassword}
+                                            onKeyDown={(event) => handleKeyDown(event)}
+                                            required
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.ConfirmPassword}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
                                 <div className="btn-register ">
                                     <button
@@ -163,7 +228,7 @@ const Register = () => {
                                     <span>{t('homepage.registerPage.labelSignIn')} </span>
                                     <span className="btn-signin" onClick={() => { Navigate("/login") }}>{t('homepage.registerPage.buttonSignIn')}</span>
                                 </div>
-                                <div className="btn-goBack btn"><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
+                                <div className="btn-goBack btn"><span onClick={() => { Navigate("/") }}>{t('homepage.registerPage.buttonGoToHomePage')}</span></div>
                             </div>
 
 

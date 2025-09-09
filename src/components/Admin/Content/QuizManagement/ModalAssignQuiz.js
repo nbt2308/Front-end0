@@ -5,11 +5,14 @@ import { getAllQuizForAdmin, getAllUsers, postAssignQuiz } from '../../../../ser
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 const ModalAssignQuiz = (props) => {
-    const { show, setShow } = props;
+    const { show, setShow,darkMode } = props;
+    const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
-
+        setIsValidSelectedUser(true);
+        setIsValidSelectedQuiz(true)
     }
     //select state
     const [selectedOptionQuiz, setSelectedOptionQuiz] = useState(null);
@@ -42,53 +45,95 @@ const ModalAssignQuiz = (props) => {
             let newListUsers = res.DT.map(item => {
                 return {
                     value: item.id,
-                    label: `${item.id}-${item.username}`
+                    label: `${item.id}-${item.username}-${item.email}`
                 }
             })
             setListUsers(newListUsers)
         }
     }
-
-    const handleAssign = async () => {
-        //validate select quiz
+    const handleValidate = () => {
+        let isValid = true;
         if (_.isEmpty(selectedOptionQuiz) || _.isEmpty(selectedOptionUser)) {
             if (_.isEmpty(selectedOptionQuiz)) {
                 setIsValidSelectedQuiz(false)
+                isValid = false;
             }
             if (_.isEmpty(selectedOptionUser)) {
                 setIsValidSelectedUser(false)
+                isValid = false;
             }
-            return;
+
 
         }
         else {
             setIsValidSelectedQuiz(true)
             setIsValidSelectedUser(true)
+            isValid = true;
         }
+        return isValid
+    }
+    const handleAssign = async () => {
+        //validate select quiz
+        if (!handleValidate()) return;
 
         let res = await postAssignQuiz(selectedOptionQuiz.value, selectedOptionUser.value)
         if (res && res.EC === 0) {
-            toast.success(res.EM);
+            toast.success(`${t('adminPage.quizzesManagement.modalAssignQuiz.assignSucceed')}`);
             handleClose();
         }
         if (res && res.EC !== 0) {
-            toast.error(res.EM);
+            toast.error(`${t('adminPage.quizzesManagement.modalAssignQuiz.assignFail')}`);
         }
 
 
     }
-
+     const getCustomStyles = (darkMode) => ({
+        menuPortal: base => ({ ...base, zIndex: 9999 }),
+        control: (base) => ({
+            ...base,
+            backgroundColor: darkMode ? "#0d305a" : "#fff",
+            color: darkMode ? "#fff" : "#000",
+            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            boxShadow: "none",
+            ":hover": {
+                borderColor: darkMode ? "#63a4ff" : "#888",
+            },
+        }),
+        menu: (base) => ({
+            ...base,
+            backgroundColor: darkMode ? "#0d305a" : "#fff",
+            color: darkMode ? "#fff" : "#000",
+        }),
+        option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isSelected
+                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                : state.isFocused
+                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
+                    : (darkMode ? "#0d305a" : "#fff"),
+            color: darkMode ? "#fff" : "#000",
+            cursor: "pointer",
+        }),
+        singleValue: (base) => ({
+            ...base,
+            color: darkMode ? "#fff" : "#000",
+        }),
+        placeholder: (base) => ({
+            ...base,
+            color: darkMode ? "#bbb" : "#666",
+        }),
+    });
 
 
     return (
         <>
             <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-assign-quiz'>
-                <Modal.Header closeButton>
-                    <Modal.Title>Assign quiz to users</Modal.Title>
+                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                    <Modal.Title>{t('adminPage.quizzesManagement.modalAssignQuiz.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
                     <div className="quiz-select col-5 form-group" >
-                        <label >Select quiz</label>
+                        <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
                         <Select
                             className={`${isValidSelectedQuiz ? "" : "is-invalid"}`}
                             classNamePrefix="react-select"
@@ -100,14 +145,12 @@ const ModalAssignQuiz = (props) => {
                             options={listQuiz}
                             menuPortalTarget={document.body}
                             required
-                            styles={{
-                                menuPortal: base => ({ ...base, zIndex: 9999 })
-                            }}
+                            styles={getCustomStyles(!darkMode)}
                         />
-                        <div className="invalid-feedback">Please select a quiz</div>
+                        <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                     </div>
                     <div className="user-select col-5 form-group">
-                        <label >Select user</label>
+                        <label >{t('adminPage.quizzesManagement.modalAssignQuiz.selectUser')}</label>
                         <Select
                             className={`${isValidSelectedUser ? "" : "is-invalid"}`}
                             classNamePrefix="react-select"
@@ -119,19 +162,17 @@ const ModalAssignQuiz = (props) => {
                             options={listUsers}
                             menuPortalTarget={document.body}
                             required
-                            styles={{
-                                menuPortal: base => ({ ...base, zIndex: 9999 })
-                            }}
+                            styles={getCustomStyles(!darkMode)}
                         />
-                        <div className="invalid-feedback">Please select a user</div>
+                        <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalAssignQuiz.invalidSelect')}</div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                        {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                     </Button>
                     <Button variant="warning" onClick={() => { handleAssign() }}>
-                        Assign
+                        {t('adminPage.quizzesManagement.modalAssignQuiz.assign')}
                     </Button>
                 </Modal.Footer>
             </Modal>

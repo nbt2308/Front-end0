@@ -9,7 +9,9 @@
             "profile": "My account",
             "logout": "Logout",
             "vi": "Vietnamese",
-            "en": "English"
+            "en": "English",
+            "dark":"Dark",
+            "light":"Light"
         },
         "loginPage": {
             "loginTitle": "Sign in",
@@ -22,19 +24,28 @@
             "buttonSignIn": "SIGN IN",
             "labelSignUp": "Don't have an account?",
             "buttonCreateAccount": "Create a new account",
-            "buttonGoToHomePage": "Go to Homepage"
+            "buttonGoToHomePage": "Go to Homepage",
+            "loginSucceed": "Login Succeed",
+            "loginFail": "Incorrect password",
+            "loginFail1": "Not found user with the email: "
         },
         "registerPage": {
             "registerTitle": "Create a new account",
             "divider": "Or use your email",
+            "labelEmail": "Email address",
+            "labelInValidEmail": "Please enter a valid email address.",
+            "labelPassword": "Password",
             "labelUsername": "Username",
-            "labelInvalidUsername": "Username must be at least 5 characters long",
+            "labelInvalidUsername": "Username must be at least 5 characters long.",
             "labelConfirmPassword": "Confirm password",
             "labelInValidPassword": "Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.",
             "labelInvalidConfirmPassword": "Passwords do not match!",
             "buttonSignup": "SIGN UP",
             "labelSignIn": "Already have an Account?",
-            "buttonSignIn": "Login here"
+            "buttonSignIn": "Login here",
+            "buttonGoToHomePage": "Go to Homepage",
+            "registerFail": "Email already exists",
+            "registerSucceed": "A new user created success"
         },
         "userStats": {
             "userstats1": "20M+ Users",
@@ -49,5 +60,223 @@
             "button1": "Get started - it's FREE",
             "button2": "Doing Quiz Now"
         }
+    },
+    "usersPage": {
+        "emptyQuiz": "You don't have any quiz now...",
+        "buttonStart": "Start now",
+        "buttonPrev": "Prev",
+        "buttonNext": "Next",
+        "buttonFinish": "Finish",
+        "question": "Question",
+        "noti": "You don't have any questions",
+        "modalConfirmSelect": {
+            "titleConfirm": "ARE YOU SURE ?",
+            "buttonNo": "No",
+            "buttonYes": "Yes"
+        },
+        "modalResult": {
+            "resultTitle": "Your Result",
+            "congratulation": "CONGRATULATION",
+            "yourResult": "Your answered",
+            "questionsCorrect": "questions correct",
+            "buttonBack": "Back to Home",
+            "buttonShowAnswer": "Show answers"
+        }
+    },
+    "adminPage": {
+        "sideBar": {
+            "dashboard": "Dashboard",
+            "usersManagement": "Users management",
+            "quizzesManagement": "Quizzes management",
+            "questionsManagement": "Questions management",
+            "accountProfile": "Account Profile"
+        },
+        "breadcrumb": {
+            "home": "Home",
+            "dashboard": "Dashboard",
+            "management": "Management",
+            "usersManagement": "Users management",
+            "quizzesManagement": "Quizzes management",
+            "questionsManagement": "Questions management",
+            "accountProfile": "Account Profile"
+        },
+        "dashboard": {
+            "dashboardTitle": "Analytics Dashboard",
+            "totalUsers": "Total Users",
+            "users": "Users",
+            "admins": "Admins",
+            "online": "Online",
+            "quizStatistics": {
+                "quizStatisticsTitle": "Quiz Statistics",
+                "quizzes": "Quizzes",
+                "questions": "Questions",
+                "answers": "Answers"
+            },
+            "others": {
+                "othersTitle": "Others",
+                "totalQuizzes": "Total Quizzes",
+                "totalQuestions": "Total Questions",
+                "totalAnswers": "Total Answers"
+            }
+        },
+        "usersManagement": {
+            "usersManagementTitle": "Users Management",
+            "featureComming": "This feature is under development",
+            "modalAddUsers": {
+                "buttonAddUsers": "Add new users",
+                "title": "Add new users",
+                "email": "Email address",
+                "invalidEmail": "Please enter a valid email",
+                "invalidEmail1": "Email address is required",
+                "password": "Password",
+                "invalidPassword": "Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character",
+                "invalidPassword1": "Password is required",
+                "username": "Username",
+                "invalidUsername": "Username must be at least 5 characters long and max 20 characters",
+                "invalidUsername1": "Username is required",
+                "role": "Role",
+                "uploadImageFile": "Upload Image File",
+                "upload1": "Drag & Drop Image Or Select Image",
+                "buttonCancel": "Cancel",
+                "buttonSave": "Save",
+                "createUserSucceed": "Create a new participant succeed",
+                "user":"USER",
+                "admin":"ADMIN"
+            },
+            "modalViewUsers": {
+                "title": "Personal Details"
+            },
+            "modalUpdateUsers": {
+                "title": "Update a user",
+                "email": "Email address (It cannot be changed here)",
+                "password": "Password (It cannot be changed here)",
+                "updateSucceed": "Update the participant succeed"
+            },
+            "modalDeleteUsers": {
+                "title": "Delete confirmation",
+                "text1": "Are you sure to delete this account?",
+                "buttonCancel": "Cancel",
+                "buttonConfirm": "Confirm",
+                "deleteSucceed": "Delete the user succeed"
+            },
+            "searchBar": "Search",
+            "tableUsers": {
+                "username": "USERNAME",
+                "email": "EMAIL",
+                "role": "ROLE",
+                "actions": "ACTIONS",
+                "error": "Not Found",
+                "next": "Next >",
+                "prev": "< Prev"
+            }
+        },
+        "quizzesManagement": {
+            "title": "Quizzes management",
+            "btnAddQuiz": "Add new Quiz",
+            "btnUpdateQA": "Update Q/A",
+            "btnAssignQuiz": "Assign quiz",
+            "tableQuiz": {
+                "nameQuiz": "QUIZ NAME",
+                "descriptionQuiz": "DESCRIPTION",
+                "difficultyQuiz": "DIFFICULTY",
+                "notFound": "Not found"
+            },
+            "modalAddQuiz": {
+                "title": "Add New Quiz",
+                "quizName": "Quiz's name",
+                "labelInvalidQuizName": "Quiz's name is required",
+                "labelInvalidQuizName1": "Quiz's name must be at least 5 characters long",
+                "difficulty": {
+                    "title": "Difficulty",
+                    "EASY": "EASY",
+                    "MEDIUM": "MEDIUM",
+                    "HARD": "HARD"
+                },
+                "description": "Description",
+                "labelInvalidDescription": "Description is required",
+                "labelInvalidDescription1": "Description must be at least 5 characters long",
+                "addQuizSucceed": "Create a new quiz succeed",
+                "addQuizFail": "No files were uploaded"
+            },
+            "modalUpdateQuiz": {
+                "updateSucceed": "Update new quiz succeed",
+                "title": "Update a Quiz"
+            },
+            "modalDeleteQuiz": {
+                "deleteSucceed": "Delete the quiz succeed",
+                "title": "Delete confirmation",
+                "label1": "Are you sure to delete this quiz?"
+            },
+            "modalUpsertQA": {
+                "upsertQASucceed": "Upsert Quiz with Q/A succeed",
+                "emptyQA": "Please add questions and answers for this quiz",
+                "title": "Update Questions and Answers",
+                "selectQuiz": "Select quiz",
+                "invalidSelect": "Please select a quiz",
+                "addQuestions": "Add questions",
+                "q": "Question",
+                "s": "'s description",
+                "invalidQuestion": "Question's description is required",
+                "uploadImage": "Upload image",
+                "emptyFile": "0 file is uploaded",
+                "a": "Answer",
+                "s1": "'s description",
+                "invalidAnswer": "Answer's description is required",
+                "emptyQA1": "Quiz is empty. Please add questions and answer for this quiz",
+                "previewImage": "Upload image success. Click image's name to preview"
+            },
+            "modalAssignQuiz": {
+                "assignSucceed": "Assign the quiz to the current user succeed",
+                "assignFail": "The quiz already assigned to the user",
+                "title": "Assign quiz to users",
+                "selectUser": "Select user",
+                "invalidSelect": "Please select a user",
+                "assign": "Assign"
+            }
+        },
+        "questionsManagement": {
+            "createSucceed": "Create questions and answers succeed",
+            "title": " Questions Management",
+            "save": "Save questions"
+        },
+        "accountProfile": {
+            "title": "Account Profile",
+            "personalDetail": {
+                "updateSucceed": "Update the current user succeed",
+                "btnEdit": "Edit",
+                "title1": "Personal Details",
+                "title": "Personal Information",
+                "email": "Your Email",
+                "role": "Your Role",
+                "name": "Your Name",
+                "bio": "Bio",
+                "description": "Describe a little about yourself",
+                "btnReset": "Reset",
+                "btnUpdateProfile": "Update Profile"
+            },
+            "changePassword": {
+                "title": "Change Password",
+                "currentPassword": "Current Password",
+                "newPassword": "New Password",
+                "confirmPassword": "Confirm Password",
+                "updateSucceed": "Update the new password succeed",
+                "updateFail": "Incorrect password",
+                "errorCurrentPassWord": "Current password is required",
+                "errorNewPassWord": "New password is required",
+                "errorNewPassWord1": "New password must not be the same as current password",
+                "btnUpdate": "Update"
+            },
+            "history": {
+                "title1": "History",
+                "title": "Your recent quiz results",
+                "totalQuestions": "Total Questions",
+                "totalCorrect": "Total Correct",
+                "date": "Date",
+                "notFound": "Not found"
+            }
+        }
+    },
+    "errorPage": {
+        "404": "404.Not found data with your current URL"
     }
 }

@@ -1,0 +1,23 @@
+.loading-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(67,185,105);
+    .loading-icon {
+        font-size: 3rem;
+        color: #ffffff;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+
+        to {
+            transform: scale(1) rotate(360deg);
+        }
+    }
+}

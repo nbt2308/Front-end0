@@ -7,8 +7,14 @@ import ModalUpdateUser from "./ModalUpdateUser"
 import ModalViewUsers from "./ModalViewUsers"
 import ModalDeleteUser from './ModalDeleteUser'
 import TableUserPaginate from './TableUserPaginate'
+import { useTranslation } from 'react-i18next';
+import { toast } from "react-toastify";
+import { useOutletContext } from "react-router-dom";
+
 const ManageUsers = (props) => {
-    //modal
+
+    const { darkMode } = useOutletContext();
+    const { t } = useTranslation();
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalViewUser, setShowModalViewUser] = useState(false);
     const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
@@ -19,7 +25,7 @@ const ManageUsers = (props) => {
     const [listUsers, setListUsers] = useState([]);
 
     //table paginate
-    const LIMIT_USERS_PER_PAGE = 5;
+    const LIMIT_USERS_PER_PAGE = 8;
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
@@ -59,20 +65,38 @@ const ManageUsers = (props) => {
     const resetViewData = () => {
         setDataView({});
     }
+
     return (
-        <div className="manageUsers-container">
-            <div className="manageUsers-title">
-                Users Management
+        <div className={darkMode ? "manageUsers-container light" : "manageUsers-container dark"}>
+            <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
+                <div className="manageUsers-title">
+                    {t('adminPage.usersManagement.usersManagementTitle')}
+                </div>
+                <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
+
+                    <ol className="breadcrumb">
+                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
+                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
+                        <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.usersManagement')}</li>
+                    </ol>
+
+                </div>
             </div>
-            <div className="Users-content">
+
+
+            <div
+                className={darkMode ? "Users-content light-card" : "Users-content dark-card"}
+            // className="Users-content"
+            >
                 <div className="Add-users">
                     <AddUsers
                         fetchListUsers={fetchListUsers}
                         fetchListUsersWithPaginate={fetchListUsersWithPaginate}
-                        setCurrentPage={setCurrentPage} 
-                        />
+                        setCurrentPage={setCurrentPage}
+                        darkMode={darkMode}
+                    />
                 </div>
-                <div className="search-bar">
+                <div className="search-bar"  >
                     <SearchBar />
                 </div>
                 <div className="table-users">
@@ -89,7 +113,8 @@ const ManageUsers = (props) => {
                         fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                         pageCount={pageCount}
                         currentPage={currentPage}
-                        setCurrentPage={setCurrentPage} />
+                        setCurrentPage={setCurrentPage}
+                        darkMode={darkMode} />
                 </div>
                 <ModalUpdateUser
                     show={showModalUpdateUser}
@@ -99,10 +124,12 @@ const ManageUsers = (props) => {
                     resetUpdateData={resetUpdateData}
                     fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                     currentPage={currentPage}
-                    setCurrentPage={setCurrentPage} />
+                    setCurrentPage={setCurrentPage}
+                    darkMode={darkMode} />
 
 
                 <ModalViewUsers
+                    darkMode={darkMode}
                     show={showModalViewUser}
                     setShow={setShowModalViewUser}
                     dataView={dataView}
@@ -110,6 +137,7 @@ const ManageUsers = (props) => {
                     fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                 />
                 <ModalDeleteUser
+                    darkMode={darkMode}
                     show={showModalDeleteUser}
                     setShow={setShowModalDeleteUser}
                     dataDelete={dataDelete}

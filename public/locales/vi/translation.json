@@ -6,35 +6,46 @@
             "admin": "Quản trị",
             "login": "Đăng nhập",
             "signup": "Đăng ký",
-            "profile": "Trang cá nhân",
+            "profile": "Thông tin cá nhân",
             "logout": "Đăng xuất",
             "vi": "Tiếng Việt",
-            "en": "Tiếng Anh"
+            "en": "Tiếng Anh",
+            "dark":"Tối",
+            "light":"Sáng"
         },
         "loginPage": {
             "loginTitle": "Đăng nhập",
-            "divider": "Or use your account",
-            "labelEmail": "Email address",
-            "labelInValidEmail": "Please enter a valid email address.",
-            "labelPassword": "Password",
-            "labelInValidPassword": "Please enter a valid password.",
-            "labelForgotPassword": "Forgot your password?",
-            "buttonSignIn": "SIGN IN",
-            "labelSignUp": "Don't have an account?",
-            "buttonCreateAccount": "Create a new account",
-            "buttonGoToHomePage": "Go to Homepage"
+            "divider": "Hoặc sử dụng tài khoản có sẵn của bạn",
+            "labelEmail": "Địa chỉ email",
+            "labelInValidEmail": "Xin hãy vui lòng điền lại một địa chỉ email hợp lệ khác.",
+            "labelPassword": "Mật khẩu",
+            "labelInValidPassword": "Xin hãy vui lòng điền lại một mật khẩu hợp lệ khác.",
+            "labelForgotPassword": "Bạn đã quên mật khẩu ư?",
+            "buttonSignIn": "Đăng nhập",
+            "labelSignUp": "Bạn hiện đang không có tài khoản ?",
+            "buttonCreateAccount": "Tạo tài khoản ",
+            "buttonGoToHomePage": "Trang chủ",
+            "loginSucceed": "Đăng nhập thành công",
+            "loginFail": "Sai mật khẩu",
+            "loginFail1": "Không tìm thấy người dùng với email: "
         },
         "registerPage": {
-            "registerTitle": "Create a new account",
-            "divider": "Or use your email",
-            "labelUsername": "Username",
-            "labelInvalidUsername": "Username must be at least 5 characters long",
-            "labelConfirmPassword": "Confirm password",
-            "labelInValidPassword": "Password must be at least 5 characters long and include at least one uppercase letter,one lowercase letter, one number, and one special character.",
-            "labelInvalidConfirmPassword": "Passwords do not match!",
-            "buttonSignup": "SIGN UP",
-            "labelSignIn": "Already have an Account?",
-            "buttonSignIn": "Login here"
+            "registerTitle": "Tạo tài khoản",
+            "divider": "Hoặc bạn có thể sử dụng email của mình",
+            "labelEmail": "Địa chỉ email",
+            "labelInValidEmail": "Xin hãy vui lòng điền lại một địa chỉ email hợp lệ khác.",
+            "labelPassword": "Mật khẩu",
+            "labelUsername": "Tên người dùng",
+            "labelInvalidUsername": "Mỗi tên người dùng phải có độ dài tối thiểu là 5 ký tự.",
+            "labelConfirmPassword": "Xác nhận lại mật khẩu",
+            "labelInValidPassword": "Mật khẩu phải có độ dài tối thiểu là 5 ký tự và phải bao gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.",
+            "labelInvalidConfirmPassword": "Mật khẩu bạn vừa nhập không trùng khớp!",
+            "buttonSignup": "Đăng nhập",
+            "labelSignIn": "Bạn đã có sẵn tài khoản?",
+            "buttonSignIn": "Đăng nhập",
+            "buttonGoToHomePage": "Trang chủ",
+            "registerFail": "Tài khoản email đã tồn tại",
+            "registerSucceed": "Tạo tài khoản thành công"
         },
         "userStats": {
             "userstats1": "Hơn 20 triệu người dùng",
@@ -49,5 +60,221 @@
             "button1": "Bắt đầu ngay – Hoàn toàn miễn phí",
             "button2": "Thử Thách Ngay"
         }
-    }
+    },
+    "usersPage": {
+        "emptyQuiz": "Hiện tại bạn không có bài kiểm tra nào...",
+        "buttonStart": "Bắt đầu ngay",
+        "buttonPrev": "Trang trước",
+        "buttonNext": "Trang sau",
+        "buttonFinish": "Nộp bài",
+        "question": "Câu hỏi",
+        "noti": "Hiện chưa có câu hỏi",
+        "modalConfirmSelect": {
+            "titleConfirm": "Bạn có chắc chắn muốn nộp bài không ?",
+            "buttonNo": "Không",
+            "buttonYes": "Có"
+        },
+        "modalResult": {
+            "resultTitle": "Kết quả của bạn ",
+            "congratulation": "Xin chúc mừng bạn",
+            "yourResult": "Câu trả lời của bạn",
+            "questionsCorrect": "Câu trả lời đúng",
+            "buttonBack": "Trở lại trang chủ",
+            "buttonShowAnswer": "Hiển thị kết quả"
+        }
+    },
+    "adminPage": {
+        "sideBar": {
+            "dashboard": "Bảng điều khiển",
+            "usersManagement": "Quản lý người dùng",
+            "quizzesManagement": "Quản lý bài thi",
+            "questionsManagement": "Quản lý câu hỏi",
+            "accountProfile": "Hồ sơ tài khoản"
+        },
+        "breadcrumb": {
+            "home": "Trang chủ",
+            "dashboard": "Bảng điều khiển",
+            "management": "Trình quản lý",
+            "usersManagement": "Quản lý người dùng",
+            "quizzesManagement": "Quản lý bài thi",
+            "questionsManagement": "Quản lý câu hỏi",
+            "accountProfile": "Hồ sơ tài khoản"
+        },
+        "dashboard": {
+            "dashboardTitle": "Bảng số liệu thống kê",
+            "totalUsers": "Tổng số người dùng",
+            "users": "Người dùng",
+            "admins": "Quản trị viên",
+            "online": "Đang trực tuyến",
+            "quizStatistics": {
+                "quizStatisticsTitle": "Số liệu về bài thi",
+                "quizzes": "Câu đố",
+                "questions": "Câu hỏi",
+                "answers": "Câu trả lời"
+            },
+            "others": {
+                "othersTitle": "Các mục khác",
+                "totalQuizzes": "Tổng các bài thi",
+                "totalQuestions": "Tổng các câu hỏi",
+                "totalAnswers": "Tổng các câu trả lời"
+            }
+        },
+        "usersManagement": {
+            "usersManagementTitle": "Quản lý người dùng",
+            "featureComming": "Tính năng này đang được phát triển",
+            "modalAddUsers": {
+                "buttonAddUsers": "Thêm người dùng",
+                "title": "Thêm người dùng mới",
+                "email": "Địa chỉ email",
+                "invalidEmail": "Vui lòng hãy nhập 1 địa chỉ email hợp lệ",
+                "invalidEmail1": "Bạn cần nhập địa chỉ email",
+                "password": "Mật khẩu",
+                "invalidPassword": "Mật khẩu được nhập phải có độ dài ít nhất là 5 ký tự và bao gồm có ít nhất 1 chữ cái in hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.",
+                "invalidPassword1": "Bạn cần nhập mật khẩu",
+                "username": "Tên người dùng",
+                "invalidUsername": "Tên đăng nhập phải có độ dài ít nhất là 5 ký tự và tối đa là 20 ký tự",
+                "invalidUsername1": "Bạn cần nhập tên người dùng",
+                "role": "Vai trò",
+                "uploadImageFile": "Tải lên ảnh từ thư mục của bạn",
+                "upload1": "Kéo và thả ảnh của bạn hoặc chọn hình ảnh",
+                "buttonCancel": "Thoát",
+                "buttonSave": "Lưu",
+                "createUserSucceed": "Thêm mới người dùng thành công",
+                "user":"Nguời dùng",
+                "admin":"Quản trị viên"
+            },
+            "modalViewUsers": {
+                "title": "Thông tin chi tiết cá nhân"
+            },
+            "modalUpdateUsers": {
+                "title": "Cập nhật thông tin người dùng",
+                "email": "Địa chỉ email (Hành động này không thể thực hiện ở đây)",
+                "password": "Mật khẩu (Hành động này không thể thực hiện ở đây)",
+                "updateSucceed": "Cập nhật người dùng thành công"
+            },
+            "modalDeleteUsers": {
+                "title": "Xác nhận xóa",
+                "text1": "Bạn có chắc chắn muốn xóa tài khoản này?",
+                "buttonCancel": "Thoát",
+                "buttonConfirm": "Xác nhận",
+                "deleteSucceed": "Xoá người dùng thành công"
+            },
+            "searchBar": "Tìm kiếm",
+            "tableUsers": {
+                "username": "Tên người dùng",
+                "email": "Địa chỉ email",
+                "role": "Vai trò",
+                "actions": "Hành động",
+                "error": "không tìm thấy",
+                "next": "Tiến >",
+                "prev": "< Lùi"
+            }
+        },
+        "quizzesManagement": {
+            "title": "Quản lý bài thi",
+            "btnAddQuiz": "Thêm bài thi mới",
+            "btnUpdateQA": "Cập nhật câu hỏi và câu trả lời",
+            "btnAssignQuiz": "Chỉ định bài thi cho người dùng",
+            "tableQuiz": {
+                "nameQuiz": "Tên bài thi",
+                "descriptionQuiz": "Mô tả",
+                "difficultyQuiz": "Độ khó",
+                "notFound": "Không tìm thấy bài thi"
+            },
+            "modalAddQuiz": {
+                "title": "Thêm bài thi mới",
+                "quizName": "Tên của bài thi",
+                "labelInvalidQuizName": "Phải có tên bài thi",
+                "labelInvalidQuizName1": "Tên bài thi phải có độ dài tối thiểu là 5 ký tự",
+                "difficulty": {
+                    "title": "Độ khó",
+                    "EASY": "Dễ",
+                    "MEDIUM": "Trung bình",
+                    "HARD": "Khó"
+                },
+                "description": "Phần mô tả",
+                "labelInvalidDescription": "Mô tả là bắt buộc phải có",
+                "labelInvalidDescription1": "Mỗi mô tả phải có độ dài ít nhất là 5 ký tự",
+                "addQuizSucceed": "Tạo ra bài thi mới thành công",
+                "addQuizFail": "Không có tài liệu nào đã được đăng tải lên đây"
+            },
+            "modalUpdateQuiz": {
+                "updateSucceed": "Cập nhật bài thi thành công",
+                "title": "Cập nhật 1 bài thi"
+            },
+            "modalDeleteQuiz": {
+                "deleteSucceed": "Xóa bài thi thành công",
+                "title": "Xác nhận xóa",
+                "label1": "Bạn có chắc chắn bạn muốn xóa bài thi này không?"
+            },
+            "modalUpsertQA": {
+                "upsertQASucceed": "Cập nhật câu hỏi và câu trả lời thành công",
+                "emptyQA": "Xin hãy thêm câu hỏi và câu trả lời cho bài thi này",
+                "title": "Cập nhật câu hỏi và câu trả lời cho bài thi",
+                "selectQuiz": "Chọn bài thi",
+                "invalidSelect": "Xin hãy chọn 1 bài thi",
+                "addQuestions": "Thêm câu hỏi",
+                "q": "Mô tả câu hỏi",
+                "s": "",
+                "invalidQuestion": "Phần mô tả câu hỏi là bắt buộc Phải có",
+                "uploadImage": "Đăng tải hình ảnh",
+                "emptyFile": "0 có tài liệu nào được đăng tải lên",
+                "a": "Mô tả câu trả lời ",
+                "s1": "",
+                "invalidAnswer": "Mô tả câu trả lời là bắt buộc phải có",
+                "emptyQA1": "Câu đố đang không có dữ liệu. Vui lòng thêm câu hỏi cho bài thi này",
+                "previewImage": "Đăng tải hình ảnh thành công. Vui lòng nhấn vào đây để xem trước"
+            },
+            "modalAssignQuiz": {
+                "assignSucceed": "Chỉ định quiz cho người dùng thành công",
+                "assignFail": "Các bài thi đã sẵn sàng giao cho người dùng",
+                "title": "Chỉ định bài thi cho người dùng",
+                "selectUser": "Chọn người dùng",
+                "invalidSelect": "Hãy chọn 1 người dùng",
+                "assign": "Chỉ định"
+            }
+        },
+        "questionsManagement": {
+            "createSucceed": "Tạo câu hỏi và câu trả lời thành công",
+            "title": " Quản lý câu hỏi",
+            "save": "Lưu câu hỏi"
+        },
+        "accountProfile": {
+            "title": "Thông tin chi tiết của tài khoản",
+            "personalDetail": {
+                "updateSucceed": "Cập nhật thông tin của người dùng thành công",
+                "btnEdit": "Chỉnh sửa",
+                "title1": "Thông tin cá nhân",
+                "title": "Chi tiết thông tin cá nhân",
+                "email": "Địa chỉ email của bạn",
+                "role": "Vai trò",
+                "name": "Tên người dùng",
+                "bio": "Tiểu sử",
+                "description": "Hãy mô tả 1 chút về bản thân bạn",
+                "btnReset": "Đặt lại",
+                "btnUpdateProfile": "Cập nhật hồ sơ"
+            },
+            "changePassword": {
+                "title": "Thay đổi mật khẩu",
+                "currentPassword": "Mật khẩu hiện tại",
+                "newPassword": "Mật khẩu mới",
+                "confirmPassword": "Xác nhận lại mật khẩu mới tạo",
+                "updateSucceed": "Cập nhật mật khẩu mới thành công",
+                "updateFail": "Mật khẩu trên không đúng",
+                "errorCurrentPassWord": "Mật khẩu hiện tại thì bắt buộc phải có",
+                "errorNewPassWord": "Mật khẩu mới thì bắt buộc phải có",
+                "errorNewPassWord1": "Mật khẩu mới thì không được trùng với mật khẩu hiện tại",
+                "btnUpdate": "Update"
+            },
+            "history": {
+                "title1": "Lịch sử",
+                "title": "Lịch sử kết quả làm bài của bạn",
+                "totalQuestions": "Tổng số câu hỏi",
+                "totalCorrect": "Tổng số câu trả lời đúng",
+                "date": "Ngày làm bài",
+                "notFound": "Không tìm thấy"
+            }
+        }
+    },
+    "404Page": "404-Không thể tìm thấy trang với địa chỉ URL của bạn vừa nhập"
 }

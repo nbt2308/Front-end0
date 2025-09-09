@@ -1,10 +1,18 @@
 import CountDownTimer from "./CountDownTimer";
 import { useRef } from "react";
+import { useTranslation } from 'react-i18next';
 const RightContent = (props) => {
-    const { dataQuiz, handleFinish, setIndex } = props
+    const { dataQuiz, handleFinishResult, setIndex ,check,setCheck} = props
     const refDiv = useRef([]);
+    const { t } = useTranslation();
+    
+     
     const onTimeUp = () => {
-        handleFinish();
+        handleFinishResult();
+        setCheck(prev=>({
+            ...prev,
+            isFinish:true
+        }))
     }
 
     const getClassQuestion = (index, question) => {
@@ -41,10 +49,19 @@ const RightContent = (props) => {
     return (
         <>
             <div className="timer-container">
-                <div className="timer"><CountDownTimer onTimeUp={onTimeUp} /></div>
+                <div className="timer">
+                    {
+                        dataQuiz && dataQuiz.length>0 
+                        ? 
+                        <CountDownTimer onTimeUp={onTimeUp} check={check}/>
+                        :
+                        <span>00:00</span>
+                    }
+                    
+                    </div>
             </div>
             <div className="questions-container">
-                {dataQuiz && dataQuiz.length > 0 &&
+                {dataQuiz && dataQuiz.length > 0 ?
                     dataQuiz.map((item, index) => {
                         return (
                             <div
@@ -55,7 +72,10 @@ const RightContent = (props) => {
                                 {index + 1}
                             </div>
                         )
-                    })}
+                    })
+                    :
+                    <span className="text-danger fs-3 fw-medium">{t('usersPage.noti')}</span>
+                }
 
 
 

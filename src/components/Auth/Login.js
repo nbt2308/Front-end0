@@ -1,55 +1,99 @@
 import './Login.scss'
 import { useNavigate } from "react-router-dom"
-import { FaFacebookF, FaGithub } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { postLoginUser } from '../../services/apiService';
 import { toast } from 'react-toastify';
-import { validateEmail} from '../../utils/validators';
+import { validateEmail } from '../../utils/validators';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/actions/userAction';
 import { ImSpinner6 } from "react-icons/im";
 import Language from '../Header/Language';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import brandname from "../../assets/images/brandname.png"
 import { useTranslation } from 'react-i18next';
-const Login = () => {
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
+import { IoIosMoon } from "react-icons/io";
+import { AiFillSun } from "react-icons/ai";
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from "../../assets/images/NBT.svg"
+import gg from "../../assets/images/2.svg"
+import fb from "../../assets/images/3.svg"
+import gh from "../../assets/images/gh.svg"
+
+const Login = (props) => {
+    const { darkMode } = props;
     const [isLoadingLogin, setIsLoadingLogin] = useState(false);
-    const [isValidEmail,setIsValidEmail]=useState(true)
-    const [isValidPassword,setIsValidPassword]=useState(true)
+    const [form, setForm] = useState({
+        Email: "",
+        Password: ""
+    });
+
+    const [errors, setErrors] = useState({
+        Email: "",
+        Password: "",
+
+    });
+
+    const [showErrors, setShowErrors] = useState({
+        Email: false,
+        Password: false,
+
+    });
     const Navigate = useNavigate();
     const dispatch = useDispatch();
     const { t } = useTranslation();
+    const handleValidate = () => {
+        const newErrors = {
+            Email: "",
+            Password: "",
+
+        };
+
+        if (!form.Email) {
+            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
+        } else if (!validateEmail(form.Email)) {
+            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
+        }
+        if (!form.Password) {
+            newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
+        }
+
+        setErrors(newErrors);
+        setShowErrors({
+            Email: !!newErrors.Email,
+            Password: !!newErrors.Password,
+
+        });
+
+        return !Object.values(newErrors).some(Boolean); // hợp lệ nếu không có error nào
+    };
+    const handleChange = (field, value) => {
+        setForm(prev => ({ ...prev, [field]: value }));
+
+        if (showErrors[field]) {
+            setShowErrors(prev => ({ ...prev, [field]: false }));
+        }
+    };
     const handleLogin = async () => {
         //validate
-        const isEmptyEmail = validateEmail(Email);
-        if (!isEmptyEmail){
-            setIsValidEmail(false);
-            return;
-        }
-        else{
-            setIsValidEmail(true);
-        }
-        if (!Password) {
-            setIsValidPassword(false);
-            return;
-        }else{
-            setIsValidPassword(true);
-        }
+        if (!handleValidate()) return;
         setIsLoadingLogin(true)
-        let data = await postLoginUser(Email, Password);
+        let data = await postLoginUser(form.Email, form.Password);
         if (data && data.EC === 0) {
             dispatch(doLogin.loginSuccess(data.DT));
-            toast.success(data.EM);
+            toast.success(`${t('homepage.loginPage.loginSucceed')}`);
             setIsLoadingLogin(false)
             Navigate("/");
         }
-        if (data && data.EC !== 0) {
-            toast.error(data.EM);
+        if (data && data.EC === -2) {
+            toast.error(`${t('homepage.loginPage.loginFail')}`);
             setIsLoadingLogin(false)
         }
+        if (data && data.EC === -1) {
+            toast.error(`${t('homepage.loginPage.loginFail1')} ${form.Email}`);
+            setIsLoadingLogin(false)
+        }
+
 
     }
     const handleKeyDown = (event) => {
@@ -57,59 +101,79 @@ const Login = () => {
             handleLogin();
         }
     }
+    const handleChangeLight = () => {
+        darkMode.enable();
+    }
+    const handleChangeDark = () => {
+        darkMode.disable();
+    }
     return (
         <>
-            <div className='login-main'>
+            <div className={darkMode.value ? "login-main main-container-light" : "login-main main-container-dark"}>
                 <PerfectScrollbar>
                     <div className='languages-change-container'>
-                        <Language />
+                        <Language darkMode={darkMode.value} />
+                        <NavDropdown
+                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />}
+                            id="basic-nav-dropdown"
+                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
+
+                        </NavDropdown>
+
                     </div>
-                    <div className='brand-name'><img src={brandname} alt="NBT" /></div>
+                    <div className='brand-name'><img src={logo} alt="NBT" /></div>
                     <div className="login-container ">
-                        <div className="login-content">
+                        <div className={darkMode.value?"login-content light":"login-content dark-card"}>
 
                             <div className="login-title mt-3">
                                 <span>{t('homepage.loginPage.loginTitle')}</span>
                             </div>
-                            <div className="social-links">
-                                <a href='/login'><FaFacebookF /></a>
-                                <a href='/login' className='mx-3'><SiGmail /></a>
-                                <a href='/login'><FaGithub /></a>
+                            <div className={darkMode.value?"social-links-light":"social-links-dark"}>
+                                <a href='/login'><img src={fb} alt="facebook" /></a>
+                                <a href='/login' className='mx-3'><img src={gg} alt="google" /></a>
+                                <a href='/login'><img src={gh} alt="github" /></a>
                             </div>
-                            <div className="divider my-3">
+                            <div className={darkMode.value?"divider-light my-3":"divider-dark my-3"}>
                                 <span>{t('homepage.loginPage.divider')}</span>
                             </div>
                             <div className="form-login mx-auto ">
                                 <div className="form-group">
                                     {/* <label className='form-label'>Email</label> */}
-                                    <div className="form-floating ">
-                                        <input type="email"
-                                            className={isValidEmail?"form-control": 'form-control is-invalid'}
-                                            value={Email}
-                                            onChange={(event) => { setEmail(event.target.value) }}
+                                    <FloatingLabel
+                                        label={t('adminPage.usersManagement.modalAddUsers.email')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="name@example.com"
+                                            value={form.Email}
+                                            onChange={e => handleChange("Email", e.target.value)}
+                                            isInvalid={showErrors.Email}
                                             required
-                                            id="floatingInput"
-                                            placeholder="name@example.com" />
-                                        <label htmlFor="floatingInput">{t('homepage.loginPage.labelEmail')}</label>
-                                        <div className="invalid-feedback">{t('homepage.loginPage.labelInValidEmail')}</div>
-                                    </div>
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
                                 <div className="form-group mt-2">
                                     {/* <label className='form-label'>Password</label> */}
-                                    
-                                    <div className="form-floating">
-                                        <input
+
+                                    <FloatingLabel
+                                        label={t('adminPage.usersManagement.modalAddUsers.password')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
                                             type="password"
-                                            className={isValidPassword?"form-control":"form-control is-invalid"}
-                                            value={Password}
-                                            onChange={(event) => { setPassword(event.target.value) }}
-                                            placeholder='Password'
-                                            required
+                                            placeholder="Password"
+                                            value={form.Password}
+                                            onChange={e => handleChange("Password", e.target.value)}
+                                            isInvalid={showErrors.Password}
                                             onKeyDown={(event) => handleKeyDown(event)}
+                                            required
                                         />
-                                        <label htmlFor="floatingPassword">{t('homepage.loginPage.labelPassword')}</label>
-                                        <div className="invalid-feedback">{t('homepage.loginPage.labelInValidPassword')} </div>
-                                    </div>
+                                        <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
 
                                 <span className="forgot-password-label  "><a href="/login">{t('homepage.loginPage.labelForgotPassword')}</a></span>

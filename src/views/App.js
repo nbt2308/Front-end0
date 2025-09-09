@@ -2,24 +2,26 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import '../styles/App.scss';
 import Header from '../components/Header/Header';
 import { Outlet } from 'react-router-dom';
-function App() {
+function App(props) {
+  const {darkMode}=props
+  
   return (
+
     <div className="app-container">
+
       <div className="header-container">
-        <Header/>
+        <Header darkMode={darkMode}/>
       </div>
-      <div className="main-container">
-        <div className="sidebar-container">
 
-        </div>
-        <div className="app-content">
-          < PerfectScrollbar>
-            <Outlet />
-          </PerfectScrollbar>
+      <div className={darkMode.value?"main-container main-container-light":"main-container main-container-dark"}>
 
+        <div className="app-content ">
+            <Outlet context={{ darkMode: darkMode.value }}/>
         </div>
+
       </div>
-    </div>
+
+    </div >
   );
 }
 
