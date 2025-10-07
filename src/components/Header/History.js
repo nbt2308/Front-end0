@@ -13,7 +13,9 @@ const History = (props) => {
     }, [])
     const fetchListHistory = async () => {
         let res = await getHistory();
-        if (res && res.EC === 0) {
+        if (res && res.EC === 0) {  
+            console.log('data',res.DT);
+            
             let newData = res?.DT?.data?.map(item => {
 
                 return {

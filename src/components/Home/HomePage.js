@@ -13,7 +13,7 @@ const HomePage = () => {
     return (
         <>
             <div className='mb-5'>
-                <div className='Homepage-content'>
+                <div className='Homepage-content '>
                     <div className="text-container">
                         <div className={darkMode ? "user-stats-light" : "user-stats-dark"}>
                             {/* 20M+ Users */}

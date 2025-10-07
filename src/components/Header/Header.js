@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom"
 import { postLogout } from '../../services/apiService';
@@ -59,64 +60,109 @@ const Header = (props) => {
     }
     return (
         <>
-        
-            <Navbar key="lg" expand="lg" className={darkMode.value?" navbar-light":" navbar-dark"} sticky='top' >
+
+
+            <Navbar key="xl" expand="xl" className={darkMode.value ? " navbar-light " : " navbar-dark "}>
                 <Container >
-                    <NavLink to="/" className='navbar-brand '><img src={logo} alt="logo" className='logo'/></NavLink>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <NavLink to="/" className='nav-link '>{t('homepage.header.home')}</NavLink >
-                            <NavLink to="/users" className='nav-link '>{t('homepage.header.users')}</NavLink >
-                            <NavLink to="/admin" className='nav-link '>{t('homepage.header.admin')}</NavLink >
-                        </Nav>
-                        <Nav>
+                    <NavLink to="/" className='navbar-brand '><img src={logo} alt="logo" className='logo' /></NavLink>
+                    <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} />
+                    <Navbar.Offcanvas
+                        id={`offcanvasNavbar-expand-xl`}
+                        aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
+                        placement="end"
+                    >
+                        <Offcanvas.Header closeButton className={darkMode.value ? " nav-body-light " : " nav-body-dark "}>
+                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
+                                NBT
+                            </Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body className={darkMode.value ? " nav-body-light " : " nav-body-dark "}>
+                            <Nav className="me-auto">
+                                <NavLink to="/" className='nav-link '>{t('homepage.header.home')}</NavLink >
+                                <NavLink to="/users" className='nav-link '>{t('homepage.header.users')}</NavLink >
+                                <NavLink to="/admin" className='nav-link '>{t('homepage.header.admin')}</NavLink >
+                            </Nav>
 
-                            {isAuthenticated === false ?
-                                <>
-                                    <button className='btn-login' onClick={() => { handleLogin() }}>{t('homepage.header.login')}</button>
-                                    <button className='btn-signup' onClick={() => { handleRegister() }}>{t('homepage.header.signup')}</button>
-                                </> :
+                            <Nav>
+                                <div className='d-flex ico'>
+                                    {isAuthenticated === false ?
+                                        <>
+                                            <button className='btn-login' onClick={() => { handleLogin() }}>{t('homepage.header.login')}</button>
+                                            <button className='btn-signup' onClick={() => { handleRegister() }}>{t('homepage.header.signup')}</button>
+                                        </> :
 
-                                <>
-                                    {/* <span><span className=' fs-5 fw-medium'>Welcome</span> {account.username}</span> */}
-                                    <NavDropdown 
-                                    title={<IoSettings />} 
-                                    className={darkMode.value?"settings dropdown-light":"settings dropdown-dark"} >
-                                        <NavDropdown.Item
-                                            className='d-flex align-items-center gap-2'
-                                            onClick={() => handleShowModalProfile()}
+                                        <>
+                                            {/* <span><span className=' fs-5 fw-medium'>Welcome</span> {account.username}</span> */}
+                                            <NavDropdown
+                                                title={<IoSettings />}
+                                                className={darkMode.value ? "settings dropdown-light " : "settings dropdown-dark "} >
+                                                <NavDropdown.Item
+                                                    className='d-flex align-items-center gap-2'
+                                                    onClick={() => handleShowModalProfile()}
 
-                                        >
-                                            <FaRegUser />
-                                            {t('homepage.header.profile')}
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item
-                                            onClick={() => handleLogout()}
-                                            className='d-flex align-items-center gap-2'
-                                        >
-                                            <IoLogOutOutline />{t('homepage.header.logout')}
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
-                                </>
-                            }
-                            <NavDropdown 
-                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />} 
-                            id="basic-nav-dropdown" 
-                            className={darkMode.value?"changeTheme dropdown-light":"changeTheme dropdown-dark"}>
-                                <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
-                                <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
+                                                >
+                                                    <FaRegUser />
+                                                    {t('homepage.header.profile')}
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item
+                                                    onClick={() => handleLogout()}
+                                                    className='d-flex align-items-center gap-2'
+                                                >
+                                                    <IoLogOutOutline />{t('homepage.header.logout')}
+                                                </NavDropdown.Item>
+                                            </NavDropdown>
+                                        </>
+                                    }
+                                    <div className='cT-lG d-flex '>
+                                        {isAuthenticated ?
+                                            <>
+                                                <NavDropdown
+                                                    title={<IoSettings />}
+                                                    className={darkMode.value ? "settings-true dropdown-light " : "settings-true dropdown-dark "} >
+                                                    <NavDropdown.Item
+                                                        className='d-flex align-items-center gap-2'
+                                                        onClick={() => handleShowModalProfile()}
 
-                            </NavDropdown>
-                            {/* <div className='language-change-container'> */}
-                            <Language darkMode={darkMode.value} />
-                            {/* </div> */}
+                                                    >
+                                                        <FaRegUser />
+                                                        {t('homepage.header.profile')}
+                                                    </NavDropdown.Item>
+                                                    <NavDropdown.Item
+                                                        onClick={() => handleLogout()}
+                                                        className='d-flex align-items-center gap-2'
+                                                    >
+                                                        <IoLogOutOutline />{t('homepage.header.logout')}
+                                                    </NavDropdown.Item>
+                                                </NavDropdown>
+                                            </>
+                                            :
+                                            <>
 
-                        </Nav>
-                    </Navbar.Collapse>
+                                            </>
+                                        }
+
+                                        <NavDropdown
+                                            title={
+                                                (darkMode.value ? <AiFillSun /> : <IoIosMoon />)
+                                            }
+                                            id="basic-nav-dropdown"
+                                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
+                                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
+
+                                        </NavDropdown>
+                                        {/* <div className='language-change-container'> */}
+                                        <Language darkMode={darkMode.value} />
+                                        {/* </div> */}
+                                    </div>
+                                </div>
+
+                            </Nav>
+
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
                 </Container>
-            </Navbar>
-
+            </Navbar >
             <ModalProfile
                 show={showModalProfile}
                 setShow={setShowModalProfile}

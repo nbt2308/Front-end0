@@ -12,6 +12,9 @@ const postCreateNewUser = (Email, Password, Username, Role, Image) => {
 const getAllUsers = () => {
     return axios.get('/api/v1/participant/all');
 }
+// const getAllUsers = () => {
+//     return axios.get('/api/users');
+// }
 const putUpdateUser = (ID, Username, Role, Image) => {
     const data = new FormData();
     data.append('id', ID);

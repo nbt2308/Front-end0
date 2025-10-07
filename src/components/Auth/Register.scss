@@ -218,3 +218,69 @@
     color: #cfcfcf !important;
 
 }
+
+
+@media (max-width: 576px) {
+    .register-content {
+        width: 100% !important;
+
+        .register-title {
+            font-size: 25px !important;
+        }
+
+        .social-links-light {
+            margin-top: 10px;
+
+            a {
+
+
+
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 5px;
+                height: 35px !important;
+                width: 35px !important;
+                color: #000000;
+
+                img {
+                    border: 2px solid #DDDDDD;
+                    border-radius: 50%;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+        }
+
+        .social-links-dark {
+            margin-top: 10px;
+
+            a {
+
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 5px;
+                height: 35px !important;
+                width: 35px !important;
+                color: #fff;
+
+                img {
+                    border: 2px solid #DDDDDD;
+                    border-radius: 50%;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+        }
+
+        .form-register {
+            width: 80% !important;
+
+            .sign-in {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ const processQueue = (error, token = null) => {
 };
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8081/',
+  baseURL: 'http://localhost:8081',
 
 });
 

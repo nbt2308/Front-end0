@@ -6,6 +6,7 @@ import { getAllUsers, getUsersWithPaginate } from "../../../../services/apiServi
 import ModalUpdateUser from "./ModalUpdateUser"
 import ModalViewUsers from "./ModalViewUsers"
 import ModalDeleteUser from './ModalDeleteUser'
+// import TableUsers from "./TableUsers";
 import TableUserPaginate from './TableUserPaginate'
 import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
@@ -65,6 +66,7 @@ const ManageUsers = (props) => {
     const resetViewData = () => {
         setDataView({});
     }
+    console.log('check list user:', listUsers);
 
     return (
         <div className={darkMode ? "manageUsers-container light" : "manageUsers-container dark"}>

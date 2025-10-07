@@ -32,7 +32,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const PersonalDetails = (props) => {
-    const { darkMode } =props;
+    const { darkMode } = props;
     const account = useSelector(state => state?.account);
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -194,10 +194,10 @@ const PersonalDetails = (props) => {
                                 <Form.Label>{t('adminPage.accountProfile.personalDetail.email')}</Form.Label>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalUpdateUsers.email')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className="mb-3"
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className="form-control"
                                         type="email"
                                         placeholder="name@example.com"
                                         value={formData.email}
@@ -210,7 +210,7 @@ const PersonalDetails = (props) => {
                             <Form.Group as={Col} >
                                 <Form.Label>{t('adminPage.accountProfile.personalDetail.role')}</Form.Label>
                                 <Form.Control
-                                    className={darkMode ? "mb-3 form-control light" : " mb-3 form-control dark-card"}
+                                    className="form-control"
                                     type="text"
                                     placeholder="name@example.com"
                                     value={formData.role}
@@ -225,11 +225,9 @@ const PersonalDetails = (props) => {
                                 <Form.Label>{t('adminPage.accountProfile.personalDetail.name')}</Form.Label>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.username')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
-                                >
+                                    className="mb-3">
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
-                                        type="text"
+                                        className="form-control" type="text"
                                         placeholder="name@example.com"
                                         value={formData.username}
                                         onChange={(event) => {
@@ -249,13 +247,12 @@ const PersonalDetails = (props) => {
                                 <Form.Label>{t('adminPage.accountProfile.personalDetail.bio')}</Form.Label>
                                 <FloatingLabel
                                     label={t('adminPage.accountProfile.personalDetail.description')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
-                                >
+                                    className="mb-3"                                >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
-                                        type="text"
+                                        className="form-control" type="text"
+                                        as="textarea"
                                         placeholder="name@example.com"
-                                        // as="textarea"
+                                    // as="textarea"
                                     // value={Email}
                                     />
                                 </FloatingLabel>

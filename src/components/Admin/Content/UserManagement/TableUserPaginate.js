@@ -63,7 +63,7 @@ const TableUserPaginate = (props) => {
                             {
                                 listUsers && listUsers.length === 0 &&
                                 <tr>
-                                    <td colSpan={"4"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
+                                    <td colSpan={"5"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
                                 </tr>
                             }
 

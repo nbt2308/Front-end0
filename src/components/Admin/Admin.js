@@ -1,14 +1,12 @@
-import SideBar from "./SideBar/SideBar";
 import SideBar1 from "./SideBar/SideBar1";
 import './Admin.scss';
 import { useState } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import Language from '../Header/Language';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { IoSettings, IoLogOutOutline } from "react-icons/io5";
 import { AiFillSun } from "react-icons/ai";
-import { FaRegUser,FaMoon,FaBars  } from "react-icons/fa";
+import { FaRegUser,FaBars  } from "react-icons/fa";
 import { IoIosMoon } from "react-icons/io";
 import { FiHome } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
@@ -48,7 +46,7 @@ const Admin = (props) => {
     
     return (
         <div className="Admin-container " >
-            <div className="Sidebar-container">
+            <div className="Sidebar-container ">
                 {/* <SideBar
                     collapsed={collapsed}
                     toggled={toggled}

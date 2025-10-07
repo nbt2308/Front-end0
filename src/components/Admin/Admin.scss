@@ -4,7 +4,8 @@
     .Sidebar-container {
         position: sticky;
         top: 0;
-        z-index: 1;
+        height: 100vh;
+        z-index: 9998;
     }
 
     .Admin-content {

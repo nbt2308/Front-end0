@@ -1,4 +1,3 @@
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import '../styles/App.scss';
 import Header from '../components/Header/Header';
 import { Outlet } from 'react-router-dom';
@@ -7,7 +6,7 @@ function App(props) {
   
   return (
 
-    <div className="app-container">
+    <div className="app-container ">
 
       <div className="header-container">
         <Header darkMode={darkMode}/>
