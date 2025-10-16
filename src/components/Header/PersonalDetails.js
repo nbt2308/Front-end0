@@ -44,6 +44,7 @@ const PersonalDetails = (props) => {
         username: "",
         email: "",
         role: "",
+        
         image: "",
     });
 

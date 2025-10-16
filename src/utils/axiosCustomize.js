@@ -1,7 +1,7 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
 import { store } from '../redux/store';
-import { FETCH_USER_LOGIN_SUCCESS,USER_LOGOUT_SUCCESS } from '../redux/reducer/userReducer';
+import { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } from '../redux/reducer/userReducer';
 import { postRefreshToken } from '../services/apiService';
 
 // ===== Queue cho các request chờ refresh =====
@@ -71,9 +71,9 @@ instance.interceptors.response.use(function (response) {
     }
     isRefreshing = true;
     const refresh_token = store?.getState()?.account?.refresh_token;
-    const email=store?.getState()?.account?.email;
+    const email = store?.getState()?.account?.email;
     try {
-      const res = await postRefreshToken(email,refresh_token);
+      const res = await postRefreshToken(email, refresh_token);
 
       const newAccessToken = res?.data?.DT?.access_token;
       const newRefreshToken = res?.data?.DT?.refresh_token;

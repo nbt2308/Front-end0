@@ -24,18 +24,18 @@ const Login = (props) => {
     const { darkMode } = props;
     const [isLoadingLogin, setIsLoadingLogin] = useState(false);
     const [form, setForm] = useState({
-        Email: "",
+        EmailOrPhone: "",
         Password: ""
     });
 
     const [errors, setErrors] = useState({
-        Email: "",
+        EmailOrPhone: "",
         Password: "",
 
     });
 
     const [showErrors, setShowErrors] = useState({
-        Email: false,
+        EmailOrPhone: false,
         Password: false,
 
     });
@@ -44,15 +44,15 @@ const Login = (props) => {
     const { t } = useTranslation();
     const handleValidate = () => {
         const newErrors = {
-            Email: "",
+            EmailOrPhone: "",
             Password: "",
 
         };
 
-        if (!form.Email) {
-            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
-        } else if (!validateEmail(form.Email)) {
-            newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
+        if (!form.EmailOrPhone) {
+            newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
+        } else if (!validateEmail(form.EmailOrPhone)) {
+            newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
         }
         if (!form.Password) {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
@@ -60,7 +60,7 @@ const Login = (props) => {
 
         setErrors(newErrors);
         setShowErrors({
-            Email: !!newErrors.Email,
+            EmailOrPhone: !!newErrors.EmailOrPhone,
             Password: !!newErrors.Password,
 
         });
@@ -78,7 +78,7 @@ const Login = (props) => {
         //validate
         if (!handleValidate()) return;
         setIsLoadingLogin(true)
-        let data = await postLoginUser(form.Email, form.Password);
+        let data = await postLoginUser(form.EmailOrPhone, form.Password);
         if (data && data.EC === 0) {
             dispatch(doLogin.loginSuccess(data.DT));
             toast.success(`${t('homepage.loginPage.loginSucceed')}`);
@@ -90,7 +90,7 @@ const Login = (props) => {
             setIsLoadingLogin(false)
         }
         if (data && data.EC === -1) {
-            toast.error(`${t('homepage.loginPage.loginFail1')} ${form.Email}`);
+            toast.error(`${t('homepage.loginPage.loginFail1')} ${form.EmailOrPhone}`);
             setIsLoadingLogin(false)
         }
 
@@ -124,85 +124,85 @@ const Login = (props) => {
 
                     </div>
                     <div className='brand-name'><img src={logo} alt="NBT" /></div>
-                    
-                       
-                            <div className="login-container ">
-                                <div className={darkMode.value ? "login-content  light" : "login-content  dark-card"}>
-
-                                    <div className="login-title mt-3">
-                                        <span>{t('homepage.loginPage.loginTitle')}</span>
-                                    </div>
-                                    <div className={darkMode.value ? "social-links-light" : "social-links-dark"}>
-                                        <a href='/login'><img src={fb} alt="facebook" /></a>
-                                        <a href='/login' className='mx-3'><img src={gg} alt="google" /></a>
-                                        <a href='/login'><img src={gh} alt="github" /></a>
-                                    </div>
-                                    <div className={darkMode.value ? "divider-light my-3" : "divider-dark my-3"}>
-                                        <span>{t('homepage.loginPage.divider')}</span>
-                                    </div>
-                                    <div className="form-login">
-                                        <div className="form-group ">
-                                            {/* <label className='form-label'>Email</label> */}
-                                            <FloatingLabel
-                                                label={t('adminPage.usersManagement.modalAddUsers.email')}
-                                                className="mb-3 "
-                                            >
-                                                <Form.Control
-                                                    type="email"
-                                                    placeholder="name@example.com"
-                                                    value={form.Email}
-                                                    onChange={e => handleChange("Email", e.target.value)}
-                                                    isInvalid={showErrors.Email}
-                                                    required
-                                                    
-                                                />
-                                                <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
-                                            </FloatingLabel>
-                                        </div>
-                                        <div className="form-group mt-2 ">
-                                            {/* <label className='form-label'>Password</label> */}
-
-                                            <FloatingLabel
-                                                label={t('adminPage.usersManagement.modalAddUsers.password')}
-                                                className="mb-3"
-                                            >
-                                                <Form.Control
-                                                    type="password"
-                                                    placeholder="Password"
-                                                    value={form.Password}
-                                                    onChange={e => handleChange("Password", e.target.value)}
-                                                    isInvalid={showErrors.Password}
-                                                    onKeyDown={(event) => handleKeyDown(event)}
-                                                    required
-                                                />
-                                                <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
-                                            </FloatingLabel>
-                                        </div>
-
-                                        <span className="forgot-password-label  "><a href="/login">{t('homepage.loginPage.labelForgotPassword')}</a></span>
-
-                                        <div className="btn-login ">
-                                            <button
-                                                type='button'
-                                                className='btn btn-primary '
-                                                onClick={() => { handleLogin() }}
-                                                disabled={isLoadingLogin}
-                                            >{isLoadingLogin === true && <ImSpinner6 className='loading-icon' />}<span>{t('homepage.loginPage.buttonSignIn')}</span></button>
-                                        </div>
-                                        <div className="sign-up d-flex flex-column flex-sm-row mx-sm-3">
-                                            <span>{t('homepage.loginPage.labelSignUp')} </span>
-                                            <span className="btn-signup" onClick={() => { Navigate("/register") }}>{t('homepage.loginPage.buttonCreateAccount')}</span>
-                                        </div>
-                                        <div className="btn-goBack btn mt-4 mx-5 mx-sm-3 "><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
-                                    </div>
 
 
+                    <div className="login-container ">
+                        <div className={darkMode.value ? "login-content  light" : "login-content  dark-card"}>
+
+                            <div className="login-title mt-3">
+                                <span>{t('homepage.loginPage.loginTitle')}</span>
+                            </div>
+                            <div className={darkMode.value ? "social-links-light" : "social-links-dark"}>
+                                <a href='/login'><img src={fb} alt="facebook" /></a>
+                                <a href='/login' className='mx-3'><img src={gg} alt="google" /></a>
+                                <a href='/login'><img src={gh} alt="github" /></a>
+                            </div>
+                            <div className={darkMode.value ? "divider-light my-3" : "divider-dark my-3"}>
+                                <span>{t('homepage.loginPage.divider')}</span>
+                            </div>
+                            <div className="form-login">
+                                <div className="form-group ">
+                                    {/* <label className='form-label'>Email</label> */}
+                                    <FloatingLabel
+                                        label="Email or Phone number"
+                                        className="mb-3 "
+                                    >
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="name@example.com"
+                                            value={form.Email}
+                                            onChange={e => handleChange("EmailOrPhone", e.target.value)}
+                                            isInvalid={showErrors.EmailOrPhone}
+                                            required
+
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.EmailOrPhone}</Form.Control.Feedback>
+                                    </FloatingLabel>
+                                </div>
+                                <div className="form-group mt-2 ">
+                                    {/* <label className='form-label'>Password</label> */}
+
+                                    <FloatingLabel
+                                        label={t('adminPage.usersManagement.modalAddUsers.password')}
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Password"
+                                            value={form.Password}
+                                            onChange={e => handleChange("Password", e.target.value)}
+                                            isInvalid={showErrors.Password}
+                                            onKeyDown={(event) => handleKeyDown(event)}
+                                            required
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </div>
 
+                                <span className="forgot-password-label  "><a href="/login">{t('homepage.loginPage.labelForgotPassword')}</a></span>
 
+                                <div className="btn-login ">
+                                    <button
+                                        type='button'
+                                        className='btn btn-primary '
+                                        onClick={() => { handleLogin() }}
+                                        disabled={isLoadingLogin}
+                                    >{isLoadingLogin === true && <ImSpinner6 className='loading-icon' />}<span>{t('homepage.loginPage.buttonSignIn')}</span></button>
+                                </div>
+                                <div className="sign-up d-flex flex-column flex-sm-row mx-sm-3">
+                                    <span>{t('homepage.loginPage.labelSignUp')} </span>
+                                    <span className="btn-signup" onClick={() => { Navigate("/register") }}>{t('homepage.loginPage.buttonCreateAccount')}</span>
+                                </div>
+                                <div className="btn-goBack btn mt-4 mx-5 mx-sm-3 "><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
                             </div>
-                      
-                    
+
+
+                        </div>
+
+
+                    </div>
+
+
                 </PerfectScrollbar>
             </div>
 

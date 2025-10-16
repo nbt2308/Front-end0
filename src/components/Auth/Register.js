@@ -4,7 +4,7 @@ import { SiGmail } from "react-icons/si";
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { postRegisterUser } from '../../services/apiService';
-import { validateEmail, validatePassword, validateUsername } from '../../utils/validators';
+import { validateEmail, validatePassword, validateUsername,validatePhone } from '../../utils/validators';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import './Register.scss';
 import Language from "../Header/Language";
@@ -32,6 +32,7 @@ const Register = (props) => {
         Password: "",
         ConfirmPassword: "",
         Username: "",
+        Phone:""
     });
 
     const [errors, setErrors] = useState({
@@ -39,12 +40,14 @@ const Register = (props) => {
         Password: "",
         ConfirmPassword: "",
         Username: "",
+        Phone:""
     });
 
     const [showErrors, setShowErrors] = useState({
         Email: false,
         Password: false,
         Username: false,
+        Phone:false,
         ConfirmPassword: false,
     });
     const handleValidate = () => {
@@ -52,6 +55,7 @@ const Register = (props) => {
             Email: "",
             Password: "",
             Username: "",
+            Phone:"",
             ConfirmPassword: "",
         };
 
@@ -59,6 +63,11 @@ const Register = (props) => {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
         } else if (!validateEmail(form.Email)) {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
+        }
+        if(!form.Phone){
+             newErrors.Phone ="Phone number is required";
+        }else if(!validatePhone(form.Phone)){
+             newErrors.Phone ="Phone number is invalid";
         }
         if (!form.Password) {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
@@ -78,6 +87,7 @@ const Register = (props) => {
         setShowErrors({
             Email: !!newErrors.Email,
             Password: !!newErrors.Password,
+            Phone:!!newErrors.Phone,
             Username: !!newErrors.Username,
             ConfirmPassword: !!newErrors.ConfirmPassword
         });
@@ -94,10 +104,10 @@ const Register = (props) => {
     const handleRegister = async () => {
         //validate
         if (!handleValidate()) return;
-        let data = await postRegisterUser(form.Email, form.Username, form.Password);
+        let data = await postRegisterUser(form.Email,form.Phone, form.Username, form.Password);
         if (data && data.EC === 0) {
             toast.success(`${t('homepage.registerPage.registerSucceed')}`);
-            Navigate("/login");
+            // Navigate("/login");
         }
         if (data && data.EC !== 0) {
             toast.error(`${t('homepage.registerPage.registerFail')}`);
@@ -179,6 +189,22 @@ const Register = (props) => {
                                             required
                                         />
                                         <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
+                                    </FloatingLabel>
+                                </div>
+                                <div className="form-group">
+                                    <FloatingLabel
+                                        label="Phone number"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="name@example.com"
+                                            value={form.Phone}
+                                            onChange={e => handleChange("Phone", e.target.value)}
+                                            isInvalid={showErrors.Phone}
+                                            required
+                                        />
+                                        <Form.Control.Feedback type="invalid">{errors.Phone}</Form.Control.Feedback>
                                     </FloatingLabel>
                                 </div>
                                 <div className="form-group">
