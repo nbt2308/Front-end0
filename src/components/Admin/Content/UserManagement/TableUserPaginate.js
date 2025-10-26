@@ -11,6 +11,7 @@ const TableUserPaginate = (props) => {
         fetchListUsersWithPaginate(+event.selected + 1);
         setCurrentPage(+event.selected + 1);
     };
+    
 
 
 
@@ -24,6 +25,7 @@ const TableUserPaginate = (props) => {
                                 <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
                                 <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
                                 <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
+                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
                                 <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
                                 <th scope="col" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                             </tr>
@@ -36,7 +38,8 @@ const TableUserPaginate = (props) => {
                                             <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
                                             <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
                                             <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.role}</td>
+                                            <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>
+                                            <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
                                             <td className={darkMode ? "action-col light" : "action-col dark-card"}>
                                                 <button
                                                     className={darkMode ? "btn btn-view btn-light" : "btn btn-view btn-dark"}

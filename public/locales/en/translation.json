@@ -134,7 +134,7 @@
                 "username": "Username",
                 "invalidUsername": "Username must be at least 5 characters long and max 20 characters",
                 "invalidUsername1": "Username is required",
-                "role": "Role",
+                "role": "Group",
                 "uploadImageFile": "Upload Image File",
                 "upload1": "Drag & Drop Image Or Select Image",
                 "buttonCancel": "Cancel",
@@ -150,7 +150,8 @@
                 "title": "Update a user",
                 "email": "Email address (It cannot be changed here)",
                 "password": "Password (It cannot be changed here)",
-                "updateSucceed": "Update the participant succeed"
+                "updateSucceed": "Update the participant succeed",
+                "phone":"Phone number (It cannot be changed here)"
             },
             "modalDeleteUsers": {
                 "title": "Delete confirmation",
@@ -163,7 +164,8 @@
             "tableUsers": {
                 "username": "USERNAME",
                 "email": "EMAIL",
-                "role": "ROLE",
+                "phone":"Phone number",
+                "role": "GROUP",
                 "actions": "ACTIONS",
                 "error": "Not Found",
                 "next": "Next >",

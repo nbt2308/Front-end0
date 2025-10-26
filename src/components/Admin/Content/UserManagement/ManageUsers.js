@@ -44,9 +44,10 @@ const ManageUsers = (props) => {
         let res = await getUsersWithPaginate(page, LIMIT_USERS_PER_PAGE);
         if (res.EC === 0) {
             setListUsers(res.DT.users);
-            setPageCount(res.DT.totalPages)
+            setPageCount(res.DT.totalPages);
         }
     }
+
 
     const handleBtnUpdateUser = (user) => {
         setShowModalUpdateUser(true);
@@ -66,7 +67,8 @@ const ManageUsers = (props) => {
     const resetViewData = () => {
         setDataView({});
     }
-    console.log('check list user:', listUsers);
+
+    console.log('check list', listUsers);
 
     return (
         <div className={darkMode ? "manageUsers-container light" : "manageUsers-container dark"}>

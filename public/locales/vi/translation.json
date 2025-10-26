@@ -10,8 +10,8 @@
             "logout": "Đăng xuất",
             "vi": "Tiếng Việt",
             "en": "Tiếng Anh",
-            "dark":"Tối",
-            "light":"Sáng"
+            "dark": "Tối",
+            "light": "Sáng"
         },
         "loginPage": {
             "loginTitle": "Đăng nhập",
@@ -140,8 +140,8 @@
                 "buttonCancel": "Thoát",
                 "buttonSave": "Lưu",
                 "createUserSucceed": "Thêm mới người dùng thành công",
-                "user":"Nguời dùng",
-                "admin":"Quản trị viên"
+                "user": "Nguời dùng",
+                "admin": "Quản trị viên"
             },
             "modalViewUsers": {
                 "title": "Thông tin chi tiết cá nhân"
@@ -150,7 +150,8 @@
                 "title": "Cập nhật thông tin người dùng",
                 "email": "Địa chỉ email (Hành động này không thể thực hiện ở đây)",
                 "password": "Mật khẩu (Hành động này không thể thực hiện ở đây)",
-                "updateSucceed": "Cập nhật người dùng thành công"
+                "updateSucceed": "Cập nhật người dùng thành công",
+                "phone": "Số điện thoại (Hành động này không thể thực hiện ở đây)"
             },
             "modalDeleteUsers": {
                 "title": "Xác nhận xóa",
@@ -163,6 +164,7 @@
             "tableUsers": {
                 "username": "Tên người dùng",
                 "email": "Địa chỉ email",
+                "phone":"Số điện thoại",
                 "role": "Vai trò",
                 "actions": "Hành động",
                 "error": "không tìm thấy",

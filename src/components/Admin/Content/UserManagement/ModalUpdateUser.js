@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Row from 'react-bootstrap/Row';
 import { toast } from 'react-toastify';
-import { putUpdateUser } from '../../../../services/apiService';
+import { getAllGroup, putUpdateUser } from '../../../../services/apiService';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 //Filepond
@@ -48,11 +48,15 @@ const ModalUpdateUser = (props) => {
 
     //define state
     const [files, setFiles] = useState([]);
+    const [listGroup, setListGroup] = useState([]);
     const [form, setForm] = useState({
         Email: "",
         Password: "",
         Username: "",
-        Role: "USER",
+        Sex: "Male",
+        Group: "",
+        Address: "",
+        Phone: "",
         Image: ""
     });
 
@@ -65,15 +69,20 @@ const ModalUpdateUser = (props) => {
     });
     // const [PreviewImage, setPreviewImage] = useState("");
 
+
     useEffect(() => {
         if (!_.isEmpty(dataUpdate)) {
             //update state
+            fetchListGroup();
             setForm(prev => ({
                 ...prev,
                 Email: dataUpdate.email,
                 Username: dataUpdate.username,
-                Role: dataUpdate.role,
-                Image: ""
+                Address: dataUpdate.address,
+                Sex: dataUpdate.sex,
+                Group: dataUpdate.Group ? dataUpdate.Group.id : "",
+                Phone: dataUpdate.phone,
+                Image: dataUpdate.image ? dataUpdate.image : ""
             }));
             if (dataUpdate.image) {
                 setFiles([
@@ -89,6 +98,17 @@ const ModalUpdateUser = (props) => {
         }
     }, [dataUpdate])
 
+
+
+    const fetchListGroup = async () => {
+        let res = await getAllGroup();
+        if (res && res.EC === 0) {
+            setListGroup(res.DT);
+        }
+        else {
+            toast.error(res.EM);
+        }
+    }
     const handleValidate = () => {
         const newErrors = {
             Username: "",
@@ -98,7 +118,7 @@ const ModalUpdateUser = (props) => {
         } else if (!validateUsername(form.Username)) {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername')}`;
         }
-
+        //validate phone,address
         setErrors(newErrors);
         setShowErrors({
             Username: !!newErrors.Username
@@ -132,7 +152,7 @@ const ModalUpdateUser = (props) => {
         } else {
             setForm(prev => ({
                 ...prev,
-                Image: " "
+                Image: ""
             }));
         }
     }
@@ -141,17 +161,21 @@ const ModalUpdateUser = (props) => {
     const handleSubmit = async () => {
         //validate
         if (!handleValidate()) return;
-        if (form.image instanceof Blob) {
-            const file = new File([form.image], "avatar.jpg", {
-                type: form.image.type || "image/jpeg",
-            });
-            setForm(prev => ({
-                ...prev,
-                Image: file
-            }));
+        if (!form.Image) {
+            toast.error("No file uploaded");
+            return;
         }
+        let file;
+        if (form.Image instanceof Blob) {
+            file = new File([form.Image], "avatar.jpg", {
+                type: form.Image.type || "image/jpeg",
+            });
+        }
+
+        
+
         //call apis
-        let data = await putUpdateUser(dataUpdate.id, form.Username, form.Role, form.Image);
+        let data = await putUpdateUser(dataUpdate.id, form.Username, form.Group, form.Sex, form.Address, file);
         if (data && data.EC === 0) {
             toast.success(`${t('adminPage.usersManagement.modalUpdateUsers.updateSucceed')}`);
             handleClose();
@@ -164,6 +188,8 @@ const ModalUpdateUser = (props) => {
 
 
     }
+    
+
 
 
     return (
@@ -208,7 +234,7 @@ const ModalUpdateUser = (props) => {
 
 
                         <Row className="mb-3">
-                            <Form.Group as={Col} className="mb-3" controlId="formGridUsername">
+                            <Form.Group as={Col} controlId="formGridUsername">
 
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.username')}
@@ -226,19 +252,84 @@ const ModalUpdateUser = (props) => {
                                     </Form.Control.Feedback>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formGridRole">
+                            <Form.Group as={Col} >
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.role')}
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
                                 >
-                                    <Form.Select value={form.Role} onChange={e => handleChange("Role", e.target.value)}>
-                                        <option value="USER">USER</option>
-                                        <option value="ADMIN">ADMIN</option>
+                                    <Form.Select value={form.Group} onChange={e => handleChange("Group", e.target.value)}>
+                                        {
+                                            listGroup.length > 0 &&
+                                            listGroup.map((item, index) => {
+                                                return (
+                                                    <option key={`group-${index}`} value={item.id}>{item.name}</option>
+                                                )
+                                            })
+
+                                        }
+
                                     </Form.Select>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group className="md-12" controlId="formGridImage">
-                                <Form.Label className={darkMode ? "label-uploadFile floating-light mb-3" : "label-uploadFile floating-dark mb-3"} >
+                        </Row>
+                        <Row>
+                            <Form.Group as={Col} className="mb-3" >
+                                <FloatingLabel
+                                    label="Address"
+                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                >
+                                    <Form.Control
+                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        type="text"
+                                        placeholder="Address"
+                                        value={form.Address}
+                                        onChange={e => handleChange("Address", e.target.value)}
+                                        isInvalid={showErrors.Address}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.Address}
+                                    </Form.Control.Feedback>
+                                </FloatingLabel>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group as={Col} >
+                                <FloatingLabel
+                                    label="Gender"
+                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                >
+                                    <Form.Select value={form.Sex} onChange={e => handleChange("Sex", e.target.value)}>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </Form.Group>
+                            <Form.Group as={Col} >
+                                <FloatingLabel
+                                    label={t('adminPage.usersManagement.modalUpdateUsers.phone')}
+                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                >
+                                    <Form.Control
+                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        type="tel"
+                                        placeholder="Phone number"
+                                        value={form.Phone}
+                                        onChange={e => handleChange("Phone", e.target.value)}
+                                        isInvalid={showErrors.Phone}
+                                        required
+                                        disabled
+                                    />
+                                    <Form.Control.Feedback type="invalid">{errors.Phone}</Form.Control.Feedback>
+                                </FloatingLabel>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group className="md-12" >
+                                <Form.Label
+                                    className={darkMode ? "label-uploadFile floating-light mb-3" : "label-uploadFile floating-dark mb-3"}
+                                    htmlFor="upload-image" >
                                     {t('adminPage.usersManagement.modalAddUsers.uploadImageFile')}
                                 </Form.Label>
                                 <FilePond
@@ -246,7 +337,7 @@ const ModalUpdateUser = (props) => {
                                     onupdatefiles={(fileItem) => { handleUploadFile(fileItem) }}
                                     allowMultiple={false}
                                     maxFiles={1}
-                                    name="upload-image"
+                                    name="image"
                                     acceptedFileTypes={["image/*"]}
                                     imageResizeTargetWidth={400}
                                     imageResizeTargetHeight={400}
@@ -255,10 +346,6 @@ const ModalUpdateUser = (props) => {
                                     className={darkMode ? "light-theme" : "dark-theme"}
                                 />
                             </Form.Group>
-                            {/* <Form.Group className="image-preview" controlId="formGridImagePreview">
-                                {PreviewImage ? <img src={PreviewImage} alt="Preview" /> : <span>Preview Image</span>}
-                            </Form.Group> */}
-
                         </Row>
                     </Form>
 

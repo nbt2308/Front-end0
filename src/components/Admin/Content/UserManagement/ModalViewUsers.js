@@ -12,7 +12,7 @@ const ModalViewUsers = (props) => {
         setShow(false);
         setEmail("");
         setUsername("");
-        setRole("");
+        setGroup("");
         setImage("");
         resetViewData();
     };
@@ -20,16 +20,16 @@ const ModalViewUsers = (props) => {
     //define state
     const [Email, setEmail] = useState("");
     const [Username, setUsername] = useState("");
-    const [Role, setRole] = useState("USER");
+    const [Group, setGroup] = useState("");
     const [Image, setImage] = useState("");
-
+    
 
     useEffect(() => {
         if (!_.isEmpty(dataView)) {
             //update state
             setEmail(dataView.email);
             setUsername(dataView.username);
-            setRole(dataView.role);
+            setGroup(dataView.Group.name);
             if (dataView.image) {
                 setImage(`data:image/jpeg;base64,${dataView.image}`);
             }
@@ -55,7 +55,7 @@ const ModalViewUsers = (props) => {
                             </div>
                             <div className="user-infor">
                                 <span><FiMail  className='icon'/> {Email}</span>
-                                <span><FaRegUser  className='icon' /> {Role} </span>
+                                <span><FaRegUser  className='icon' /> {Group} </span>
                                 
                             </div>
 

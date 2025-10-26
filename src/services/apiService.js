@@ -1,35 +1,40 @@
 import axios from '../utils/axiosCustomize';
 //user
-const postCreateNewUser = (Email, Password, Username, Role, Image) => {
+const postCreateNewUser = (Email, Password, Username, Group,Sex,Address,Phone, Image) => {
     const data = new FormData();
     data.append('email', Email);
     data.append('password', Password);
     data.append('username', Username);
-    data.append('role', Role);
-    data.append('userImage', Image);
-    return axios.post('/api/v1/participant', data);
-}
-const getAllUsers = () => {
-    return axios.get('/api/v1/participant/all');
+    data.append('groupId', Group);
+    data.append('sex', Sex);
+    data.append('address', Address);
+    data.append('phone', Phone);
+    data.append('image', Image);
+    return axios.post('/api/v1/users', data);
 }
 // const getAllUsers = () => {
-//     return axios.get('/api/users');
+//     return axios.get('/api/v1/participant/all');
 // }
-const putUpdateUser = (ID, Username, Role, Image) => {
+const getAllUsers = () => {
+    return axios.get('/api/users/all');
+}
+const putUpdateUser = (ID, Username, Group,Sex,Address, Image) => {
     const data = new FormData();
     data.append('id', ID);
     data.append('username', Username);
-    data.append('role', Role);
-    data.append('userImage', Image);
-    return axios.put('/api/v1/participant', data);
+    data.append('groupId', Group);
+    data.append('sex', Sex);
+    data.append('address', Address);
+    data.append('image', Image);
+    return axios.put('/api/v1/users', data);
 }
 const deleteUser = (ID) => {
 
-    return axios.delete('/api/v1/participant', { data: { id: ID } });
+    return axios.delete('/api/v1/users', { data: { id: ID } });
 }
 const getUsersWithPaginate = (page, limit) => {
 
-    return axios.get(`/api/v1/participant?page=${page}&limit=${limit}`);
+    return axios.get(`/api/v1/users?page=${page}&limit=${limit}`);
 }
 const postLoginUser = (EmailOrPhone, Password) => {
     return axios.post(`/api/v1/login`, { emailorphone: EmailOrPhone, password: Password, delay: 3000 });
@@ -39,6 +44,10 @@ const postRegisterUser = (Email, Username, Password) => {
 }
 const postLogout = (Email, refresh_token) => {
     return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
+}
+//Group
+const getAllGroup=()=>{
+    return axios.get('/api/v1/group/all');
 }
 //Quiz user
 const getQuizByUser = () => {
@@ -126,12 +135,14 @@ const postUpdateProfile = (username, userImage) => {
 const postChangePassword = (current_password, new_password) => {
     return axios.post(`/api/v1/change-password`, { current_password, new_password });
 }
-const getHistory=()=>{
+const getHistory = () => {
     return axios.get(`/api/v1/history`)
 }
 export {
     postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, postLogout,
     getUsersWithPaginate, postLoginUser, postRegisterUser,
+
+    getAllGroup,
 
     getQuizByUser, getDataQuiz,
 
@@ -142,8 +153,8 @@ export {
     postAssignQuiz, getQuizWithQA, postUpsertQA,
 
     getDashboard, postRefreshToken,
-    
-    postUpdateProfile,postChangePassword,getHistory
+
+    postUpdateProfile, postChangePassword, getHistory
 
 
 }
