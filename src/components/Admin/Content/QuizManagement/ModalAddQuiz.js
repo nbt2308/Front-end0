@@ -31,7 +31,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const ModalAddQuiz = (props) => {
-    const { show, setShow, fetchListQuiz, darkMode } = props;
+    const { show, setShow, fetchListQuiz, darkMode,fetchListQuizWithPagination,setCurrentPage } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -132,8 +132,10 @@ const ModalAddQuiz = (props) => {
         let data = await postCreateNewQuiz(form.description, form.name, form.difficulty, form.image);
         if (data && data.EC === 0) {
             toast.success(`${t('adminPage.quizzesManagement.modalAddQuiz.addQuizSucceed')}`);
-            await fetchListQuiz();
+            // await fetchListQuiz();
             handleClose();
+            setCurrentPage(1);
+            await fetchListQuizWithPagination(1);
         }
         if (data && data.EC !== 0) {
             toast.error(`${t('adminPage.quizzesManagement.modalAddQuiz.addQuizFail')}`);

@@ -31,7 +31,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const ModalUpdateQuiz = (props) => {
-    const { show, setShow, dataUpdate, fetchListQuiz, resetUpdateQuiz, darkMode } = props;
+    const { show, setShow, dataUpdate, fetchListQuiz, resetUpdateQuiz, darkMode,fetchListQuizWithPagination,currentPage } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -128,7 +128,7 @@ const ModalUpdateQuiz = (props) => {
                 name: dataUpdate.name,
                 description: dataUpdate.description,
                 difficulty: dataUpdate.difficulty,
-                image: ""
+                image: dataUpdate.image ? dataUpdate.image : ""
             }));
             if (dataUpdate.image) {
                 setFiles([
@@ -152,15 +152,27 @@ const ModalUpdateQuiz = (props) => {
     //     }
     // }
 
+    
 
     const handleSubmit = async () => {
         //validate
         if (!handleValidate()) return;
-        let res = await putUpdateQuiz(dataUpdate.id, form.description, form.name, form.difficulty, form.image)
+        if (!form.image) {
+            toast.error("No file uploaded");
+            return;
+        }
+        let file;
+        if (form.image instanceof Blob) {
+            file = new File([form.image], "avatar.jpg", {
+                type: form.image.type || "image/jpeg",
+            });
+        }
+        let res = await putUpdateQuiz(dataUpdate.id, form.description, form.name, form.difficulty, file)
         if (res && res.EC === 0) {
             toast.success(`${t('adminPage.quizzesManagement.modalUpdateQuiz.updateSucceed')}`);
             handleClose();
-            await fetchListQuiz();
+            // await fetchListQuiz();
+            await fetchListQuizWithPagination(currentPage);
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM);
@@ -235,7 +247,7 @@ const ModalUpdateQuiz = (props) => {
                                 onupdatefiles={(fileItem) => { handleUploadFile(fileItem) }}
                                 allowMultiple={false}
                                 maxFiles={1}
-                                name="upload-image"
+                                name="image"
                                 acceptedFileTypes={["image/*"]}
                                 imageResizeTargetWidth={400}
                                 imageResizeTargetHeight={400}

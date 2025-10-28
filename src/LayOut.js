@@ -18,7 +18,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from 'react';
 import Test from "./components/Admin/Content/UserManagement/Test";
 import AccountProfile from "./components/Admin/Content/AccountProfile";
-import LoadingSpinner from "./components/LoadingLanguage/Loading"
+import LoadingSpinner from "./components/Loading/Loading"
 import useDarkMode from "use-dark-mode";
 const LayOut = (props) => {
     const darkMode = useDarkMode(false, {

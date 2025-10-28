@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 const ModalDeleteQuiz = (props) => {
-    const { show, setShow, dataDelete, fetchListQuiz, darkMode } = props;
+    const { show, setShow, dataDelete, fetchListQuiz, darkMode, fetchListQuizWithPagination, setCurrentPage } = props;
     const { t } = useTranslation();
 
     const handleClose = () => setShow(false);
@@ -16,7 +16,10 @@ const ModalDeleteQuiz = (props) => {
         if (data && data.EC === 0) {
             toast.success(`${t('adminPage.quizzesManagement.modalDeleteQuiz.deleteSucceed')}`);
             handleClose();
-            await fetchListQuiz();
+            // await fetchListQuiz();
+            setCurrentPage(1);
+            await fetchListQuizWithPagination(1);
+
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);

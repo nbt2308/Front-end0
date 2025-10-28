@@ -6,12 +6,13 @@ import ModalUpdateQuiz from './ModalUpdateQuiz';
 import ModalDeleteQuiz from './ModalDeleteQuiz';
 import ModalUpdateQA from './ModalUpdateQA';
 import ModalAssignQuiz from './ModalAssignQuiz';
-import { getAllQuizForAdmin } from '../../../../services/apiService';
+import { getAllQuizForAdmin, getQuizWithPaginate } from '../../../../services/apiService';
 import { useTranslation } from 'react-i18next';
 import './ManageQuiz.scss'
 import TableQuiz from './TableQuiz';
 import SearchBar from './SearchBar';
 import { useOutletContext } from 'react-router-dom';
+import TableQuizWithPaginate from './TableQuizWithPaginate';
 const ManageQuiz = () => {
     const { darkMode } = useOutletContext();
     const [showModalAddQuiz, setShowModalAddQuiz] = useState(false);
@@ -24,10 +25,15 @@ const ManageQuiz = () => {
 
     const [dataUpdate, setDataUpdate] = useState("")
     const [dataDelete, setDataDelete] = useState("")
+
+    const LIMIT_QUIZ_PER_PAGE = 8;
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const { t } = useTranslation();
     //
     useEffect(() => {
-        fetchListQuiz();
+        // fetchListQuiz();
+        fetchListQuizWithPagination(1);
     }, [])
     const fetchListQuiz = async () => {
         setDataUpdate({})
@@ -35,6 +41,15 @@ const ManageQuiz = () => {
         let res = await getAllQuizForAdmin();
         if (res && res.EC === 0) {
             setListQuiz(res.DT);
+        }
+    }
+    const fetchListQuizWithPagination = async (page) => {
+        setDataUpdate({})
+        setDataDelete({})
+        let res = await getQuizWithPaginate(page, LIMIT_QUIZ_PER_PAGE);
+        if (res.EC === 0) {
+            setListQuiz(res.DT.quiz);
+            setPageCount(res.DT.totalPages);
         }
     }
     //add quiz
@@ -97,18 +112,30 @@ const ManageQuiz = () => {
                     <SearchBar />
                 </div>
                 <div className="table-quizzes">
-                    <TableQuiz
+                    {/* <TableQuiz
                         handleBtnUpdateQuiz={handleBtnUpdateQuiz}
                         handleBtnDeleteQuiz={handleBtnDeleteQuiz}
                         listQuiz={listQuiz}
                         darkMode={darkMode}
-                    />
+                    /> */}
+                    <TableQuizWithPaginate
+                        handleBtnUpdateQuiz={handleBtnUpdateQuiz}
+                        handleBtnDeleteQuiz={handleBtnDeleteQuiz}
+                        listQuiz={listQuiz}
+                        darkMode={darkMode}
+                        fetchListQuizWithPagination={fetchListQuizWithPagination}
+                        pageCount={pageCount}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    ></TableQuizWithPaginate>
                 </div>
             </div>
             <ModalAddQuiz
                 show={showModalAddQuiz}
                 setShow={setShowModalAddQuiz}
                 fetchListQuiz={fetchListQuiz}
+                fetchListQuizWithPagination={fetchListQuizWithPagination}
+                setCurrentPage={setCurrentPage}
                 darkMode={darkMode}
             />
             <ModalUpdateQuiz
@@ -116,6 +143,8 @@ const ManageQuiz = () => {
                 setShow={setShowModalUpdateQuiz}
                 dataUpdate={dataUpdate}
                 fetchListQuiz={fetchListQuiz}
+                fetchListQuizWithPagination={fetchListQuizWithPagination}
+                currentPage={currentPage}
                 resetUpdateQuiz={resetUpdateQuiz}
                 darkMode={darkMode}
             />
@@ -124,6 +153,8 @@ const ManageQuiz = () => {
                 setShow={setShowModalDeleteQuiz}
                 dataDelete={dataDelete}
                 fetchListQuiz={fetchListQuiz}
+                fetchListQuizWithPagination={fetchListQuizWithPagination}
+                setCurrentPage={setCurrentPage}
                 darkMode={darkMode}
 
             />

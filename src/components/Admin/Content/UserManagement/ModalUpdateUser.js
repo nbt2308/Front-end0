@@ -100,6 +100,7 @@ const ModalUpdateUser = (props) => {
 
 
 
+
     const fetchListGroup = async () => {
         let res = await getAllGroup();
         if (res && res.EC === 0) {
@@ -141,6 +142,8 @@ const ModalUpdateUser = (props) => {
 
     //     }
     // }
+
+    console.log(dataUpdate.image);
     const handleUploadFile = (fileItem) => {
         setFiles(fileItem);
         if (fileItem.length > 0) {
@@ -172,7 +175,7 @@ const ModalUpdateUser = (props) => {
             });
         }
 
-        
+
 
         //call apis
         let data = await putUpdateUser(dataUpdate.id, form.Username, form.Group, form.Sex, form.Address, file);
@@ -188,7 +191,7 @@ const ModalUpdateUser = (props) => {
 
 
     }
-    
+
 
 
 

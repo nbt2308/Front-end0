@@ -1,72 +1,60 @@
-import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
-import ReactPaginate from 'react-paginate';
+import { FaPen, FaTrashAlt } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
-const TableUserPaginate = (props) => {
-    const { listUsers, handleBtnUpdateUser, handleBtnViewUser, handleBtnDeleteUser, fetchListUsersWithPaginate
-        , pageCount, currentPage, setCurrentPage, darkMode } = props;
-
+import ReactPaginate from 'react-paginate';
+const TableQuizWithPaginate = (props) => {
+    const { handleBtnUpdateQuiz, handleBtnDeleteQuiz, listQuiz, darkMode, fetchListQuizWithPagination, 
+        setCurrentPage, pageCount,currentPage } = props
     const { t } = useTranslation();
     const handlePageClick = (event) => {
-        fetchListUsersWithPaginate(+event.selected + 1);
+        fetchListQuizWithPagination(+event.selected + 1);
         setCurrentPage(+event.selected + 1);
     };
-
-
-
-
     return (
         <>
             <div className="scrollbar">
                 <PerfectScrollbar >
-                    <table className="table table-hover" >
-                        <thead >
-                            <tr >
+                    <table className="table table-hover ">
+                        <thead>
+                            <tr>
                                 <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
+                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
+                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.descriptionQuiz')}</th>
+                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.difficultyQuiz')}</th>
                                 <th scope="col" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
+                                listQuiz && listQuiz.length > 0 && listQuiz.map((item, index) => {
                                     return (
                                         <tr key={`table-user-${index}`}>
                                             <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
+                                            <td className={darkMode ? "light" : "dark-card"}>{item.name}</td>
+                                            <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
+                                            <td className={darkMode ? "light" : "dark-card"}>{item.difficulty}</td>
                                             <td className={darkMode ? "action-col light" : "action-col dark-card"}>
                                                 <button
-                                                    className={darkMode ? "btn btn-view btn-light" : "btn btn-view btn-dark"}
-                                                    onClick={() => handleBtnViewUser(item)}
-                                                    type="button"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                                ><FaEye /></button>
-                                                <button
                                                     className={darkMode ? "btn mx-3 btn-edit btn-light" : "btn mx-3 btn-edit btn-dark"}
-                                                    onClick={() => handleBtnUpdateUser(item)}
                                                     type="button"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                                ><FaPen /></button>
+                                                    onClick={() => handleBtnUpdateQuiz(item)}
+
+                                                ><FaPen className="icon-edit" /></button>
                                                 <button className={darkMode ? "btn btn-delete btn-light" : "btn btn-delete btn-dark"}
-                                                    onClick={() => handleBtnDeleteUser(item)}
                                                     type="button"
+                                                    onClick={() => handleBtnDeleteQuiz(item)}
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                                ><FaTrashAlt /></button>
+                                                ><FaTrashAlt className="icon-delete" /></button>
                                             </td>
                                         </tr>
                                     )
                                 })
                             }
                             {
-                                listUsers && listUsers.length === 0 &&
+                                listQuiz && listQuiz.length === 0 &&
                                 <tr>
-                                    <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
+                                    <td colSpan={"5"}>{t('adminPage.quizzesManagement.tableQuiz.notFound')}</td>
                                 </tr>
                             }
 
@@ -99,4 +87,4 @@ const TableUserPaginate = (props) => {
         </>
     )
 }
-export default TableUserPaginate;
+export default TableQuizWithPaginate

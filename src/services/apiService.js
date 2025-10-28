@@ -1,6 +1,6 @@
 import axios from '../utils/axiosCustomize';
 //user
-const postCreateNewUser = (Email, Password, Username, Group,Sex,Address,Phone, Image) => {
+const postCreateNewUser = (Email, Password, Username, Group, Sex, Address, Phone, Image) => {
     const data = new FormData();
     data.append('email', Email);
     data.append('password', Password);
@@ -16,9 +16,9 @@ const postCreateNewUser = (Email, Password, Username, Group,Sex,Address,Phone, I
 //     return axios.get('/api/v1/participant/all');
 // }
 const getAllUsers = () => {
-    return axios.get('/api/users/all');
+    return axios.get('/api/v1/users/all');
 }
-const putUpdateUser = (ID, Username, Group,Sex,Address, Image) => {
+const putUpdateUser = (ID, Username, Group, Sex, Address, Image) => {
     const data = new FormData();
     data.append('id', ID);
     data.append('username', Username);
@@ -46,7 +46,7 @@ const postLogout = (Email, refresh_token) => {
     return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
 }
 //Group
-const getAllGroup=()=>{
+const getAllGroup = () => {
     return axios.get('/api/v1/group/all');
 }
 //Quiz user
@@ -62,12 +62,16 @@ const postSubmitAnswer = (data) => {
 
 
 //CRUD Quiz Management
+const getQuizWithPaginate=(page,limit)=>{
+    return axios.get(`/api/v1/quiz?page=${page}&limit=${limit}`);
+}
+
 const postCreateNewQuiz = (description, name, difficulty, image) => {
     const data = new FormData();
     data.append('description', description);
     data.append('name', name);
     data.append('difficulty', difficulty);
-    data.append('quizImage', image);
+    data.append('image', image);
     return axios.post('/api/v1/quiz', data);
 }
 const getAllQuizForAdmin = () => {
@@ -79,7 +83,7 @@ const putUpdateQuiz = (id, description, name, difficulty, image) => {
     data.append('description', description);
     data.append('name', name);
     data.append('difficulty', difficulty);
-    data.append('quizImage', image);
+    data.append('image', image);
     return axios.put('/api/v1/quiz', data);
 }
 const deleteQuiz = (ID) => {
@@ -146,7 +150,7 @@ export {
 
     getQuizByUser, getDataQuiz,
 
-    postSubmitAnswer, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz,
+    postSubmitAnswer, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz,getQuizWithPaginate,
 
     postCreateNewQuestion, postCreateNewAnswer,
 
