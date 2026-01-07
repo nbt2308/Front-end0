@@ -111,7 +111,8 @@ const instance = axios.create({
   baseURL: 'http://localhost:8000/',
 
 });
-
+// Enable sending cookies (e.g. HttpOnly JWT, session) with every Axios request
+instance.defaults.withCredentials=true;
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
   // Do something before request is sent
