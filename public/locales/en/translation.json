@@ -27,7 +27,7 @@
             "buttonGoToHomePage": "Go to Homepage",
             "loginSucceed": "Login Succeed",
             "loginFail": "Incorrect password",
-            "loginFail1": "Not found user with the email: "
+            "loginFail1": "Your email/phone number or password is incorrect "
         },
         "registerPage": {
             "registerTitle": "Create a new account",

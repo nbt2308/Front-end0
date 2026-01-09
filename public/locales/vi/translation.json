@@ -27,7 +27,7 @@
             "buttonGoToHomePage": "Trang chủ",
             "loginSucceed": "Đăng nhập thành công",
             "loginFail": "Sai mật khẩu",
-            "loginFail1": "Không tìm thấy người dùng với email: "
+            "loginFail1": "Tài khoản hoặc mật khẩu không đúng "
         },
         "registerPage": {
             "registerTitle": "Tạo tài khoản",
