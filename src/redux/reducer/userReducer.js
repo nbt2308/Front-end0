@@ -4,12 +4,12 @@ const userReducer = createSlice({
     name: "user",
     initialState: {
         account: {
-            access_token: '',
-            refresh_token: '',
+            accessToken: '',
+            refreshToken: '',
             username: '',
             email: '',
             image: '',
-            role: ''
+            groupWithRole: ''
         },
         isAuthenticated: false
     },
@@ -24,12 +24,12 @@ const userReducer = createSlice({
         },
         USER_LOGOUT_SUCCESS: (state) => {
             state.account = {
-                access_token: '',
-                refresh_token: '',
+                accessToken: '',
+                refreshToken: '',
                 username: '',
                 email: '',
                 image: '',
-                role: ''
+                groupWithRole: ''
             }
             state.isAuthenticated = false
         },
@@ -42,5 +42,5 @@ const userReducer = createSlice({
     },
 });
 
-export const { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS,UPDATE_ACCOUNT } = userReducer.actions;
+export const { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, UPDATE_ACCOUNT } = userReducer.actions;
 export default userReducer.reducer;

@@ -39,11 +39,11 @@ const getUsersWithPaginate = (page, limit) => {
 const postLoginUser = (EmailOrPhone, Password) => {
     return axios.post(`/api/v1/login`, { emailorphone: EmailOrPhone, password: Password, delay: 3000 });
 }
-const postRegisterUser = (Email, Username, Password) => {
-    return axios.post(`/api/v1/register`, { email: Email, username: Username, password: Password });
+const postRegisterUser = (Email, Phone, Username, Password) => {
+    return axios.post(`/api/v1/register`, { email: Email, phone: Phone, username: Username, password: Password });
 }
 const postLogout = (Email, refresh_token) => {
-    return axios.post('/api/v1/logout', { email: Email, refresh_token: refresh_token });
+    return axios.post('/api/v1/logout', { email: Email, refreshToken: refresh_token });
 }
 //Group
 const getAllGroup = () => {
@@ -62,7 +62,7 @@ const postSubmitAnswer = (data) => {
 
 
 //CRUD Quiz Management
-const getQuizWithPaginate=(page,limit)=>{
+const getQuizWithPaginate = (page, limit) => {
     return axios.get(`/api/v1/quiz?page=${page}&limit=${limit}`);
 }
 
@@ -123,10 +123,8 @@ const getDashboard = () => {
 }
 
 //refresh token
-const postRefreshToken = (email, refresh_token) => {
-    return axios.post(`/api/v1/refresh-token`, {
-        email, refresh_token
-    })
+const postRefreshToken = (refreshToken) => {
+    return axios.post(`/api/v1/refresh-token`, { refreshToken })
 }
 
 //update profile
@@ -150,7 +148,7 @@ export {
 
     getQuizByUser, getDataQuiz,
 
-    postSubmitAnswer, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz,getQuizWithPaginate,
+    postSubmitAnswer, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz, getQuizWithPaginate,
 
     postCreateNewQuestion, postCreateNewAnswer,
 

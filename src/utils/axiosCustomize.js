@@ -1,136 +1,139 @@
-// import axios from 'axios';
-// import NProgress from 'nprogress';
-// import { store } from '../redux/store';
-// import { FETCH_USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } from '../redux/reducer/userReducer';
-// import { postRefreshToken } from '../services/apiService';
+import axios from "axios";
+import NProgress from "nprogress";
+import { store } from "../redux/store";
+import {
+  FETCH_USER_LOGIN_SUCCESS,
+  USER_LOGOUT_SUCCESS
+} from "../redux/reducer/userReducer";
+import { postRefreshToken } from "../services/apiService";
+import { toast } from "react-toastify";
 
-// // ===== Queue cho các request chờ refresh =====
-// let isRefreshing = false;
-// let failedQueue = [];
+/* =====================
+   Refresh Token Queue
+===================== */
+let isRefreshing = false;
+let failedQueue = [];
 
-// const processQueue = (error, token = null) => {
-//   failedQueue.forEach((prom) => {
-//     if (error) {
-//       prom.reject(error);
-//     } else {
-//       prom.resolve(token);
-//     }
-//   });
-//   failedQueue = [];
-// };
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) prom.reject(error);
+    else prom.resolve(token);
+  });
+  failedQueue = [];
+};
 
-// const instance = axios.create({
-//   baseURL: 'http://localhost:8000',
-
-// });
-
-
-
-// // Add a request interceptor
-// instance.interceptors.request.use(function (config) {
-//   const access_token = store?.getState()?.account?.access_token
-//   config.headers["Authorization"] = `Bearer ${access_token}`;
-//   NProgress.start();
-//   // Do something before request is sent
-//   return config;
-// }, function (error) {
-//   NProgress.start();
-//   // Do something with request error
-//   return Promise.reject(error);
-// });
-
-// // Add a response interceptor
-// instance.interceptors.response.use(function (response) {
-//   NProgress.done();
-//   // Any status code that lie within the range of 2xx cause this function to trigger
-//   // Do something with response data
-//   return response && response.data ? response.data : response;
-// }, async function (error) {
-//   NProgress.done();
-//   //token expired( res.EC=-999) 
-//   const originalRequest = error.config;
-//   if (
-//     error.response &&
-//     // error.response.status === 401 &&
-//     error.response.data?.EC === -999 &&
-//     !originalRequest._retry
-//   ) {
-//     // đánh dấu để tránh loop vô hạn
-//     originalRequest._retry = true;
-
-//     if (isRefreshing) {
-//       // request khác đang refresh -> đẩy vào queue
-//       return new Promise((resolve, reject) => {
-//         failedQueue.push({ resolve, reject });
-//       })
-//         .then((token) => {
-//           originalRequest.headers["Authorization"] = "Bearer " + token;
-//           return instance(originalRequest);
-//         })
-//         .catch((err) => Promise.reject(err));
-//     }
-//     isRefreshing = true;
-//     const refresh_token = store?.getState()?.account?.refresh_token;
-//     const email = store?.getState()?.account?.email;
-//     try {
-//       const res = await postRefreshToken(email, refresh_token);
-
-//       const newAccessToken = res?.data?.DT?.access_token;
-//       const newRefreshToken = res?.data?.DT?.refresh_token;
-
-//       // cập nhật Redux
-//       store.dispatch(
-//         FETCH_USER_LOGIN_SUCCESS({
-//           access_token: newAccessToken,
-//           refresh_token: newRefreshToken,
-//         })
-//       );
-
-//       processQueue(null, newAccessToken);
-
-//       // retry request cũ với token mới
-//       originalRequest.headers["Authorization"] = "Bearer " + newAccessToken;
-//       return instance(originalRequest);
-//     } catch (err) {
-//       processQueue(err, null);
-//       store.dispatch(USER_LOGOUT_SUCCESS());
-//       window.location.href = "/login";
-//       return Promise.reject(err);
-//     } finally {
-//       isRefreshing = false;
-//     }
-//   }
-//   // Any status codes that falls outside the range of 2xx cause this function to trigger
-//   // Do something with response error
-//   return error && error.response && error.response.data ? error.response.data : Promise.reject(error);
-// });
-// export default instance;
-
-import axios from 'axios';
+/* =====================
+   Axios Instance
+===================== */
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/',
-
-});
-// Enable sending cookies (e.g. HttpOnly JWT, session) with every Axios request
-instance.defaults.withCredentials=true;
-// Add a request interceptor
-instance.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  return config;
-}, function (error) {
-  // Do something with request error
-  return Promise.reject(error);
+  baseURL: "http://localhost:8000/",
+  withCredentials: true
 });
 
-// Add a response interceptor
-instance.interceptors.response.use(function (response) {
+/* =====================
+   Request Interceptor
+===================== */
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = store?.getState()?.account?.accessToken;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    NProgress.start();
+    return config;
+  },
+  (error) => {
+    NProgress.done();
+    return Promise.reject(error);
+  }
+);
 
-  // Any status code that lie within the range of 2xx cause this function to trigger
-  // Do something with response data
-  return response && response.data ? response.data : response;
-}, function (error) {
-  // Any status codes that falls outside the range of 2xx cause this function to trigger
-  // Do something with response error
-  return Promise.reject(error);
-});
+/* =====================
+   Response Interceptor
+===================== */
+instance.interceptors.response.use(
+  (response) => {
+    NProgress.done();
+    return response?.data ?? response;
+  },
+  async (error) => {
+    NProgress.done();
+
+    const originalRequest = error.config;
+    const status = error.response?.status;
+
+    /* =====================
+       ACCESS TOKEN EXPIRED
+    ===================== */
+    if (status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        }).then((token) => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return instance(originalRequest);
+        });
+      }
+
+      isRefreshing = true;
+
+      try {
+        const refreshToken = store?.getState()?.account?.refreshToken;
+
+        const res = await postRefreshToken(refreshToken);
+
+        const newAccessToken = res?.DT?.accessToken;
+        const newRefreshToken = res?.DT?.refreshToken;
+
+        store.dispatch(
+          FETCH_USER_LOGIN_SUCCESS({
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken
+          })
+        );
+
+        processQueue(null, newAccessToken);
+
+        originalRequest.headers.Authorization =
+          `Bearer ${newAccessToken}`;
+
+        return instance(originalRequest);
+      } catch (err) {
+        processQueue(err, null);
+        store.dispatch(USER_LOGOUT_SUCCESS());
+        window.location.href = "/login";
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    /* =====================
+       OTHER HTTP ERRORS
+    ===================== */
+    switch (status) {
+      case 403:
+        toast.error("You don't have permission to access this resource");
+        break;
+      case 404:
+        toast.error("Resource not found");
+        break;
+      case 409:
+        toast.error("Conflict error");
+        break;
+      case 422:
+        toast.error("Invalid data");
+        break;
+      case 500:
+      default:
+        toast.error("Server error");
+        break;
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default instance;
