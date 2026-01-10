@@ -65,7 +65,7 @@ instance.interceptors.response.use(
     /* =====================
        ACCESS TOKEN EXPIRED
     ===================== */
-    if (status === 401 && !originalRequest._retry) {
+    if (status === 401 && error.response.data?.EC === -999 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       if (isRefreshing) {
