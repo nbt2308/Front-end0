@@ -107,7 +107,7 @@ const Register = (props) => {
         let data = await postRegisterUser(form.Email,form.Phone, form.Username, form.Password);
         if (data && data.EC === 0) {
             toast.success(`${t('homepage.registerPage.registerSucceed')}`);
-            // Navigate("/login");
+            Navigate("/login");
         }
         if (data && data.EC !== 0) {
             toast.error(`${t('homepage.registerPage.registerFail')}`);
@@ -217,7 +217,7 @@ const Register = (props) => {
                                             type="password"
                                             placeholder="Password"
                                             value={form.Password}
-                                            onChange={e => handleChange("Password", e.target.value)}
+                                            onChange={e => handleChange("Password", e.target.value.replace(/\s/g, ""))}
                                             isInvalid={showErrors.Password}
 
                                             required
@@ -235,7 +235,7 @@ const Register = (props) => {
                                             type="password"
                                             placeholder="ConfirmPassword"
                                             value={form.ConfirmPassword}
-                                            onChange={e => handleChange("ConfirmPassword", e.target.value)}
+                                            onChange={e => handleChange("ConfirmPassword", e.target.value.replace(/\s/g, ""))}
                                             isInvalid={showErrors.ConfirmPassword}
                                             onKeyDown={(event) => handleKeyDown(event)}
                                             required

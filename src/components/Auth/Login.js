@@ -85,12 +85,9 @@ const Login = (props) => {
             setIsLoadingLogin(false)
             Navigate("/");
         }
-        if (data && data.EC === -2) {
-            toast.error(`${t('homepage.loginPage.loginFail')}`);
-            setIsLoadingLogin(false)
-        }
+        
         if (data && data.EC === -1) {
-            toast.error(`${t('homepage.loginPage.loginFail1')} ${form.EmailOrPhone}`);
+            toast.error(`${t('homepage.loginPage.loginFail1')}`);
             setIsLoadingLogin(false)
         }
 
