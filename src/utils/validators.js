@@ -5,6 +5,16 @@ const validateEmail = (Email) => {
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
 }
+const validateEmailOrPhone = (value) => {
+    if (!value) return false;
+
+    const emailRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    const phoneRegex = /^0\d{9}$/;
+
+    return emailRegex.test(value) || phoneRegex.test(value);
+};
 const validatePassword = (Password) => {
 
     return /[A-Z]/.test(Password) &&
@@ -26,6 +36,6 @@ const validatePhone = (phone) => {
 };
 export {
     validateEmail, validatePassword, validateUsername,
-    validateNameQuiz, validatePhone
+    validateNameQuiz, validatePhone, validateEmailOrPhone
 
 }

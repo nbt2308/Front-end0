@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { postLoginUser } from '../../services/apiService';
 import { toast } from 'react-toastify';
-import { validateEmail } from '../../utils/validators';
+import { validateEmailOrPhone } from '../../utils/validators';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/actions/userAction';
 import { ImSpinner6 } from "react-icons/im";
@@ -51,7 +51,7 @@ const Login = (props) => {
 
         if (!form.EmailOrPhone) {
             newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
-        } else if (!validateEmail(form.EmailOrPhone)) {
+        } else if (!validateEmailOrPhone(form.EmailOrPhone)) {
             newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
         }
         if (!form.Password) {
