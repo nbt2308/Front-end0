@@ -6,7 +6,7 @@ import Language from '../Header/Language';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { IoSettings, IoLogOutOutline } from "react-icons/io5";
 import { AiFillSun } from "react-icons/ai";
-import { FaRegUser,FaBars  } from "react-icons/fa";
+import { FaRegUser, FaBars } from "react-icons/fa";
 import { IoIosMoon } from "react-icons/io";
 import { FiHome } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
@@ -24,9 +24,9 @@ const Admin = (props) => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
     const { t } = useTranslation();
-    const {darkMode}=props
+    const { darkMode } = props
     const handleLogout = async () => {
-        let res = await postLogout(account.email, account.refresh_token)
+        let res = await postLogout(account.refreshToken)
         if (res && res.EC === 0) {
             //clear data redux
             dispatch(USER_LOGOUT_SUCCESS())
@@ -39,11 +39,11 @@ const Admin = (props) => {
     const handleChangeLight = () => {
         darkMode.enable();
     }
-    const handleChangeDark= () => {
+    const handleChangeDark = () => {
         darkMode.disable();
     }
-    
-    
+
+
     return (
         <div className="Admin-container " >
             <div className="Sidebar-container ">
@@ -70,18 +70,18 @@ const Admin = (props) => {
                     </span>
                     <div className="rightside">
 
-                        <NavDropdown 
-                        title={darkMode.value?<AiFillSun />:<IoIosMoon />} 
-                        id="basic-nav-dropdown" 
-                        className={darkMode.value?"changeTheme dropdown-light":"changeTheme dropdown-dark"}>
-                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={()=>handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
-                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={()=>handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
-                           
+                        <NavDropdown
+                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />}
+                            id="basic-nav-dropdown"
+                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
+                            <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
+
                         </NavDropdown>
-                        <NavDropdown 
-                        title={<IoSettings />} 
-                        id="basic-nav-dropdown" 
-                        className={darkMode.value?"settings dropdown-light":"settings dropdown-dark"}>
+                        <NavDropdown
+                            title={<IoSettings />}
+                            id="basic-nav-dropdown"
+                            className={darkMode.value ? "settings dropdown-light" : "settings dropdown-dark"}>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' href="/"><FiHome />{t('homepage.header.home')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' href="/admin/account"><FaRegUser />{t('homepage.header.profile')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2'
@@ -89,17 +89,17 @@ const Admin = (props) => {
 
                         </NavDropdown>
 
-                        <Language 
-                        darkMode={darkMode.value}
+                        <Language
+                            darkMode={darkMode.value}
                         />
 
 
                     </div>
                 </div>
                 <div className={darkMode.value ? "Admin-main light" : "Admin-main dark"}>
-                    
-                        <Outlet context={{ darkMode: darkMode.value }}/>
-                    
+
+                    <Outlet context={{ darkMode: darkMode.value }} />
+
                 </div>
 
             </div>

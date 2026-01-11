@@ -42,8 +42,8 @@ const postLoginUser = (EmailOrPhone, Password) => {
 const postRegisterUser = (Email, Phone, Username, Password) => {
     return axios.post(`/api/v1/register`, { email: Email, phone: Phone, username: Username, password: Password });
 }
-const postLogout = (Email, refresh_token) => {
-    return axios.post('/api/v1/logout', { email: Email, refreshToken: refresh_token });
+const postLogout = (refreshToken) => {
+    return axios.post('/api/v1/logout', { refreshToken: refreshToken });
 }
 //Group
 const getAllGroup = () => {

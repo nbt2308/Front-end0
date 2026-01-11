@@ -36,7 +36,7 @@ const Header = (props) => {
     }
 
     const handleLogout = async () => {
-        let res = await postLogout(account.email, account.refresh_token)
+        let res = await postLogout(account.refreshToken)
         if (res && res.EC === 0) {
             //clear data redux
             dispatch(doLogout.logoutSuccess())
