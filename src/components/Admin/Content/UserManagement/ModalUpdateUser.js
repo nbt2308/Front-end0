@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { getAllGroup, putUpdateUser } from '../../../../services/apiService';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from '../../../../views/App';
 //Filepond
 // React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -35,7 +36,6 @@ const ModalUpdateUser = (props) => {
     const { show, setShow, dataUpdate, resetUpdateData, currentPage, fetchListUsersWithPaginate
         , darkMode
     } = props
-    const API_URL = "http://localhost:8000";
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);

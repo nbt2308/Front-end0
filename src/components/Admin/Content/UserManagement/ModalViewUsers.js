@@ -5,6 +5,7 @@ import { FiMail } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from '../../../../views/App';
 const ModalViewUsers = (props) => {
     const {  show, setShow, dataView,resetViewData,darkMode } = props
     const { t } = useTranslation();
@@ -22,7 +23,7 @@ const ModalViewUsers = (props) => {
     const [Username, setUsername] = useState("");
     const [Group, setGroup] = useState("");
     const [Image, setImage] = useState("");
-    const API_URL = "http://localhost:8000";
+    
 
     useEffect(() => {
         if (!_.isEmpty(dataView)) {
