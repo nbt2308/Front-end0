@@ -8,8 +8,9 @@ import { getDashboard } from "../../../services/apiService";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from "react-router-dom";
+import Breadcrumb from "../BreadCrump/Breadcrumb";
 const DashBoard = (props) => {
-    const { darkMode } = useOutletContext();
+    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const [dataOverview, setDataOverview] = useState("");
     const [dataChart, setDataChart] = useState([]);
     const { t } = useTranslation();
@@ -17,6 +18,7 @@ const DashBoard = (props) => {
 
     useEffect(() => {
         fetchDataOverview();
+        setBreadCrumb("dashboard");
     }, [])
     const fetchDataOverview = async () => {
         let res = await getDashboard();
@@ -53,20 +55,12 @@ const DashBoard = (props) => {
     return (
         <>
             <div className={darkMode ? "dashboard-container light" : "dashboard-container dark"}>
-                <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
-                    <div className="dashboard-title">
-                        {t('adminPage.dashboard.dashboardTitle')}
-                    </div>
-                    <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
 
-                        <ol className="breadcrumb">
-                            <li className={darkMode ? "breadcrumb-item  basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
-                            <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.dashboard')}</li>
-                        </ol>
-
-                    </div>
-                </div>
-
+                {/* Breadcrumb */}
+                <Breadcrumb
+                    breadCrumb={breadCrumb}
+                    darkMode={darkMode}
+                />
                 <div className="dashboard-content">
                     <div className="top">
                         <div className="row">
@@ -156,14 +150,14 @@ const DashBoard = (props) => {
                                         <BarChart data={dataChart} style={{
                                             fontSize: 14,
                                             color: "#000000ff",
-                                            
+
                                             fontFamily: "Arial",
                                             fontWeight: "bold",
                                         }}>
                                             <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="name" stroke={darkMode?"#000":"#8ba1b7"}/>
-                                            <YAxis stroke={darkMode?"#000":"#8ba1b7"} />
-                                            <Tooltip  />
+                                            <XAxis dataKey="name" stroke={darkMode ? "#000" : "#8ba1b7"} />
+                                            <YAxis stroke={darkMode ? "#000" : "#8ba1b7"} />
+                                            <Tooltip />
                                             <Legend />
                                             <Bar dataKey="Quizzes" fill="#3B82F6" />
                                             <Bar dataKey="Questions" fill="#8B5CF6" />

@@ -15,8 +15,9 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer } from '../../../../services/apiService';
 import { useOutletContext } from 'react-router-dom';
+import Breadcrumb from '../../BreadCrump/Breadcrumb';
 const ManageQuestions = (props) => {
-    const { darkMode } = useOutletContext();
+    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [initQuestions, setInitQuestions] = useState([
         {
@@ -45,6 +46,7 @@ const ManageQuestions = (props) => {
 
     useEffect(() => {
         fetchListQuiz();
+        setBreadCrumb("manageQuestion");
     }, [])
     const fetchListQuiz = async () => {
         let res = await getAllQuizForAdmin();
@@ -291,20 +293,12 @@ const ManageQuestions = (props) => {
     });
     return (
         <div className={darkMode ? "manageQuestions-container light" : "manageQuestions-container dark"}>
-            <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
-                <div className="manageQuestions-title">
-                    {t('adminPage.questionsManagement.title')}
-                </div>
-                <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
 
-                    <ol className="breadcrumb">
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.questionsManagement')}</li>
-                    </ol>
-
-                </div>
-            </div>
+            {/* Breadcrumb */}
+            <Breadcrumb
+                breadCrumb={breadCrumb}
+                darkMode={darkMode}
+            />
 
             <div className={darkMode ? "questions-content light-card" : "questions-content dark-card"}>
                 <div className='mt-4 ms-4'>

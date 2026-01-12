@@ -6,6 +6,7 @@ import { getAllUsers, getUsersWithPaginate } from "../../../../services/apiServi
 import ModalUpdateUser from "./ModalUpdateUser"
 import ModalViewUsers from "./ModalViewUsers"
 import ModalDeleteUser from './ModalDeleteUser'
+import Breadcrumb from "../../BreadCrump/Breadcrumb";
 // import TableUsers from "./TableUsers";
 import TableUserPaginate from './TableUserPaginate'
 import { useTranslation } from 'react-i18next';
@@ -13,8 +14,7 @@ import { toast } from "react-toastify";
 import { useOutletContext } from "react-router-dom";
 
 const ManageUsers = (props) => {
-
-    const { darkMode } = useOutletContext();
+    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalViewUser, setShowModalViewUser] = useState(false);
@@ -32,6 +32,7 @@ const ManageUsers = (props) => {
     useEffect(() => {
         // fetchListUsers();
         fetchListUsersWithPaginate(1);
+        setBreadCrumb("manageUsers");
     }, []);
 
     const fetchListUsers = async () => {
@@ -67,25 +68,16 @@ const ManageUsers = (props) => {
     const resetViewData = () => {
         setDataView({});
     }
-
-    console.log('check list', listUsers);
-
+    
     return (
         <div className={darkMode ? "manageUsers-container light" : "manageUsers-container dark"}>
-            <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
-                <div className="manageUsers-title">
-                    {t('adminPage.usersManagement.usersManagementTitle')}
-                </div>
-                <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
 
-                    <ol className="breadcrumb">
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.usersManagement')}</li>
-                    </ol>
+            {/* Breadcrumb */}
+            <Breadcrumb
+                breadCrumb={breadCrumb}
+                darkMode={darkMode}
+            />
 
-                </div>
-            </div>
 
 
             <div

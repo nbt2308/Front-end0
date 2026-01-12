@@ -6,6 +6,7 @@ import ModalUpdateQuiz from './ModalUpdateQuiz';
 import ModalDeleteQuiz from './ModalDeleteQuiz';
 import ModalUpdateQA from './ModalUpdateQA';
 import ModalAssignQuiz from './ModalAssignQuiz';
+import Breadcrumb from '../../BreadCrump/Breadcrumb';
 import { getAllQuizForAdmin, getQuizWithPaginate } from '../../../../services/apiService';
 import { useTranslation } from 'react-i18next';
 import './ManageQuiz.scss'
@@ -13,8 +14,9 @@ import TableQuiz from './TableQuiz';
 import SearchBar from './SearchBar';
 import { useOutletContext } from 'react-router-dom';
 import TableQuizWithPaginate from './TableQuizWithPaginate';
-const ManageQuiz = () => {
-    const { darkMode } = useOutletContext();
+const ManageQuiz = (props) => {
+    
+    const { darkMode,breadCrumb, setBreadCrumb } = useOutletContext();
     const [showModalAddQuiz, setShowModalAddQuiz] = useState(false);
     const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
     const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
@@ -34,6 +36,7 @@ const ManageQuiz = () => {
     useEffect(() => {
         // fetchListQuiz();
         fetchListQuizWithPagination(1);
+        setBreadCrumb("manageQuiz");
     }, [])
     const fetchListQuiz = async () => {
         setDataUpdate({})
@@ -81,20 +84,12 @@ const ManageQuiz = () => {
     }
     return (
         <div className={darkMode ? "manageQuizzes-container light" : "manageQuizzes-container dark"}>
-            <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
-                <div className="manageQuizzes-title">
-                    {t('adminPage.quizzesManagement.title')}
-                </div>
-                <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
-
-                    <ol className="breadcrumb">
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
-                        <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.quizzesManagement')}</li>
-                    </ol>
-
-                </div>
-            </div>
+            
+            {/* Breadcrumb */}
+            <Breadcrumb
+                breadCrumb={breadCrumb}
+                darkMode={darkMode}
+            />
 
             <div className={darkMode ? "quizzes-content light-card" : "quizzes-content dark-card"}>
                 <div className='d-flex'>

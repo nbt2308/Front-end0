@@ -1,62 +1,7 @@
 .manageQuestions-container {
     height: 100%;
 
-    .breadcrumb-container {
-        margin-left: 20px;
-        margin-right: 20px;
-        // margin-top: 20px;
-        height: 80px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .manageQuestions-title {
-            margin-left: 20px;
-            // margin-top: 10px;
-            font-size: 1.875rem;
-            font-weight: 600;
-        }
-
-        .nav-breadcrumb {
-            font-size: 1rem;
-            margin-right: 20px;
-
-            .breadcrumb {
-                margin-bottom: 0;
-
-                .breadcrumb-item {
-                    &::before {
-                        color: #ccc6c6
-                    }
-
-                    a {
-                        text-decoration: none;
-
-                        .basic-light {
-                            color: #0d6efd
-                        }
-
-                        .basic-dark {
-                            color: #0066ff
-                        }
-
-                        .active-light {
-                            color: rgba(33, 37, 41, 0.75)
-                        }
-
-                        .active-dark {
-                            color: #989898
-                        }
-                    }
-
-                }
-            }
-        }
-
-
-    }
+    
 
     .questions-content {
         margin: 20px 20px 50px;

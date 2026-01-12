@@ -19,7 +19,7 @@ const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     const [toggled, setToggled] = useState(false);
     const [theme, setTheme] = useState('light');
-
+    const [breadCrumb, setBreadCrumb] = useState();
     const account = useSelector(state => state?.account);
     const dispatch = useDispatch();
     const Navigate = useNavigate();
@@ -98,7 +98,14 @@ const Admin = (props) => {
                 </div>
                 <div className={darkMode.value ? "Admin-main light" : "Admin-main dark"}>
 
-                    <Outlet context={{ darkMode: darkMode.value }} />
+                    <Outlet
+                        context={{ 
+                            darkMode: darkMode.value,
+                            breadCrumb: breadCrumb,
+                            setBreadCrumb: setBreadCrumb
+                         }}
+                        
+                    />
 
                 </div>
 
