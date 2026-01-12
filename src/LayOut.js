@@ -5,7 +5,7 @@ import App from './views/App';
 // import User from './components/User/User';
 import Admin from './components/Admin/Admin';
 import HomePage from './components/Home/HomePage';
-import DashBoard from './components/Admin/Content/DashBoard';
+import DashBoard from "./components/Admin/Content/Dashboard/DashBoard";
 import ManageUsers from './components/Admin/Content/UserManagement/ManageUsers';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register'
@@ -17,7 +17,7 @@ import ManageQuestions from "./components/Admin/Content/QuestionManagement/Manag
 import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from 'react';
 import Test from "./components/Admin/Content/UserManagement/Test";
-import AccountProfile from "./components/Admin/Content/AccountProfile";
+import AccountProfile from"./components/Admin/Content/AccountProfile/AccountProfile";
 import LoadingSpinner from "./components/Loading/Loading"
 import useDarkMode from "use-dark-mode";
 const LayOut = (props) => {

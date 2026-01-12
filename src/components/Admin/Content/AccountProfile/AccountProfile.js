@@ -1,12 +1,12 @@
 import { Tab, Tabs } from 'react-bootstrap';
-import PersonalDetails from '../../Header/PersonalDetails';
-import ChangePassword from '../../Header/ChangePassword';
-import History from '../../Header/History';
+import PersonalDetails from '../../../Header/PersonalDetails';
+import ChangePassword from '../../../Header/ChangePassword';
+import History from '../../../Header/History';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import "./AccountProfile.scss"
 import { useOutletContext } from 'react-router-dom';
-import Breadcrumb from '../BreadCrump/Breadcrumb';
+import Breadcrumb from '../../BreadCrump/Breadcrumb';
 const AccountProfile = () => {
     const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const [key, setKey] = useState('Personal Details');

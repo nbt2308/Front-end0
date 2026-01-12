@@ -4,11 +4,11 @@ import { FaRegUser, FaCheckSquare, FaListAlt } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer } from "recharts";
-import { getDashboard } from "../../../services/apiService";
+import { getDashboard } from "../../../../services/apiService";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from "react-router-dom";
-import Breadcrumb from "../BreadCrump/Breadcrumb";
+import Breadcrumb from "../../BreadCrump/Breadcrumb";
 const DashBoard = (props) => {
     const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const [dataOverview, setDataOverview] = useState("");
