@@ -164,7 +164,7 @@
             "tableUsers": {
                 "username": "USERNAME",
                 "email": "EMAIL",
-                "phone":"Phone number",
+                "phone":"PHONE NUMBER",
                 "role": "GROUP",
                 "actions": "ACTIONS",
                 "error": "Not Found",
