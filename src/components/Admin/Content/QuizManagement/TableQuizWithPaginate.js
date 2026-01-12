@@ -36,7 +36,7 @@ const TableQuizWithPaginate = (props) => {
                                                 <td className={darkMode ? "light" : "dark-card"}>{item.difficulty}</td>
                                                 <td className={darkMode ? "action-col light" : "action-col dark-card"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light" : "btn btn-edit btn-dark"}
+                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                                         onClick={() => handleBtnUpdateQuiz(item)}
@@ -44,7 +44,7 @@ const TableQuizWithPaginate = (props) => {
                                                     ><FaPen className="icon-edit" /></button>
                                                 </td>
                                                 <td className={darkMode ? "action-col light" : "action-col dark-card"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light" : "btn btn-delete btn-dark"}
+                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         type="button"
                                                         onClick={() => handleBtnDeleteQuiz(item)}
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"

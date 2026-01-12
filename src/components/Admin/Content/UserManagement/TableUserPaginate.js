@@ -43,7 +43,7 @@ const TableUserPaginate = (props) => {
                                                 <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
                                                 <td className={darkMode ? "light action-col" : "dark-card action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-view btn-light" : "btn btn-view btn-dark"}
+                                                        className={darkMode ? "btn btn-view btn-light border-0" : "btn btn-view btn-dark border-0"}
                                                         onClick={() => handleBtnViewUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="View"
@@ -52,7 +52,7 @@ const TableUserPaginate = (props) => {
                                                 </td>
                                                 <td className={darkMode ? "light action-col" : "dark-card action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light" : "btn btn-edit btn-dark"}
+                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         onClick={() => handleBtnUpdateUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
@@ -60,7 +60,7 @@ const TableUserPaginate = (props) => {
                                                     </button>
                                                 </td>
                                                 <td className={darkMode ? "light action-col" : "dark-card action-col"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light" : "btn btn-delete btn-dark"}
+                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         onClick={() => handleBtnDeleteUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
