@@ -19,62 +19,72 @@ const TableUserPaginate = (props) => {
         <>
             <div className="scrollbar">
                 <PerfectScrollbar >
-                    <table className="table table-hover" >
-                        <thead >
-                            <tr >
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
-                                <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
-                                <th scope="col" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
-                                    return (
-                                        <tr key={`table-user-${index}`}>
-                                            <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>
-                                            <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
-                                            <td className={darkMode ? "action-col light" : "action-col dark-card"}>
-                                                <button
-                                                    className={darkMode ? "btn btn-view btn-light" : "btn btn-view btn-dark"}
-                                                    onClick={() => handleBtnViewUser(item)}
-                                                    type="button"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"
-                                                ><FaEye /></button>
-                                                <button
-                                                    className={darkMode ? "btn mx-3 btn-edit btn-light" : "btn mx-3 btn-edit btn-dark"}
-                                                    onClick={() => handleBtnUpdateUser(item)}
-                                                    type="button"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                                                ><FaPen /></button>
-                                                <button className={darkMode ? "btn btn-delete btn-light" : "btn btn-delete btn-dark"}
-                                                    onClick={() => handleBtnDeleteUser(item)}
-                                                    type="button"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                                ><FaTrashAlt /></button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                            {
-                                listUsers && listUsers.length === 0 &&
-                                <tr>
-                                    <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
+                    <div class="table-responsive">
+                        <table className="table table-bordered table-hover">
+                            <thead >
+                                <tr >
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
+                                    <th scope="col" colspan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                {
+                                    listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
+                                        return (
+                                            <tr key={`table-user-${index}`}>
+                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
+                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                    <button
+                                                        className={darkMode ? "btn btn-view btn-light" : "btn btn-view btn-dark"}
+                                                        onClick={() => handleBtnViewUser(item)}
+                                                        type="button"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="View"
+                                                    ><FaEye />
+                                                    </button>
+                                                </td>
+                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                    <button
+                                                        className={darkMode ? "btn btn-edit btn-light" : "btn btn-edit btn-dark"}
+                                                        onClick={() => handleBtnUpdateUser(item)}
+                                                        type="button"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                                                    ><FaPen />
+                                                    </button>
+                                                </td>
+                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                    <button className={darkMode ? "btn btn-delete btn-light" : "btn btn-delete btn-dark"}
+                                                        onClick={() => handleBtnDeleteUser(item)}
+                                                        type="button"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                                    ><FaTrashAlt />
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        )
+                                    })
+                                }
+                                {
+                                    listUsers && listUsers.length === 0 &&
+                                    <tr>
+                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
+                                    </tr>
+                                }
 
 
-                        </tbody>
-                    </table>
-                </PerfectScrollbar>
-            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </PerfectScrollbar >
+            </div >
             <ReactPaginate
                 nextLabel={t('adminPage.usersManagement.tableUsers.next')}
                 onPageChange={handlePageClick}
