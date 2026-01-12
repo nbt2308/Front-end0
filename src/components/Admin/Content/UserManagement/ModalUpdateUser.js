@@ -35,6 +35,7 @@ const ModalUpdateUser = (props) => {
     const { show, setShow, dataUpdate, resetUpdateData, currentPage, fetchListUsersWithPaginate
         , darkMode
     } = props
+    const API_URL = "http://localhost:8000";
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -87,19 +88,19 @@ const ModalUpdateUser = (props) => {
             if (dataUpdate.image) {
                 setFiles([
                     {
-                        source: `data:image/jpeg;base64,${dataUpdate.image}`,
+                        source: `${API_URL}${dataUpdate.image}`,
                         options: {
-                            type: "local",
+                            type: "remote",
                         },
                     },
                 ]);
             }
-
+                
         }
     }, [dataUpdate])
 
 
-
+    
 
     const fetchListGroup = async () => {
         let res = await getAllGroup();
@@ -143,11 +144,28 @@ const ModalUpdateUser = (props) => {
     //     }
     // }
 
-    console.log(dataUpdate.image);
-    const handleUploadFile = (fileItem) => {
-        setFiles(fileItem);
-        if (fileItem.length > 0) {
-            const file = fileItem[0].file;
+    // console.log(dataUpdate.image);
+    // const handleUploadFile = (fileItem) => {
+    //     setFiles(fileItem);
+    //     if (fileItem.length > 0) {
+    //         const file = fileItem[0].file;
+    //         setForm(prev => ({
+    //             ...prev,
+    //             Image: file
+    //         }));
+    //     } else {
+    //         setForm(prev => ({
+    //             ...prev,
+    //             Image: ""
+    //         }));
+    //     }
+    // }
+    const handleUploadFile = (fileItems) => {
+        setFiles(fileItems);
+
+        if (fileItems.length > 0) {
+            const file = fileItems[0].file;
+
             setForm(prev => ({
                 ...prev,
                 Image: file
@@ -155,11 +173,10 @@ const ModalUpdateUser = (props) => {
         } else {
             setForm(prev => ({
                 ...prev,
-                Image: ""
+                Image: null
             }));
         }
-    }
-
+    };
 
     const handleSubmit = async () => {
         //validate
@@ -168,17 +185,8 @@ const ModalUpdateUser = (props) => {
             toast.error("No file uploaded");
             return;
         }
-        let file;
-        if (form.Image instanceof Blob) {
-            file = new File([form.Image], "avatar.jpg", {
-                type: form.Image.type || "image/jpeg",
-            });
-        }
-
-
-
         //call apis
-        let data = await putUpdateUser(dataUpdate.id, form.Username, form.Group, form.Sex, form.Address, file);
+        let data = await putUpdateUser(dataUpdate.id, form.Username, form.Group, form.Sex, form.Address, form.Image);
         if (data && data.EC === 0) {
             toast.success(`${t('adminPage.usersManagement.modalUpdateUsers.updateSucceed')}`);
             handleClose();

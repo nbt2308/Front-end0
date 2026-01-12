@@ -22,7 +22,7 @@ const ModalViewUsers = (props) => {
     const [Username, setUsername] = useState("");
     const [Group, setGroup] = useState("");
     const [Image, setImage] = useState("");
-    
+    const API_URL = "http://localhost:8000";
 
     useEffect(() => {
         if (!_.isEmpty(dataView)) {
@@ -31,7 +31,7 @@ const ModalViewUsers = (props) => {
             setUsername(dataView.username);
             setGroup(dataView.Group.name);
             if (dataView.image) {
-                setImage(`data:image/jpeg;base64,${dataView.image}`);
+                setImage(`${API_URL}${dataView.image}`);
             }
 
         }

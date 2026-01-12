@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { postCreateNewUser, getAllGroup } from '../../../../services/apiService';
+import { postCreateNewUser, getAllGroup, postUploadFile } from '../../../../services/apiService';
 import { validateEmail, validatePassword, validatePhone, validateUsername } from '../../../../utils/validators';
 import { useTranslation } from 'react-i18next';
 //Filepond
@@ -181,21 +181,23 @@ const AddUsers = (props) => {
 
     //     }
     // }
-    const handleUploadFile = (fileItem) => {
-        setFiles(fileItem);
-        if (fileItem.length > 0) {
-            const file = fileItem[0].file;
+    const handleUploadFile = (fileItems) => {
+        setFiles(fileItems);
+
+        if (fileItems.length > 0) {
+            const file = fileItems[0].file;
+
             setForm(prev => ({
                 ...prev,
-                Image: file
+                Image: file 
             }));
         } else {
             setForm(prev => ({
                 ...prev,
-                Image: " "
+                Image: null
             }));
         }
-    }
+    };
 
 
 
@@ -215,8 +217,8 @@ const AddUsers = (props) => {
             handleClose();
             setCurrentPage(1);
             await fetchListUsersWithPaginate(1);
-        } 
-        if(data && data.EC!==0) {
+        }
+        if (data && data.EC !== 0) {
             toast.error(data.EM);
         }
 
