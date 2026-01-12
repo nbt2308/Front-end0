@@ -175,10 +175,10 @@ const DashBoard = (props) => {
                             <div className="col-md-6 col-sm-4 mb-3">
                                 <div className={darkMode ? "card p-3 others light" : "card p-3 others dark-card"}>
                                     <span className="text-1">{t('adminPage.dashboard.others.othersTitle')}</span>
-                                    <div class="row align-items-center mb-3 child">
-                                        <div class="col-auto icon"><FaListAlt style={{ color: "#3B82F6" }} /></div>
-                                        <div class="col text-1">{t('adminPage.dashboard.others.totalQuizzes')}</div>
-                                        <div class="col-auto text-2 me-2">
+                                    <div className="row align-items-center mb-3 child">
+                                        <div className="col-auto icon"><FaListAlt style={{ color: "#3B82F6" }} /></div>
+                                        <div className="col text-1">{t('adminPage.dashboard.others.totalQuizzes')}</div>
+                                        <div className="col-auto text-2 me-2">
                                             {
                                                 dataOverview && dataOverview.others
                                                     &&
@@ -192,10 +192,10 @@ const DashBoard = (props) => {
                                         </div>
                                     </div>
 
-                                    <div class="row align-items-center mb-3 child">
-                                        <div class="col-auto icon"><BsFillQuestionSquareFill style={{ color: "#8B5CF6" }} /></div>
-                                        <div class="col text-1">{t('adminPage.dashboard.others.totalQuestions')}</div>
-                                        <div class="col-auto text-2 me-2">
+                                    <div className="row align-items-center mb-3 child">
+                                        <div className="col-auto icon"><BsFillQuestionSquareFill style={{ color: "#8B5CF6" }} /></div>
+                                        <div className="col text-1">{t('adminPage.dashboard.others.totalQuestions')}</div>
+                                        <div className="col-auto text-2 me-2">
                                             {
                                                 dataOverview && dataOverview.others
                                                     &&
@@ -209,10 +209,10 @@ const DashBoard = (props) => {
                                         </div>
                                     </div>
 
-                                    <div class="row align-items-center child">
-                                        <div class="col-auto icon"><FaCheckSquare style={{ color: "#10B981" }} /></div>
-                                        <div class="col text-1">{t('adminPage.dashboard.others.totalAnswers')}</div>
-                                        <div class="col-auto text-2 me-2">
+                                    <div className="row align-items-center child">
+                                        <div className="col-auto icon"><FaCheckSquare style={{ color: "#10B981" }} /></div>
+                                        <div className="col text-1">{t('adminPage.dashboard.others.totalAnswers')}</div>
+                                        <div className="col-auto text-2 me-2">
                                             {
                                                 dataOverview && dataOverview.others
                                                     &&
