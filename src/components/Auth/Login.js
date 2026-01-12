@@ -190,7 +190,7 @@ const Login = (props) => {
                                     <span>{t('homepage.loginPage.labelSignUp')} </span>
                                     <span className="btn-signup" onClick={() => { Navigate("/register") }}>{t('homepage.loginPage.buttonCreateAccount')}</span>
                                 </div>
-                                <div className="btn-goBack btn mt-4 mx-5 mx-sm-3 "><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
+                                <div className="btn-goBack btn"><span onClick={() => { Navigate("/") }}>{t('homepage.loginPage.buttonGoToHomePage')}</span></div>
                             </div>
 
 
