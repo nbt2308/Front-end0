@@ -31,7 +31,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const ModalAddQuiz = (props) => {
-    const { show, setShow, fetchListQuiz, darkMode,fetchListQuizWithPagination,setCurrentPage } = props;
+    const { show, setShow, darkMode, fetchListQuizWithPagination, setCurrentPage } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -127,7 +127,10 @@ const ModalAddQuiz = (props) => {
     const handleSubmit = async (event) => {
         //validate
         if (!handleValidate()) return;
-
+        if (!form.image) {
+            toast.error("No file uploaded");
+            return;
+        }
         //call apis
         let data = await postCreateNewQuiz(form.description, form.name, form.difficulty, form.image);
         if (data && data.EC === 0) {

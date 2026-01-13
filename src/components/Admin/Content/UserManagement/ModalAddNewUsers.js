@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './ManageUsers.scss';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { postCreateNewUser, getAllGroup, postUploadFile } from '../../../../services/apiService';
+import { postCreateNewUser, getAllGroup} from '../../../../services/apiService';
 import { validateEmail, validatePassword, validatePhone, validateUsername } from '../../../../utils/validators';
 import { useTranslation } from 'react-i18next';
 //Filepond

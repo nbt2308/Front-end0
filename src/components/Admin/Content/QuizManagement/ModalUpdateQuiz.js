@@ -23,6 +23,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
 import { validateNameQuiz } from '../../../../utils/validators';
+import { API_URL } from '../../../../views/App';
 
 // Đăng ký plugin
 registerPlugin(
@@ -31,7 +32,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const ModalUpdateQuiz = (props) => {
-    const { show, setShow, dataUpdate, fetchListQuiz, resetUpdateQuiz, darkMode,fetchListQuizWithPagination,currentPage } = props;
+    const { show, setShow, dataUpdate, resetUpdateQuiz, darkMode,fetchListQuizWithPagination,currentPage } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -133,9 +134,9 @@ const ModalUpdateQuiz = (props) => {
             if (dataUpdate.image) {
                 setFiles([
                     {
-                        source: `data:image/jpeg;base64,${dataUpdate.image}`,
+                        source: `${API_URL}${dataUpdate.image}`,
                         options: {
-                            type: "local",
+                            type: "remote",
                         },
                     },
                 ]);
@@ -151,7 +152,7 @@ const ModalUpdateQuiz = (props) => {
 
     //     }
     // }
-
+    
     
 
     const handleSubmit = async () => {
@@ -161,13 +162,8 @@ const ModalUpdateQuiz = (props) => {
             toast.error("No file uploaded");
             return;
         }
-        let file;
-        if (form.image instanceof Blob) {
-            file = new File([form.image], "avatar.jpg", {
-                type: form.image.type || "image/jpeg",
-            });
-        }
-        let res = await putUpdateQuiz(dataUpdate.id, form.description, form.name, form.difficulty, file)
+        
+        let res = await putUpdateQuiz(dataUpdate.id, form.description, form.name, form.difficulty, form.image)
         if (res && res.EC === 0) {
             toast.success(`${t('adminPage.quizzesManagement.modalUpdateQuiz.updateSucceed')}`);
             handleClose();
