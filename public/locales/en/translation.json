@@ -89,6 +89,8 @@
             "usersManagement": "Users management",
             "quizzesManagement": "Quizzes management",
             "questionsManagement": "Questions management",
+            "rolesManagement": "Roles management",
+            "groupsManagement": "Groups management",
             "accountProfile": "Account Profile"
         },
         "breadcrumb": {
@@ -240,6 +242,72 @@
             "createSucceed": "Create questions and answers succeed",
             "title": " Questions Management",
             "save": "Save questions"
+        },
+        "rolesManagement": {
+            "title": "Roles management",
+            "btnAddRole": "Add new Role",
+            "btnAssignRole": "Assign role",
+            "modalAddRole": {
+                "title": "Add New Role",
+                "header":"Role's",
+                "roleUrl": "URL",
+                "labelInvalidRoleUrl": "URL is required",
+                "labelInvalidRoleUrl1": "Invalid URL format, it must begin with '/'",
+                "roleMethod": "Method",
+                "labelInvalidRoleMethod": "Method is required",
+                "labelInvalidRoleMethod1": "Method must be: GET, POST, PUT, DELETE, or PATCH",
+                "roleDescription": "Description",
+                "labelInvalidRoleDescription": "Description is required",
+                "btnAddMoreRole":"Add another role",
+                "btnCancel": "Cancel",
+                "btnSave": "Save"
+            },
+            "tableRoles": {
+                "roleUrl": "URL",
+                "roleMethod": "METHOD",
+                "roleDescription":"DESCRIPTION",
+                "roleActions": "ACTIONS",
+                "error": "Not Found",
+                "next": "Next >",
+                "prev": "< Prev",
+                "tooltipEdit":"Edit",
+                "tooltipDelete":"Delete"
+            },
+            "modalUpdateQuiz": {
+                "updateSucceed": "Update new quiz succeed",
+                "title": "Update a Quiz"
+            },
+            "modalDeleteQuiz": {
+                "deleteSucceed": "Delete the quiz succeed",
+                "title": "Delete confirmation",
+                "label1": "Are you sure to delete this quiz?"
+            },
+            "modalUpsertQA": {
+                "upsertQASucceed": "Upsert Quiz with Q/A succeed",
+                "emptyQA": "Please add questions and answers for this quiz",
+                "title": "Update Questions and Answers",
+                "selectQuiz": "Select quiz",
+                "invalidSelect": "Please select a quiz",
+                "addQuestions": "Add questions",
+                "q": "Question",
+                "s": "'s description",
+                "invalidQuestion": "Question's description is required",
+                "uploadImage": "Upload image",
+                "emptyFile": "0 file is uploaded",
+                "a": "Answer",
+                "s1": "'s description",
+                "invalidAnswer": "Answer's description is required",
+                "emptyQA1": "Quiz is empty. Please add questions and answer for this quiz",
+                "previewImage": "Upload image success. Click image's name to preview"
+            },
+            "modalAssignQuiz": {
+                "assignSucceed": "Assign the quiz to the current user succeed",
+                "assignFail": "The quiz already assigned to the user",
+                "title": "Assign quiz to users",
+                "selectUser": "Select user",
+                "invalidSelect": "Please select a user",
+                "assign": "Assign"
+            }
         },
         "accountProfile": {
             "title": "Account Profile",

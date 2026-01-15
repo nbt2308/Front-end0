@@ -34,8 +34,36 @@ const validatePhone = (phone) => {
     const regex = /^\d{10}$/;
     return regex.test(phone);
 };
+
+const checkRoleUrlFormat = (roleUrl) => {
+    if (!roleUrl || typeof roleUrl !== "string") return null;
+
+    const trimmed = roleUrl.trim();
+    
+    // Regex: Phải bắt đầu bằng /, sau đó là các ký tự a-z, 0-9, -, /
+    // Không cho phép 2 dấu // liên tiếp hoặc kết thúc bằng /
+    const ROLE_URL_REGEX = /^\/([a-z0-9-]+\/?)*[a-z0-9-]+$/;
+
+    if (!ROLE_URL_REGEX.test(trimmed)) {
+        return null;
+    }
+
+    return trimmed.toLowerCase();
+};
+const validateMethod = (methodValue) => {
+    // 1. Danh sách các method cho phép
+    const ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']; 
+
+    
+    if (!ALLOWED_METHODS.includes(methodValue.toUpperCase())) {
+        return false;
+    }
+
+   
+    return true;
+};
 export {
     validateEmail, validatePassword, validateUsername,
-    validateNameQuiz, validatePhone, validateEmailOrPhone
-
+    validateNameQuiz, validatePhone, validateEmailOrPhone,
+    checkRoleUrlFormat, validateMethod
 }

@@ -1,0 +1,101 @@
+import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
+import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
+import PerfectScrollbar from 'react-perfect-scrollbar'
+const TableRolesWithPaginate = (props) => {
+    const { listRole, handleBtnUpdateRole, handleBtnDeleteRole, fetchListRoleWithPaginate
+        , pageCount, currentPage, setCurrentPage, darkMode } = props;
+
+    const { t } = useTranslation();
+    const handlePageClick = (event) => {
+        fetchListRoleWithPaginate(+event.selected + 1);
+        setCurrentPage(+event.selected + 1);
+    };
+
+
+
+
+    return (
+        <>
+            <div className="scrollbar">
+                <PerfectScrollbar >
+                    <div class="table-responsive">
+                        <table className="table table-bordered table-hover text-center">
+                            <thead >
+                                <tr >
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
+                                    <th scope="col" colspan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    listRole && listRole.length > 0 && listRole.map((item, index) => {
+                                        return (
+                                            <tr key={`table-role-${index}`}>
+                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.url}</td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.method}</td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
+                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                    <button
+                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
+                                                        onClick={() => handleBtnUpdateRole(item)}
+                                                        type="button"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.rolesManagement.tableRoles.tooltipEdit')}
+                                                    ><FaPen />
+                                                    </button>
+                                                </td>
+                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                        onClick={() => handleBtnDeleteRole(item)}
+                                                        type="button"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.rolesManagement.tableRoles.tooltipDelete')}
+                                                    ><FaTrashAlt />
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        )
+                                    })
+                                }
+                                {
+                                    listRole && listRole.length === 0 &&
+                                    <tr>
+                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.rolesManagement.tableRoles.error')}</td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </PerfectScrollbar >
+            </div >
+            <ReactPaginate
+                nextLabel={t('adminPage.rolesManagement.tableRoles.next')}
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={pageCount}
+                previousLabel={t('adminPage.rolesManagement.tableRoles.prev')}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+                forcePage={currentPage - 1}
+            />
+        </>
+    )
+}
+export default TableRolesWithPaginate;

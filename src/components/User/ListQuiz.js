@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useOutletContext } from "react-router-dom";
 import './ListQuiz.scss';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from "../../views/App";
 const ListQuiz = () => {
     const { darkMode } = useOutletContext();
     const [arrQuiz, setArrQuiz] = useState([])
@@ -29,7 +30,7 @@ const ListQuiz = () => {
                         <div key={`${index}-quiz`} className="row">
                             <div  className={darkMode?"card light":"card dark-card"} >
                                 <div className="image-preview">
-                                    <img className="card-img-top" src={`data:image/jpeg;base64,${item.image}`} alt="Card-image-cap" />
+                                    <img className="card-img-top" src={`${API_URL}${item.image}`} alt="Card-image-cap" />
                                 </div>
                                 <div className="card-body">
                                     <h5 className="card-title">Quiz {+`${index}` + 1}</h5>

@@ -49,9 +49,17 @@ const postLogout = (refreshToken) => {
 const getAllGroup = () => {
     return axios.get('/api/v1/group/all');
 }
+
+//Role
+const getRoleWithPaginate = (page, limit) => {
+    return axios.get(`/api/v1/role?page=${page}&limit=${limit}`);
+}
+const postCreateNewRole = (data) => {
+    return axios.post(`/api/v1/role`,[...data]);
+}
 //Quiz user
 const getQuizByUser = () => {
-    return axios.get('/api/v1/quiz-by-participant')
+    return axios.get('/api/v1/quiz-by-user')
 }
 const getDataQuiz = (quizId) => {
     return axios.get(`/api/v1/questions-by-quiz?quizId=${quizId}`)
@@ -146,6 +154,8 @@ export {
 
     getAllGroup,
 
+    getRoleWithPaginate, postCreateNewRole,
+
     getQuizByUser, getDataQuiz,
 
     postSubmitAnswer, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz, getQuizWithPaginate,
@@ -157,6 +167,4 @@ export {
     getDashboard, postRefreshToken,
 
     postUpdateProfile, postChangePassword, getHistory
-
-
 }

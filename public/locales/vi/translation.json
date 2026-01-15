@@ -89,6 +89,8 @@
             "usersManagement": "Quản lý người dùng",
             "quizzesManagement": "Quản lý bài thi",
             "questionsManagement": "Quản lý câu hỏi",
+            "rolesManagement": "Quản lý vai trò",
+            "groupsManagement": "Quản lý nhóm vai trò",
             "accountProfile": "Hồ sơ tài khoản"
         },
         "breadcrumb": {
@@ -164,7 +166,7 @@
             "tableUsers": {
                 "username": "Tên người dùng",
                 "email": "Địa chỉ email",
-                "phone":"Số điện thoại",
+                "phone": "Số điện thoại",
                 "role": "Vai trò",
                 "actions": "Hành động",
                 "error": "không tìm thấy",
@@ -240,6 +242,37 @@
             "createSucceed": "Tạo câu hỏi và câu trả lời thành công",
             "title": " Quản lý câu hỏi",
             "save": "Lưu câu hỏi"
+        },
+        "rolesManagement": {
+            "title": "Quản lý vai trò người dùng",
+            "btnAddRole": "Thêm vai trò mới",
+            "btnAssignRole": "Chỉ định vai trò",
+            "modalAddRole": {
+                "title": "Thêm vai trò mới",
+                "header": "Vai trò",
+                "roleUrl": "URL",
+                "labelInvalidRoleUrl": "URL là bắt buộc phải có",
+                "labelInvalidRoleUrl1": "Định dạng URL không hợp lệ, Nó phải bắt đầu bằng '/'",
+                "roleMethod": "Phương thức",
+                "labelInvalidRoleMethod": "Phương thức là bắt buộc phải có",
+                "labelInvalidRoleMethod1": "Phương thức phải là: GET, POST, PUT, DELETE, hoặc PATCH",
+                "roleDescription": "Mô tả",
+                "labelInvalidRoleDescription": "Mô tả là bắt buộc phải có",
+                "btnAddMoreRole": "Thêm một vai trò khác",
+                "btnCancel": "Huỷ",
+                "btnSave": "Lưu"
+            },
+            "tableRoles": {
+                "roleUrl": "URL",
+                "roleMethod": "PHƯƠNG THỨC",
+                "roleDescription":"MÔ TẢ",
+                "roleActions": "HÀNH ĐỘNG",
+                "error": "không tìm thấy",
+                "next": "Tiến >",
+                "prev": "< Lùi",
+                "tooltipEdit":"Sửa thông tin",
+                "tooltipDelete":"Xoá"
+            }
         },
         "accountProfile": {
             "title": "Thông tin chi tiết của tài khoản",
