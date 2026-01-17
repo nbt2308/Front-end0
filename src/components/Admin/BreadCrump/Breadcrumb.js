@@ -104,6 +104,27 @@ const Breadcrumb = (props) => {
                     </div>
                 )
             }
+
+            {
+                breadCrumb === "manageRole" &&
+                (
+                    <div className={darkMode ? "breadcrumb-container  light" : "breadcrumb-container  dark-card"}>
+                        <div className="title">
+                            {t('adminPage.rolesManagement.title')}
+                        </div>
+                        <div className="nav-breadcrumb d-flex justify-content-center align-items-center">
+
+                            <ol className="breadcrumb">
+                                <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/">{t('adminPage.breadcrumb.home')}</a></li>
+                                <li className={darkMode ? "breadcrumb-item basic-light" : "breadcrumb-item basic-dark"}><a href="/admin/manage-users">{t('adminPage.breadcrumb.management')}</a></li>
+                                <li className={darkMode ? "breadcrumb-item active-light" : "breadcrumb-item active-dark"} aria-current="page">{t('adminPage.breadcrumb.rolesManagement')}</li>
+                            </ol>
+
+                        </div>
+                    </div>
+
+                )
+            }
         </>
     );
 }
