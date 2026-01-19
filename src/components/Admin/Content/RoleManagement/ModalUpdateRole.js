@@ -4,20 +4,21 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
-import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { checkRoleUrlFormat, validateMethod } from '../../../../utils/validators';
-import { postCreateNewRole } from '../../../../services/apiService';
-const ModalAddRoles = (props) => {
-    const { show, setShow, darkMode,setCurrentPage,fetchListRoleWithPagination } = props
+import {  putUpdateRole } from '../../../../services/apiService';
+
+const ModalUpdateRoles = (props) => {
+    const { show, setShow, darkMode, dataUpdate, resetUpdateData, currentPage, fetchListRoleWithPagination } = props
     const { t } = useTranslation();
     const handleClose = () => {
         setRoles(initRoles);
         setShow(false);
+        resetUpdateData();
 
     };
     const [initRoles, setInitRoles] = useState([
@@ -33,9 +34,24 @@ const ModalAddRoles = (props) => {
     ])
     const [roles, setRoles] = useState(initRoles)
 
-    const handleAddnRemoveRoles = (type, id) => {
-        if (type === 'ADD') {
+    
+    
+    useEffect(() => {
+        if (!_.isEmpty(dataUpdate)) {
             const newRoles = {
+                id: uuidv4(),
+                url: dataUpdate?.url || "",
+                method: dataUpdate?.method || "",
+                description: dataUpdate?.description || "",
+                urlErrorMessage: '',
+                methodErrorMessage: '',
+                descriptionErrorMessage: '',
+            }
+            setRoles([newRoles]);
+        }
+        else {
+            const newRolesIfNoData = {
+
                 id: uuidv4(),
                 url: '',
                 method: '',
@@ -44,15 +60,12 @@ const ModalAddRoles = (props) => {
                 methodErrorMessage: '',
                 descriptionErrorMessage: '',
             }
-            setRoles([...roles, newRoles]);
+            setRoles([newRolesIfNoData]);
         }
 
-        if (type === 'REMOVE') {
-            let roleClone = _.cloneDeep(roles);
-            roleClone = roleClone.filter(item => item.id !== id);
-            setRoles(roleClone)
-        }
-    }
+    }, [dataUpdate])
+    
+   
     const handleOnChangeRoleValue = (type, roleId, value) => {
         if (type === 'URL') {
             let roleClone = _.cloneDeep(roles);
@@ -132,38 +145,23 @@ const ModalAddRoles = (props) => {
         return isValid;
     };
 
-    //build data before send to server
-    const buildDataPersists = () => {
-        let _roles = _.cloneDeep(roles);
-
-        let dataAfterHandle = [];
-        _roles.map((role, index) => {
-            dataAfterHandle.push({
-                url: role.url,
-                method: role.method,
-                description: role.description
-            })
-        })
-        return dataAfterHandle;
-    }
+    
     const handleSubmit = async () => {
         //---validate data---
         if (!handleValidate()) return;
 
-        let data = buildDataPersists();
-        let res = await postCreateNewRole(data);
-        if(res && res.EC===0){
+        let res = await putUpdateRole(dataUpdate.id, roles[0].url, roles[0].method, roles[0].description);
+        if (res && res.EC === 0) {
             toast.success(res.EM);
-            setCurrentPage(1);
-            await fetchListRoleWithPagination(1);
+            await fetchListRoleWithPagination(currentPage);
             handleClose();
         }
-        else{
+        else {
             toast.error(res.EM);
         }
     }
 
-    
+
     return (
         <>
 
@@ -172,10 +170,10 @@ const ModalAddRoles = (props) => {
                 onHide={handleClose}
                 size="xl"
                 backdrop="static"
-                className='modal-add-role'
+                className='modal-update-role'
             >
                 <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
-                    <Modal.Title>{t("adminPage.rolesManagement.modalAddRole.title")}</Modal.Title>
+                    <Modal.Title>{t("adminPage.rolesManagement.modalUpdateRole.title")}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
@@ -185,19 +183,11 @@ const ModalAddRoles = (props) => {
                                 {/* Header nhỏ cho từng Role */}
                                 <div className="d-flex justify-content-between align-items-center mb-2">
                                     <h6 className={`m-0 ${darkMode ? 'text-dark' : 'text-light'}`}>
-                                        {t("adminPage.rolesManagement.modalAddRole.header")} {index_role + 1}
+                                        {t("adminPage.rolesManagement.modalUpdateRole.header")} {index_role + 1}
                                     </h6>
 
-                                    {/* Nút xóa nằm ngay góc phải của từng item */}
-                                    {roles.length > 1 && (
-                                        <Button
-                                            variant="link"
-                                            className="text-danger p-0"
-                                            onClick={() => handleAddnRemoveRoles("REMOVE", role.id)}
-                                        >
-                                            <FaMinusCircle size={20} />
-                                        </Button>
-                                    )}
+
+
                                 </div>
 
                                 <Row className="g-3"> {/* g-3 tạo khoảng cách đều giữa các ô */}
@@ -262,17 +252,8 @@ const ModalAddRoles = (props) => {
                         )
                     })}
 
-                    {/* Nút Add New Role tách riêng ra ở dưới cùng, to và rõ ràng */}
-                    <div className="d-flex justify-content-center mt-3">
-                        <Button
-                            variant={"outline-primary"}
-                            className="d-flex align-items-center gap-2 px-4"
-                            onClick={() => handleAddnRemoveRoles("ADD", '')}
-                        >
-                            <FaPlusCircle />
-                            <span>{t("adminPage.rolesManagement.modalAddRole.btnAddMoreRole")}</span>
-                        </Button>
-                    </div>
+
+
 
                 </Modal.Body>
 
@@ -288,4 +269,4 @@ const ModalAddRoles = (props) => {
         </>
     );
 }
-export default ModalAddRoles
+export default ModalUpdateRoles

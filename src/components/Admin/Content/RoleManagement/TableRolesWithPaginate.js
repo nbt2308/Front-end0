@@ -1,14 +1,14 @@
-import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
+import { FaPen, FaTrashAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 const TableRolesWithPaginate = (props) => {
-    const { listRole, handleBtnUpdateRole, handleBtnDeleteRole, fetchListRoleWithPaginate
+    const { listRole, handleBtnUpdateRole, handleBtnDeleteRole, fetchListRoleWithPagination
         , pageCount, currentPage, setCurrentPage, darkMode } = props;
 
     const { t } = useTranslation();
     const handlePageClick = (event) => {
-        fetchListRoleWithPaginate(+event.selected + 1);
+        fetchListRoleWithPagination(+event.selected + 1);
         setCurrentPage(+event.selected + 1);
     };
 
@@ -19,7 +19,7 @@ const TableRolesWithPaginate = (props) => {
         <>
             <div className="scrollbar">
                 <PerfectScrollbar >
-                    <div class="table-responsive">
+                    <div className="table-responsive">
                         <table className="table table-bordered table-hover text-center">
                             <thead >
                                 <tr >
@@ -27,7 +27,7 @@ const TableRolesWithPaginate = (props) => {
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
-                                    <th scope="col" colspan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                    <th scope="col" colSpan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>

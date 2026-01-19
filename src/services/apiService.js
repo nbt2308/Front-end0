@@ -55,7 +55,18 @@ const getRoleWithPaginate = (page, limit) => {
     return axios.get(`/api/v1/role?page=${page}&limit=${limit}`);
 }
 const postCreateNewRole = (data) => {
-    return axios.post(`/api/v1/role`,[...data]);
+    return axios.post(`/api/v1/role`, [...data]);
+}
+const putUpdateRole = (id, url, method, description) => {
+    const data = new FormData();
+    data.append('id', id);
+    data.append('url', url);
+    data.append('method', method);
+    data.append('description', description);
+    return axios.put('/api/v1/role', data);
+}
+const deleteRole = (id) => {
+    return axios.delete('/api/v1/role', { data: { id: id } });
 }
 //Quiz user
 const getQuizByUser = () => {
@@ -154,7 +165,7 @@ export {
 
     getAllGroup,
 
-    getRoleWithPaginate, postCreateNewRole,
+    getRoleWithPaginate, postCreateNewRole, putUpdateRole, deleteRole,
 
     getQuizByUser, getDataQuiz,
 

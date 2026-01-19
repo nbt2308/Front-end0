@@ -10,8 +10,8 @@
             "logout": "Logout",
             "vi": "Vietnamese",
             "en": "English",
-            "dark":"Dark",
-            "light":"Light"
+            "dark": "Dark",
+            "light": "Light"
         },
         "loginPage": {
             "loginTitle": "Sign in",
@@ -143,8 +143,8 @@
                 "buttonCancel": "Cancel",
                 "buttonSave": "Save",
                 "createUserSucceed": "Create a new participant succeed",
-                "user":"USER",
-                "admin":"ADMIN"
+                "user": "USER",
+                "admin": "ADMIN"
             },
             "modalViewUsers": {
                 "title": "Personal Details"
@@ -154,7 +154,7 @@
                 "email": "Email address (It cannot be changed here)",
                 "password": "Password (It cannot be changed here)",
                 "updateSucceed": "Update the participant succeed",
-                "phone":"Phone number (It cannot be changed here)"
+                "phone": "Phone number (It cannot be changed here)"
             },
             "modalDeleteUsers": {
                 "title": "Delete confirmation",
@@ -167,7 +167,7 @@
             "tableUsers": {
                 "username": "USERNAME",
                 "email": "EMAIL",
-                "phone":"PHONE NUMBER",
+                "phone": "PHONE NUMBER",
                 "role": "GROUP",
                 "actions": "ACTIONS",
                 "error": "Not Found",
@@ -250,7 +250,7 @@
             "btnAssignRole": "Assign role",
             "modalAddRole": {
                 "title": "Add New Role",
-                "header":"Role's",
+                "header": "Role's",
                 "roleUrl": "URL",
                 "labelInvalidRoleUrl": "URL is required",
                 "labelInvalidRoleUrl1": "Invalid URL format, it must begin with '/'",
@@ -259,20 +259,41 @@
                 "labelInvalidRoleMethod1": "Method must be: GET, POST, PUT, DELETE, or PATCH",
                 "roleDescription": "Description",
                 "labelInvalidRoleDescription": "Description is required",
-                "btnAddMoreRole":"Add another role",
+                "btnAddMoreRole": "Add another role",
                 "btnCancel": "Cancel",
                 "btnSave": "Save"
+            },
+            "modalUpdateRole": {
+                "title": "Update a Role",
+                "header": "Role",
+                "roleUrl": "URL",
+                "labelInvalidRoleUrl": "URL is required",
+                "labelInvalidRoleUrl1": "Invalid URL format, it must begin with '/'",
+                "roleMethod": "Method",
+                "labelInvalidRoleMethod": "Method is required",
+                "labelInvalidRoleMethod1": "Method must be: GET, POST, PUT, DELETE, or PATCH",
+                "roleDescription": "Description",
+                "labelInvalidRoleDescription": "Description is required",
+                "btnCancel": "Cancel",
+                "btnSave": "Save"
+            },
+            "modalDeleteRole": {
+                "title": "Delete confirmation",
+                "text1": "Are you sure to delete this role?",
+                "buttonCancel": "Cancel",
+                "buttonConfirm": "Confirm",
+                "deleteSucceed": "Delete the role succeed"
             },
             "tableRoles": {
                 "roleUrl": "URL",
                 "roleMethod": "METHOD",
-                "roleDescription":"DESCRIPTION",
+                "roleDescription": "DESCRIPTION",
                 "roleActions": "ACTIONS",
                 "error": "Not Found",
                 "next": "Next >",
                 "prev": "< Prev",
-                "tooltipEdit":"Edit",
-                "tooltipDelete":"Delete"
+                "tooltipEdit": "Edit",
+                "tooltipDelete": "Delete"
             },
             "modalUpdateQuiz": {
                 "updateSucceed": "Update new quiz succeed",

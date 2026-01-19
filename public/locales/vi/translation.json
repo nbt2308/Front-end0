@@ -262,6 +262,27 @@
                 "btnCancel": "Huỷ",
                 "btnSave": "Lưu"
             },
+            "modalUpdateRole": {
+                "title": "Sửa vai trò",
+                "header": "Vai trò",
+                "roleUrl": "URL",
+                "labelInvalidRoleUrl": "URL là bắt buộc phải có",
+                "labelInvalidRoleUrl1": "Định dạng URL không hợp lệ, Nó phải bắt đầu bằng '/'",
+                "roleMethod": "Phương thức",
+                "labelInvalidRoleMethod": "Phương thức là bắt buộc phải có",
+                "labelInvalidRoleMethod1": "Phương thức phải là: GET, POST, PUT, DELETE, hoặc PATCH",
+                "roleDescription": "Mô tả", 
+                "labelInvalidRoleDescription": "Mô tả là bắt buộc phải có",
+                "btnCancel": "Huỷ",
+                "btnSave": "Lưu"
+            },
+            "modalDeleteRole": {
+                "title": "Xác nhận xóa",
+                "text1": "Bạn có chắc chắn muốn xóa vai trò này?",
+                "buttonCancel": "Huỷ",
+                "buttonConfirm": "Xác nhận",
+                "deleteSucceed": "Xoá vai trò thành công"
+            },
             "tableRoles": {
                 "roleUrl": "URL",
                 "roleMethod": "PHƯƠNG THỨC",

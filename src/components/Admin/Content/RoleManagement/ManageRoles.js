@@ -1,19 +1,14 @@
-import Select from 'react-select';
-import { FaPlusCircle, FaFolderPlus, FaMinusCircle } from "react-icons/fa";
 import { useState, useEffect } from 'react';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { FaPlus } from 'react-icons/fa';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import "./ManageRoles.scss"
-import _ from 'lodash';
-import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 import Breadcrumb from '../../BreadCrump/Breadcrumb';
-import ModalAddRoles from './ModalAddRole';
+import ModalAddRole from './ModalAddRole';
 import { getRoleWithPaginate } from '../../../../services/apiService';
 import TableRolesWithPaginate from './TableRolesWithPaginate';
+import ModalUpdateRole from './ModalUpdateRole';
+import ModalDeleteRole from './ModalDeleteRole';
 const ManageRoles = (props) => {
     const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
@@ -54,6 +49,9 @@ const ManageRoles = (props) => {
     const resetUpdateData = () => {
         setDataUpdate({});
     }
+    const resetDeleteData = () => {
+        setDataDelete({});
+    }
 
     return (
         <div className={darkMode ? "manageRoles-container light" : "manageRoles-container dark"}>
@@ -71,8 +69,8 @@ const ManageRoles = (props) => {
                 <div className="table-role">
                     <TableRolesWithPaginate
                         listRole={listRole}
-                        handleBtnUpdateUser={handleBtnUpdateRole}
-                        handleBtnDeleteUser={handleBtnDeleteRole}
+                        handleBtnUpdateRole={handleBtnUpdateRole}
+                        handleBtnDeleteRole={handleBtnDeleteRole}
                         fetchListRoleWithPagination={fetchListRoleWithPagination}
                         pageCount={pageCount}
                         currentPage={currentPage}
@@ -81,13 +79,31 @@ const ManageRoles = (props) => {
                 </div>
             </div>
 
-            <ModalAddRoles
+            <ModalAddRole
                 show={showModalAddRoles}
                 setShow={setShowModalAddRoles}
                 darkMode={darkMode}
                 fetchListRoleWithPagination={fetchListRoleWithPagination}
                 setCurrentPage={setCurrentPage}
             />
+            <ModalUpdateRole
+                show={showModalUpdateRole}
+                setShow={setShowModalUpdateRole}
+                dataUpdate={dataUpdate}
+                resetUpdateData={resetUpdateData}
+                fetchListRoleWithPagination={fetchListRoleWithPagination}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                darkMode={darkMode} />
+            <ModalDeleteRole
+                show={showModalDeleteRole}
+                setShow={setShowModalDeleteRole}
+                dataDelete={dataDelete}
+                resetDeleteData={resetDeleteData}
+                fetchListRoleWithPagination={fetchListRoleWithPagination}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                darkMode={darkMode} />
         </div>
 
 
