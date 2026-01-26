@@ -100,6 +100,8 @@
             "usersManagement": "Quản lý người dùng",
             "quizzesManagement": "Quản lý bài thi",
             "questionsManagement": "Quản lý câu hỏi",
+            "rolesManagement": "Quản lý vai trò",
+            "groupsManagement": "Quản lý nhóm vai trò",
             "accountProfile": "Hồ sơ tài khoản"
         },
         "dashboard": {
@@ -285,20 +287,20 @@
                 "deleteSucceed": "Xoá vai trò thành công"
             },
             "modalAssignRole": {
-                "selectGroup": "Chọn nhóm người dùng",
-                "assignSucceed": "Chỉ định vai trò cho nhóm người dùng thành công",
-                "title": "Chỉ định vai trò cho nhóm người dùng",
+                "selectGroup": "Chọn nhóm vai trò",
+                "assignSucceed": "Chỉ định vai trò cho nhóm vai trò thành công",
+                "title": "Chỉ định vai trò cho nhóm vai trò",
                 "selectRole": "Chọn vai trò",
                 "invalidSelectRole": "Vui lòng chọn ít nhất 1 vai trò",
-                "invalidSelectGroup": "Vui lòng chọn 1 nhóm người dùng",
+                "invalidSelectGroup": "Vui lòng chọn 1 nhóm vai trò",
                 "assign": "Chỉ định"
             },
             "modalUnassignRole": {
-                "selectGroup": "Chọn nhóm người dùng",
+                "selectGroup": "Chọn nhóm vai trò",
                 "title": "Gỡ vai trò",
                 "unassignConfirm": "Xác nhận gỡ vai trò",
-                "messageConfirm":"Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm người dùng không?",
-                "unassignSucceed":"Gỡ vai trò khỏi nhóm người dùng thành công"
+                "messageConfirm":"Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm vai trò không?",
+                "unassignSucceed":"Gỡ vai trò khỏi nhóm vai trò thành công"
             },
             "tableRoles": {
                 "roleUrl": "URL",

@@ -101,6 +101,7 @@
             "quizzesManagement": "Quizzes management",
             "questionsManagement": "Questions management",
             "rolesManagement": "Roles management",
+            "groupsManagement": "Groups management",
             "accountProfile": "Account Profile"
         },
         "dashboard": {
