@@ -22,7 +22,7 @@ const ManageRoles = (props) => {
     const [showModalDeleteRole, setShowModalDeleteRole] = useState(false);
     const [showModalAssignRole, setShowModalAssignRole] = useState(false);
     const [showModalUnassignRole, setShowModalUnassignRole] = useState(false);
-    const LIMIT_QUIZ_PER_PAGE = 8;
+    const LIMIT_ROLE_PER_PAGE = 8;
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
@@ -33,7 +33,7 @@ const ManageRoles = (props) => {
     const fetchListRoleWithPagination = async (page) => {
         setDataUpdate({})
         setDataDelete({})
-        let res = await getRoleWithPaginate(page, LIMIT_QUIZ_PER_PAGE);
+        let res = await getRoleWithPaginate(page, LIMIT_ROLE_PER_PAGE);
         if (res.EC === 0) {
             setListRole(res.DT.role);
             setPageCount(res.DT.totalPages);
