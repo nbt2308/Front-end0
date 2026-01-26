@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Row from 'react-bootstrap/Row';
 import { toast } from 'react-toastify';
-import { getAllGroup, putUpdateUser } from '../../../../services/apiService';
+import { getAllGroups, putUpdateUser } from '../../../../services/apiService';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { API_URL } from '../../../../views/App';
@@ -103,7 +103,7 @@ const ModalUpdateUser = (props) => {
     
 
     const fetchListGroup = async () => {
-        let res = await getAllGroup();
+        let res = await getAllGroups();
         if (res && res.EC === 0) {
             setListGroup(res.DT);
         }

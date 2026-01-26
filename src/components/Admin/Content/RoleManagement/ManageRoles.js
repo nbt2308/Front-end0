@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus,FaUserShield,FaUserMinus   } from 'react-icons/fa';
 import "./ManageRoles.scss"
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { getRoleWithPaginate } from '../../../../services/apiService';
 import TableRolesWithPaginate from './TableRolesWithPaginate';
 import ModalUpdateRole from './ModalUpdateRole';
 import ModalDeleteRole from './ModalDeleteRole';
+import ModalAssignRole from './ModalAssignRole';
+import ModalUnassignRole from './ModalUnassignRole';
 const ManageRoles = (props) => {
     const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
@@ -18,6 +20,8 @@ const ManageRoles = (props) => {
     const [showModalAddRoles, setShowModalAddRoles] = useState(false);
     const [showModalUpdateRole, setShowModalUpdateRole] = useState(false);
     const [showModalDeleteRole, setShowModalDeleteRole] = useState(false);
+    const [showModalAssignRole, setShowModalAssignRole] = useState(false);
+    const [showModalUnassignRole, setShowModalUnassignRole] = useState(false);
     const LIMIT_QUIZ_PER_PAGE = 8;
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -46,6 +50,12 @@ const ManageRoles = (props) => {
         setShowModalDeleteRole(true);
         setDataDelete(role);
     }
+    const handleBtnAssignRole = () => {
+        setShowModalAssignRole(true);
+    }
+    const handleBtnUnassignRole = () => {
+        setShowModalUnassignRole(true);
+    }
     const resetUpdateData = () => {
         setDataUpdate({});
     }
@@ -63,8 +73,17 @@ const ManageRoles = (props) => {
             />
 
             <div className={darkMode ? "roles-content light-card" : "roles-content dark-card"}>
-                <div className="btn-add-role btn-common">
-                    <button onClick={() => { handleBtnAddRoles() }} className='btn-showModal'><FaPlus className='i-size' /> {t('adminPage.rolesManagement.btnAddRole')} </button>
+                <div className="d-flex">
+                    <div className="btn-add-role btn-common">
+                        <button onClick={() => { handleBtnAddRoles() }} className='btn btn-primary'><FaPlus className='i-size' /> {t('adminPage.rolesManagement.btnAddRole')} </button>
+                    </div>
+                    <div className="btn-assign-role btn-common">
+                        <button onClick={() => { handleBtnAssignRole() }} className='btn btn-info '><FaUserShield  className='i-size' /> {t('adminPage.rolesManagement.btnAssignRole')} </button>
+                    </div>
+                    <div className="btn-unassign-role btn-common">
+                        <button onClick={() => { handleBtnUnassignRole() }} className='btn btn-warning '><FaUserMinus  className='i-size' /> {t('adminPage.rolesManagement.btnUnassignRole')} </button>
+                    </div>
+                    
                 </div>
                 <div className="table-role">
                     <TableRolesWithPaginate
@@ -104,6 +123,17 @@ const ManageRoles = (props) => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 darkMode={darkMode} />
+            <ModalAssignRole
+                show={showModalAssignRole}
+                setShow={setShowModalAssignRole}
+                darkMode={darkMode}
+            />
+            <ModalUnassignRole
+                show={showModalUnassignRole}
+                setShow={setShowModalUnassignRole}
+                darkMode={darkMode}
+            />
+
         </div>
 
 

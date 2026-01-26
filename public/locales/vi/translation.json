@@ -247,6 +247,7 @@
             "title": "Quản lý vai trò người dùng",
             "btnAddRole": "Thêm vai trò mới",
             "btnAssignRole": "Chỉ định vai trò",
+            "btnUnassignRole": "Gỡ vai trò",
             "modalAddRole": {
                 "title": "Thêm vai trò mới",
                 "header": "Vai trò",
@@ -282,6 +283,22 @@
                 "buttonCancel": "Huỷ",
                 "buttonConfirm": "Xác nhận",
                 "deleteSucceed": "Xoá vai trò thành công"
+            },
+            "modalAssignRole": {
+                "selectGroup": "Chọn nhóm người dùng",
+                "assignSucceed": "Chỉ định vai trò cho nhóm người dùng thành công",
+                "title": "Chỉ định vai trò cho nhóm người dùng",
+                "selectRole": "Chọn vai trò",
+                "invalidSelectRole": "Vui lòng chọn ít nhất 1 vai trò",
+                "invalidSelectGroup": "Vui lòng chọn 1 nhóm người dùng",
+                "assign": "Chỉ định"
+            },
+            "modalUnassignRole": {
+                "selectGroup": "Chọn nhóm người dùng",
+                "title": "Gỡ vai trò",
+                "unassignConfirm": "Xác nhận gỡ vai trò",
+                "messageConfirm":"Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm người dùng không?",
+                "unassignSucceed":"Gỡ vai trò khỏi nhóm người dùng thành công"
             },
             "tableRoles": {
                 "roleUrl": "URL",

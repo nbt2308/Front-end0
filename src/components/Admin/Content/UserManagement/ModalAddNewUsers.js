@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { postCreateNewUser, getAllGroup} from '../../../../services/apiService';
+import { postCreateNewUser, getAllGroups} from '../../../../services/apiService';
 import { validateEmail, validatePassword, validatePhone, validateUsername } from '../../../../utils/validators';
 import { useTranslation } from 'react-i18next';
 //Filepond
@@ -102,7 +102,7 @@ const AddUsers = (props) => {
 
     }, [show]);
     const fetchListGroup = async () => {
-        let res = await getAllGroup();
+        let res = await getAllGroups();
         if (res && res.EC === 0) {
             setListGroup(res.DT);
             if (res.DT && !form.Group) {

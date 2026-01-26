@@ -248,6 +248,7 @@
             "title": "Roles management",
             "btnAddRole": "Add new Role",
             "btnAssignRole": "Assign role",
+            "btnUnassignRole": "Unassign role",
             "modalAddRole": {
                 "title": "Add New Role",
                 "header": "Role's",
@@ -284,6 +285,25 @@
                 "buttonConfirm": "Confirm",
                 "deleteSucceed": "Delete the role succeed"
             },
+            "modalAssignRole": {
+                "selectGroup": "Select group",
+                "assignSucceed": "Assign the role to the group succeed",
+                "title": "Assign Role to Group",
+                "selectRole": "Select Role",
+                "invalidSelectRole": "Please select at least one role",
+                "invalidSelectGroup": "Please select a group",
+                "assign": "Assign"
+            },
+            "modalUnassignRole": {
+                "selectGroup": "Select group",
+                "title": "Unassign Role",
+                "selectRole": "Select Role",
+                "invalidSelectRole": "Please select a role",
+                "invalidSelectGroup": "Please select a group",
+                "unassignConfirm": "Unassign role confirmation",
+                "messageConfirm":"Are you sure you want to remove this role from this group?",
+                "unassignSucceed":"Unassign role from this group succeed"
+            },
             "tableRoles": {
                 "roleUrl": "URL",
                 "roleMethod": "METHOD",
@@ -293,7 +313,8 @@
                 "next": "Next >",
                 "prev": "< Prev",
                 "tooltipEdit": "Edit",
-                "tooltipDelete": "Delete"
+                "tooltipDelete": "Delete",
+                "tooltipUnassign": "Unassign"
             },
             "modalUpdateQuiz": {
                 "updateSucceed": "Update new quiz succeed",

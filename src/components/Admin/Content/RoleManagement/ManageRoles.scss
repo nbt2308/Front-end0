@@ -37,6 +37,22 @@
                     font-size: 17px;
                 }
             }
+
+            .btn-assign {
+                background-color: #0db6d8;
+
+                &:hover {
+                    background-color: #19a1bc;
+                }
+            }
+
+            .btn-unassign {
+                background-color: #e3dc02;
+
+                &:hover {
+                    background-color: rgb(215, 205, 11);
+                }
+            }
         }
 
         .table-role {
@@ -106,14 +122,14 @@
                     }
 
                     th.action-col {
-                        
+
                         text-align: center;
                     }
 
 
                     td.action-col {
                         text-align: center;
-                        
+
                         // align-items: center;
                     }
 
@@ -130,7 +146,7 @@
 
                     }
 
-                    
+
 
                     button.btn-edit {
                         // background: transparent;
@@ -168,7 +184,7 @@
 
 
         }
-        
+
 
 
 
@@ -228,5 +244,15 @@
             border-color: #86b7fe;
             box-shadow: 0 0 0 0.25rem rgba(144, 202, 249, 0.25);
         }
+    }
+}
+
+
+.modal-unassign-role {
+    .table-wrapper {
+        max-height: 400px;
+        /* tuỳ chỉnh */
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
