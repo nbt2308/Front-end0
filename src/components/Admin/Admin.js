@@ -63,7 +63,7 @@ const Admin = (props) => {
             </div>
             <div className={darkMode.value? "Admin-content light" : "Admin-content dark"} >
                 <div className={darkMode.value ? "Admin-header light" : "Admin-header dark"}>
-                    <span><FaBars onClick={() => {
+                    <span className="collapse-btn"><FaBars onClick={() => {
                         setCollapsed(!collapsed)
                     }}
                         className="btn-collapse" />
