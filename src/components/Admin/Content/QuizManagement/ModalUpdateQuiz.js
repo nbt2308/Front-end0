@@ -22,7 +22,7 @@ import "filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
-import { validateNameQuiz } from '../../../../utils/validators';
+import { validateName } from '../../../../utils/validators';
 import { API_URL } from '../../../../views/App';
 
 // Đăng ký plugin
@@ -70,12 +70,12 @@ const ModalUpdateQuiz = (props) => {
         };
         if (!form.name) {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName')}`
-        } else if (!validateNameQuiz(form.name)) {
+        } else if (!validateName(form.name)) {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName1')}`;
         }
         if (!form.description) {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription')}`
-        } else if (!validateNameQuiz(form.description)) {
+        } else if (!validateName(form.description)) {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription1')}`
         }
 

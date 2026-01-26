@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useState } from 'react';
 import { postCreateNewQuiz } from '../../../../services/apiService';
-import { validateNameQuiz } from '../../../../utils/validators';
+import { validateName } from '../../../../utils/validators';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 //Filepond
@@ -74,12 +74,12 @@ const ModalAddQuiz = (props) => {
         };
         if (!form.name) {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName')}`
-        } else if (!validateNameQuiz(form.name)) {
+        } else if (!validateName(form.name)) {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName1')}`;
         }
         if (!form.description) {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription')}`
-        } else if (!validateNameQuiz(form.description)) {
+        } else if (!validateName(form.description)) {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription1')}`
         }
 
