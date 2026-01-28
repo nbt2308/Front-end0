@@ -299,7 +299,6 @@
                 "selectGroup": "Select group",
                 "title": "Unassign Role",
                 "selectRole": "Select Role",
-                "invalidSelectRole": "Please select a role",
                 "invalidSelectGroup": "Please select a group",
                 "unassignConfirm": "Unassign role confirmation",
                 "messageConfirm":"Are you sure you want to remove this role from this group?",

@@ -298,6 +298,8 @@
             "modalUnassignRole": {
                 "selectGroup": "Chọn nhóm vai trò",
                 "title": "Gỡ vai trò",
+                "invalidSelectRole": "Vui lòng chọn 1 vai trò",
+                "invalidSelectGroup": "Vui lòng chọn 1 nhóm vai trò",
                 "unassignConfirm": "Xác nhận gỡ vai trò",
                 "messageConfirm":"Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm vai trò không?",
                 "unassignSucceed":"Gỡ vai trò khỏi nhóm vai trò thành công"
@@ -307,6 +309,49 @@
                 "roleMethod": "PHƯƠNG THỨC",
                 "roleDescription":"MÔ TẢ",
                 "roleActions": "HÀNH ĐỘNG",
+                "error": "không tìm thấy",
+                "next": "Tiến >",
+                "prev": "< Lùi",
+                "tooltipEdit":"Sửa thông tin",
+                "tooltipDelete":"Xoá"
+            }
+        },
+        "groupsManagement":{
+            "title": "Quản lý nhóm vai trò",
+            "btnAddGroup": "Thêm mới nhóm vai trò",
+            "modalAddGroup": {
+                "title": "Thêm mới nhóm vai trò",
+                "groupName": "Tên nhóm vai trò",
+                "labelInvalidGroupName": "Vui lòng nhập tên nhóm vai trò",
+                "labelInvalidGroupName1": "Tên vai trò phải có ít nhất 5 ký tự và nhỏ hơn 255 ký tự",
+                "groupDescription": "Mô tả vai trò",
+                "labelInvalidGroupDescription": "Vui lòng nhập mô tả nhóm vai trò",
+                "btnCancel": "Huỷ",
+                "btnSave": "Lưu",
+                "createGroupSucceed":"Tạo nhóm vai trò thành công"
+            },
+            "modalUpdateGroup": {
+                "title": "Cập nhật thông tin nhóm vai trò",
+                "groupName": "Tên nhóm vai trò",
+                "labelInvalidGroupName": "Vui lòng nhập tên nhóm vai trò",
+                "labelInvalidGroupName1": "Tên vai trò phải có ít nhất 5 ký tự và nhỏ hơn 255 ký tự",
+                "groupDescription": "Mô tả vai trò",
+                "labelInvalidGroupDescription": "Vui lòng nhập mô tả nhóm vai trò",
+                "btnCancel": "Huỷ",
+                "btnSave": "Lưu",
+                "updateGroupSucceed":"Cập nhật nhóm vai trò thành công"
+            },
+            "modalDeleteGroup": {
+                "title": "Xác nhận xóa",
+                "textConfirmDelete": "Bạn có chắc chắn muốn xoá nhóm vai trò này không?",
+                "btnCancel": "Huỷ",
+                "btnConfirm": "Xác nhận",
+                "deleteSucceed": "Xoá nhóm vai trò thành công"
+            },
+            "tableGroups": {
+                "groupName": "TÊN VAI TRÒ",
+                "groupDescription": "MÔ TẢ",
+                "groupActions": "HÀNH ĐỘNG",
                 "error": "không tìm thấy",
                 "next": "Tiến >",
                 "prev": "< Lùi",
