@@ -63,7 +63,7 @@ const ManageGroups = (props) => {
             <div className={darkMode ? "groups-content light-card" : "groups-content dark-card"}>
                 <div className="d-flex">
                     <div className="btn-common">
-                        <button onClick={() => { handleBtnAddGroup() }} className='btn btn-primary'><FaPlus className='i-size' /> {t('adminPage.groupsManagement.btnAddGroup')} </button>
+                        <button onClick={() => { handleBtnAddGroup() }} className='btn btn-primary d-flex align-items-center gap-1'><FaPlus className='i-size' /> {t('adminPage.groupsManagement.btnAddGroup')} </button>
                     </div>
                 </div>
                 <div className="table-group">

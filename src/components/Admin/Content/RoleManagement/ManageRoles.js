@@ -75,13 +75,13 @@ const ManageRoles = (props) => {
             <div className={darkMode ? "roles-content light-card" : "roles-content dark-card"}>
                 <div className="d-flex">
                     <div className="btn-add-role btn-common">
-                        <button onClick={() => { handleBtnAddRoles() }} className='btn btn-primary'><FaPlus className='i-size' /> {t('adminPage.rolesManagement.btnAddRole')} </button>
+                        <button onClick={() => { handleBtnAddRoles() }} className='btn btn-primary d-flex align-items-center gap-1'><FaPlus className='i-size' /> {t('adminPage.rolesManagement.btnAddRole')} </button>
                     </div>
                     <div className="btn-assign-role btn-common">
-                        <button onClick={() => { handleBtnAssignRole() }} className='btn btn-info '><FaUserShield  className='i-size' /> {t('adminPage.rolesManagement.btnAssignRole')} </button>
+                        <button onClick={() => { handleBtnAssignRole() }} className='btn btn-info d-flex align-items-center gap-1 '><FaUserShield  className='i-size' /> {t('adminPage.rolesManagement.btnAssignRole')} </button>
                     </div>
                     <div className="btn-unassign-role btn-common">
-                        <button onClick={() => { handleBtnUnassignRole() }} className='btn btn-warning '><FaUserMinus  className='i-size' /> {t('adminPage.rolesManagement.btnUnassignRole')} </button>
+                        <button onClick={() => { handleBtnUnassignRole() }} className='btn btn-warning d-flex align-items-center gap-1'><FaUserMinus  className='i-size' /> {t('adminPage.rolesManagement.btnUnassignRole')} </button>
                     </div>
                     
                 </div>
