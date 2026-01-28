@@ -143,6 +143,9 @@ const SideBar1 = (props) => {
                         <MenuItem component={<Link to="/admin/manage-roles" />} active={currentPath === "/admin/manage-roles"} className='mt-2 mb-2'>
                             {t('adminPage.sideBar.rolesManagement')}
                         </MenuItem>
+                        <MenuItem component={<Link to="/admin/manage-groups" />} active={currentPath === "/admin/manage-groups"} className='mt-2 mb-2'>
+                            {t('adminPage.sideBar.groupsManagement')}
+                        </MenuItem>
                     </SubMenu>
                     <MenuItem
                         icon={<FaRegCircleUser />}

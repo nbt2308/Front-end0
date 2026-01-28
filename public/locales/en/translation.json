@@ -191,7 +191,7 @@
                 "title": "Add New Quiz",
                 "quizName": "Quiz's name",
                 "labelInvalidQuizName": "Quiz's name is required",
-                "labelInvalidQuizName1": "Quiz's name must be at least 5 characters long",
+                "labelInvalidQuizName1": "Quiz's name must be at least 5 characters long and less than 255 characters",
                 "difficulty": {
                     "title": "Difficulty",
                     "EASY": "EASY",
@@ -200,7 +200,7 @@
                 },
                 "description": "Description",
                 "labelInvalidDescription": "Description is required",
-                "labelInvalidDescription1": "Description must be at least 5 characters long",
+                "labelInvalidDescription1": "Description must be at least 5 characters long and less than 255 characters",
                 "addQuizSucceed": "Create a new quiz succeed",
                 "addQuizFail": "No files were uploaded"
             },
@@ -316,41 +316,49 @@
                 "tooltipEdit": "Edit",
                 "tooltipDelete": "Delete",
                 "tooltipUnassign": "Unassign"
+            }
+        },
+        "groupsManagement":{
+            "title": "Groups management",
+            "btnAddGroup": "Add new Group",
+            "modalAddGroup": {
+                "title": "Add New Group",
+                "groupName": "Group's name",
+                "labelInvalidGroupName": "Group's name is required",
+                "labelInvalidGroupName1": "Group's name must be at least 5 characters long and less than 255 characters",
+                "groupDescription": "Group's description",
+                "labelInvalidGroupDescription": "Description is required",
+                "btnCancel": "Cancel",
+                "btnSave": "Save",
+                "createGroupSucceed":"Create a new group succeed"
             },
-            "modalUpdateQuiz": {
-                "updateSucceed": "Update new quiz succeed",
-                "title": "Update a Quiz"
+            "modalUpdateGroup": {
+                "title": "Update a Group",
+                "groupName": "Group's name",
+                "labelInvalidGroupName": "Group's name is required",
+                "labelInvalidGroupName1": "Group's name must be at least 5 characters long and less than 255 characters",
+                "groupDescription": "Group's description",
+                "labelInvalidGroupDescription": "Description is required",
+                "btnCancel": "Cancel",
+                "btnSave": "Save",
+                "updateGroupSucceed":"Update group succeed"
             },
-            "modalDeleteQuiz": {
-                "deleteSucceed": "Delete the quiz succeed",
+            "modalDeleteGroup": {
                 "title": "Delete confirmation",
-                "label1": "Are you sure to delete this quiz?"
+                "textConfirmDelete": "Are you sure to delete this group?",
+                "btnCancel": "Cancel",
+                "btnConfirm": "Confirm",
+                "deleteSucceed": "Delete the group succeed"
             },
-            "modalUpsertQA": {
-                "upsertQASucceed": "Upsert Quiz with Q/A succeed",
-                "emptyQA": "Please add questions and answers for this quiz",
-                "title": "Update Questions and Answers",
-                "selectQuiz": "Select quiz",
-                "invalidSelect": "Please select a quiz",
-                "addQuestions": "Add questions",
-                "q": "Question",
-                "s": "'s description",
-                "invalidQuestion": "Question's description is required",
-                "uploadImage": "Upload image",
-                "emptyFile": "0 file is uploaded",
-                "a": "Answer",
-                "s1": "'s description",
-                "invalidAnswer": "Answer's description is required",
-                "emptyQA1": "Quiz is empty. Please add questions and answer for this quiz",
-                "previewImage": "Upload image success. Click image's name to preview"
-            },
-            "modalAssignQuiz": {
-                "assignSucceed": "Assign the quiz to the current user succeed",
-                "assignFail": "The quiz already assigned to the user",
-                "title": "Assign quiz to users",
-                "selectUser": "Select user",
-                "invalidSelect": "Please select a user",
-                "assign": "Assign"
+            "tableGroups": {
+                "groupName": "NAME",
+                "groupDescription": "DESCRIPTION",
+                "groupActions": "ACTIONS",
+                "error": "Not Found",
+                "next": "Next >",
+                "prev": "< Prev",
+                "tooltipEdit": "Edit",
+                "tooltipDelete": "Delete"
             }
         },
         "accountProfile": {

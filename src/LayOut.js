@@ -21,6 +21,7 @@ import AccountProfile from"./components/Admin/Content/AccountProfile/AccountProf
 import LoadingSpinner from "./components/Loading/Loading"
 import useDarkMode from "use-dark-mode";
 import ManageRoles from "./components/Admin/Content/RoleManagement/ManageRoles";
+import ManageGroups from "./components/Admin/Content/GroupManagement/ManageGroups";
 const LayOut = (props) => {
     const darkMode = useDarkMode(false, {
         storageKey: 'theme', // lưu theme trong localStorage
@@ -48,6 +49,7 @@ const LayOut = (props) => {
                     <Route path="manage-quizzes" element={<ManageQuiz />} />
                     <Route path="manage-questions" element={<ManageQuestions />} />
                     <Route path="manage-roles" element={<ManageRoles/>} />
+                    <Route path="manage-groups" element={<ManageGroups/>} />
                     <Route path="account" element={<AccountProfile />} />
                 </Route>
                 <Route path="/login" element={<Login darkMode={darkMode}/>} />

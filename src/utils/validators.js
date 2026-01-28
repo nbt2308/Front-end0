@@ -27,8 +27,8 @@ const validatePassword = (Password) => {
 const validateUsername = (Username) => {
     return Username.length > 4 && Username.length < 20;
 }
-const validateNameQuiz = (name) => {
-    return name.length > 5;
+const validateName = (name) => {
+    return name.length > 5 && name.length <= 255;
 }
 const validatePhone = (phone) => {
     const regex = /^\d{10}$/;
@@ -64,6 +64,6 @@ const validateMethod = (methodValue) => {
 };
 export {
     validateEmail, validatePassword, validateUsername,
-    validateNameQuiz, validatePhone, validateEmailOrPhone,
+    validateName, validatePhone, validateEmailOrPhone,
     checkRoleUrlFormat, validateMethod
 }

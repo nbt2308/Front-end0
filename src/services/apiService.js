@@ -49,7 +49,27 @@ const postLogout = (refreshToken) => {
 const getAllGroups = () => {
     return axios.get('/api/v1/group/all');
 }
+const getGroupWithPaginate = (page, limit) => {
+    return axios.get(`/api/v1/group?page=${page}&limit=${limit}`);
+}
+const postCreateNewGroup = (name, description) => {
+    const data = new FormData();
+    data.append('description', description);
+    data.append('name', name);
+    return axios.post('/api/v1/group', data);
+}
+const putUpdateGroup = (id, name, description) => {
+    const data = new FormData();
+    data.append('id', id);
+    data.append('name', name);
+    data.append('description', description);
 
+    return axios.put('/api/v1/group', data);
+}
+const deleteGroup = (id) => {
+
+    return axios.delete('/api/v1/group', { data: { id: id } });
+}
 //Role
 const getAllRoles = () => {
     return axios.get('/api/v1/role/all');
@@ -79,7 +99,7 @@ const deleteRole = (id) => {
 const postAssignRoleToGroup = (data) => {
     return axios.post(`/api/v1/role/assign-role`, { ...data });
 }
-const postUnassignRole = (data)=>{
+const postUnassignRole = (data) => {
     return axios.post(`/api/v1/role/unassign-role`, { ...data });
 }
 //Quiz user
@@ -177,9 +197,9 @@ export {
     postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, postLogout,
     getUsersWithPaginate, postLoginUser, postRegisterUser,
 
-    getAllGroups,
+    getAllGroups, getGroupWithPaginate, postCreateNewGroup, putUpdateGroup, deleteGroup,
 
-    getAllRoles, getRoleWithPaginate, postCreateNewRole, putUpdateRole, deleteRole, postAssignRoleToGroup,postUnassignRole, getAllRolesWithGroup,
+    getAllRoles, getRoleWithPaginate, postCreateNewRole, putUpdateRole, deleteRole, postAssignRoleToGroup, postUnassignRole, getAllRolesWithGroup,
 
     getQuizByUser, getDataQuiz,
 
