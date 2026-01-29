@@ -1,8 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react';
-import { getAllGroups, getAllRolesWithGroup, postAssignRoleToGroup } from '../../../../services/apiService';
-import { toast } from 'react-toastify';
+import { getAllGroups, getAllRolesWithGroup } from '../../../../services/apiService';
 import Select from 'react-select';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';

@@ -28,7 +28,7 @@ const validateUsername = (Username) => {
     return Username.length > 4 && Username.length < 20;
 }
 const validateName = (name) => {
-    return name.length > 5 && name.length <= 255;
+    return name.length <= 255;
 }
 const validatePhone = (phone) => {
     const regex = /^\d{10}$/;
