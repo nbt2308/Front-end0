@@ -36,7 +36,7 @@ const ManageQuiz = (props) => {
     useEffect(() => {
         // fetchListQuiz();
         fetchListQuizWithPagination(1);
-        setBreadCrumb("manageQuiz");
+        setBreadCrumb("quizzesManagement");
     }, [])
     const fetchListQuiz = async () => {
         setDataUpdate({})

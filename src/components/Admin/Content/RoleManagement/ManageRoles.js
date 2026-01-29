@@ -27,7 +27,7 @@ const ManageRoles = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
         fetchListRoleWithPagination(1);
-        setBreadCrumb("manageRole");
+        setBreadCrumb("rolesManagement");
     }, [])
 
     const fetchListRoleWithPagination = async (page) => {

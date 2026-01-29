@@ -46,7 +46,7 @@ const ManageQuestions = (props) => {
 
     useEffect(() => {
         fetchListQuiz();
-        setBreadCrumb("manageQuestion");
+        setBreadCrumb("questionsManagement");
     }, [])
     const fetchListQuiz = async () => {
         let res = await getAllQuizForAdmin();

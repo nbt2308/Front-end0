@@ -31,7 +31,7 @@ const ManageUsers = (props) => {
     useEffect(() => {
         // fetchListUsers();
         fetchListUsersWithPaginate(1);
-        setBreadCrumb("manageUsers");
+        setBreadCrumb("usersManagement");
     }, []);
 
     const fetchListUsers = async () => {
