@@ -158,15 +158,15 @@ const postUpsertQA = (data) => {
 //Questions management
 const postCreateNewQuestion = (quiz_id, description, questionImage) => {
     const data = new FormData();
-    data.append('quiz_id', quiz_id);
+    data.append('quizId', quiz_id);
     data.append('description', description);
-    data.append('questionImage', questionImage);
+    data.append('image', questionImage);
     return axios.post('/api/v1/question', data);
 }
-const postCreateNewAnswer = (description, correct_answer, question_id) => {
+const postCreateNewAnswer = (description, correctAnswer, questionId) => {
 
     return axios.post('/api/v1/answer', {
-        description, correct_answer, question_id
+        description, correctAnswer, questionId
     });
 }
 

@@ -177,7 +177,11 @@ const ManageQuestions = (props) => {
             } else {
                 updatedQuestions[i].isValidQuestion = true;
             }
-
+            if(!updatedQuestions[i].imageFile){
+                toast.error(`${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`)
+                isValid = false;
+            }
+            
         }
 
 
@@ -203,7 +207,6 @@ const ManageQuestions = (props) => {
     const handleSubmitQuestions = async () => {
         //---validate data---
         if (!handleValidate()) return;
-
 
         //submit question/answer(but not sequence)
         // await Promise.all(questions.map(async(question)=>{
