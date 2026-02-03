@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import { checkRoleUrlFormat, validateMethod } from '../../../../utils/validators';
-import {  putUpdateRole } from '../../../../services/apiService';
+import { putUpdateRole } from '../../../../services/apiService';
 
 const ModalUpdateRoles = (props) => {
     const { show, setShow, darkMode, dataUpdate, resetUpdateData, currentPage, fetchListRoleWithPagination } = props
@@ -34,8 +34,8 @@ const ModalUpdateRoles = (props) => {
     ])
     const [roles, setRoles] = useState(initRoles)
 
-    
-    
+
+
     useEffect(() => {
         if (!_.isEmpty(dataUpdate)) {
             const newRoles = {
@@ -64,8 +64,8 @@ const ModalUpdateRoles = (props) => {
         }
 
     }, [dataUpdate])
-    
-   
+
+
     const handleOnChangeRoleValue = (type, roleId, value) => {
         if (type === 'URL') {
             let roleClone = _.cloneDeep(roles);
@@ -104,6 +104,7 @@ const ModalUpdateRoles = (props) => {
         let updatedRoles = _.cloneDeep(roles);
         let isValid = true;
         for (let i = 0; i < updatedRoles.length; i++) {
+            const normalizedURL = checkRoleUrlFormat(updatedRoles[i].url);
             //url
             //--required
             if (!updatedRoles[i].url || updatedRoles[i].url.trim() === "") {
@@ -111,11 +112,12 @@ const ModalUpdateRoles = (props) => {
                 isValid = false;
             }
             //--invalid format
-            else if (!checkRoleUrlFormat(updatedRoles[i].url)) {
+            else if (!normalizedURL) {
                 updatedRoles[i].urlErrorMessage = `${t("adminPage.rolesManagement.modalAddRole.labelInvalidRoleUrl1")}`;
                 isValid = false;
             }
             else {
+                updatedRoles[i].url = normalizedURL;
                 updatedRoles[i].urlErrorMessage = "";
             }
             //method
@@ -145,12 +147,12 @@ const ModalUpdateRoles = (props) => {
         return isValid;
     };
 
-    
+
     const handleSubmit = async () => {
         //---validate data---
         if (!handleValidate()) return;
 
-        let res = await putUpdateRole(dataUpdate.id, roles[0].url, roles[0].method, roles[0].description);
+        let res = await putUpdateRole(dataUpdate.id, roles[0].url, roles[0].method.toUpperCase(), roles[0].description);
         if (res && res.EC === 0) {
             toast.success(res.EM);
             await fetchListRoleWithPagination(currentPage);

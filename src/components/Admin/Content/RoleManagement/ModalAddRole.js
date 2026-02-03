@@ -91,6 +91,7 @@ const ModalAddRoles = (props) => {
         let updatedRoles = _.cloneDeep(roles);
         let isValid = true;
         for (let i = 0; i < updatedRoles.length; i++) {
+            const normalizedURL = checkRoleUrlFormat(updatedRoles[i].url);
             //url
             //--required
             if (!updatedRoles[i].url || updatedRoles[i].url.trim() === "") {
@@ -98,11 +99,12 @@ const ModalAddRoles = (props) => {
                 isValid = false;
             }
             //--invalid format
-            else if (!checkRoleUrlFormat(updatedRoles[i].url)) {
+            else if (!normalizedURL) {
                 updatedRoles[i].urlErrorMessage = `${t("adminPage.rolesManagement.modalAddRole.labelInvalidRoleUrl1")}`;
                 isValid = false;
             }
             else {
+                updatedRoles[i].url = normalizedURL;
                 updatedRoles[i].urlErrorMessage = "";
             }
             //method
@@ -140,7 +142,7 @@ const ModalAddRoles = (props) => {
         _roles.map((role, index) => {
             dataAfterHandle.push({
                 url: role.url,
-                method: role.method,
+                method: role.method.toUpperCase(),
                 description: role.description
             })
         })

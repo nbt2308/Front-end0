@@ -39,10 +39,24 @@ const checkRoleUrlFormat = (roleUrl) => {
     if (!roleUrl || typeof roleUrl !== "string") return null;
 
     const trimmed = roleUrl.trim();
-    
-    // Regex: Phải bắt đầu bằng /, sau đó là các ký tự a-z, 0-9, -, /
-    // Không cho phép 2 dấu // liên tiếp hoặc kết thúc bằng /
-    const ROLE_URL_REGEX = /^\/([a-z0-9-]+\/?)*[a-z0-9-]+$/;
+
+    /*
+        Regex giải thích:
+        ^\/                         -> bắt đầu bằng /
+        (?:                         -> group không capture
+            [a-z0-9-]+              -> segment thường (user, order, item)
+            |                       -> HOẶC
+            :[a-zA-Z][a-zA-Z0-9_]*  -> param (:id, :userId)
+        )
+        (?:                         -> các segment tiếp theo
+            \/                      -> dấu /
+            (?:[a-z0-9-]+|:[a-zA-Z][a-zA-Z0-9_]*)
+        )*
+        $                           -> kết thúc
+    */
+
+    const ROLE_URL_REGEX =
+        /^\/(?:[a-z0-9-]+|:[a-zA-Z][a-zA-Z0-9_]*)(?:\/(?:[a-z0-9-]+|:[a-zA-Z][a-zA-Z0-9_]*))*$/;
 
     if (!ROLE_URL_REGEX.test(trimmed)) {
         return null;
