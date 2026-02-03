@@ -22,7 +22,7 @@ const TableQuizWithPaginate = (props) => {
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.descriptionQuiz')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.difficultyQuiz')}</th>
-                                    <th scope="col" colspan="2 " className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                    <th scope="col" colSpan="2 " className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
