@@ -149,11 +149,16 @@ const postAssignQuiz = (quizId, userId) => {
         quizId, userId
     });
 }
-const getQuizWithQA = (quizId) => {
-    return axios.get(`api/v1/quiz-with-qa/${quizId}`)
+const getQuizWithQA = (id) => {
+    return axios.get(`api/v1/quiz-with-qa/${id}`)
 }
 const postUpsertQA = (data) => {
     return axios.post(`/api/v1/quiz-upsert-qa`, { ...data })
+}
+const postUploadFile = (file) => {
+    const data = new FormData();
+    data.append('image', file);
+    return axios.post(`/api/v1/upload`, data)
 }
 //Questions management
 const postCreateNewQuestion = (quiz_id, description, questionImage) => {
@@ -164,10 +169,11 @@ const postCreateNewQuestion = (quiz_id, description, questionImage) => {
     return axios.post('/api/v1/question', data);
 }
 const postCreateNewAnswer = (description, correctAnswer, questionId) => {
-
-    return axios.post('/api/v1/answer', {
-        description, correctAnswer, questionId
-    });
+    const data = new FormData();
+    data.append('description', description);
+    data.append('correctAnswer', correctAnswer);
+    data.append('questionId', questionId);
+    return axios.post('/api/v1/answer', data);
 }
 
 //Dashboard
@@ -207,7 +213,7 @@ export {
 
     postCreateNewQuestion, postCreateNewAnswer,
 
-    postAssignQuiz, getQuizWithQA, postUpsertQA,
+    postAssignQuiz, getQuizWithQA, postUpsertQA, postUploadFile,
 
     getDashboard, postRefreshToken,
 

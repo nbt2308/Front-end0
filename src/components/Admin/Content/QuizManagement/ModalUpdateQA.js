@@ -7,29 +7,34 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { FaPlusCircle, FaFolderPlus, FaMinusCircle } from "react-icons/fa";
 import Select from 'react-select';
-import _ from 'lodash';
-import { getAllQuizForAdmin, getQuizWithQA, postUpsertQA } from '../../../../services/apiService';
+import _, { intersection } from 'lodash';
+import { getAllQuizForAdmin, getQuizWithQA, postUploadFile, postUpsertQA } from '../../../../services/apiService';
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/captions.css";
 import { useTranslation } from 'react-i18next';
+import { API_URL } from '../../../../views/App';
 const ModalUpdateQA = (props) => {
     const { show, setShow, darkMode } = props
     const { t } = useTranslation();
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setQuestions(initQuestions);
+        setSelectedOption(null);
+    }
     const [initQuestions, setInitQuestions] = useState([
         {
             id: uuidv4(),
             description: '',
+            image: '',
             imageFile: '',
-            imageName: '',
             isValidQuestion: true,
             answers: [{
                 id: uuidv4(),
                 description: '',
-                isCorrect: false,
+                correctAnswer: false,
                 isValidAnswer: true
             }]
         }
@@ -60,7 +65,7 @@ const ModalUpdateQA = (props) => {
             let newQuiz = res.DT.map(item => {
                 return {
                     value: item.id,
-                    label: `${item.id}-${item.description}`
+                    label: `${item.id}-${item.name}`
                 }
             })
             setListQuiz(newQuiz);
@@ -68,62 +73,32 @@ const ModalUpdateQA = (props) => {
     }
 
     const fetchQuizWithQA = async () => {
-        let res = await getQuizWithQA(selectedOption.value)
+        let res = await getQuizWithQA(+selectedOption.value);
         if (res && res.EC === 0) {
             //add state isValidQuestion and isValidAnswer to state questions
-            let data = res.DT.qa.map(q => {
+            let data = res.DT.QuizQuestions.map(q => {
                 return {
                     ...q,
                     isValidQuestion: true, // mặc định valid
-                    answers: q.answers.map(a => ({
+                    answers: q.QuizAnswers.map(a => ({
                         ...a,
                         isValidAnswer: true  // mặc định valid
                     }))
                 }
             })
-
-            //convert base64 string to file object
-            let newQA = [];
-            for (let i = 0; i < data.length; i++) {
-                let q = data[i];
-                if (q.imageFile) {
-                    q.imageName = `Question-${q.id}.jpg`
-                    q.imageFile = await urltoFile(`data:image/jpg;base64,${q.imageFile}`, `Question-${q.id}.jpg`, 'image/jpg')
-                }
-                newQA.push(q);
-            }
-            setQuestions(newQA);
+            setQuestions(data);
 
 
         }
     }
 
-    //convert BASE64 string to file object fuction
-    //works for any type of url, (http url, dataURL, blobURL, etc...)
-    const urltoFile = (url, filename, mimeType) => {
-        if (url.startsWith('data:')) {
-            var arr = url.split(','),
-                mime = arr[0].match(/:(.*?);/)[1],
-                bstr = atob(arr[arr.length - 1]),
-                n = bstr.length,
-                u8arr = new Uint8Array(n);
-            while (n--) {
-                u8arr[n] = bstr.charCodeAt(n);
-            }
-            var file = new File([u8arr], filename, { type: mime || mimeType });
-            return Promise.resolve(file);
-        }
-        return fetch(url)
-            .then(res => res.arrayBuffer())
-            .then(buf => new File([buf], filename, { type: mimeType }));
-    }
     //convert file to base64 fuction
     const toBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
+            reader.onerror = error => reject(error);
         });
     }
     const handleAddnRemoveQuestions = (type, id) => {
@@ -132,12 +107,11 @@ const ModalUpdateQA = (props) => {
                 id: uuidv4(),
                 description: '',
                 imageFile: '',
-                imageName: '',
                 isValidQuestion: true,
                 answers: [{
                     id: uuidv4(),
                     description: '',
-                    isCorrect: false,
+                    correctAnswer: false,
                     isValidAnswer: true
                 }]
             }
@@ -156,7 +130,7 @@ const ModalUpdateQA = (props) => {
             const newAnswer = {
                 id: uuidv4(),
                 description: '',
-                isCorrect: false,
+                correctAnswer: false,
                 isValidAnswer: true
             }
             let index = questionsClone.findIndex(item => item.id === questionId);
@@ -186,12 +160,14 @@ const ModalUpdateQA = (props) => {
         }
     }
 
-    const handleOnchangeImageFile = (questionId, event) => {
+    const handleOnchangeImageFile = async(questionId, event) => {
         let questionsClone = _.cloneDeep(questions);
         let index = questionsClone.findIndex(item => item.id === questionId);
         if (index > -1 && event.target && event.target.files && event.target.files[0]) {
-            questionsClone[index].imageFile = event.target.files[0];
-            questionsClone[index].imageName = event.target.files[0].name;
+            let file = event.target.files[0];
+            let base64 = await toBase64(file);
+            questionsClone[index].imageFile = base64;
+            questionsClone[index].image = '/uploads/' + event.target.files[0].name;
             setQuestions(questionsClone);
             toast.success(`${t('adminPage.quizzesManagement.modalUpsertQA.previewImage')}`);
         }
@@ -205,7 +181,7 @@ const ModalUpdateQA = (props) => {
             questionsClone[index].answers = questionsClone[index].answers.map(item => {
                 if (item.id === answerId) {
                     if (type === 'CHECKBOX') {
-                        item.isCorrect = value;
+                        item.correctAnswer = value;
                     }
                     if (type === 'INPUT_ANSWER') {
                         item.description = value;
@@ -242,6 +218,10 @@ const ModalUpdateQA = (props) => {
             } else {
                 updatedQuestions[i].isValidQuestion = true;
             }
+            if (!updatedQuestions[i].image) {
+                toast.error(`${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`)
+                isValid = false;
+            }
 
         }
 
@@ -268,17 +248,10 @@ const ModalUpdateQA = (props) => {
     const handleSubmitQuestions = async () => {
         //---validate data---
         if (!handleValidate()) return;
-
-        let questionsClone = _.cloneDeep(questions);
-        for (let i = 0; i < questionsClone.length; i++) {
-            if (questionsClone[i].imageFile) {
-                questionsClone[i].imageFile = await toBase64(questionsClone[i].imageFile)
-            }
-        }
-
+        console.log(questions);
         let res = await postUpsertQA({
             quizId: selectedOption.value,
-            questions: questionsClone
+            questions: questions
         })
 
 
@@ -295,10 +268,18 @@ const ModalUpdateQA = (props) => {
         let index = questionsClone.findIndex(item => item.id === questionId);
         if (index > -1) {
             setOpen(true)
-            setPreviewImage({
-                src: URL.createObjectURL(questionsClone[index].imageFile),
-                title: questionsClone[index].imageName
-            })
+            if (questionsClone[index].imageFile) {
+                setPreviewImage({
+                    src: URL.createObjectURL(questionsClone[index].imageFile),
+                    title: questionsClone[index].image.split('/').pop()
+                })
+            } else {
+                setPreviewImage({
+                    src: `${API_URL}${questionsClone[index].image}`,
+                    title: questionsClone[index].image.split('/').pop()
+                })
+            }
+
         }
 
     }
@@ -359,7 +340,7 @@ const ModalUpdateQA = (props) => {
                             <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
                             <Select
                                 styles={getCustomStyles(!darkMode)}
-                                className={`${isValidSelected ? "" : "is-invalid"}`}
+                                className={`${isValidSelected ? "" : "is-invalid"} `}
                                 classNamePrefix="react-select"
                                 defaultValue={selectedOption}
                                 onChange={(option) => {
@@ -369,7 +350,7 @@ const ModalUpdateQA = (props) => {
                                 options={listQuiz}
                                 menuPortalTarget={document.body}
                                 required
-                                
+
                             />
                             <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                         </div>
@@ -383,7 +364,7 @@ const ModalUpdateQA = (props) => {
                                             <div className='mt-3'>{t('adminPage.quizzesManagement.modalUpsertQA.addQuestions')}</div>
                                             <div className="questions ">
                                                 <FloatingLabel
-                                                    label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')}`}
+                                                    label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')} `}
                                                     className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
                                                 >
                                                     <Form.Control
@@ -398,22 +379,22 @@ const ModalUpdateQA = (props) => {
                                                     </Form.Control.Feedback>
                                                 </FloatingLabel>
                                                 <div className='col-2 uploadFile-container' >
-                                                    <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />{t('adminPage.quizzesManagement.modalUpsertQA.uploadImage')}</label>
+                                                    <label className='label-uploadFile' htmlFor={`${question.id} `}><FaFolderPlus />{t('adminPage.quizzesManagement.modalUpsertQA.uploadImage')}</label>
                                                     <input
                                                         type="file"
-                                                        id={`${question.id}`}
+                                                        id={`${question.id} `}
                                                         hidden
                                                         accept="image/*"
                                                         onChange={(event) => handleOnchangeImageFile(question.id, event)} />
 
                                                     <div className='file-name'>
                                                         <span>
-                                                            {question.imageName ?
+                                                            {question.image ?
                                                                 <span onClick={() => handlePreviewImage(question.id)}>
-                                                                    {question.imageName}
+                                                                    {question.image.split('/').pop()}
                                                                 </span>
                                                                 :
-                                                                `${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`}
+                                                                `${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')} `}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -436,11 +417,11 @@ const ModalUpdateQA = (props) => {
                                                             <input
                                                                 className="form-check-input"
                                                                 type="checkbox"
-                                                                checked={answer.isCorrect}
+                                                                checked={answer.correctAnswer}
                                                                 onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
                                                             />
                                                             <FloatingLabel
-                                                                label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')}`}
+                                                                label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')} `}
                                                                 className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
                                                             >
                                                                 <Form.Control
