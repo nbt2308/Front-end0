@@ -243,6 +243,7 @@
         "questionsManagement": {
             "createSucceed": "Tạo câu hỏi và câu trả lời thành công",
             "title": " Quản lý câu hỏi",
+            "correctAnswerError": "Mỗi câu hỏi phải có 1 câu trả lời đúng",
             "save": "Lưu câu hỏi"
         },
         "rolesManagement": {
@@ -274,7 +275,7 @@
                 "roleMethod": "Phương thức",
                 "labelInvalidRoleMethod": "Phương thức là bắt buộc phải có",
                 "labelInvalidRoleMethod1": "Phương thức phải là: GET, POST, PUT, DELETE, hoặc PATCH",
-                "roleDescription": "Mô tả", 
+                "roleDescription": "Mô tả",
                 "labelInvalidRoleDescription": "Mô tả là bắt buộc phải có",
                 "btnCancel": "Huỷ",
                 "btnSave": "Lưu"
@@ -301,22 +302,22 @@
                 "invalidSelectRole": "Vui lòng chọn 1 vai trò",
                 "invalidSelectGroup": "Vui lòng chọn 1 nhóm vai trò",
                 "unassignConfirm": "Xác nhận gỡ vai trò",
-                "messageConfirm":"Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm vai trò không?",
-                "unassignSucceed":"Gỡ vai trò khỏi nhóm vai trò thành công"
+                "messageConfirm": "Bạn có chắc chắn muốn gỡ vai trò này khỏi nhóm vai trò không?",
+                "unassignSucceed": "Gỡ vai trò khỏi nhóm vai trò thành công"
             },
             "tableRoles": {
                 "roleUrl": "URL",
                 "roleMethod": "PHƯƠNG THỨC",
-                "roleDescription":"MÔ TẢ",
+                "roleDescription": "MÔ TẢ",
                 "roleActions": "HÀNH ĐỘNG",
                 "error": "không tìm thấy",
                 "next": "Tiến >",
                 "prev": "< Lùi",
-                "tooltipEdit":"Sửa thông tin",
-                "tooltipDelete":"Xoá"
+                "tooltipEdit": "Sửa thông tin",
+                "tooltipDelete": "Xoá"
             }
         },
-        "groupsManagement":{
+        "groupsManagement": {
             "title": "Quản lý nhóm vai trò",
             "btnAddGroup": "Thêm mới nhóm vai trò",
             "modalAddGroup": {
@@ -328,7 +329,7 @@
                 "labelInvalidGroupDescription": "Vui lòng nhập mô tả nhóm vai trò",
                 "btnCancel": "Huỷ",
                 "btnSave": "Lưu",
-                "createGroupSucceed":"Tạo nhóm vai trò thành công"
+                "createGroupSucceed": "Tạo nhóm vai trò thành công"
             },
             "modalUpdateGroup": {
                 "title": "Cập nhật thông tin nhóm vai trò",
@@ -339,7 +340,7 @@
                 "labelInvalidGroupDescription": "Vui lòng nhập mô tả nhóm vai trò",
                 "btnCancel": "Huỷ",
                 "btnSave": "Lưu",
-                "updateGroupSucceed":"Cập nhật nhóm vai trò thành công"
+                "updateGroupSucceed": "Cập nhật nhóm vai trò thành công"
             },
             "modalDeleteGroup": {
                 "title": "Xác nhận xóa",
@@ -355,8 +356,8 @@
                 "error": "không tìm thấy",
                 "next": "Tiến >",
                 "prev": "< Lùi",
-                "tooltipEdit":"Sửa thông tin",
-                "tooltipDelete":"Xoá"
+                "tooltipEdit": "Sửa thông tin",
+                "tooltipDelete": "Xoá"
             }
         },
         "accountProfile": {

@@ -177,15 +177,16 @@ const ManageQuestions = (props) => {
             } else {
                 updatedQuestions[i].isValidQuestion = true;
             }
-            if(!updatedQuestions[i].imageFile){
+            if (!updatedQuestions[i].imageFile) {
                 toast.error(`${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`)
                 isValid = false;
             }
-            
+
         }
 
 
         //validate answers
+        let hasCorrectAnswer = false;
         for (let i = 0; i < updatedQuestions.length; i++) {
             for (let j = 0; j < updatedQuestions[i].answers.length; j++) {
                 if (!updatedQuestions[i].answers[j].description) {
@@ -197,10 +198,18 @@ const ManageQuestions = (props) => {
                 else {
                     updatedQuestions[i].answers[j].isValidAnswer = true
                 }
+
+                if (updatedQuestions[i].answers[j].isCorrect === true) {
+                    hasCorrectAnswer = true;
+                }
+
             }
 
         }
-
+        if (!hasCorrectAnswer) {
+            toast.error(`${t("adminPage.questionsManagement.correctAnswerError")}`)
+            isValid = false;
+        }
         setQuestions(updatedQuestions)
         return isValid;
     };

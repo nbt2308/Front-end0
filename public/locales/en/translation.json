@@ -243,6 +243,7 @@
         "questionsManagement": {
             "createSucceed": "Create questions and answers succeed",
             "title": " Questions Management",
+            "correctAnswerError": "Each question must have one correct answer",
             "save": "Save questions"
         },
         "rolesManagement": {

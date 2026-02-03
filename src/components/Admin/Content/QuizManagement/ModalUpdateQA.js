@@ -160,7 +160,7 @@ const ModalUpdateQA = (props) => {
         }
     }
 
-    const handleOnchangeImageFile = async(questionId, event) => {
+    const handleOnchangeImageFile = async (questionId, event) => {
         let questionsClone = _.cloneDeep(questions);
         let index = questionsClone.findIndex(item => item.id === questionId);
         if (index > -1 && event.target && event.target.files && event.target.files[0]) {
@@ -227,6 +227,7 @@ const ModalUpdateQA = (props) => {
 
 
         //validate answers
+        let hasCorrectAnswer = false;
         for (let i = 0; i < updatedQuestions.length; i++) {
             for (let j = 0; j < updatedQuestions[i].answers.length; j++) {
                 if (!updatedQuestions[i].answers[j].description) {
@@ -238,10 +239,16 @@ const ModalUpdateQA = (props) => {
                 else {
                     updatedQuestions[i].answers[j].isValidAnswer = true
                 }
+                if (updatedQuestions[i].answers[j].isCorrect === true) {
+                    hasCorrectAnswer = true;
+                }
             }
 
         }
-
+        if (!hasCorrectAnswer) {
+            toast.error(`${t("adminPage.questionsManagement.correctAnswerError")}`)
+            isValid = false;
+        }
         setQuestions(updatedQuestions)
         return isValid;
     };
