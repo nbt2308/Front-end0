@@ -18,8 +18,8 @@ const RightContent = (props) => {
     const getClassQuestion = (index, question) => {
 
 
-        if (question && question.answerContainer.length > 0) {
-            let isAnswered = question.answerContainer.find(a => a.isChecked === true)
+        if (question && question.QuizAnswers.length > 0) {
+            let isAnswered = question.QuizAnswers.find(a => a.isChecked === true)
 
             if (isAnswered) {
                 return "question bg-success-subtle"
@@ -36,8 +36,8 @@ const RightContent = (props) => {
                 }
             })
         }
-        if (question && question.answerContainer.length > 0) {
-            let isAnswered = question.answerContainer.find(a => a.isChecked === true)
+        if (question && question.QuizAnswers.length > 0) {
+            let isAnswered = question.QuizAnswers.find(a => a.isChecked === true)
             if (isAnswered) {
                 return ;
             }

@@ -39,28 +39,20 @@ const DetailQuiz = (props) => {
         let res = await getDataQuiz(quizId);
         if (res && res.EC === 0) {
             let raw = res.DT;
-            let data = _.chain(raw)
-                .groupBy('id')
-                .map((item, index) => {
-                    let answerContainer = []
-                    let questionDescription, image = null;
-                    item.forEach((temp, index) => {
-                        if (index === 0) {
-                            questionDescription = temp.description
-                            image = temp.image
-                        }
-                        temp.answers.isChecked = false
-                        temp.answers.isCorrect = false
-                        answerContainer.push(temp.answers)
-                    })
-                    answerContainer = _.orderBy(answerContainer, ['id'], ['asc'])
-                    return {
-                        questionid: index, answerContainer, questionDescription, image
-                    };
-                }).value();
-            setDataQuiz(data);
+            let newDT = raw.map(question => {
+                return {
+                    ...question,
+                    QuizAnswers: question.QuizAnswers.map(answer => ({
+                        ...answer,
+                        isChecked: false,
+                        isCorrect: false
+                    }))
+                }
+            })
+            setDataQuiz(newDT);
         }
     }
+
 
 
     const handlePrev = () => {
@@ -77,17 +69,17 @@ const DetailQuiz = (props) => {
     }
     const handleDataCheckbox = (answerID, questionID) => {
         let dataQuizClone = _.cloneDeep(dataQuiz);
-        let question = dataQuizClone.find(item => +item.questionid === +questionID)
-        if (question && question.answerContainer) {
-            let result = question.answerContainer.map(item => {
+        let question = dataQuizClone.find(item => +item.id === +questionID)
+        if (question && question.QuizAnswers) {
+            let result = question.QuizAnswers.map(item => {
                 if (+item.id === +answerID) {
                     item.isChecked = !item.isChecked;
                 }
                 return item;
             })
-            question.answerContainer = result;
+            question.QuizAnswers = result;
         }
-        let index = dataQuizClone.findIndex(item => +item.questionid === +questionID)
+        let index = dataQuizClone.findIndex(item => +item.id === +questionID)
         if (index > -1) {
             dataQuizClone[index] = question;
             setDataQuiz(dataQuizClone);
@@ -109,11 +101,11 @@ const DetailQuiz = (props) => {
 
         if (dataQuiz && dataQuiz.length > 0) {
             dataQuiz.forEach(item => {
-                let questionId = item.questionid;
+                let questionId = item.id;
                 let userAnswerId = [];
 
                 //get userAnswerId
-                item.answerContainer.forEach(answer => {
+                item.QuizAnswers.forEach(answer => {
                     if (answer.isChecked === true) {
                         userAnswerId.push(answer.id);
                     }
@@ -124,6 +116,8 @@ const DetailQuiz = (props) => {
                     userAnswerId: userAnswerId
                 })
             })
+            
+            //select * from quizanswer where
             let res = await postSubmitAnswer(payload);
             if (res && res.EC === 0) {
 
@@ -135,24 +129,23 @@ const DetailQuiz = (props) => {
                 setShowModalResult(true);
                 
 
-
                 //update dataquiz with correct answer
                 if (res.DT && res.DT.quizData) {
                     let dataQuizClone = _.cloneDeep(dataQuiz);
                     let a = res.DT.quizData;
                     for (let q of a) {
                         for (let i = 0; i < dataQuizClone.length; i++) {
-                            if (+q.questionId === +dataQuizClone[i].questionid) {
+                            if (+q.questionId === +dataQuizClone[i].id) {
                                 //update answer
                                 let newAnswer = [];
-                                for (let j = 0; j < dataQuizClone[i].answerContainer.length; j++) {
-                                    let s = q.systemAnswers.find(item => +item.id === +dataQuizClone[i].answerContainer[j].id)
+                                for (let j = 0; j < dataQuizClone[i].QuizAnswers.length; j++) {
+                                    let s = q.systemAnswers.find(item => +item.id === +dataQuizClone[i].QuizAnswers[j].id)
                                     if (s) {
-                                        dataQuizClone[i].answerContainer[j].isCorrect = true;
+                                        dataQuizClone[i].QuizAnswers[j].isCorrect = true;
                                     }
-                                    newAnswer.push(dataQuizClone[i].answerContainer[j])
+                                    newAnswer.push(dataQuizClone[i].QuizAnswers[j])
                                 }
-                                dataQuizClone[i].answerContainer = newAnswer
+                                dataQuizClone[i].QuizAnswers = newAnswer
                             }
                         }
                     }
@@ -166,7 +159,7 @@ const DetailQuiz = (props) => {
 
         }
     }
-
+    
     return (
         <div className="detail-quiz-container">
             <div className="detail-quiz-header">
@@ -202,8 +195,8 @@ const DetailQuiz = (props) => {
                         dataQuiz={dataQuiz}
                         handleFinishResult={handleFinishResult}
                         setIndex={setIndex}
-                        check={check} 
-                         setCheck={setCheck}/>
+                        check={check}
+                        setCheck={setCheck} />
                 </div>
             </div>
             <ModalResult

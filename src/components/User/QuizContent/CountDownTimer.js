@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 const CountDownTimer = (props) => {
     const { onTimeUp,check } = props
-    const [count, setCount] = useState(10)
+    const [count, setCount] = useState(3000)
     
     
     useEffect(() => {

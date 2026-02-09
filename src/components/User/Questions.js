@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { API_URL } from "../../views/App";
 const Questions = (props) => {
     const { data, questionIndex, handleDataCheckbox,check } = props;
     const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ const Questions = (props) => {
                 data.image ?
                     <div className="question-image">
                         <img
-                            src={`data:image/jpeg;base64,${data.image}`}
+                            src={`${API_URL}${data.image}`}
                             alt="QuestionImage"
                             onClick={() => handlePreviewImage()} />
                         <Lightbox
@@ -41,7 +42,7 @@ const Questions = (props) => {
                             zoom={{ scrollToZoom: true }}
                             slides={data.image?[
                                 {
-                                    src: `data:image/jpeg;base64,${data.image}`,
+                                    src: `${API_URL}${data.image}`,
                                     title: "Preview image",
                                 },
                             ]: []}
@@ -58,11 +59,11 @@ const Questions = (props) => {
             }
 
             <div className="question-content">
-                <span>{t('usersPage.question')} {questionIndex + 1}: {data.questionDescription}</span>
+                <span>{t('usersPage.question')} {questionIndex + 1}: {data.description}</span>
             </div>
             <div className="answer">
-                {data.answerContainer && data.answerContainer.length &&
-                    data.answerContainer.map((answer, index) => {
+                {data.QuizAnswers && data.QuizAnswers.length &&
+                    data.QuizAnswers.map((answer, index) => {
                         return (
                             <div key={`answer-${index}`} className="a-child">
                                 <div class="form-check" >
@@ -71,7 +72,7 @@ const Questions = (props) => {
                                         type="checkbox"
                                         checked={answer.isChecked}
                                         disabled={check.isShowAnswer}
-                                        onChange={(event) => { handleCheckbox(event, answer.id, data.questionid) }}
+                                        onChange={(event) => { handleCheckbox(event, answer.id, data.id) }}
                                     />
                                     <label className="form-check-label" >
                                         {answer.description}
