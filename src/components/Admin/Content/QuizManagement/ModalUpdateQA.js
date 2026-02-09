@@ -239,7 +239,7 @@ const ModalUpdateQA = (props) => {
                 else {
                     updatedQuestions[i].answers[j].isValidAnswer = true
                 }
-                if (updatedQuestions[i].answers[j].isCorrect === true) {
+                if (updatedQuestions[i].answers[j].correctAnswer === true) {
                     hasCorrectAnswer = true;
                 }
             }
@@ -254,8 +254,10 @@ const ModalUpdateQA = (props) => {
     };
     const handleSubmitQuestions = async () => {
         //---validate data---
-        if (!handleValidate()) return;
         console.log(questions);
+        if (!handleValidate()) return;
+        
+        return;
         let res = await postUpsertQA({
             quizId: selectedOption.value,
             questions: questions
