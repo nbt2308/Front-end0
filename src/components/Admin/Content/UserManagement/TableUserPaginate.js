@@ -20,10 +20,10 @@ const TableUserPaginate = (props) => {
             <div className="scrollbar">
                 <PerfectScrollbar >
                     <div class="table-responsive">
-                        <table className="table table-bordered table-hover">
+                        <table className="table table-bordered table-hover text-center">
                             <thead >
                                 <tr >
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>ID</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
@@ -36,7 +36,7 @@ const TableUserPaginate = (props) => {
                                     listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
                                         return (
                                             <tr key={`table-user-${index}`}>
-                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={darkMode ? "light" : "dark-card"}>{item.id}</td>
                                                 <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
                                                 <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
                                                 <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>

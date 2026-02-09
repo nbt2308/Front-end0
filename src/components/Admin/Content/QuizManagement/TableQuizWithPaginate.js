@@ -58,7 +58,7 @@ const TableQuizWithPaginate = (props) => {
                                 {
                                     listQuiz && listQuiz.length === 0 &&
                                     <tr>
-                                        <td colSpan={"5"}>{t('adminPage.quizzesManagement.tableQuiz.notFound')}</td>
+                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.quizzesManagement.tableQuiz.notFound')}</td>
                                     </tr>
                                 }
 
