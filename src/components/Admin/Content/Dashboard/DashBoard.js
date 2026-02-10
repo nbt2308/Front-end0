@@ -70,9 +70,9 @@ const DashBoard = (props) => {
                                         <span className="text-1">{t('adminPage.dashboard.totalUsers')}</span>
                                         <span className="text-2">
                                             {dataOverview && dataOverview.users &&
-                                                dataOverview.users.total ?
+                                                dataOverview.users.totalUsers ?
                                                 <>
-                                                    {dataOverview.users.total}
+                                                    {dataOverview.users.totalUsers}
                                                 </>
                                                 :
                                                 <>
@@ -93,9 +93,9 @@ const DashBoard = (props) => {
                                         <span className="text-2">
                                             {
                                                 dataOverview && dataOverview.users &&
-                                                    dataOverview.users.countUsers ?
+                                                    dataOverview.users.User ?
                                                     <>
-                                                        {dataOverview.users.countUsers}
+                                                        {dataOverview.users.User}
                                                     </>
                                                     :
                                                     <>0</>
@@ -112,12 +112,12 @@ const DashBoard = (props) => {
                             <div className="col-md-3 col-sm-6 mb-3">
                                 <div className={darkMode ? "card p-3  light" : "card p-3  dark-card"}>
                                     <div className="stats w-75">
-                                        <span className="text-1">{t('adminPage.dashboard.admins')}</span>
+                                        <span className="text-1">{t('adminPage.dashboard.dev')}</span>
                                         <span className="text-2">{
                                             dataOverview && dataOverview.users &&
-                                                dataOverview.users.countAdmin ?
+                                                dataOverview.users.Dev ?
                                                 <>
-                                                    {dataOverview.users.countAdmin}
+                                                    {dataOverview.users.Dev}
                                                 </>
                                                 :
                                                 <>0</>
@@ -129,9 +129,9 @@ const DashBoard = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3 col-sm-6 mb-3 ">
-                                <div className={darkMode ? "card p-3  light" : "card p-3  dark-card"}>
+                                <div className={darkMode ? "card p-3 light" : "card p-3 dark-card"}>
                                     <div className="stats w-75">
-                                        <span className="text-1">{t('adminPage.dashboard.online')}</span>
+                                        <span className="text-1">{t('adminPage.dashboard.leader')}</span>
                                         <span className="text-2">1</span>
                                     </div>
                                     <div className="icon w-25">

@@ -108,8 +108,8 @@
             "dashboardTitle": "Analytics Dashboard",
             "totalUsers": "Total Users",
             "users": "Users",
-            "admins": "Admins",
-            "online": "Online",
+            "dev": "Dev",
+            "leader": "Leader",
             "quizStatistics": {
                 "quizStatisticsTitle": "Quiz Statistics",
                 "quizzes": "Quizzes",

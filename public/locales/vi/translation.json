@@ -108,8 +108,8 @@
             "dashboardTitle": "Bảng số liệu thống kê",
             "totalUsers": "Tổng số người dùng",
             "users": "Người dùng",
-            "admins": "Quản trị viên",
-            "online": "Đang trực tuyến",
+            "dev": "Nhà phát triển",
+            "leader": "Quản lý",
             "quizStatistics": {
                 "quizStatisticsTitle": "Số liệu về bài thi",
                 "quizzes": "Câu đố",
