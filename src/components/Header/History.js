@@ -14,15 +14,14 @@ const History = (props) => {
     const fetchListHistory = async () => {
         let res = await getHistory();
         if (res && res.EC === 0) {  
-            console.log('data',res.DT);
             
-            let newData = res?.DT?.data?.map(item => {
+            let newData = res?.DT?.map(item => {
 
                 return {
                     id: item.id,
-                    quiz_name: item.quizHistory.name,
-                    total_questions: item.total_questions,
-                    total_correct: item.total_correct,
+                    quiz_name: item.Quiz.name,
+                    total_questions: item.totalQuestions,
+                    total_correct: item.totalCorrect,
                     date: moment(item.createdAt).tz("Asia/Ho_Chi_Minh").format('DD/MM/YYYY hh:mm:ss A')
                 }
             }).reverse()
@@ -34,11 +33,11 @@ const History = (props) => {
     return (
         <>
             <div className={darkMode ? "table-history-container mx-3 light-card" : "table-history-container mx-3 dark-card"}>
-                <div className="title mb-3 ms-3 ">{t('adminPage.accountProfile.history.title')}</div>
+                <div className="title mb-3 ms-3 mt-3">{t('adminPage.accountProfile.history.title')}</div>
 
                 <div className="table-content mb-3">
                     <PerfectScrollbar>
-                        <table className="table">
+                        <table className="table text-center">
                             <thead>
                                 <tr>
                                     <th scope="col" className={darkMode ? "th-light" : "th-dark"}>ID</th>

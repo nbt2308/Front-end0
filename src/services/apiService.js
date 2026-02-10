@@ -110,7 +110,7 @@ const getDataQuiz = (quizId) => {
     return axios.get(`/api/v1/questions-by-quiz?quizId=${quizId}`)
 }
 const postSubmitAnswer = (data) => {
-    return axios.post(`/api/v1/quiz-submit`, { ...data })
+    return axios.post(`/api/v1/submit-quiz`, { ...data })
 }
 
 
@@ -190,11 +190,11 @@ const postRefreshToken = (refreshToken) => {
 const postUpdateProfile = (username, userImage) => {
     const data = new FormData();
     data.append('username', username);
-    data.append('userImage', userImage);
-    return axios.post('/api/v1/profile', data);
+    data.append('image', userImage);
+    return axios.post('/api/v1/update-profile', data);
 }
-const postChangePassword = (current_password, new_password) => {
-    return axios.post(`/api/v1/change-password`, { current_password, new_password });
+const postChangePassword = (currentPassword, newPassword) => {
+    return axios.post(`/api/v1/change-password`, { currentPassword, newPassword });
 }
 const getHistory = () => {
     return axios.get(`/api/v1/history`)

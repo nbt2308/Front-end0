@@ -254,10 +254,8 @@ const ModalUpdateQA = (props) => {
     };
     const handleSubmitQuestions = async () => {
         //---validate data---
-        console.log(questions);
         if (!handleValidate()) return;
         
-        return;
         let res = await postUpsertQA({
             quizId: selectedOption.value,
             questions: questions

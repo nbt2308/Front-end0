@@ -77,7 +77,7 @@ const ChangePassword = (props) => {
             })
         }
         if (res && res.EC !== 0) {
-            toast.error(`${t('adminPage.accountProfile.changePassword.updateFail')}`)
+            toast.error(res.EM);
         }
 
 

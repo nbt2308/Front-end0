@@ -21,6 +21,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageEdit from "filepond-plugin-image-edit";
 import { toast } from 'react-toastify';
+import { API_URL } from '../../views/App';
 
 
 
@@ -44,36 +45,34 @@ const PersonalDetails = (props) => {
         username: "",
         email: "",
         role: "",
-        
-        image: "",
+        image: ""
     });
 
     const [formData, setFormData] = useState(originalData);
 
     //set state
     useEffect(() => {
-        let fileSource = "";
         if (account.image) {
-            // Nếu account.image là Base64 string
+            // // Nếu account.image là Base64 string
 
-            if (typeof account.image === "string") {
-                fileSource = account.image.startsWith("data:")
-                    ? account.image
-                    : `data:image/jpeg;base64,${account.image}`;
-            }
-            else if (account.image instanceof Blob) {
-                // Nếu account.image là Blob -> convert thành File
-                fileSource = new File([account.image], "avatar.jpg", { type: account.image.type || "image/jpeg" });
-            }
-            else {
-                // Nếu account.image là File / Blob
-                fileSource = account.image;
-            }
+            // if (typeof account.image === "string") {
+            //     fileSource = account.image.startsWith("data:")
+            //         ? account.image
+            //         : `data:image/jpeg;base64,${account.image}`;
+            // }
+            // else if (account.image instanceof Blob) {
+            //     // Nếu account.image là Blob -> convert thành File
+            //     fileSource = new File([account.image], "avatar.jpg", { type: account.image.type || "image/jpeg" });
+            // }
+            // else {
+            //     // Nếu account.image là File / Blob
+            //     fileSource = account.image;
+            // }
 
             setFiles([
                 {
-                    source: fileSource,
-                    options: { type: "local" }
+                    source: `${API_URL}${account.image}`,
+                    options: { type: "remote" }
                 }
             ]);
         }
@@ -83,17 +82,15 @@ const PersonalDetails = (props) => {
         const initData = {
             username: account.username,
             email: account.email,
-            role: account.role,
-            image: fileSource,
+            role: account.groupWithRole.name,
+            image: account.image,
         };
         setOriginalData(initData);
         setFormData(initData);
 
     }, [account]);
 
-
-
-    const handleUploadFile = (fileItem) => {
+    const handleUploadFile = async (fileItem) => {
         setFiles(fileItem);
         if (fileItem.length > 0) {
             const file = fileItem[0].file;
@@ -104,7 +101,7 @@ const PersonalDetails = (props) => {
         } else {
             setFormData(prev => ({
                 ...prev,
-                image: ""
+                imageFile: ""
             }))
         }
     }
@@ -117,7 +114,7 @@ const PersonalDetails = (props) => {
     const handleReset = () => {
         setFormData(originalData);
         if (originalData.image) {
-            setFiles([{ source: originalData.image, options: { type: "local" } }]);
+            setFiles([{ source: `${API_URL}${originalData.image}`, options: { type: "local" } }]);
         } else {
             setFiles([]);
         }
@@ -132,7 +129,7 @@ const PersonalDetails = (props) => {
         else {
             setIsValidUsername(true);
         }
-
+        
         //call apis
         let res = await postUpdateProfile(formData.username, formData.image);
 
@@ -141,7 +138,7 @@ const PersonalDetails = (props) => {
 
             dispatch(UPDATE_ACCOUNT({
                 username: res.DT.username,
-                image: formData.image,
+                image: res.DT.image
             }))
             setOriginalData(formData);
         }
@@ -161,7 +158,7 @@ const PersonalDetails = (props) => {
                         onupdatefiles={(fileItem) => { handleUploadFile(fileItem) }}
                         allowMultiple={false}
                         maxFiles={1}
-                        name="upload-image"
+                        name="image"
                         acceptedFileTypes={["image/*"]}
                         allowImageEditor={true}
                         // imagePreviewHeight={300}
@@ -211,7 +208,7 @@ const PersonalDetails = (props) => {
                             <Form.Group as={Col} >
                                 <Form.Label>{t('adminPage.accountProfile.personalDetail.role')}</Form.Label>
                                 <Form.Control
-                                    className="form-control"
+                                    className="form-control mb-3"
                                     type="text"
                                     placeholder="name@example.com"
                                     value={formData.role}
@@ -239,23 +236,6 @@ const PersonalDetails = (props) => {
                                         isInvalid={isValidUsername ? false : true}
                                     />
                                     <Form.Control.Feedback type="invalid">{t('adminPage.usersManagement.modalAddUsers.invalidUsername')}</Form.Control.Feedback>
-                                </FloatingLabel>
-                            </Form.Group>
-                        </Row>
-
-                        <Row className="mb-1">
-                            <Form.Group as={Col}>
-                                <Form.Label>{t('adminPage.accountProfile.personalDetail.bio')}</Form.Label>
-                                <FloatingLabel
-                                    label={t('adminPage.accountProfile.personalDetail.description')}
-                                    className="mb-3"                                >
-                                    <Form.Control
-                                        className="form-control" type="text"
-                                        as="textarea"
-                                        placeholder="name@example.com"
-                                    // as="textarea"
-                                    // value={Email}
-                                    />
                                 </FloatingLabel>
                             </Form.Group>
                         </Row>
