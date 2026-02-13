@@ -57,17 +57,6 @@ export default function Footer(props) {
                                     </a>
                                 </p>
                             }
-
-                            <p>
-                                <a href='/aboutus' className='text-reset text-decoration-none link-primary'>
-                                    {t('homepage.header.aboutUs')}
-                                </a>
-                            </p>
-                            <p>
-                                <a href='/contact' className='text-reset text-decoration-none link-primary'>
-                                    {t('homepage.header.contact')}
-                                </a>
-                            </p>
                         </MDBCol>
 
                         <MDBCol md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
