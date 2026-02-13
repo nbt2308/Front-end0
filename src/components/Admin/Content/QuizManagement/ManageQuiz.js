@@ -15,8 +15,8 @@ import SearchBar from './SearchBar';
 import { useOutletContext } from 'react-router-dom';
 import TableQuizWithPaginate from './TableQuizWithPaginate';
 const ManageQuiz = (props) => {
-    
-    const { darkMode,breadCrumb, setBreadCrumb } = useOutletContext();
+
+    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
     const [showModalAddQuiz, setShowModalAddQuiz] = useState(false);
     const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
     const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
@@ -84,7 +84,7 @@ const ManageQuiz = (props) => {
     }
     return (
         <div className={darkMode ? "manageQuizzes-container light" : "manageQuizzes-container dark"}>
-            
+
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
@@ -92,16 +92,21 @@ const ManageQuiz = (props) => {
             />
 
             <div className={darkMode ? "quizzes-content light-card" : "quizzes-content dark-card"}>
-                <div className='d-flex'>
-                    <div className="btn-add-quiz btn-common">
-                        <button onClick={() => { handleBtnAddQuiz() }} className='btn-showModal'><FaPlus className='i-size' /> {t('adminPage.quizzesManagement.btnAddQuiz')} </button>
-                    </div>
-                    <div className='btn-update-QA btn-common'>
-                        <button onClick={() => { handleBtnUpdateQA() }} className='btn-showModal btn-update'><MdOutlineUpdate className='i-size' /> {t('adminPage.quizzesManagement.btnUpdateQA')} </button>
-                    </div>
-                    <div className='btn-assign-quiz btn-common'>
-                        <button onClick={() => { handleBtnAssignQuiz() }} className='btn-showModal btn-assign'><MdAssignmentInd className='i-size' /> {t('adminPage.quizzesManagement.btnAssignQuiz')} </button>
-                    </div>
+                <div className='d-flex flex-column flex-md-row gap-3 mb-3'>
+                    <button onClick={() => handleBtnAddQuiz()} className='btn btn-primary mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
+                        <FaPlus className='i-size' />
+                        <span>{t('adminPage.quizzesManagement.btnAddQuiz')}</span>
+                    </button>
+
+                    <button onClick={() => handleBtnUpdateQA()} className='btn btn-info mx-3 my-md-3 my-0 d-flex align-items-center justify-content-center gap-1'>
+                        <MdOutlineUpdate className='i-size' />
+                        <span>{t('adminPage.quizzesManagement.btnUpdateQA')}</span>
+                    </button>
+
+                    <button onClick={() => handleBtnAssignQuiz()} className='btn btn-warning mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
+                        <MdAssignmentInd className='i-size' />
+                        <span>{t('adminPage.quizzesManagement.btnAssignQuiz')}</span>
+                    </button>
                 </div>
                 <div className="search-bar" >
                     <SearchBar />

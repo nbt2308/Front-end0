@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { FaPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { postCreateNewUser, getAllGroups} from '../../../../services/apiService';
+import { postCreateNewUser, getAllGroups } from '../../../../services/apiService';
 import { validateEmail, validatePassword, validatePhone, validateUsername } from '../../../../utils/validators';
 import { useTranslation } from 'react-i18next';
 //Filepond
@@ -128,29 +128,29 @@ const AddUsers = (props) => {
             Address: ""
         };
 
-        if (!form.Email) {
+        if (!form.Email || form.Email.trim() === "") {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
         } else if (!validateEmail(form.Email)) {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
         }
-        if (!form.Password) {
+        if (!form.Password || form.Password.trim() === "") {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
         } else if (!validatePassword(form.Password)) {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword')}`;
         }
-        if (!form.Username) {
+        if (!form.Username || form.Username.trim() === "") {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername1')}`;
         } else if (!validateUsername(form.Username)) {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername')}`;
         }
         //validate phone,address
-        if (!form.Phone) {
-            newErrors.Phone = `Phone number is required`;
+        if (!form.Phone || form.Phone.trim() === "") {
+            newErrors.Phone = `${t('adminPage.usersManagement.modalAddUsers.invalidPhone')}`;
         } else if (!validatePhone(form.Phone)) {
-            newErrors.Phone = "Please enter a valid Phone number";
+            newErrors.Phone = `${t('adminPage.usersManagement.modalAddUsers.invalidPhone1')}`;
         }
-        if (!form.Address) {
-            newErrors.Address = "Address is required";
+        if (!form.Address || form.Address.trim() === "") {
+            newErrors.Address = `${t('adminPage.usersManagement.modalAddUsers.invalidAddress')}`;
         }
 
         setErrors(newErrors);
@@ -189,7 +189,7 @@ const AddUsers = (props) => {
 
             setForm(prev => ({
                 ...prev,
-                Image: file 
+                Image: file
             }));
         } else {
             setForm(prev => ({
@@ -239,12 +239,14 @@ const AddUsers = (props) => {
                     <Modal.Title>{t('adminPage.usersManagement.modalAddUsers.title')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
-                    <Form  >
-                        <Row className="mb-3">
-                            <Form.Group as={Col} >
+                    <Form>
+                        {/* Hàng 1: Email & Password */}
+                        {/* Thêm g-3 để tạo khoảng cách giữa các cột */}
+                        <Row className="mb-3 g-3">
+                            <Form.Group as={Col} xs={12} md={6}> {/* Mobile: 12, PC: 6 */}
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.email')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Control
                                         className={darkMode ? "form-control light" : "form-control dark-card"}
@@ -259,10 +261,10 @@ const AddUsers = (props) => {
                                 </FloatingLabel>
                             </Form.Group>
 
-                            <Form.Group as={Col} >
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.password')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Control
                                         className={darkMode ? "form-control light" : "form-control dark-card"}
@@ -278,17 +280,12 @@ const AddUsers = (props) => {
                             </Form.Group>
                         </Row>
 
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col}  >
-                                {/* <Form.Label>Username</Form.Label>
-                                <Form.Control
-                                    placeholder="Username"
-                                    value={Username}
-                                    onChange={(event) => { setUsername(event.target.value) }} /> */}
+                        {/* Hàng 2: Username & Role */}
+                        <Row className="mb-3 g-3">
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.username')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Control
                                         className={darkMode ? "form-control light" : "form-control dark-card"}
@@ -304,35 +301,31 @@ const AddUsers = (props) => {
                                     </Form.Control.Feedback>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} >
+
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.role')}
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Select value={form.Group} onChange={e => handleChange("Group", e.target.value)}>
-                                        {
-                                            listGroup.length > 0 &&
+                                        {listGroup.length > 0 &&
                                             listGroup.map((item, index) => {
                                                 return (
                                                     <option key={`group-${index}`} value={item.id}>{item.name}</option>
                                                 )
                                             })
-
                                         }
-
                                     </Form.Select>
                                 </FloatingLabel>
                             </Form.Group>
-
-                            {/* <Form.Group className="image-preview" controlId="formGridImagePreview" for="upload-image">
-                                {PreviewImage ? <img src={PreviewImage} alt="Preview" /> : <span>Preview Image</span>}
-                            </Form.Group> */}
                         </Row>
-                        <Row>
-                            <Form.Group as={Col} className="mb-3" >
+
+                        {/* Hàng 3: Address (Luôn full chiều rộng) */}
+                        <Row className="mb-3">
+                            <Form.Group as={Col} xs={12}>
                                 <FloatingLabel
                                     label="Address"
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Control
                                         className={darkMode ? "form-control light" : "form-control dark-card"}
@@ -349,11 +342,13 @@ const AddUsers = (props) => {
                                 </FloatingLabel>
                             </Form.Group>
                         </Row>
-                        <Row>
-                            <Form.Group as={Col} >
+
+                        {/* Hàng 4: Gender & Phone */}
+                        <Row className="mb-3 g-3">
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label="Gender"
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Select value={form.Sex} onChange={e => handleChange("Sex", e.target.value)}>
                                         <option value="Male">Male</option>
@@ -362,10 +357,10 @@ const AddUsers = (props) => {
                                     </Form.Select>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} >
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label="Phone"
-                                    className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                    className={darkMode ? "floating-light" : "floating-dark"}
                                 >
                                     <Form.Control
                                         className={darkMode ? "form-control light" : "form-control dark-card"}
@@ -380,10 +375,12 @@ const AddUsers = (props) => {
                                 </FloatingLabel>
                             </Form.Group>
                         </Row>
+
+                        {/* Hàng 5: Upload File */}
                         <Row>
-                            <Form.Group className="md-12" >
+                            <Form.Group className="mb-3 col-12"> {/* Luôn full width */}
                                 <Form.Label
-                                    className={darkMode ? "label-uploadFile floating-light mb-3" : "label-uploadFile floating-dark mb-3"}
+                                    className={darkMode ? "label-uploadFile floating-light mb-2" : "label-uploadFile floating-dark mb-2"}
                                     htmlFor="upload-image" >
                                     {t('adminPage.usersManagement.modalAddUsers.uploadImageFile')}
                                 </Form.Label>
@@ -396,7 +393,7 @@ const AddUsers = (props) => {
                                     acceptedFileTypes={["image/*"]}
                                     imageResizeTargetWidth={400}
                                     imageResizeTargetHeight={400}
-                                    imageResizeMode="cover" // cover = luôn đúng 400x400
+                                    imageResizeMode="cover"
                                     labelIdle={t('adminPage.usersManagement.modalAddUsers.upload1')}
                                     className={darkMode ? "light-theme" : "dark-theme"}
                                 />

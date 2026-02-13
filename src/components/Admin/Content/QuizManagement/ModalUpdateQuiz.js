@@ -68,12 +68,12 @@ const ModalUpdateQuiz = (props) => {
             name: "",
             description: "",
         };
-        if (!form.name) {
+        if (!form.name|| form.name.trim()==="") {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName')}`
         } else if (!validateName(form.name)) {
             newErrors.name = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidQuizName1')}`;
         }
-        if (!form.description) {
+        if (!form.description|| form.description.trim()==="") {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription')}`
         } else if (!validateName(form.description)) {
             newErrors.description = `${t('adminPage.quizzesManagement.modalAddQuiz.labelInvalidDescription1')}`

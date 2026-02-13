@@ -2,8 +2,10 @@
     "homepage": {
         "header": {
             "home": "Home",
-            "users": "Users",
+            "play": "Play",
             "admin": "Admin",
+            "aboutUs": "About us",
+            "contact": "Contact",
             "login": "Sign in",
             "signup": "Sign up",
             "profile": "My account",
@@ -12,6 +14,9 @@
             "en": "English",
             "dark": "Dark",
             "light": "Light"
+        },
+        "footer":{
+            "navigation":"Navigation"
         },
         "loginPage": {
             "loginTitle": "Sign in",
@@ -138,6 +143,9 @@
                 "username": "Username",
                 "invalidUsername": "Username must be at least 5 characters long and max 20 characters",
                 "invalidUsername1": "Username is required",
+                "invalidPhone": "Phone number is required",
+                "invalidPhone1": "Please enter a valid Phone number",
+                "invalidAddress": "Address is required",
                 "role": "Group",
                 "uploadImageFile": "Upload Image File",
                 "upload1": "Drag & Drop Image Or Select Image",

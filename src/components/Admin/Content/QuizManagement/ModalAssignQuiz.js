@@ -7,7 +7,7 @@ import Select from 'react-select';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 const ModalAssignQuiz = (props) => {
-    const { show, setShow,darkMode } = props;
+    const { show, setShow, darkMode } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -87,7 +87,7 @@ const ModalAssignQuiz = (props) => {
 
 
     }
-     const getCustomStyles = (darkMode) => ({
+    const getCustomStyles = (darkMode) => ({
         menuPortal: base => ({ ...base, zIndex: 9999 }),
         control: (base) => ({
             ...base,
@@ -132,39 +132,41 @@ const ModalAssignQuiz = (props) => {
                     <Modal.Title>{t('adminPage.quizzesManagement.modalAssignQuiz.title')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
-                    <div className="quiz-select col-5 form-group" >
-                        <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
-                        <Select
-                            className={`${isValidSelectedQuiz ? "" : "is-invalid"}`}
-                            classNamePrefix="react-select"
-                            defaultValue={selectedOptionQuiz}
-                            onChange={(option) => {
-                                setSelectedOptionQuiz(option)
-                                setIsValidSelectedQuiz(true)
-                            }}
-                            options={listQuiz}
-                            menuPortalTarget={document.body}
-                            required
-                            styles={getCustomStyles(!darkMode)}
-                        />
-                        <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
-                    </div>
-                    <div className="user-select col-5 form-group">
-                        <label >{t('adminPage.quizzesManagement.modalAssignQuiz.selectUser')}</label>
-                        <Select
-                            className={`${isValidSelectedUser ? "" : "is-invalid"}`}
-                            classNamePrefix="react-select"
-                            defaultValue={selectedOptionUser}
-                            onChange={(option) => {
-                                setSelectedOptionUser(option)
-                                setIsValidSelectedUser(true)
-                            }}
-                            options={listUsers}
-                            menuPortalTarget={document.body}
-                            required
-                            styles={getCustomStyles(!darkMode)}
-                        />
-                        <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalAssignQuiz.invalidSelect')}</div>
+                    <div className="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <div className="quiz-select col col-md-5 form-group" >
+                            <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
+                            <Select
+                                className={`${isValidSelectedQuiz ? "" : "is-invalid"}`}
+                                classNamePrefix="react-select"
+                                defaultValue={selectedOptionQuiz}
+                                onChange={(option) => {
+                                    setSelectedOptionQuiz(option)
+                                    setIsValidSelectedQuiz(true)
+                                }}
+                                options={listQuiz}
+                                menuPortalTarget={document.body}
+                                required
+                                styles={getCustomStyles(!darkMode)}
+                            />
+                            <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
+                        </div>
+                        <div className="user-select col-12 col-md-5 form-group">
+                            <label >{t('adminPage.quizzesManagement.modalAssignQuiz.selectUser')}</label>
+                            <Select
+                                className={`${isValidSelectedUser ? "" : "is-invalid"}`}
+                                classNamePrefix="react-select"
+                                defaultValue={selectedOptionUser}
+                                onChange={(option) => {
+                                    setSelectedOptionUser(option)
+                                    setIsValidSelectedUser(true)
+                                }}
+                                options={listUsers}
+                                menuPortalTarget={document.body}
+                                required
+                                styles={getCustomStyles(!darkMode)}
+                            />
+                            <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalAssignQuiz.invalidSelect')}</div>
+                        </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>

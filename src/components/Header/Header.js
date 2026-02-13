@@ -22,6 +22,7 @@ const Header = (props) => {
     const { darkMode } = props;
     const isAuthenticated = useSelector(state => state?.isAuthenticated);
     const account = useSelector(state => state?.account);
+    const role = useSelector(state => state?.account?.groupWithRole?.name);
     const Navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -79,8 +80,12 @@ const Header = (props) => {
                         <Offcanvas.Body className={darkMode.value ? " nav-body-light " : " nav-body-dark "}>
                             <Nav className="me-auto">
                                 <NavLink to="/" className='nav-link '>{t('homepage.header.home')}</NavLink >
-                                <NavLink to="/users" className='nav-link '>{t('homepage.header.users')}</NavLink >
-                                <NavLink to="/admin" className='nav-link '>{t('homepage.header.admin')}</NavLink >
+                                <NavLink to="/users" className='nav-link '>{t('homepage.header.play')}</NavLink >
+                                {
+                                    role && role === 'Dev' &&
+                                    <NavLink to="/admin" className='nav-link '>{t('homepage.header.admin')}</NavLink >
+                                }
+
                             </Nav>
 
                             <Nav>

@@ -43,7 +43,6 @@ const Admin = (props) => {
         darkMode.disable();
     }
 
-
     return (
         <div className="Admin-container " >
             <div className="Sidebar-container ">
@@ -61,10 +60,17 @@ const Admin = (props) => {
                     darkMode={darkMode.value}
                 />
             </div>
-            <div className={darkMode.value? "Admin-content light" : "Admin-content dark"} >
+            <div className={darkMode.value ? "Admin-content light" : "Admin-content dark"} >
                 <div className={darkMode.value ? "Admin-header light" : "Admin-header dark"}>
                     <span className="collapse-btn"><FaBars onClick={() => {
-                        setCollapsed(!collapsed)
+                        // Kiểm tra kích thước màn hình
+                        if (window.innerWidth <= 768) {
+                            // Nếu là điện thoại: bật/tắt hiển thị (overlay)
+                            setToggled(!toggled);
+                        } else {
+                            // Nếu là máy tính: thu nhỏ/phóng to (collapse)
+                            setCollapsed(!collapsed);
+                        }
                     }}
                         className="btn-collapse" />
                     </span>
@@ -99,12 +105,12 @@ const Admin = (props) => {
                 <div className={darkMode.value ? "Admin-main light" : "Admin-main dark"}>
 
                     <Outlet
-                        context={{ 
+                        context={{
                             darkMode: darkMode.value,
                             breadCrumb: breadCrumb,
                             setBreadCrumb: setBreadCrumb
-                         }}
-                        
+                        }}
+
                     />
 
                 </div>

@@ -41,7 +41,8 @@ const ModalUpdateUser = (props) => {
         setShow(false);
         // setPreviewImage("");
         setShowErrors(prev => ({
-            Username: false
+            Username: false,
+            Address: false
         }))
         setFiles([]);
         resetUpdateData();
@@ -63,10 +64,12 @@ const ModalUpdateUser = (props) => {
 
     const [errors, setErrors] = useState({
         Username: "",
+        Address: ""
     });
 
     const [showErrors, setShowErrors] = useState({
-        Username: false
+        Username: false,
+        Address: false
     });
     // const [PreviewImage, setPreviewImage] = useState("");
 
@@ -114,16 +117,20 @@ const ModalUpdateUser = (props) => {
     const handleValidate = () => {
         const newErrors = {
             Username: "",
+            Address: ""
         };
-        if (!form.Username) {
+        if (!form.Username|| form.Username.trim() === "") {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername1')}`;
         } else if (!validateUsername(form.Username)) {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername')}`;
         }
-        //validate phone,address
+        if (!form.Address || form.Address.trim() === "") {
+            newErrors.Address = `${t('adminPage.usersManagement.modalAddUsers.invalidAddress')}`;
+        }
         setErrors(newErrors);
         setShowErrors({
-            Username: !!newErrors.Username
+            Username: !!newErrors.Username,
+            Address: !!newErrors.Address
         });
 
         return !Object.values(newErrors).some(Boolean); // hợp lệ nếu không có error nào
@@ -212,7 +219,7 @@ const ModalUpdateUser = (props) => {
                 <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
                     <Form>
                         <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridEmail">
+                            <Form.Group as={Col} controlId="formGridEmail" xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalUpdateUsers.email')}
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -226,7 +233,7 @@ const ModalUpdateUser = (props) => {
                                     />
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formGridPassword">
+                            <Form.Group as={Col} controlId="formGridPassword" xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalUpdateUsers.password')}
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -245,7 +252,7 @@ const ModalUpdateUser = (props) => {
 
 
                         <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridUsername">
+                            <Form.Group as={Col} controlId="formGridUsername" xs={12} md={6}>
 
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.username')}
@@ -263,7 +270,7 @@ const ModalUpdateUser = (props) => {
                                     </Form.Control.Feedback>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} >
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.role')}
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -284,7 +291,7 @@ const ModalUpdateUser = (props) => {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <Form.Group as={Col} className="mb-3" >
+                            <Form.Group as={Col} className="mb-3" xs={12}>
                                 <FloatingLabel
                                     label="Address"
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -305,7 +312,7 @@ const ModalUpdateUser = (props) => {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <Form.Group as={Col} >
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label="Gender"
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -317,7 +324,7 @@ const ModalUpdateUser = (props) => {
                                     </Form.Select>
                                 </FloatingLabel>
                             </Form.Group>
-                            <Form.Group as={Col} >
+                            <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalUpdateUsers.phone')}
                                     className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
@@ -337,7 +344,7 @@ const ModalUpdateUser = (props) => {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <Form.Group className="md-12" >
+                            <Form.Group className="mb-3 col-12" >
                                 <Form.Label
                                     className={darkMode ? "label-uploadFile floating-light mb-3" : "label-uploadFile floating-dark mb-3"}
                                     htmlFor="upload-image" >

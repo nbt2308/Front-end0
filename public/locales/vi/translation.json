@@ -2,9 +2,11 @@
     "homepage": {
         "header": {
             "home": "Trang chủ",
-            "users": "Người dùng",
+            "play": "Chơi",
             "admin": "Quản trị",
             "login": "Đăng nhập",
+            "aboutUs": "Về chúng tôi",
+            "contact": "Liên hệ",
             "signup": "Đăng ký",
             "profile": "Thông tin cá nhân",
             "logout": "Đăng xuất",
@@ -12,6 +14,9 @@
             "en": "Tiếng Anh",
             "dark": "Tối",
             "light": "Sáng"
+        },
+        "footer":{
+            "navigation":"Điều hướng"
         },
         "loginPage": {
             "loginTitle": "Đăng nhập",
@@ -138,6 +143,9 @@
                 "username": "Tên người dùng",
                 "invalidUsername": "Tên đăng nhập phải có độ dài ít nhất là 5 ký tự và tối đa là 20 ký tự",
                 "invalidUsername1": "Bạn cần nhập tên người dùng",
+                "invalidPhone": "Bạn cần nhập số điện thoại",
+                "invalidPhone1": "Bạn cần nhập 1 số điện thoại hợp lệ",
+                "invalidAddress": "Bạn cần nhập địa chỉ",
                 "role": "Vai trò",
                 "uploadImageFile": "Tải lên ảnh từ thư mục của bạn",
                 "upload1": "Kéo và thả ảnh của bạn hoặc chọn hình ảnh",

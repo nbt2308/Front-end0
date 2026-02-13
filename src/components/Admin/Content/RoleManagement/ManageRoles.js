@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaPlus,FaUserShield,FaUserMinus   } from 'react-icons/fa';
+import { FaPlus, FaUserShield, FaUserMinus } from 'react-icons/fa';
 import "./ManageRoles.scss"
 import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
@@ -73,17 +73,21 @@ const ManageRoles = (props) => {
             />
 
             <div className={darkMode ? "roles-content light-card" : "roles-content dark-card"}>
-                <div className="d-flex">
-                    <div className="btn-add-role btn-common">
-                        <button onClick={() => { handleBtnAddRoles() }} className='btn btn-primary d-flex align-items-center gap-1'><FaPlus className='i-size' /> {t('adminPage.rolesManagement.btnAddRole')} </button>
-                    </div>
-                    <div className="btn-assign-role btn-common">
-                        <button onClick={() => { handleBtnAssignRole() }} className='btn btn-info d-flex align-items-center gap-1 '><FaUserShield  className='i-size' /> {t('adminPage.rolesManagement.btnAssignRole')} </button>
-                    </div>
-                    <div className="btn-unassign-role btn-common">
-                        <button onClick={() => { handleBtnUnassignRole() }} className='btn btn-warning d-flex align-items-center gap-1'><FaUserMinus  className='i-size' /> {t('adminPage.rolesManagement.btnUnassignRole')} </button>
-                    </div>
-                    
+                <div className="d-flex flex-column flex-md-row gap-3 mb-3">
+                    <button onClick={() => handleBtnAddRoles()} className='btn btn-primary mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
+                        <FaPlus className='i-size' />
+                        <span>{t('adminPage.rolesManagement.btnAddRole')} </span>
+                    </button>
+
+                    <button onClick={() => handleBtnAssignRole()} className='btn btn-info mx-3 my-md-3 my-0 d-flex align-items-center justify-content-center gap-1'>
+                        <FaUserShield className='i-size' />
+                        <span>{t('adminPage.rolesManagement.btnAssignRole')}</span>
+                    </button>
+
+                    <button onClick={() => handleBtnUnassignRole()} className='btn btn-warning mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
+                        <FaUserMinus className='i-size' />
+                        <span>{t('adminPage.rolesManagement.btnUnassignRole')}</span>
+                    </button>
                 </div>
                 <div className="table-role">
                     <TableRolesWithPaginate

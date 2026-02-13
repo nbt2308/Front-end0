@@ -166,7 +166,7 @@ const DetailQuiz = (props) => {
                 <button className="btn btn-danger" onClick={() => { handleQuit() }}><CiLogout className="icon" /> </button>
                 <h1>{location?.state?.title}</h1>
             </div>
-            <div className="quiz-content">
+            <div className="quiz-content d-flex flex-md-row flex-column-reverse">
                 <div className="left-content">
                     <div className="question-container">
                         <Questions

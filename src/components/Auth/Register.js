@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import { FaFacebookF, FaGithub } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { postRegisterUser } from '../../services/apiService';
@@ -11,8 +9,6 @@ import Language from "../Header/Language";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useTranslation } from 'react-i18next';
-import brandname from "../../assets/images/brandname.png"
-import useDarkMode from "use-dark-mode";
 import { IoIosMoon } from "react-icons/io";
 import { AiFillSun } from "react-icons/ai";
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -59,22 +55,22 @@ const Register = (props) => {
             ConfirmPassword: "",
         };
 
-        if (!form.Email) {
+        if (!form.Email || form.Email.trim()==="") {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
         } else if (!validateEmail(form.Email)) {
             newErrors.Email = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
         }
-        if(!form.Phone){
+        if(!form.Phone || form.Phone.trim()===""){
              newErrors.Phone ="Phone number is required";
         }else if(!validatePhone(form.Phone)){
              newErrors.Phone ="Phone number is invalid";
         }
-        if (!form.Password) {
+        if (!form.Password || form.Password.trim()==="") {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
         } else if (!validatePassword(form.Password)) {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword')}`;
         }
-        if (!form.Username) {
+        if (!form.Username || form.Username.trim()==="") {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername1')}`;
         } else if (!validateUsername(form.Username)) {
             newErrors.Username = `${t('adminPage.usersManagement.modalAddUsers.invalidUsername')}`;

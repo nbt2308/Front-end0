@@ -1,58 +1,99 @@
 .breadcrumb-container {
-    margin-left: 20px;
-    margin-right: 20px;
-
-    height: 80px;
-    // border: 1px solid #ccc;
-    // background-color: #ccc;
+    margin: 10px 20px; // Giảm margin trên dưới để tiết kiệm không gian
+    min-height: fit-content; // Sử dụng min-height thay vì fixed height
+    padding: 10px 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap; // Cho phép các phần tử xuống dòng khi màn hình quá nhỏ
+    gap: 10px;
 
     .title {
-        margin-left: 20px;
-        // margin-top: 10px;
-        font-size: 1.875rem;
+        font-size: 1.5rem; // Giảm nhẹ size chữ mặc định
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .nav-breadcrumb {
-        font-size: 1rem;
-        margin-right: 20px;
+        font-size: 0.9rem;
 
         .breadcrumb {
             margin-bottom: 0;
+            background-color: transparent; // Xóa background mặc định của bootstrap nếu có
 
             .breadcrumb-item {
                 &::before {
-                    color: #ccc6c6
+                    color: #ccc6c6;
                 }
 
                 a {
                     text-decoration: none;
-
-                    .basic-light {
-                        color: #0d6efd
-                    }
-
-                    .basic-dark {
-                        color: #0066ff
-                    }
-
-                    .active-light {
-                        color: rgba(33, 37, 41, 0.75)
-                    }
-
-                    .active-dark {
-                        color: #989898
-                    }
                 }
 
+                // Di chuyển class color ra ngoài thẻ a để ăn vào đúng li/a
+                &.basic-light a {
+                    color: #0d6efd;
+                }
+
+                &.basic-dark a {
+                    color: #0066ff;
+                }
+
+                &.active-light {
+                    color: rgba(33, 37, 41, 0.75);
+                }
+
+                &.active-dark {
+                    color: #989898;
+                }
             }
         }
     }
 
+    // --- Responsive Breakpoints ---
 
+    // Tablet & Mobile
+    @media (max-width: 768px) {
+        .breadcrumb-container {
+            flex-direction: column; // Chuyển thành hàng dọc
+            align-items: flex-start; // Căn lề trái
+            height: auto;
+            padding: 15px;
+        }
+
+
+        .title {
+            font-size: 1.25rem;
+            margin-left: 0;
+        }
+
+        .nav-breadcrumb {
+            margin-right: 0;
+            width: 100%;
+
+            .breadcrumb {
+                padding-left: 0; // Căn thẳng hàng với title
+            }
+        }
+    }
+
+    // Mobile nhỏ (iPhone SE, v.v.)
+    @media (max-width: 480px) {
+        .breadcrumb-container {
+            margin: 10px; // Thu nhỏ lề ngoài
+        }
+
+
+        .title {
+            font-size: 1.1rem;
+        }
+
+        .nav-breadcrumb {
+            font-size: 0.8rem;
+        }
+    }
 }

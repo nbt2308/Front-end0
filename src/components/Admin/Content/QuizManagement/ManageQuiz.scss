@@ -1,7 +1,7 @@
 .manageQuizzes-container {
     height: 100%;
 
-    
+
 
     .quizzes-content {
         margin: 20px 20px 50px;
@@ -14,43 +14,7 @@
             margin-left: 20px;
             margin-top: 20px;
 
-            .btn-showModal {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                border-radius: 20px;
-                padding: 8px 10px;
-                background-color: #0d6efd;
-                transition: 0.2s ease-out;
-                border: none;
-                color: #fff;
-                font-size: 16px;
-
-                &:hover {
-                    background-color: #08378e;
-                    transition: 0.2s ease-in;
-                }
-
-                .i-size {
-                    font-size: 17px;
-                }
-            }
-
-            .btn-update {
-                background-color: #f1b606;
-
-                &:hover {
-                    background-color: #9e7c15;
-                }
-            }
-
-            .btn-assign {
-                background-color: #0db6d8;
-
-                &:hover {
-                    background-color: #19a1bc;
-                }
-            }
+            
         }
 
         .search-bar {
@@ -130,7 +94,7 @@
                     }
 
                     th.action-col {
-                        
+
                         text-align: center;
                     }
 
@@ -481,9 +445,6 @@
 
 .modal-assign-quiz {
     .modal-body {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
         height: 200px;
 
         .quiz-select {

@@ -49,12 +49,12 @@ const Login = (props) => {
 
         };
 
-        if (!form.EmailOrPhone) {
+        if (!form.EmailOrPhone || form.EmailOrPhone.trim() === "") {
             newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail1')}`;
         } else if (!validateEmailOrPhone(form.EmailOrPhone)) {
             newErrors.EmailOrPhone = `${t('adminPage.usersManagement.modalAddUsers.invalidEmail')}`;
         }
-        if (!form.Password) {
+        if (!form.Password|| form.Password.trim() === "") {
             newErrors.Password = `${t('adminPage.usersManagement.modalAddUsers.invalidPassword1')}`;
         }
 
@@ -85,7 +85,7 @@ const Login = (props) => {
             setIsLoadingLogin(false)
             Navigate("/");
         }
-        
+
         if (data && data.EC === -1) {
             toast.error(`${t('homepage.loginPage.loginFail1')}`);
             setIsLoadingLogin(false)
@@ -167,7 +167,7 @@ const Login = (props) => {
                                             type="password"
                                             placeholder="Password"
                                             value={form.Password}
-                                            onChange={e => handleChange("Password", e.target.value)}
+                                            onChange={e => handleChange("Password", e.target.value.replace(/\s/g, ""))}
                                             isInvalid={showErrors.Password}
                                             onKeyDown={(event) => handleKeyDown(event)}
                                             required

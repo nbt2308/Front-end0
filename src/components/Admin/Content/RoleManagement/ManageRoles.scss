@@ -256,3 +256,25 @@
         overflow-x: hidden;
     }
 }
+.modal-assign-role {
+    .modal-body {
+        height: 200px;
+
+        .role-select {
+            .is-invalid .react-select__control {
+                border-color: #dc3545 !important;
+                /* màu đỏ của bootstrap */
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .25) !important;
+            }
+        }
+
+        .group-select {
+            .is-invalid .react-select__control {
+                border-color: #dc3545 !important;
+                /* màu đỏ của bootstrap */
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .25) !important;
+            }
+        }
+
+    }
+}

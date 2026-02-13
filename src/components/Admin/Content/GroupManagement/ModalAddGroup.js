@@ -48,12 +48,12 @@ const ModalAddGroup = (props) => {
             description: ""
         };
 
-        if (!form.name) {
+        if (!form.name || form.name.trim()==="") {
             newErrors.name = `${t('adminPage.groupsManagement.modalAddGroup.labelInvalidGroupName')}`
         } else if (!validateName(form.name)) {
             newErrors.name = `${t('adminPage.groupsManagement.modalAddGroup.labelInvalidGroupName1')}`;
         }
-        if (!form.description) {
+        if (!form.description || form.description.trim()==="") {
             newErrors.description = `${t('adminPage.groupsManagement.modalAddGroup.labelInvalidGroupDescription')}`
         }
         setErrors(newErrors);

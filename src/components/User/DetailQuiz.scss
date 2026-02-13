@@ -1,66 +1,110 @@
 .detail-quiz-container {
     background-color: #cbc8bd;
-    .detail-quiz-header {
+    min-height: 100vh; // Đảm bảo background luôn phủ kín màn hình
+    display: flex;
+    flex-direction: column;
 
+    .detail-quiz-header {
         height: 70px;
         display: flex;
         gap: 20px;
         align-items: center;
-        background-color:#e5e3db;
+        background-color: #e5e3db;
+        padding: 0 10px; // Thêm padding để không sát lề trên mobile
 
         button {
-            margin-left: 20px;
+            // margin-left: 20px; // Bỏ margin cứng, dùng gap của cha hoặc padding
             display: flex;
             justify-content: center;
             align-items: center;
-            .icon{
+            .icon {
                 font-size: 1.3rem;
             }
         }
 
         h1 {
             font-size: 35px;
+            margin: 0; // Reset margin mặc định
+            // Mobile: Giảm size chữ
+            @media (max-width: 768px) {
+                font-size: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
 
     .quiz-content {
-
-        height: 100vh;
-
+        // height: 100vh; // Xóa height 100vh cứng để tránh lỗi cuộn trên mobile
+        flex: 1; // Tự động chiếm phần còn lại
         display: flex;
+        padding: 20px;
+        gap: 20px;
+
+        // Mobile & Tablet dọc
+        @media (max-width: 992px) {
+            flex-direction: column; // Xếp chồng lên nhau
+            padding: 10px;
+            height: auto;
+        }
 
         .left-content {
             border: 2px solid rgb(154, 154, 154);
             border-radius: 20px;
             width: 70%;
-            margin: 20px;
-            height: 600px;
+            // margin: 20px; // Xóa margin cứng, dùng gap của cha (.quiz-content)
+            min-height: 600px; // Dùng min-height thay vì height cứng
             background-color: #fff;
-            .question-container {
-                height: 90%;
+            display: flex;
+            flex-direction: column;
 
+            // Mobile
+            @media (max-width: 992px) {
+                width: 100%;
+                min-height: auto; // Chiều cao tự động theo nội dung
+                margin: 0;
+            }
+
+            .question-container {
+                flex: 1; // Chiếm phần lớn không gian
+                padding: 15px;
 
                 .question-image {
                     height: 300px;
                     display: flex;
                     justify-content: center;
+                    align-items: center;
+
+                    // Mobile: Ảnh nhỏ lại
+                    @media (max-width: 768px) {
+                        height: 200px;
+                    }
 
                     img {
                         cursor: pointer;
-                        margin: 20px;
+                        // margin: 20px;
                         max-width: 100%;
                         max-height: 100%;
+                        object-fit: contain; // Giữ tỉ lệ ảnh
                     }
                 }
 
                 .question-content {
                     display: flex;
                     justify-content: center;
+                    text-align: center;
+                    margin-top: 10px;
 
                     span {
                         font-size: 25px;
                         font-weight: 600;
                         user-select: none;
+                        
+                        // Mobile text size
+                        @media (max-width: 768px) {
+                            font-size: 18px;
+                        }
                     }
                 }
 
@@ -70,65 +114,108 @@
                     font-size: 20px;
                     font-weight: 400;
 
-                    .form-check {
-                        input {
-                            border: 1px solid;
-                        }
-                        
-                        .correct{
-                            color: green;
-                            font-size: 25px;
-                            margin-left: 3px;
-                        }
-                        .incorrect{
-                            color: red;
-                            font-size: 25px;
-                        }
+                    @media (max-width: 768px) {
+                        margin-left: 10px;
+                        font-size: 16px;
                     }
 
+                    .form-check {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+                        
+                        input {
+                            border: 1px solid;
+                            width: 20px; 
+                            height: 20px;
+                        }
+
+                        label {
+                            margin-left: 10px;
+                        }
+
+                        .correct {
+                            color: green;
+                            font-size: 25px;
+                            margin-left: 10px;
+                        }
+                        .incorrect {
+                            color: red;
+                            font-size: 25px;
+                            margin-left: 10px;
+                        }
+                    }
                 }
             }
 
             .footer {
-                height: 10%;
+                height: 80px; // Cố định chiều cao footer
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
-
+                border-top: 1px solid #eee;
+                padding: 10px;
+                
+                // Mobile: Stack nút hoặc nhỏ lại
+                @media (max-width: 576px) {
+                    gap: 10px;
+                    button {
+                        font-size: 14px;
+                        padding: 5px 10px;
+                    }
+                    .mx-3 {
+                        margin-left: 0.5rem !important;
+                        margin-right: 0.5rem !important;
+                    }
+                }
             }
         }
 
         .right-content {
-            margin: 20px 20px 20px 0;
+            // margin: 20px 20px 20px 0; // Xóa margin cứng
             border: 2px solid rgb(154, 154, 154);
             border-radius: 20px;
-            height: 600px;
+            // height: 600px; // Bỏ height cứng
             width: 30%;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
+
+            // Mobile
+            @media (max-width: 992px) {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
             .timer-container {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                height: 100px;
-                margin: 0 20px 0 20px;
+                height: 80px;
+                margin: 0 20px;
                 border-bottom: 2px solid #000000;
                 user-select: none;
+
                 .timer {
                     font-size: 30px;
                     font-weight: 700;
                 }
-
             }
 
             .questions-container {
                 display: flex;
-                gap: 20px;
+                gap: 15px;
                 flex-wrap: wrap;
                 margin: 20px;
-                // align-items: center;
                 justify-content: center;
-                .question{
+                padding-bottom: 20px; // Thêm padding đáy
+                
+                // Giới hạn chiều cao và cho phép cuộn nếu quá nhiều câu hỏi
+                max-height: 500px; 
+                overflow-y: auto;
+
+                .question {
                     width: 40px;
                     height: 40px;
                     border-radius: 50%;
@@ -138,18 +225,20 @@
                     align-items: center;
                     cursor: pointer;
                     user-select: none;
-                    &:hover{
-                        border:1px solid rgb(142, 142, 142);
+                    flex-shrink: 0; // Không bị méo
+
+                    &:hover {
+                        border: 1px solid rgb(142, 142, 142);
                         color: rgb(0, 0, 0);
                         background-color: rgb(218, 218, 218);
                     }
-                    &.selected{
+                    &.selected {
                         background-color: #c6c6c6;
                     }
-                    &.clicked{
+                    &.clicked {
                         color: rgb(0, 0, 0);
                         background-color: rgb(218, 218, 218);
-                        border:1px solid rgb(0, 0, 0);
+                        border: 1px solid rgb(0, 0, 0);
                     }
                 }
             }
@@ -157,17 +246,22 @@
     }
 }
 
+// Các class Modal giữ nguyên hoặc chỉnh nhẹ
 .modal-show-result {
     .modal-body {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center; // Canh giữa text trên mobile
 
         h1 {
             font-size: 30px;
             font-weight: 700;
             color: red;
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
         }
 
         .result {
@@ -175,12 +269,10 @@
             flex-direction: column;
             align-items: center;
 
-
             p {
                 font-size: 20px;
                 font-weight: 600;
                 margin: 0;
-
             }
 
             .counter-result {
@@ -189,14 +281,17 @@
                 color: red;
             }
         }
-
     }
 }
-.modal-confirm{
-    .modal-body{
-        span{
+
+.modal-confirm {
+    .modal-body {
+        span {
             font-size: 1.7rem;
             font-weight: 700;
+            @media (max-width: 768px) {
+                font-size: 1.2rem;
+            }
         }
     }
 }

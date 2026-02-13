@@ -82,7 +82,7 @@ const ModalAssignRole = (props) => {
         setSelectedOptionRole(selectedRole)
         setIsValidSelectedRole(true);
     }
-    
+
     const handleAssign = async () => {
 
         // validate select 
@@ -90,8 +90,8 @@ const ModalAssignRole = (props) => {
         //send only role id selected
         let selectedOptionRoleValue = selectedOptionRole.map(item => item.value);
         console.log(selectedOptionRoleValue);
-        
-        let data ={
+
+        let data = {
             groupId: selectedOptionGroup.value,
             roleId: selectedOptionRoleValue
         };
@@ -146,27 +146,30 @@ const ModalAssignRole = (props) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-assign-quiz'>
+            <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-assign-role'>
                 <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.rolesManagement.modalAssignRole.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light d-flex flex-row" : "modal-body dark d-flex flex-row"}>
-                    <div className="role-select col-5 form-group" >
-                        <label >{t('adminPage.rolesManagement.modalAssignRole.selectRole')}</label>
-                        <Select
-                            className={`${isValidSelectedRole ? "" : "is-invalid"}`}
-                            classNamePrefix="react-select"
-                            defaultValue={selectedOptionRole}
-                            onChange={handleOnchangeSelectRole}
-                            options={listRoles}
-                            menuPortalTarget={document.body}
-                            isMulti={true}
-                            required
-                            styles={getCustomStyles(!darkMode)}
-                        />
-                        <div className="invalid-feedback">{t('adminPage.rolesManagement.modalAssignRole.invalidSelectRole')}</div>
-                    </div>
-                    <div className="group-select col-5 form-group">
+                <Modal.Body className={darkMode ? "modal-body light " : "modal-body dark "}>
+                    <div className="d-flex flex-column flex-md-row gap-4 justify-content-center">
+                        <div className="role-select col col-md-5 form-group" >
+                            <label >{t('adminPage.rolesManagement.modalAssignRole.selectRole')}</label>
+                            <Select
+                                className={`${isValidSelectedRole ? "" : "is-invalid"}`}
+                                classNamePrefix="react-select"
+                                defaultValue={selectedOptionRole}
+                                onChange={handleOnchangeSelectRole}
+                                options={listRoles}
+                                menuPortalTarget={document.body}
+                                isMulti={true}
+                                required
+                                styles={getCustomStyles(!darkMode)}
+                            />
+                            <div className="invalid-feedback">{t('adminPage.rolesManagement.modalAssignRole.invalidSelectRole')}</div>
+                        </div>
+                    
+
+                    <div className="group-select col-12 col-md-5 form-group">
                         <label >{t('adminPage.rolesManagement.modalAssignRole.selectGroup')}</label>
                         <Select
                             className={`${isValidSelectedGroup ? "" : "is-invalid"}`}
@@ -183,6 +186,7 @@ const ModalAssignRole = (props) => {
                         />
                         <div className="invalid-feedback">{t('adminPage.rolesManagement.modalAssignRole.invalidSelectGroup')}</div>
                     </div>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
@@ -192,7 +196,7 @@ const ModalAssignRole = (props) => {
                         {t('adminPage.quizzesManagement.modalAssignQuiz.assign')}
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal >
         </>
     );
 }

@@ -305,7 +305,6 @@ const ManageQuestions = (props) => {
     });
     return (
         <div className={darkMode ? "manageQuestions-container light" : "manageQuestions-container dark"}>
-
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
@@ -313,9 +312,12 @@ const ManageQuestions = (props) => {
             />
 
             <div className={darkMode ? "questions-content light-card" : "questions-content dark-card"}>
-                <div className='mt-4 ms-4'>
-                    <div className="questions-select col-6 form-group" >
-                        <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
+                {/* Thay đổi margin: mobile là 2, laptop là 4 */}
+                <div className='p-3 p-md-4'>
+
+                    {/* Select Quiz: Chiếm 12 cột trên mobile, 6 cột trên laptop */}
+                    <div className="questions-select col-12 col-md-6 form-group mb-4" >
+                        <label className="mb-2">{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
                         <Select
                             className={`${isValidSelected ? "" : "is-invalid"}`}
                             classNamePrefix="react-select"
@@ -331,117 +333,128 @@ const ManageQuestions = (props) => {
                         />
                         <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                     </div>
-                    {
-                        questions && questions.length > 0 &&
+
+                    {questions && questions.length > 0 &&
                         questions.map((question, index_question) => {
                             return (
-                                <div key={question.id} className='q-main mb-4'>
-                                    <div className='mt-3'>{t('adminPage.quizzesManagement.modalUpsertQA.addQuestions')}</div>
+                                <div key={question.id} className='q-main mb-5 border-bottom pb-4'>
+                                    <h6 className='mb-3 text-uppercase fw-bold'>
+                                        {t('adminPage.quizzesManagement.modalUpsertQA.addQuestions')} {index_question + 1}
+                                    </h6>
 
-                                    <div className="questions ">
-                                        <FloatingLabel
-                                            label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')}`}
-                                            className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
-                                        >
-                                            <Form.Control
-                                                className={darkMode ? "form-control light" : "form-control dark-card"}
-                                                placeholder="Name"
-                                                value={question.description}
-                                                onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
-                                                isInvalid={!question.isValidQuestion}
-                                                required />
-                                            <Form.Control.Feedback type="invalid">
-                                                {t('adminPage.quizzesManagement.modalUpsertQA.invalidQuestion')}
-                                            </Form.Control.Feedback>
-                                        </FloatingLabel>
-                                        <div className='col-2 uploadFile-container' >
-                                            <label className='label-uploadFile' htmlFor={`${question.id}`}><FaFolderPlus />{t('adminPage.quizzesManagement.modalUpsertQA.uploadImage')}</label>
+                                    {/* Row bọc Question Input & Upload & Action */}
+                                    <div className="questions row g-3 align-items-center">
+                                        <div className="col-12 col-md-6">
+                                            <FloatingLabel
+                                                label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')}`}
+                                                className={darkMode ? "floating-light" : "floating-dark"}
+                                            >
+                                                <Form.Control
+                                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                    placeholder="Name"
+                                                    value={question.description}
+                                                    onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
+                                                    isInvalid={!question.isValidQuestion}
+                                                    required />
+                                                <Form.Control.Feedback type="invalid">
+                                                    {t('adminPage.quizzesManagement.modalUpsertQA.invalidQuestion')}
+                                                </Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </div>
+
+                                        {/* Phần Upload Image: Tự xuống dòng trên mobile */}
+                                        <div className='col-12 col-md-4 d-flex align-items-center gap-2 '>
+                                            <label className='badge bg-primary mb-0' htmlFor={`${question.id}`}>
+                                                <FaFolderPlus /> {t('adminPage.quizzesManagement.modalUpsertQA.uploadImage')}
+                                            </label>
                                             <input
                                                 type="file"
                                                 id={`${question.id}`}
                                                 hidden
                                                 accept="image/*"
-                                                onChange={(event) => handleOnchangeImageFile(question.id, event)} />
+                                                onChange={(event) => handleOnchangeImageFile(question.id, event)}
+                                            />
 
-                                            <div className='file-name'>
-                                                <span>
-                                                    {question.imageName ?
-                                                        <span onClick={() => handlePreviewImage(question.id)}>
-                                                            {question.imageName}
-                                                        </span>
-                                                        :
-                                                        `${t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}`}
-                                                </span>
+                                            <div className='file-name text-truncate' style={{ maxWidth: '150px' }}>
+                                                {question.imageName ?
+                                                    <span className="text-primary cursor-pointer" onClick={() => handlePreviewImage(question.id)}>
+                                                        {question.imageName}
+                                                    </span>
+                                                    :
+                                                    <small className="text-muted">{t('adminPage.quizzesManagement.modalUpsertQA.emptyFile')}</small>
+                                                }
                                             </div>
                                         </div>
-                                        <div className="action-btn">
-                                            <button className='btn-plus btn' onClick={() => { handleAddnRemoveQuestions("ADD", '') }}><FaPlusCircle /></button>
-                                            {
-                                                questions.length > 1
-                                                &&
-                                                <button className='btn-minus btn' onClick={() => { handleAddnRemoveQuestions("REMOVE", question.id) }}><FaMinusCircle /></button>
-                                            }
 
+                                        {/* Nút thêm/xóa câu hỏi */}
+                                        <div className="col-12 col-md-1 d-flex gap-2 justify-content-md-end">
+                                            <button className='btn btn-primary btn-sm btn-plus d-flex align-items-center' onClick={() => { handleAddnRemoveQuestions("ADD", '') }}><FaPlusCircle /></button>
+                                            {questions.length > 1 &&
+                                                <button className='btn btn-danger btn-sm btn-minus d-flex align-items-center' onClick={() => { handleAddnRemoveQuestions("REMOVE", question.id) }}><FaMinusCircle /></button>
+                                            }
                                         </div>
                                     </div>
-                                    {
-                                        question.answers && question.answers.length > 0 &&
-                                        question.answers.map((answer, index_answer) => {
-                                            return (
-                                                <div key={answer.id} className="answers-content mt-3">
 
-                                                    <input
-                                                        className="form-check-input"
-                                                        type="checkbox"
-                                                        checked={answer.isCorrect}
-                                                        onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
-                                                    />
-                                                    <FloatingLabel
-                                                        label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')}`}
-                                                        className={darkMode ? "floating-light mb-3 col-6" : "floating-dark mb-3 col-6"}
-                                                    >
-                                                        <Form.Control
-                                                            className={darkMode ? "form-control light" : "form-control dark-card"}
-                                                            placeholder="Name"
-                                                            value={answer.description}
-                                                            onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
-                                                            isInvalid={!answer.isValidAnswer}
-                                                            required />
-                                                        <Form.Control.Feedback type="invalid">
-                                                            {t('adminPage.quizzesManagement.modalUpsertQA.invalidAnswer')}
-                                                        </Form.Control.Feedback>
-                                                    </FloatingLabel>
-                                                    <div className="action-btn">
-                                                        <button className='btn-plus btn' onClick={() => { handleAddnRemoveAnswers("ADD", question.id) }}><FaPlusCircle /></button>
-                                                        {
-                                                            question.answers.length > 1 &&
-                                                            <button className='btn-minus btn' onClick={() => { handleAddnRemoveAnswers("REMOVE", question.id, answer.id) }}><FaMinusCircle /></button>
-                                                        }
+                                    {/* Answers Section */}
+                                    <div className="ms-3 ms-md-5 mt-3">
+                                        {question.answers && question.answers.length > 0 &&
+                                            question.answers.map((answer, index_answer) => {
+                                                return (
+                                                    <div key={answer.id} className="answers-content row g-2 mb-2 align-items-center">
+                                                        <div className="col-1">
+                                                            <input
+                                                                className="form-check-input mt-0"
+                                                                type="checkbox"
+                                                                style={{ width: '20px', height: '20px' }}
+                                                                checked={answer.isCorrect}
+                                                                onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)}
+                                                            />
+                                                        </div>
 
+                                                        <div className="col-9 col-md-8">
+                                                            <FloatingLabel
+                                                                label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')}`}
+                                                                className={darkMode ? "floating-light" : "floating-dark"}
+                                                            >
+                                                                <Form.Control
+                                                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                                    placeholder="Answer"
+                                                                    value={answer.description}
+                                                                    onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
+                                                                    isInvalid={!answer.isValidAnswer}
+                                                                    required />
+                                                            </FloatingLabel>
+                                                        </div>
+
+                                                        <div className="col-auto d-flex gap-2">
+                                                            <button className='btn btn-primary btn-sm btn-plus d-flex align-items-center' onClick={() => { handleAddnRemoveAnswers("ADD", question.id) }}><FaPlusCircle /></button>
+                                                            {question.answers.length > 1 &&
+                                                                <button className='btn btn-danger btn-sm btn-minus d-flex align-items-center' onClick={() => { handleAddnRemoveAnswers("REMOVE", question.id, answer.id) }}><FaMinusCircle /></button>
+                                                            }
+                                                        </div>
                                                     </div>
-
-                                                </div>
-                                            )
-                                        })
-                                    }
-
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
                             )
                         })
-
                     }
-                    {
-                        questions && questions.length > 0 &&
-                        <div>
+
+                    {questions && questions.length > 0 &&
+                        <div className="mt-4">
                             <button
-                                className='btn btn-primary mb-4 btn-save-questions'
+                                className='btn btn-primary px-5 py-2 fw-bold btn-save-questions'
                                 onClick={() => handleSubmitQuestions()}
-                            > {t('adminPage.questionsManagement.save')}</button>
+                            >
+                                {t('adminPage.questionsManagement.save')}
+                            </button>
                         </div>
                     }
-
                 </div>
             </div>
+
             <Lightbox
                 open={open}
                 close={() => setOpen(false)}
@@ -449,8 +462,8 @@ const ManageQuestions = (props) => {
                 zoom={{ scrollToZoom: true }}
                 slides={previewImage ? [previewImage] : []}
                 render={{
-                    buttonPrev: () => null, // ẩn nút Prev
-                    buttonNext: () => null, // ẩn nút Next
+                    buttonPrev: () => null,
+                    buttonNext: () => null,
                 }}
             />
         </div>
