@@ -32,7 +32,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const ModalUpdateQuiz = (props) => {
-    const { show, setShow, dataUpdate, resetUpdateQuiz, darkMode,fetchListQuizWithPagination,currentPage } = props;
+    const { show, setShow, dataUpdate, resetUpdateQuiz, themeState,fetchListQuizWithPagination,currentPage } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -176,19 +176,19 @@ const ModalUpdateQuiz = (props) => {
     }
     return (
         <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-add-quiz'>
-            <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+            <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                 <Modal.Title>{t('adminPage.quizzesManagement.modalUpdateQuiz.title')}</Modal.Title>
             </Modal.Header>
-            <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+            <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                 <Form>
                     <Row className="mb-3">
                         <Form.Group as={Col} >
                             <FloatingLabel
                                 label={t('adminPage.quizzesManagement.modalAddQuiz.quizName')}
-                                className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}
                             >
                                 <Form.Control
-                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                     placeholder="Name"
                                     value={form.name}
                                     onChange={e => handleChange("name", e.target.value)}
@@ -204,7 +204,7 @@ const ModalUpdateQuiz = (props) => {
                         <Form.Group as={Col} className="mb-3" >
                             <FloatingLabel
                                 label={t('adminPage.quizzesManagement.modalAddQuiz.difficulty.title')}
-                                className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}
                             >
                                 <Form.Select value={form.difficulty} onChange={e => handleChange("difficulty", e.target.value)}>
                                     <option value="EASY">{t('adminPage.quizzesManagement.modalAddQuiz.difficulty.EASY')}</option>
@@ -218,10 +218,10 @@ const ModalUpdateQuiz = (props) => {
                         <Form.Group as={Col}  >
                             <FloatingLabel
                                 label={t('adminPage.quizzesManagement.modalAddQuiz.description')}
-                                className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}
                             >
                                 <Form.Control
-                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                     placeholder="Description"
                                     value={form.description}
                                     onChange={e => handleChange("description", e.target.value)}
@@ -235,7 +235,7 @@ const ModalUpdateQuiz = (props) => {
                     </Row>
                     <Row>
                         <Form.Group className="mt-3" >
-                            <Form.Label className={darkMode ? "label-uploadFile floating-light mb-3" : "label-uploadFile floating-dark mb-3"}>
+                            <Form.Label className={themeState ? "label-uploadFile theme-floating-light mb-3" : "label-uploadFile theme-floating-dark mb-3"}>
                                 {t('adminPage.usersManagement.modalAddUsers.uploadImageFile')}
                             </Form.Label>
                             <FilePond
@@ -249,7 +249,7 @@ const ModalUpdateQuiz = (props) => {
                                 imageResizeTargetHeight={400}
                                 imageResizeMode="cover" // cover = luôn đúng 400x400
                                 labelIdle={t('adminPage.usersManagement.modalAddUsers.upload1')}
-                                className={darkMode ? "light-theme" : "dark-theme"}
+                                className={themeState ? "theme-mode-light" : "theme-mode-dark"}
                             />
                         </Form.Group>
                     </Row>
@@ -257,7 +257,7 @@ const ModalUpdateQuiz = (props) => {
                 </Form>
 
             </Modal.Body>
-            <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+            <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                 <Button variant="secondary" onClick={handleClose}>
                     {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                 </Button>

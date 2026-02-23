@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useOutletContext } from "react-router-dom";
 
 const ManageUsers = (props) => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalViewUser, setShowModalViewUser] = useState(false);
@@ -69,18 +69,18 @@ const ManageUsers = (props) => {
     }
     
     return (
-        <div className={darkMode ? "manageUsers-container light" : "manageUsers-container dark"}>
+        <div className={themeState ? "manageUsers-container light" : "manageUsers-container dark"}>
 
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
 
 
             <div
-                className={darkMode ? "Users-content light-card" : "Users-content dark-card"}
+                className={themeState ? "Users-content theme-card-light" : "Users-content theme-card-dark"}
             // className="Users-content"
             >
                 <div className="Add-users">
@@ -88,7 +88,7 @@ const ManageUsers = (props) => {
                         fetchListUsers={fetchListUsers}
                         fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                         setCurrentPage={setCurrentPage}
-                        darkMode={darkMode}
+                        themeState={themeState}
                     />
                 </div>
                 <div className="search-bar"  >
@@ -109,7 +109,7 @@ const ManageUsers = (props) => {
                         pageCount={pageCount}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
-                        darkMode={darkMode} />
+                        themeState={themeState} />
                 </div>
                 <ModalUpdateUser
                     show={showModalUpdateUser}
@@ -120,11 +120,11 @@ const ManageUsers = (props) => {
                     fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    darkMode={darkMode} />
+                    themeState={themeState} />
 
 
                 <ModalViewUsers
-                    darkMode={darkMode}
+                    themeState={themeState}
                     show={showModalViewUser}
                     setShow={setShowModalViewUser}
                     dataView={dataView}
@@ -132,7 +132,7 @@ const ManageUsers = (props) => {
                     fetchListUsersWithPaginate={fetchListUsersWithPaginate}
                 />
                 <ModalDeleteUser
-                    darkMode={darkMode}
+                    themeState={themeState}
                     show={showModalDeleteUser}
                     setShow={setShowModalDeleteUser}
                     dataDelete={dataDelete}

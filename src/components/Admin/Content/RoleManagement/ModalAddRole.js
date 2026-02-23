@@ -13,7 +13,7 @@ import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { checkRoleUrlFormat, validateMethod } from '../../../../utils/validators';
 import { postCreateNewRole } from '../../../../services/apiService';
 const ModalAddRoles = (props) => {
-    const { show, setShow, darkMode,setCurrentPage,fetchListRoleWithPagination } = props
+    const { show, setShow, themeState,setCurrentPage,fetchListRoleWithPagination } = props
     const { t } = useTranslation();
     const handleClose = () => {
         setRoles(initRoles);
@@ -176,17 +176,17 @@ const ModalAddRoles = (props) => {
                 backdrop="static"
                 className='modal-add-role'
             >
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t("adminPage.rolesManagement.modalAddRole.title")}</Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     {roles && roles.length > 0 && roles.map((role, index_role) => {
                         return (
-                            <div key={role.id} className={`role-group mb-4 p-3 rounded border ${darkMode ? 'border-secondary' : 'border-light dark'}`}>
+                            <div key={role.id} className={`role-group mb-4 p-3 rounded border ${themeState ? 'border-secondary' : 'border-light dark'}`}>
                                 {/* Header nhỏ cho từng Role */}
                                 <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 className={`m-0 ${darkMode ? 'text-dark' : 'text-light'}`}>
+                                    <h6 className={`m-0 ${themeState ? 'text-dark' : 'text-light'}`}>
                                         {t("adminPage.rolesManagement.modalAddRole.header")} {index_role + 1}
                                     </h6>
 
@@ -207,10 +207,10 @@ const ModalAddRoles = (props) => {
                                     <Col xs={12} md={4}>
                                         <FloatingLabel
                                             label={t("adminPage.rolesManagement.modalAddRole.roleUrl")}
-                                            className={darkMode ? "floating-light" : "floating-dark"}
+                                            className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                         >
                                             <Form.Control
-                                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                                 placeholder={t("adminPage.rolesManagement.modalAddRole.roleUrl")}
                                                 value={role.url}
                                                 onChange={(event) => handleOnChangeRoleValue('URL', role.id, event.target.value)}
@@ -226,10 +226,10 @@ const ModalAddRoles = (props) => {
                                     <Col xs={12} md={3}>
                                         <FloatingLabel
                                             label={t("adminPage.rolesManagement.modalAddRole.roleMethod")}
-                                            className={darkMode ? "floating-light" : "floating-dark"}
+                                            className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                         >
                                             <Form.Control
-                                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                                 placeholder={t("adminPage.rolesManagement.modalAddRole.roleMethod")}
                                                 value={role.method}
                                                 onChange={(event) => handleOnChangeRoleValue('METHOD', role.id, event.target.value)}
@@ -245,10 +245,10 @@ const ModalAddRoles = (props) => {
                                     <Col xs={12} md={5}>
                                         <FloatingLabel
                                             label={t("adminPage.rolesManagement.modalAddRole.roleDescription")}
-                                            className={darkMode ? "floating-light" : "floating-dark"}
+                                            className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                         >
                                             <Form.Control
-                                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                                 placeholder={t("adminPage.rolesManagement.modalAddRole.roleDescription")}
                                                 value={role.description}
                                                 onChange={(event) => handleOnChangeRoleValue('DESCRIPTION', role.id, event.target.value)}
@@ -278,7 +278,7 @@ const ModalAddRoles = (props) => {
 
                 </Modal.Body>
 
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.rolesManagement.modalAddRole.btnCancel')}
                     </Button>

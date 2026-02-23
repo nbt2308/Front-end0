@@ -10,7 +10,7 @@ import { validateName } from '../../../../utils/validators';
 import { putUpdateGroup } from '../../../../services/apiService';
 import _ from 'lodash';
 const ModalUpdateGroup = (props) => {
-    const { show, setShow, darkMode, currentPage, setCurrentPage, fetchListGroupsWithPagination, dataUpdate, resetUpdateData } = props
+    const { show, setShow, themeState, currentPage, setCurrentPage, fetchListGroupsWithPagination, dataUpdate, resetUpdateData } = props
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -99,18 +99,18 @@ const ModalUpdateGroup = (props) => {
         <>
 
             <Modal show={show} onHide={handleClose} size="md" backdrop="static" className='modal-add-group'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.groupsManagement.modalUpdateGroup.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <Form  >
                         <Form.Group as={Col} >
                             <FloatingLabel
                                 label={t('adminPage.groupsManagement.modalUpdateGroup.groupName')}
-                                className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}
                             >
                                 <Form.Control
-                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                     type="text"
                                     placeholder="Name"
                                     value={form.name}
@@ -125,10 +125,10 @@ const ModalUpdateGroup = (props) => {
                         <Form.Group as={Col} >
                             <FloatingLabel
                                 label={t('adminPage.groupsManagement.modalUpdateGroup.groupDescription')}
-                                className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}
+                                className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}
                             >
                                 <Form.Control
-                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                     type="text"
                                     placeholder="Description"
                                     value={form.description}
@@ -142,7 +142,7 @@ const ModalUpdateGroup = (props) => {
                     </Form>
 
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.groupsManagement.modalUpdateGroup.btnCancel')}
                     </Button>

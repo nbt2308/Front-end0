@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import VN from "../../assets/images/vietnam-flag.svg";
 import US from "../../assets/images/US.svg";
 const Language = (props) => {
-    const { darkMode } = props
+    const { themeState } = props
     const { t, i18n } = useTranslation();
     const handleChangeLanguage = (language) => {
         i18n.changeLanguage(language);
@@ -15,7 +15,7 @@ const Language = (props) => {
         <NavDropdown
             title={<AiOutlineGlobal />}
             id="basic-nav-dropdown"
-            className={darkMode ? " languages language-admin dropdown-light" : " languages language-admin dropdown-dark"}>
+            className={themeState ? " languages language-admin theme-dropdown-light" : " languages language-admin theme-dropdown-dark"}>
             <NavDropdown.Item onClick={() => { handleChangeLanguage("vi") }}>
                 <img src={VN} alt="icon" width={20} height={20} />
                 {t('homepage.header.vi')} 

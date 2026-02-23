@@ -12,7 +12,7 @@ import ModalDeleteRole from './ModalDeleteRole';
 import ModalAssignRole from './ModalAssignRole';
 import ModalUnassignRole from './ModalUnassignRole';
 const ManageRoles = (props) => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [listRole, setListRole] = useState("");
     const [dataUpdate, setDataUpdate] = useState("")
@@ -64,15 +64,15 @@ const ManageRoles = (props) => {
     }
 
     return (
-        <div className={darkMode ? "manageRoles-container light" : "manageRoles-container dark"}>
+        <div className={themeState ? "manageRoles-container light" : "manageRoles-container dark"}>
 
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
-            <div className={darkMode ? "roles-content light-card" : "roles-content dark-card"}>
+            <div className={themeState ? "roles-content theme-card-light" : "roles-content theme-card-dark"}>
                 <div className="d-flex flex-column flex-md-row gap-3 mb-3">
                     <button onClick={() => handleBtnAddRoles()} className='btn btn-primary mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
                         <FaPlus className='i-size' />
@@ -98,14 +98,14 @@ const ManageRoles = (props) => {
                         pageCount={pageCount}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
-                        darkMode={darkMode} />
+                        themeState={themeState} />
                 </div>
             </div>
 
             <ModalAddRole
                 show={showModalAddRoles}
                 setShow={setShowModalAddRoles}
-                darkMode={darkMode}
+                themeState={themeState}
                 fetchListRoleWithPagination={fetchListRoleWithPagination}
                 setCurrentPage={setCurrentPage}
             />
@@ -117,7 +117,7 @@ const ManageRoles = (props) => {
                 fetchListRoleWithPagination={fetchListRoleWithPagination}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                darkMode={darkMode} />
+                themeState={themeState} />
             <ModalDeleteRole
                 show={showModalDeleteRole}
                 setShow={setShowModalDeleteRole}
@@ -126,16 +126,16 @@ const ManageRoles = (props) => {
                 fetchListRoleWithPagination={fetchListRoleWithPagination}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                darkMode={darkMode} />
+                themeState={themeState} />
             <ModalAssignRole
                 show={showModalAssignRole}
                 setShow={setShowModalAssignRole}
-                darkMode={darkMode}
+                themeState={themeState}
             />
             <ModalUnassignRole
                 show={showModalUnassignRole}
                 setShow={setShowModalUnassignRole}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
         </div>

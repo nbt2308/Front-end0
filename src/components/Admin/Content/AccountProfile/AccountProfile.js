@@ -8,7 +8,7 @@ import "./AccountProfile.scss"
 import { useOutletContext } from 'react-router-dom';
 import Breadcrumb from '../../BreadCrump/Breadcrumb';
 const AccountProfile = () => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const [key, setKey] = useState('Personal Details');
     const { t } = useTranslation();
     useEffect(() => {
@@ -20,23 +20,23 @@ const AccountProfile = () => {
                 {/* Breadcrumb */}
                 <Breadcrumb
                     breadCrumb={breadCrumb}
-                    darkMode={darkMode}
+                    themeState={themeState}
                 />
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
                     onSelect={(k) => setKey(k)}
-                    className={darkMode ? "mt-3 mb-3 light-card" : "mt-3 mb-3 dark-card"}
+                    className={themeState ? "mt-3 mb-3 theme-card-light" : "mt-3 mb-3 theme-card-dark"}
                     justify
                 >
                     <Tab eventKey="Personal Details" title={t('adminPage.accountProfile.personalDetail.title1')}>
-                        <PersonalDetails darkMode={darkMode} />
+                        <PersonalDetails themeState={themeState} />
                     </Tab>
                     <Tab eventKey="Change Password" title={t('adminPage.accountProfile.changePassword.title')}>
-                        <ChangePassword darkMode={darkMode} />
+                        <ChangePassword themeState={themeState} />
                     </Tab>
                     <Tab eventKey="contact" title={t('adminPage.accountProfile.history.title1')} >
-                        <History darkMode={darkMode} />
+                        <History themeState={themeState} />
                     </Tab>
                 </Tabs>
             </div>

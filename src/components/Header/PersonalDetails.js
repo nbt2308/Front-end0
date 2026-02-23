@@ -33,7 +33,7 @@ registerPlugin(
     FilePondPluginImageEdit
 );
 const PersonalDetails = (props) => {
-    const { darkMode } = props;
+    const { themeState } = props;
     const account = useSelector(state => state?.account);
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -150,7 +150,7 @@ const PersonalDetails = (props) => {
 
     return (
         <div className="personal-details-container mx-3">
-            <div className={darkMode ? "upload-file-container light-card" : "upload-file-container dark-card"}>
+            <div className={themeState ? "upload-file-container theme-card-light" : "upload-file-container theme-card-dark"}>
                 <div className="upload-image-profile">
                     <FilePond
                         className='filepond'
@@ -183,7 +183,7 @@ const PersonalDetails = (props) => {
                     }
                 </div>
             </div>
-            <div className={darkMode ? "personal-details-content light-card" : "personal-details-content dark-card"}>
+            <div className={themeState ? "personal-details-content theme-card-light" : "personal-details-content theme-card-dark"}>
                 <div className="title ms-2 mt-2">{t('adminPage.accountProfile.personalDetail.title')}</div>
                 <div className='ms-2 me-2 mt-2 mb-2'>
                     <Form>

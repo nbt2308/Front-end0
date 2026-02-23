@@ -6,7 +6,7 @@ import { postChangePassword } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 const ChangePassword = (props) => {
-    const { darkMode } = props;
+    const { themeState } = props;
     const { t } = useTranslation();
     const [form, setForm] = useState({
         currentPassword: "",
@@ -87,7 +87,7 @@ const ChangePassword = (props) => {
     return (
         <>
             <div className="change-password-container">
-                <div className={darkMode ? "form-change-password light-card" : "form-change-password dark-card"}>
+                <div className={themeState ? "form-change-password theme-card-light" : "form-change-password theme-card-dark"}>
                     <div className="change-password-title mb-3 mt-3">
                         {t('adminPage.accountProfile.changePassword.title')}
                     </div>
@@ -95,9 +95,9 @@ const ChangePassword = (props) => {
 
                         <FloatingLabel
                             label={t('adminPage.accountProfile.changePassword.currentPassword')}
-                            className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}>
+                            className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}>
                             <Form.Control
-                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                 type="password"
                                 placeholder="name@example.com"
                                 value={form.currentPassword}
@@ -112,9 +112,9 @@ const ChangePassword = (props) => {
                         {/* New Password */}
                         <FloatingLabel
                             label={t('adminPage.accountProfile.changePassword.newPassword')}
-                            className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}>
+                            className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}>
                             <Form.Control
-                                className={darkMode ? "form-control light" : "form-control dark-card"}
+                                className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                 placeholder="name@example.com"
                                 type="password"
                                 value={form.newPassword}
@@ -129,9 +129,9 @@ const ChangePassword = (props) => {
                         {/* Confirm Password */}
                         <FloatingLabel
                             label={t('adminPage.accountProfile.changePassword.confirmPassword')}
-                            className={darkMode ? "floating-light mb-3" : "floating-dark mb-3"}>
+                            className={themeState ? "theme-floating-light mb-3" : "theme-floating-dark mb-3"}>
                             <Form.Control
-                             className={darkMode ? "form-control light" : "form-control dark-card"}
+                             className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                 type="password"
                                  placeholder="name@example.com"
                                 value={form.confirmPassword}

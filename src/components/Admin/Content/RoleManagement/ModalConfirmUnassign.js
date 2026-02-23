@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 const ModalConfirmUnassignRole = (props) => {
-    const { show, setShow, dataUnassign, fetchListRoles, setCurrentPage, darkMode } = props;
+    const { show, setShow, dataUnassign, fetchListRoles, setCurrentPage, themeState } = props;
     const { t } = useTranslation();
     const handleClose = () => setShow(false);
 
@@ -24,14 +24,14 @@ const ModalConfirmUnassignRole = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} backdrop="static" className='modal-delete-role ' size='md' centered>
-                <Modal.Header closeButton className={darkMode ? "light border border-danger" : "dark border border-danger"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light border border-danger" : "dark border border-danger"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title className='d-flex align-items-center gap-1'><IoIosWarning className='icon text-danger' />{t('adminPage.rolesManagement.modalUnassignRole.unassignConfirm')}</Modal.Title>
                 </Modal.Header >
-                <Modal.Body className={darkMode ? "modal-body light border border-danger" : "modal-body dark border border-danger"}>
+                <Modal.Body className={themeState ? "modal-body light border border-danger" : "modal-body dark border border-danger"}>
                     <h3>{t('adminPage.rolesManagement.modalUnassignRole.messageConfirm')}</h3>
 
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light border border-danger" : "modal-footer dark border border-danger"}>
+                <Modal.Footer className={themeState ? "modal-footer light border border-danger" : "modal-footer dark border border-danger"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.rolesManagement.modalDeleteRole.buttonCancel')}
                     </Button>

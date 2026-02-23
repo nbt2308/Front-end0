@@ -5,7 +5,7 @@ import './ListQuiz.scss';
 import { useTranslation } from 'react-i18next';
 import { API_URL } from "../../views/App";
 const ListQuiz = () => {
-    const { darkMode } = useOutletContext();
+    const { themeState } = useOutletContext();
     const [arrQuiz, setArrQuiz] = useState([])
     const Navigate = useNavigate();
     const { t } = useTranslation();
@@ -28,7 +28,7 @@ const ListQuiz = () => {
                 arrQuiz.map((item, index) => {
                     return (
                         <div key={`${index}-quiz`} className="row">
-                            <div  className={darkMode?"card light":"card dark-card"} >
+                            <div  className={themeState?"card light":"card theme-card-dark"} >
                                 <div className="image-preview">
                                     <img className="card-img-top" src={`${API_URL}${item.image}`} alt="Card-image-cap" />
                                 </div>

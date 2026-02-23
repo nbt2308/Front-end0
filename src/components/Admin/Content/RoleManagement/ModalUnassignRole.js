@@ -9,7 +9,7 @@ import { FaUserMinus } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import ModalConfirmUnassignRole from './ModalConfirmUnassign';
 const ModalUnassignRole = (props) => {
-    const { show, setShow, darkMode } = props;
+    const { show, setShow, themeState } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -92,40 +92,40 @@ const ModalUnassignRole = (props) => {
         };
         setDataUnassign(data);
     }
-    const getCustomStyles = (darkMode) => ({
+    const getCustomStyles = (themeState) => ({
         menuPortal: base => ({ ...base, zIndex: 9999 }),
         control: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
-            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
+            borderColor: themeState ? "#ffffffff" : "#ccc",
             boxShadow: "none",
             ":hover": {
-                borderColor: darkMode ? "#63a4ff" : "#888",
+                borderColor: themeState ? "#63a4ff" : "#888",
             },
         }),
         menu: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
         }),
         option: (base, state) => ({
             ...base,
             backgroundColor: state.isSelected
-                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                ? (themeState ? "#104e8b" : "#e6f0ff")
                 : state.isFocused
-                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
-                    : (darkMode ? "#0d305a" : "#fff"),
-            color: darkMode ? "#fff" : "#000",
+                    ? (themeState ? "#1e90ff" : "#f0f8ff")
+                    : (themeState ? "#0d305a" : "#fff"),
+            color: themeState ? "#fff" : "#000",
             cursor: "pointer",
         }),
         singleValue: (base) => ({
             ...base,
-            color: darkMode ? "#fff" : "#000",
+            color: themeState ? "#fff" : "#000",
         }),
         placeholder: (base) => ({
             ...base,
-            color: darkMode ? "#bbb" : "#666",
+            color: themeState ? "#bbb" : "#666",
         }),
     });
 
@@ -136,10 +136,10 @@ const ModalUnassignRole = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-unassign-role'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.rolesManagement.modalUnassignRole.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light d-flex flex-column gap-3" : "modal-body dark d-flex flex-column"}>
+                <Modal.Body className={themeState ? "modal-body light d-flex flex-column gap-3" : "modal-body dark d-flex flex-column"}>
                     <div className="group-select col-md-6 col-12 form-group">
                         <label className='mb-1 fw-bold'>{t('adminPage.rolesManagement.modalAssignRole.selectGroup')}</label>
                         <Select
@@ -150,7 +150,7 @@ const ModalUnassignRole = (props) => {
                             options={listGroups}
                             menuPortalTarget={document.body}
                             required
-                            styles={getCustomStyles(!darkMode)}
+                            styles={getCustomStyles(!themeState)}
                         />
                         <div className="invalid-feedback">{t('adminPage.rolesManagement.modalAssignRole.invalidSelectGroup')}</div>
                     </div>
@@ -159,11 +159,11 @@ const ModalUnassignRole = (props) => {
                             <table className="table table-bordered table-hover text-center">
                                 <thead >
                                     <tr >
-                                        <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                        <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
-                                        <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
-                                        <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
-                                        <th scope="col" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                        <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}><span className="ms-4">ID</span></th>
+                                        <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
+                                        <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
+                                        <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
+                                        <th scope="col" className={themeState ? "action-col theme-th-light" : "action-col theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -171,12 +171,12 @@ const ModalUnassignRole = (props) => {
                                         listRoles && listRoles.length > 0 && listRoles.map((item, index) => {
                                             return (
                                                 <tr key={`table-role-${index}`}>
-                                                    <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                                    <td className={darkMode ? "light" : "dark-card"}>{item.url}</td>
-                                                    <td className={darkMode ? "light" : "dark-card"}>{item.method}</td>
-                                                    <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
-                                                    <td className={darkMode ? "light action-col" : "dark-card action-col"}>
-                                                        <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                    <td className={themeState ? "light" : "theme-card-dark"}><span className="ms-4">{item.id}</span></td>
+                                                    <td className={themeState ? "light" : "theme-card-dark"}>{item.url}</td>
+                                                    <td className={themeState ? "light" : "theme-card-dark"}>{item.method}</td>
+                                                    <td className={themeState ? "light" : "theme-card-dark"}>{item.description}</td>
+                                                    <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
+                                                        <button className={themeState ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                             onClick={() => handleShowModalConfirmUnassignRole(item)}
                                                             type="button"
                                                             data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.rolesManagement.tableRoles.tooltipUnassign')}
@@ -191,7 +191,7 @@ const ModalUnassignRole = (props) => {
                                     {
                                         listRoles && listRoles.length === 0 &&
                                         <tr>
-                                            <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.rolesManagement.tableRoles.error')}</td>
+                                            <td colSpan={"6"} className={themeState ? "light" : "theme-card-dark"}>{t('adminPage.rolesManagement.tableRoles.error')}</td>
                                         </tr>
                                     }
 
@@ -216,13 +216,13 @@ const ModalUnassignRole = (props) => {
                         breakLabel="..."
                         breakClassName="page-item"
                         breakLinkClassName="page-link"
-                        containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                        containerClassName={`pagination ${themeState ? "pagination-light" : "pagination-dark"}`}
                         activeClassName="active"
                         renderOnZeroPageCount={null}
                         forcePage={currentPage - 1}
                     />
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                     </Button>
@@ -235,7 +235,7 @@ const ModalUnassignRole = (props) => {
                 fetchListRoles={fetchListRoles}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
 

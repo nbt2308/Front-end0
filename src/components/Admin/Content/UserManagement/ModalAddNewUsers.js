@@ -36,7 +36,7 @@ registerPlugin(
 const AddUsers = (props) => {
     const [files, setFiles] = useState([]);
     const [show, setShow] = useState(false);
-    const { setCurrentPage, fetchListUsersWithPaginate, darkMode } = props
+    const { setCurrentPage, fetchListUsersWithPaginate, themeState } = props
     const { t } = useTranslation();
 
     const handleClose = () => {
@@ -235,10 +235,10 @@ const AddUsers = (props) => {
             </Button>
 
             <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-add-user'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.usersManagement.modalAddUsers.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <Form>
                         {/* Hàng 1: Email & Password */}
                         {/* Thêm g-3 để tạo khoảng cách giữa các cột */}
@@ -246,10 +246,10 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}> {/* Mobile: 12, PC: 6 */}
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.email')}
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                         type="email"
                                         placeholder="name@example.com"
                                         value={form.Email}
@@ -264,10 +264,10 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.password')}
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                         type="password"
                                         placeholder="Password"
                                         value={form.Password}
@@ -285,10 +285,10 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.username')}
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                         type="text"
                                         placeholder="Username"
                                         value={form.Username}
@@ -305,7 +305,7 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label={t('adminPage.usersManagement.modalAddUsers.role')}
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Select value={form.Group} onChange={e => handleChange("Group", e.target.value)}>
                                         {listGroup.length > 0 &&
@@ -325,10 +325,10 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12}>
                                 <FloatingLabel
                                     label="Address"
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                         type="text"
                                         placeholder="Address"
                                         value={form.Address}
@@ -348,7 +348,7 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label="Gender"
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Select value={form.Sex} onChange={e => handleChange("Sex", e.target.value)}>
                                         <option value="Male">Male</option>
@@ -360,10 +360,10 @@ const AddUsers = (props) => {
                             <Form.Group as={Col} xs={12} md={6}>
                                 <FloatingLabel
                                     label="Phone"
-                                    className={darkMode ? "floating-light" : "floating-dark"}
+                                    className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                 >
                                     <Form.Control
-                                        className={darkMode ? "form-control light" : "form-control dark-card"}
+                                        className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                         type="tel"
                                         placeholder="Phone number"
                                         value={form.Phone}
@@ -380,7 +380,7 @@ const AddUsers = (props) => {
                         <Row>
                             <Form.Group className="mb-3 col-12"> {/* Luôn full width */}
                                 <Form.Label
-                                    className={darkMode ? "label-uploadFile floating-light mb-2" : "label-uploadFile floating-dark mb-2"}
+                                    className={themeState ? "label-uploadFile theme-floating-light mb-2" : "label-uploadFile theme-floating-dark mb-2"}
                                     htmlFor="upload-image" >
                                     {t('adminPage.usersManagement.modalAddUsers.uploadImageFile')}
                                 </Form.Label>
@@ -395,14 +395,14 @@ const AddUsers = (props) => {
                                     imageResizeTargetHeight={400}
                                     imageResizeMode="cover"
                                     labelIdle={t('adminPage.usersManagement.modalAddUsers.upload1')}
-                                    className={darkMode ? "light-theme" : "dark-theme"}
+                                    className={themeState ? "theme-mode-light" : "theme-mode-dark"}
                                 />
                             </Form.Group>
                         </Row>
                     </Form>
 
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                     </Button>
