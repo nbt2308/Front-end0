@@ -7,7 +7,7 @@ import Select from 'react-select';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 const ModalAssignQuiz = (props) => {
-    const { show, setShow, darkMode } = props;
+    const { show, setShow, themeState } = props;
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -87,40 +87,40 @@ const ModalAssignQuiz = (props) => {
 
 
     }
-    const getCustomStyles = (darkMode) => ({
+    const getCustomStyles = (themeState) => ({
         menuPortal: base => ({ ...base, zIndex: 9999 }),
         control: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
-            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
+            borderColor: themeState ? "#ffffffff" : "#ccc",
             boxShadow: "none",
             ":hover": {
-                borderColor: darkMode ? "#63a4ff" : "#888",
+                borderColor: themeState ? "#63a4ff" : "#888",
             },
         }),
         menu: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
         }),
         option: (base, state) => ({
             ...base,
             backgroundColor: state.isSelected
-                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                ? (themeState ? "#104e8b" : "#e6f0ff")
                 : state.isFocused
-                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
-                    : (darkMode ? "#0d305a" : "#fff"),
-            color: darkMode ? "#fff" : "#000",
+                    ? (themeState ? "#1e90ff" : "#f0f8ff")
+                    : (themeState ? "#0d305a" : "#fff"),
+            color: themeState ? "#fff" : "#000",
             cursor: "pointer",
         }),
         singleValue: (base) => ({
             ...base,
-            color: darkMode ? "#fff" : "#000",
+            color: themeState ? "#fff" : "#000",
         }),
         placeholder: (base) => ({
             ...base,
-            color: darkMode ? "#bbb" : "#666",
+            color: themeState ? "#bbb" : "#666",
         }),
     });
 
@@ -128,10 +128,10 @@ const ModalAssignQuiz = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} size="lg" backdrop="static" className='modal-assign-quiz'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.quizzesManagement.modalAssignQuiz.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <div className="d-flex flex-column flex-md-row gap-3 justify-content-center">
                         <div className="quiz-select col col-md-5 form-group" >
                             <label >{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
@@ -146,7 +146,7 @@ const ModalAssignQuiz = (props) => {
                                 options={listQuiz}
                                 menuPortalTarget={document.body}
                                 required
-                                styles={getCustomStyles(!darkMode)}
+                                styles={getCustomStyles(!themeState)}
                             />
                             <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                         </div>
@@ -163,13 +163,13 @@ const ModalAssignQuiz = (props) => {
                                 options={listUsers}
                                 menuPortalTarget={document.body}
                                 required
-                                styles={getCustomStyles(!darkMode)}
+                                styles={getCustomStyles(!themeState)}
                             />
                             <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalAssignQuiz.invalidSelect')}</div>
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                     </Button>

@@ -24,7 +24,7 @@ const Admin = (props) => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
     const { t } = useTranslation();
-    const { darkMode } = props
+    const { themeState } = props
     const handleLogout = async () => {
         let res = await postLogout(account.refreshToken)
         if (res && res.EC === 0) {
@@ -37,10 +37,10 @@ const Admin = (props) => {
 
     }
     const handleChangeLight = () => {
-        darkMode.enable();
+        themeState.enable();
     }
     const handleChangeDark = () => {
-        darkMode.disable();
+        themeState.disable();
     }
 
     return (
@@ -57,11 +57,11 @@ const Admin = (props) => {
                     toggled={toggled}
                     setToggled={setToggled}
                     theme={theme}
-                    darkMode={darkMode.value}
+                    themeState={themeState.value}
                 />
             </div>
-            <div className={darkMode.value ? "Admin-content light" : "Admin-content dark"} >
-                <div className={darkMode.value ? "Admin-header light" : "Admin-header dark"}>
+            <div className={themeState.value ? "Admin-content light" : "Admin-content dark"} >
+                <div className={themeState.value ? "Admin-header light" : "Admin-header dark"}>
                     <span className="collapse-btn"><FaBars onClick={() => {
                         // Kiểm tra kích thước màn hình
                         if (window.innerWidth <= 768) {
@@ -77,9 +77,9 @@ const Admin = (props) => {
                     <div className="rightside">
 
                         <NavDropdown
-                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />}
+                            title={themeState.value ? <AiFillSun /> : <IoIosMoon />}
                             id="basic-nav-dropdown"
-                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                            className={themeState.value ? "changeTheme theme-dropdown-light" : "changeTheme theme-dropdown-dark"}>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
 
@@ -87,7 +87,7 @@ const Admin = (props) => {
                         <NavDropdown
                             title={<IoSettings />}
                             id="basic-nav-dropdown"
-                            className={darkMode.value ? "settings dropdown-light" : "settings dropdown-dark"}>
+                            className={themeState.value ? "settings theme-dropdown-light" : "settings theme-dropdown-dark"}>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' href="/"><FiHome />{t('homepage.header.home')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' href="/admin/account"><FaRegUser />{t('homepage.header.profile')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2'
@@ -96,17 +96,17 @@ const Admin = (props) => {
                         </NavDropdown>
 
                         <Language
-                            darkMode={darkMode.value}
+                            themeState={themeState.value}
                         />
 
 
                     </div>
                 </div>
-                <div className={darkMode.value ? "Admin-main light" : "Admin-main dark"}>
+                <div className={themeState.value ? "Admin-main light" : "Admin-main dark"}>
 
                     <Outlet
                         context={{
-                            darkMode: darkMode.value,
+                            themeState: themeState.value,
                             breadCrumb: breadCrumb,
                             setBreadCrumb: setBreadCrumb
                         }}

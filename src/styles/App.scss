@@ -22,6 +22,17 @@ body {
 
 }
 
+
+body.theme-light {
+  --app-background: #f6fff6;
+  --app-text: #111111;
+}
+
+body.theme-dark {
+  --app-background: #0d2239;
+  --app-text: #f3f3f3;
+}
+
 a.dropdown-toggle {
   font-size: 25px;
 
@@ -32,6 +43,9 @@ a.dropdown-toggle {
 
 .app-container {
   overflow-x: hidden;
+  background-color: var(--app-background);
+  color: var(--app-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 
   .header-container {
     position: sticky;
@@ -42,7 +56,7 @@ a.dropdown-toggle {
 
 
 
-    .dropdown-light {
+    .theme-dropdown-light {
       .dropdown-menu.show {
         background-color: #ffffff;
       }
@@ -56,7 +70,7 @@ a.dropdown-toggle {
       }
     }
 
-    .dropdown-dark {
+    .theme-dropdown-dark {
       .dropdown-menu.show {
         background-color: #125191;
       }
@@ -479,7 +493,7 @@ a.dropdown-toggle {
 
           .homepage-btn {
 
-            .button-light {
+            .theme-button-light {
 
               width: 200px;
               padding: 0 15px;
@@ -500,7 +514,7 @@ a.dropdown-toggle {
 
             }
 
-            .button-dark {
+            .theme-button-dark {
 
               width: 200px;
               padding: 0 15px;
@@ -555,27 +569,27 @@ a.dropdown-toggle {
   color: #cfcfcf !important;
 }
 
-.nav-body-light {
+.theme-nav-body-light {
   background: linear-gradient(90deg, rgba(247, 255, 247, 1) 1%, rgba(230, 255, 230, 1) 72%, rgba(247, 255, 247, 1) 100%);
   color: #000;
 }
 
-.nav-body-dark {
+.theme-nav-body-dark {
   background: #071e34ff;
   color: #cfcfcf;
 }
 
-.main-container-light {
+.theme-main-container-light {
   background: linear-gradient(90deg, rgba(230, 255, 230, 1) 1%, rgba(222, 255, 222, 1) 72%, rgba(201, 255, 201, 1) 100%);
 
 }
 
-.main-container-dark {
+.theme-main-container-dark {
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(12, 12, 64, 1) 35%, rgba(6, 29, 71, 1) 64%, rgba(2, 20, 61, 1) 100%);
 
 }
 
-.dropdown-light {
+.theme-dropdown-light {
   .dropdown-menu.show {
     background-color: #ffffff;
   }
@@ -589,7 +603,7 @@ a.dropdown-toggle {
   }
 }
 
-.dropdown-dark {
+.theme-dropdown-dark {
   .dropdown-menu.show {
     background-color: #125191;
   }

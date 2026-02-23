@@ -13,13 +13,13 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from "react-router-dom";
 
 const SideBar1 = (props) => {
-    const { collapsed, rtl, toggled, setToggled, theme, darkMode } = props;
+    const { collapsed, rtl, toggled, setToggled, theme, themeState } = props;
     const { t } = useTranslation();
     const location = useLocation();
     const currentPath = location.pathname;
 
     // Logic xác định theme hiện tại để dùng trong rootStyles
-    const activeTheme = darkMode ? 'light' : 'dark'; 
+    const activeTheme = themeState ? 'light' : 'dark'; 
 
     const themes = {
         light: {
@@ -55,7 +55,7 @@ const SideBar1 = (props) => {
         icon: ({ active }) => ({
             color: active 
                 ? themes[activeTheme].menu.icon 
-                : (darkMode ? "#444" : "#8ba1b7")
+                : (themeState ? "#444" : "#8ba1b7")
         }),
         button: ({ active }) => ({
             margin: collapsed ? "0" : "0 10px",
@@ -117,7 +117,7 @@ const SideBar1 = (props) => {
                         letterSpacing: '1px',
                         color: themes[activeTheme].sidebar.color 
                     }}>
-                        <a href="/" className={darkMode ?"text-decoration-none text-dark":"text-decoration-none text-light"}>Quiz website</a>
+                        <a href="/" className={themeState ?"text-decoration-none text-dark":"text-decoration-none text-light"}>Quiz website</a>
                     </span>
                 )}
             </div>

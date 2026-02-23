@@ -83,12 +83,12 @@
                 height: fit-content;
 
                 table.table {
-                    th.th-dark {
+                    th.theme-th-dark {
                         background-color: #0e4c8a;
                         color: #cfcfcf;
                     }
 
-                    th.th-light {
+                    th.theme-th-light {
                         background-color: #fff;
                         color: #000;
                     }
@@ -165,14 +165,14 @@
     color: #cfcfcf;
 }
 
-.dark-card {
+.theme-card-dark {
     background-color: #0b335c;
     color: #cfcfcf;
 
 }
 
 .modal-body {
-    .floating-light {
+    .theme-floating-light {
 
 
         label {
@@ -192,7 +192,7 @@
         }
     }
 
-    .floating-dark {
+    .theme-floating-dark {
 
 
         label {
@@ -218,7 +218,7 @@
     }
 }
 
-.light-theme {
+.theme-mode-light {
     .filepond--panel-root {
         background-color: #fff;
         border: 1px solid #ccc;
@@ -229,7 +229,7 @@
     }
 }
 
-.dark-theme {
+.theme-mode-dark {
     .filepond--panel-root {
         background-color: #0b335c !important; // nền tối
         border: 1px solid #ffffff;

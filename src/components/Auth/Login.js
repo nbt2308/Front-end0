@@ -21,7 +21,7 @@ import fb from "../../assets/images/3.svg"
 import gh from "../../assets/images/gh.svg"
 
 const Login = (props) => {
-    const { darkMode } = props;
+    const { themeState } = props;
     const [isLoadingLogin, setIsLoadingLogin] = useState(false);
     const [form, setForm] = useState({
         EmailOrPhone: "",
@@ -99,21 +99,21 @@ const Login = (props) => {
         }
     }
     const handleChangeLight = () => {
-        darkMode.enable();
+        themeState.enable();
     }
     const handleChangeDark = () => {
-        darkMode.disable();
+        themeState.disable();
     }
     return (
         <>
-            <div className={darkMode.value ? "login-main main-container-light " : "login-main main-container-dark"}>
+            <div className={themeState.value ? "login-main theme-main-container-light " : "login-main theme-main-container-dark"}>
                 <PerfectScrollbar>
                     <div className='languages-change-container'>
-                        <Language darkMode={darkMode.value} />
+                        <Language themeState={themeState.value} />
                         <NavDropdown
-                            title={darkMode.value ? <AiFillSun /> : <IoIosMoon />}
+                            title={themeState.value ? <AiFillSun /> : <IoIosMoon />}
                             id="basic-nav-dropdown"
-                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                            className={themeState.value ? "changeTheme theme-dropdown-light" : "changeTheme theme-dropdown-dark"}>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
 
@@ -124,17 +124,17 @@ const Login = (props) => {
 
 
                     <div className="login-container ">
-                        <div className={darkMode.value ? "login-content  light" : "login-content  dark-card"}>
+                        <div className={themeState.value ? "login-content  light" : "login-content  theme-card-dark"}>
 
                             <div className="login-title mt-3">
                                 <span>{t('homepage.loginPage.loginTitle')}</span>
                             </div>
-                            <div className={darkMode.value ? "social-links-light" : "social-links-dark"}>
+                            <div className={themeState.value ? "theme-social-links-light" : "theme-social-links-dark"}>
                                 <a href='/login'><img src={fb} alt="facebook" /></a>
                                 <a href='/login' className='mx-3'><img src={gg} alt="google" /></a>
                                 <a href='/login'><img src={gh} alt="github" /></a>
                             </div>
-                            <div className={darkMode.value ? "divider-light my-3" : "divider-dark my-3"}>
+                            <div className={themeState.value ? "theme-divider-light my-3" : "theme-divider-dark my-3"}>
                                 <span>{t('homepage.loginPage.divider')}</span>
                             </div>
                             <div className="form-login">

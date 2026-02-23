@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { API_URL } from '../../../../views/App';
 const ModalViewUsers = (props) => {
-    const {  show, setShow, dataView,resetViewData,darkMode } = props
+    const {  show, setShow, dataView,resetViewData,themeState } = props
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -41,10 +41,10 @@ const ModalViewUsers = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} dialogClassName="modal-10w" backdrop="static" className='modal-view-user'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.usersManagement.modalViewUsers.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <div className="user-container">
                         <div className="user-image">
                             <img src={Image} alt="imageUser" />

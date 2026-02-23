@@ -19,17 +19,15 @@ import { Suspense } from 'react';
 import Test from "./components/Admin/Content/UserManagement/Test";
 import AccountProfile from"./components/Admin/Content/AccountProfile/AccountProfile";
 import LoadingSpinner from "./components/Loading/Loading"
-import useDarkMode from "use-dark-mode";
+import useTheme from "./hooks/useTheme";
 import ManageRoles from "./components/Admin/Content/RoleManagement/ManageRoles";
 import ManageGroups from "./components/Admin/Content/GroupManagement/ManageGroups";
 const LayOut = (props) => {
-    const darkMode = useDarkMode(false, {
-        storageKey: 'theme', // lưu theme trong localStorage
-    });
+    const themeState = useTheme();
     return (
         <Suspense fallback={<LoadingSpinner />}>
             <Routes>
-                <Route path="/" element={<App darkMode={darkMode}/>} >
+                <Route path="/" element={<App themeState={themeState}/>} >
                     <Route index element={<HomePage />} />
                     <Route path="/users" element={
                         <PrivateRoute>
@@ -41,7 +39,7 @@ const LayOut = (props) => {
                 <Route path="/quiz/:id" element={<DetailQuiz />} />
                 <Route path="/admin" element={
                     <PrivateRoute>
-                        <Admin darkMode={darkMode}/>
+                        <Admin themeState={themeState}/>
                     </PrivateRoute>
                 } >
                     <Route index element={<DashBoard />} />
@@ -52,8 +50,8 @@ const LayOut = (props) => {
                     <Route path="manage-groups" element={<ManageGroups/>} />
                     <Route path="account" element={<AccountProfile />} />
                 </Route>
-                <Route path="/login" element={<Login darkMode={darkMode}/>} />
-                <Route path="/register" element={<Register darkMode={darkMode}/>} />
+                <Route path="/login" element={<Login themeState={themeState}/>} />
+                <Route path="/register" element={<Register themeState={themeState}/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <ToastContainer

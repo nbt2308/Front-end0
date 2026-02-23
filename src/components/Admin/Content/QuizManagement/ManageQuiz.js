@@ -16,7 +16,7 @@ import { useOutletContext } from 'react-router-dom';
 import TableQuizWithPaginate from './TableQuizWithPaginate';
 const ManageQuiz = (props) => {
 
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const [showModalAddQuiz, setShowModalAddQuiz] = useState(false);
     const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
     const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
@@ -83,15 +83,15 @@ const ManageQuiz = (props) => {
         setShowModalAssignQuiz(true);
     }
     return (
-        <div className={darkMode ? "manageQuizzes-container light" : "manageQuizzes-container dark"}>
+        <div className={themeState ? "manageQuizzes-container light" : "manageQuizzes-container dark"}>
 
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
-            <div className={darkMode ? "quizzes-content light-card" : "quizzes-content dark-card"}>
+            <div className={themeState ? "quizzes-content theme-card-light" : "quizzes-content theme-card-dark"}>
                 <div className='d-flex flex-column flex-md-row gap-3 mb-3'>
                     <button onClick={() => handleBtnAddQuiz()} className='btn btn-primary mx-3 my-3 d-flex align-items-center justify-content-center gap-1'>
                         <FaPlus className='i-size' />
@@ -116,13 +116,13 @@ const ManageQuiz = (props) => {
                         handleBtnUpdateQuiz={handleBtnUpdateQuiz}
                         handleBtnDeleteQuiz={handleBtnDeleteQuiz}
                         listQuiz={listQuiz}
-                        darkMode={darkMode}
+                        themeState={themeState}
                     /> */}
                     <TableQuizWithPaginate
                         handleBtnUpdateQuiz={handleBtnUpdateQuiz}
                         handleBtnDeleteQuiz={handleBtnDeleteQuiz}
                         listQuiz={listQuiz}
-                        darkMode={darkMode}
+                        themeState={themeState}
                         fetchListQuizWithPagination={fetchListQuizWithPagination}
                         pageCount={pageCount}
                         currentPage={currentPage}
@@ -136,7 +136,7 @@ const ManageQuiz = (props) => {
                 fetchListQuiz={fetchListQuiz}
                 fetchListQuizWithPagination={fetchListQuizWithPagination}
                 setCurrentPage={setCurrentPage}
-                darkMode={darkMode}
+                themeState={themeState}
             />
             <ModalUpdateQuiz
                 show={showModalUpdateQuiz}
@@ -146,7 +146,7 @@ const ManageQuiz = (props) => {
                 fetchListQuizWithPagination={fetchListQuizWithPagination}
                 currentPage={currentPage}
                 resetUpdateQuiz={resetUpdateQuiz}
-                darkMode={darkMode}
+                themeState={themeState}
             />
             <ModalDeleteQuiz
                 show={showModalDeleteQuiz}
@@ -155,18 +155,18 @@ const ManageQuiz = (props) => {
                 fetchListQuiz={fetchListQuiz}
                 fetchListQuizWithPagination={fetchListQuizWithPagination}
                 setCurrentPage={setCurrentPage}
-                darkMode={darkMode}
+                themeState={themeState}
 
             />
             <ModalUpdateQA
                 show={showModalUpdateQA}
                 setShow={setShowModalUpdateQA}
-                darkMode={darkMode}
+                themeState={themeState}
             />
             <ModalAssignQuiz
                 show={showModalAssignQuiz}
                 setShow={setShowModalAssignQuiz}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
 

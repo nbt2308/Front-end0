@@ -17,7 +17,7 @@ import { getAllQuizForAdmin, postCreateNewQuestion, postCreateNewAnswer } from '
 import { useOutletContext } from 'react-router-dom';
 import Breadcrumb from '../../BreadCrump/Breadcrumb';
 const ManageQuestions = (props) => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [initQuestions, setInitQuestions] = useState([
         {
@@ -267,51 +267,51 @@ const ManageQuestions = (props) => {
         }
 
     }
-    const getCustomStyles = (darkMode) => ({
+    const getCustomStyles = (themeState) => ({
         menuPortal: base => ({ ...base, zIndex: 9999 }),
         control: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
-            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
+            borderColor: themeState ? "#ffffffff" : "#ccc",
             boxShadow: "none",
             ":hover": {
-                borderColor: darkMode ? "#63a4ff" : "#888",
+                borderColor: themeState ? "#63a4ff" : "#888",
             },
         }),
         menu: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
         }),
         option: (base, state) => ({
             ...base,
             backgroundColor: state.isSelected
-                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                ? (themeState ? "#104e8b" : "#e6f0ff")
                 : state.isFocused
-                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
-                    : (darkMode ? "#0d305a" : "#fff"),
-            color: darkMode ? "#fff" : "#000",
+                    ? (themeState ? "#1e90ff" : "#f0f8ff")
+                    : (themeState ? "#0d305a" : "#fff"),
+            color: themeState ? "#fff" : "#000",
             cursor: "pointer",
         }),
         singleValue: (base) => ({
             ...base,
-            color: darkMode ? "#fff" : "#000",
+            color: themeState ? "#fff" : "#000",
         }),
         placeholder: (base) => ({
             ...base,
-            color: darkMode ? "#bbb" : "#666",
+            color: themeState ? "#bbb" : "#666",
         }),
     });
     return (
-        <div className={darkMode ? "manageQuestions-container light" : "manageQuestions-container dark"}>
+        <div className={themeState ? "manageQuestions-container light" : "manageQuestions-container dark"}>
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
-            <div className={darkMode ? "questions-content light-card" : "questions-content dark-card"}>
+            <div className={themeState ? "questions-content theme-card-light" : "questions-content theme-card-dark"}>
                 {/* Thay đổi margin: mobile là 2, laptop là 4 */}
                 <div className='p-3 p-md-4'>
 
@@ -329,7 +329,7 @@ const ManageQuestions = (props) => {
                             options={listQuiz}
                             menuPortalTarget={document.body}
                             required
-                            styles={getCustomStyles(!darkMode)}
+                            styles={getCustomStyles(!themeState)}
                         />
                         <div className="invalid-feedback">{t('adminPage.quizzesManagement.modalUpsertQA.invalidSelect')}</div>
                     </div>
@@ -347,10 +347,10 @@ const ManageQuestions = (props) => {
                                         <div className="col-12 col-md-6">
                                             <FloatingLabel
                                                 label={`${t('adminPage.quizzesManagement.modalUpsertQA.q')} ${index_question + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s')}`}
-                                                className={darkMode ? "floating-light" : "floating-dark"}
+                                                className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                             >
                                                 <Form.Control
-                                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                                     placeholder="Name"
                                                     value={question.description}
                                                     onChange={(event) => handleOnChangeQuestionDescription('QUESTION', question.id, event.target.value)}
@@ -414,10 +414,10 @@ const ManageQuestions = (props) => {
                                                         <div className="col-9 col-md-8">
                                                             <FloatingLabel
                                                                 label={`${t('adminPage.quizzesManagement.modalUpsertQA.a')} ${index_answer + 1}${t('adminPage.quizzesManagement.modalUpsertQA.s1')}`}
-                                                                className={darkMode ? "floating-light" : "floating-dark"}
+                                                                className={themeState ? "theme-floating-light" : "theme-floating-dark"}
                                                             >
                                                                 <Form.Control
-                                                                    className={darkMode ? "form-control light" : "form-control dark-card"}
+                                                                    className={themeState ? "form-control light" : "form-control theme-card-dark"}
                                                                     placeholder="Answer"
                                                                     value={answer.description}
                                                                     onChange={(event) => handleAnswerQuestion('INPUT_ANSWER', question.id, answer.id, event.target.value)}
