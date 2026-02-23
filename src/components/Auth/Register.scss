@@ -53,7 +53,7 @@
 
             }
 
-            .social-links-light {
+            .theme-social-links-light {
                 margin-top: 10px;
 
                 a {
@@ -77,7 +77,7 @@
                 }
             }
 
-            .social-links-dark {
+            .theme-social-links-dark {
                 margin-top: 10px;
 
                 a {
@@ -99,7 +99,7 @@
                 }
             }
 
-            .divider-light {
+            .theme-divider-light {
                 display: flex;
                 align-self: center;
                 justify-content: center;
@@ -114,7 +114,7 @@
 
             }
 
-            .divider-dark {
+            .theme-divider-dark {
                 display: flex;
                 align-self: center;
                 justify-content: center;
@@ -198,12 +198,12 @@
     }
 }
 
-.main-container-light {
+.theme-main-container-light {
     background: linear-gradient(90deg, rgba(230, 255, 230, 1) 1%, rgba(222, 255, 222, 1) 72%, rgba(201, 255, 201, 1) 100%);
     color: #000;
 }
 
-.main-container-dark {
+.theme-main-container-dark {
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(12, 12, 64, 1) 35%, rgba(6, 29, 71, 1) 64%, rgba(2, 20, 61, 1) 100%);
     color: #cfcfcf;
 }
@@ -213,7 +213,7 @@
     color: #000000;
 }
 
-.dark-card {
+.theme-card-dark {
     background-color: #0b335c !important;
     color: #cfcfcf !important;
 
@@ -228,7 +228,7 @@
             font-size: 25px !important;
         }
 
-        .social-links-light {
+        .theme-social-links-light {
             margin-top: 10px;
 
             a {
@@ -252,7 +252,7 @@
             }
         }
 
-        .social-links-dark {
+        .theme-social-links-dark {
             margin-top: 10px;
 
             a {

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 const TableGroupsWithPaginate = (props) => {
     const { listGroup, handleBtnUpdateGroup, handleBtnDeleteGroup, fetchListGroupsWithPagination
-        , pageCount, currentPage, setCurrentPage, darkMode } = props;
+        , pageCount, currentPage, setCurrentPage, themeState } = props;
 
     const { t } = useTranslation();
     const handlePageClick = (event) => {
@@ -23,10 +23,10 @@ const TableGroupsWithPaginate = (props) => {
                         <table className="table table-bordered table-hover text-center">
                             <thead >
                                 <tr >
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupName')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupDescription')}</th>
-                                    <th scope="col" colSpan="2" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupActions')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupName')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupDescription')}</th>
+                                    <th scope="col" colSpan="2" className={themeState ? "action-col theme-th-light" : "action-col theme-th-dark"}>{t('adminPage.groupsManagement.tableGroups.groupActions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,20 +34,20 @@ const TableGroupsWithPaginate = (props) => {
                                     listGroup && listGroup.length > 0 && listGroup.map((item, index) => {
                                         return (
                                             <tr key={`table-role-${index}`}>
-                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.name}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                <td className={themeState ? "light" : "theme-card-dark"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.name}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.description}</td>
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
+                                                        className={themeState ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         onClick={() => handleBtnUpdateGroup(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.groupsManagement.tableGroups.tooltipEdit')}
                                                     ><FaPen />
                                                     </button>
                                                 </td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
+                                                    <button className={themeState ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         onClick={() => handleBtnDeleteGroup(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.groupsManagement.tableGroups.tooltipDelete')}
@@ -62,7 +62,7 @@ const TableGroupsWithPaginate = (props) => {
                                 {
                                     listGroup && listGroup.length === 0 &&
                                     <tr>
-                                        <td colSpan={"5"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.groupsManagement.tableGroups.error')}</td>
+                                        <td colSpan={"5"} className={themeState ? "light" : "theme-card-dark"}>{t('adminPage.groupsManagement.tableGroups.error')}</td>
                                     </tr>
                                 }
 
@@ -88,7 +88,7 @@ const TableGroupsWithPaginate = (props) => {
                 breakLabel="..."
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                containerClassName={`pagination ${themeState ? "pagination-light" : "pagination-dark"}`}
                 activeClassName="active"
                 renderOnZeroPageCount={null}
                 forcePage={currentPage - 1}

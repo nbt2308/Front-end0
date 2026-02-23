@@ -17,7 +17,7 @@ import "yet-another-react-lightbox/plugins/captions.css";
 import { useTranslation } from 'react-i18next';
 import { API_URL } from '../../../../views/App';
 const ModalUpdateQA = (props) => {
-    const { show, setShow, darkMode } = props
+    const { show, setShow, themeState } = props
     const { t } = useTranslation();
     const handleClose = () => {
         setShow(false);
@@ -298,40 +298,40 @@ const ModalUpdateQA = (props) => {
 
     }
     //custom style select
-    const getCustomStyles = (darkMode) => ({
+    const getCustomStyles = (themeState) => ({
         menuPortal: base => ({ ...base, zIndex: 9999 }),
         control: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
-            borderColor: darkMode ? "#ffffffff" : "#ccc",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
+            borderColor: themeState ? "#ffffffff" : "#ccc",
             boxShadow: "none",
             ":hover": {
-                borderColor: darkMode ? "#63a4ff" : "#888",
+                borderColor: themeState ? "#63a4ff" : "#888",
             },
         }),
         menu: (base) => ({
             ...base,
-            backgroundColor: darkMode ? "#0d305a" : "#fff",
-            color: darkMode ? "#fff" : "#000",
+            backgroundColor: themeState ? "#0d305a" : "#fff",
+            color: themeState ? "#fff" : "#000",
         }),
         option: (base, state) => ({
             ...base,
             backgroundColor: state.isSelected
-                ? (darkMode ? "#104e8b" : "#e6f0ff")
+                ? (themeState ? "#104e8b" : "#e6f0ff")
                 : state.isFocused
-                    ? (darkMode ? "#1e90ff" : "#f0f8ff")
-                    : (darkMode ? "#0d305a" : "#fff"),
-            color: darkMode ? "#fff" : "#000",
+                    ? (themeState ? "#1e90ff" : "#f0f8ff")
+                    : (themeState ? "#0d305a" : "#fff"),
+            color: themeState ? "#fff" : "#000",
             cursor: "pointer",
         }),
         singleValue: (base) => ({
             ...base,
-            color: darkMode ? "#fff" : "#000",
+            color: themeState ? "#fff" : "#000",
         }),
         placeholder: (base) => ({
             ...base,
-            color: darkMode ? "#bbb" : "#666",
+            color: themeState ? "#bbb" : "#666",
         }),
     });
     return (
@@ -342,17 +342,17 @@ const ModalUpdateQA = (props) => {
             backdrop="static"
             className='modal-upsert-qa'
         >
-            <Modal.Header closeButton className={darkMode ? "light" : "dark"}>
+            <Modal.Header closeButton className={themeState ? "light" : "dark"}>
                 <Modal.Title>{t('adminPage.quizzesManagement.modalUpsertQA.title')}</Modal.Title>
             </Modal.Header>
-            <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+            <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                 <div className='container-fluid'>
                     {/* Select Quiz */}
                     <div className="row mb-4">
                         <div className="col-12 col-md-6">
                             <label className="mb-2">{t('adminPage.quizzesManagement.modalUpsertQA.selectQuiz')}</label>
                             <Select
-                                styles={getCustomStyles(!darkMode)}
+                                styles={getCustomStyles(!themeState)}
                                 className={`${isValidSelected ? "" : "is-invalid"}`}
                                 classNamePrefix="react-select"
                                 defaultValue={selectedOption}
@@ -452,7 +452,7 @@ const ModalUpdateQA = (props) => {
                     }
                 </div>
             </Modal.Body>
-            <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+            <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                 <Button variant="secondary" onClick={handleClose}>
                     {t('adminPage.usersManagement.modalAddUsers.buttonCancel')}
                 </Button>

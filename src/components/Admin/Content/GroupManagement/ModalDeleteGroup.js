@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { IoIosWarning } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 const ModalDeleteGroup = (props) => {
-    const { show, setShow, dataDelete, fetchListGroupsWithPagination, setCurrentPage,darkMode } = props;
+    const { show, setShow, dataDelete, fetchListGroupsWithPagination, setCurrentPage,themeState } = props;
     const { t } = useTranslation();
     const handleClose = () => setShow(false);
 
@@ -25,18 +25,18 @@ const ModalDeleteGroup = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose} backdrop="static" className='modal-delete-group'>
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title className=' d-flex align-items-center'><IoIosWarning className='icon text-danger' />{t('adminPage.groupsManagement.modalDeleteGroup.title')}</Modal.Title>
                 </Modal.Header >
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <b>{t('adminPage.groupsManagement.modalDeleteGroup.textConfirmDelete')}</b>
                     <br />
                     <input 
-                    className={darkMode ? "light" : "dark-card"}
+                    className={themeState ? "light" : "theme-card-dark"}
                     type="text" value={dataDelete && dataDelete.name ? dataDelete.name : ""} disabled />
 
                 </Modal.Body>
-                <Modal.Footer className={darkMode ? "modal-footer light" : "modal-footer dark"}>
+                <Modal.Footer className={themeState ? "modal-footer light" : "modal-footer dark"}>
                     <Button variant="secondary" onClick={handleClose}>
                         {t('adminPage.groupsManagement.modalDeleteGroup.btnCancel')}
                     </Button>

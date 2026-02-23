@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import ReactPaginate from 'react-paginate';
 const TableQuizWithPaginate = (props) => {
-    const { handleBtnUpdateQuiz, handleBtnDeleteQuiz, listQuiz, darkMode, fetchListQuizWithPagination,
+    const { handleBtnUpdateQuiz, handleBtnDeleteQuiz, listQuiz, themeState, fetchListQuizWithPagination,
         setCurrentPage, pageCount, currentPage } = props
     const { t } = useTranslation();
     const handlePageClick = (event) => {
@@ -18,11 +18,11 @@ const TableQuizWithPaginate = (props) => {
                         <table className="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.descriptionQuiz')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.difficultyQuiz')}</th>
-                                    <th scope="col" colSpan="2 " className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.descriptionQuiz')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.difficultyQuiz')}</th>
+                                    <th scope="col" colSpan="2 " className={themeState ? "action-col theme-th-light" : "action-col theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,21 +30,21 @@ const TableQuizWithPaginate = (props) => {
                                     listQuiz && listQuiz.length > 0 && listQuiz.map((item, index) => {
                                         return (
                                             <tr key={`table-user-${index}`}>
-                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.name}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.difficulty}</td>
-                                                <td className={darkMode ? "action-col light" : "action-col dark-card"}>
+                                                <td className={themeState ? "light" : "theme-card-dark"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.name}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.description}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.difficulty}</td>
+                                                <td className={themeState ? "action-col light" : "action-col theme-card-dark"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
+                                                        className={themeState ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                                         onClick={() => handleBtnUpdateQuiz(item)}
 
                                                     ><FaPen className="icon-edit" /></button>
                                                 </td>
-                                                <td className={darkMode ? "action-col light" : "action-col dark-card"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                <td className={themeState ? "action-col light" : "action-col theme-card-dark"}>
+                                                    <button className={themeState ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         type="button"
                                                         onClick={() => handleBtnDeleteQuiz(item)}
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
@@ -58,7 +58,7 @@ const TableQuizWithPaginate = (props) => {
                                 {
                                     listQuiz && listQuiz.length === 0 &&
                                     <tr>
-                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.quizzesManagement.tableQuiz.notFound')}</td>
+                                        <td colSpan={"6"} className={themeState ? "light" : "theme-card-dark"}>{t('adminPage.quizzesManagement.tableQuiz.notFound')}</td>
                                     </tr>
                                 }
 
@@ -84,7 +84,7 @@ const TableQuizWithPaginate = (props) => {
                 breakLabel="..."
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                containerClassName={`pagination ${themeState ? "pagination-light" : "pagination-dark"}`}
                 activeClassName="active"
                 renderOnZeroPageCount={null}
                 forcePage={currentPage - 1}

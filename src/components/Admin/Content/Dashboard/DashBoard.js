@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useOutletContext } from "react-router-dom";
 import Breadcrumb from "../../BreadCrump/Breadcrumb";
 const DashBoard = (props) => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const [dataOverview, setDataOverview] = useState("");
     const [dataChart, setDataChart] = useState([]);
     const { t } = useTranslation();
@@ -54,18 +54,18 @@ const DashBoard = (props) => {
     }
     return (
         <>
-            <div className={darkMode ? "dashboard-container light" : "dashboard-container dark"}>
+            <div className={themeState ? "dashboard-container light" : "dashboard-container dark"}>
 
                 {/* Breadcrumb */}
                 <Breadcrumb
                     breadCrumb={breadCrumb}
-                    darkMode={darkMode}
+                    themeState={themeState}
                 />
                 <div className="dashboard-content">
                     <div className="top">
                         <div className="row">
                             <div className="col-md-3 col-sm-6 mb-3">
-                                <div className={darkMode ? "card p-3  light" : "card p-3  dark-card"}>
+                                <div className={themeState ? "card p-3  light" : "card p-3  theme-card-dark"}>
                                     <div className="stats w-75">
                                         <span className="text-1">{t('adminPage.dashboard.totalUsers')}</span>
                                         <span className="text-2">
@@ -87,7 +87,7 @@ const DashBoard = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3 col-sm-6 mb-3">
-                                <div className={darkMode ? "card p-3  light" : "card p-3  dark-card"}>
+                                <div className={themeState ? "card p-3  light" : "card p-3  theme-card-dark"}>
                                     <div className="stats w-75">
                                         <span className="text-1">{t('adminPage.dashboard.users')}</span>
                                         <span className="text-2">
@@ -110,7 +110,7 @@ const DashBoard = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3 col-sm-6 mb-3">
-                                <div className={darkMode ? "card p-3  light" : "card p-3  dark-card"}>
+                                <div className={themeState ? "card p-3  light" : "card p-3  theme-card-dark"}>
                                     <div className="stats w-75">
                                         <span className="text-1">{t('adminPage.dashboard.dev')}</span>
                                         <span className="text-2">{
@@ -129,13 +129,13 @@ const DashBoard = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3 col-sm-6 mb-3 ">
-                                <div className={darkMode ? "card p-3 light" : "card p-3 dark-card"}>
+                                <div className={themeState ? "card p-3 light" : "card p-3 theme-card-dark"}>
                                     <div className="stats w-75">
                                         <span className="text-1">{t('adminPage.dashboard.leader')}</span>
                                         <span className="text-2">1</span>
                                     </div>
                                     <div className="icon w-25">
-                                        <RiBaseStationLine style={darkMode ? { color: "green" } : { color: "#05b905" }} />
+                                        <RiBaseStationLine style={themeState ? { color: "green" } : { color: "#05b905" }} />
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@ const DashBoard = (props) => {
                     <div className="bottom">
                         <div className="row">
                             <div className="col-md-6 col-sm-6 mb-3">
-                                <div className={darkMode ? "card p-3 chart light" : "card p-3 chart dark-card"}>
+                                <div className={themeState ? "card p-3 chart light" : "card p-3 chart theme-card-dark"}>
                                     <span className="text-1">{t('adminPage.dashboard.quizStatistics.quizStatisticsTitle')}</span>
                                     <ResponsiveContainer width="95%" height="100%">
                                         <BarChart data={dataChart} style={{
@@ -155,8 +155,8 @@ const DashBoard = (props) => {
                                             fontWeight: "bold",
                                         }}>
                                             <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="name" stroke={darkMode ? "#000" : "#8ba1b7"} />
-                                            <YAxis stroke={darkMode ? "#000" : "#8ba1b7"} />
+                                            <XAxis dataKey="name" stroke={themeState ? "#000" : "#8ba1b7"} />
+                                            <YAxis stroke={themeState ? "#000" : "#8ba1b7"} />
                                             <Tooltip />
                                             <Legend />
                                             <Bar dataKey="Quizzes" fill="#3B82F6" />
@@ -167,7 +167,7 @@ const DashBoard = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-6 col-sm-4 mb-3">
-                                <div className={darkMode ? "card p-3 others light" : "card p-3 others dark-card"}>
+                                <div className={themeState ? "card p-3 others light" : "card p-3 others theme-card-dark"}>
                                     <span className="text-1">{t('adminPage.dashboard.others.othersTitle')}</span>
                                     <div className="row align-items-center mb-3 child">
                                         <div className="col-auto icon"><FaListAlt style={{ color: "#3B82F6" }} /></div>

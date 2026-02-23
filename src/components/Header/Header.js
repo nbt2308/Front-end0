@@ -19,7 +19,7 @@ import ModalProfile from './ModalProfile';
 import { useState } from 'react';
 import logo from "../../assets/images/NBT.svg"
 const Header = (props) => {
-    const { darkMode } = props;
+    const { themeState } = props;
     const isAuthenticated = useSelector(state => state?.isAuthenticated);
     const account = useSelector(state => state?.account);
     const role = useSelector(state => state?.account?.groupWithRole?.name);
@@ -54,16 +54,16 @@ const Header = (props) => {
 
 
     const handleChangeLight = () => {
-        darkMode.enable();
+        themeState.enable();
     }
     const handleChangeDark = () => {
-        darkMode.disable();
+        themeState.disable();
     }
     return (
         <>
 
 
-            <Navbar key="xl" expand="xl" className={darkMode.value ? " navbar-light " : " navbar-dark "}>
+            <Navbar key="xl" expand="xl" className={themeState.value ? " navbar-light " : " navbar-dark "}>
                 <Container >
                     <NavLink to="/" className='navbar-brand '><img src={logo} alt="logo" className='logo' /></NavLink>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} />
@@ -72,12 +72,12 @@ const Header = (props) => {
                         aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
                         placement="end"
                     >
-                        <Offcanvas.Header closeButton className={darkMode.value ? " nav-body-light " : " nav-body-dark "}>
+                        <Offcanvas.Header closeButton className={themeState.value ? " theme-nav-body-light " : " theme-nav-body-dark "}>
                             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
                                 NBT
                             </Offcanvas.Title>
                         </Offcanvas.Header>
-                        <Offcanvas.Body className={darkMode.value ? " nav-body-light " : " nav-body-dark "}>
+                        <Offcanvas.Body className={themeState.value ? " theme-nav-body-light " : " theme-nav-body-dark "}>
                             <Nav className="me-auto">
                                 <NavLink to="/" className='nav-link '>{t('homepage.header.home')}</NavLink >
                                 <NavLink to="/users" className='nav-link '>{t('homepage.header.play')}</NavLink >
@@ -100,7 +100,7 @@ const Header = (props) => {
                                             {/* <span><span className=' fs-5 fw-medium'>Welcome</span> {account.username}</span> */}
                                             <NavDropdown
                                                 title={<IoSettings />}
-                                                className={darkMode.value ? "settings dropdown-light " : "settings dropdown-dark "} >
+                                                className={themeState.value ? "settings theme-dropdown-light " : "settings theme-dropdown-dark "} >
                                                 <NavDropdown.Item
                                                     className='d-flex align-items-center gap-2'
                                                     onClick={() => handleShowModalProfile()}
@@ -123,7 +123,7 @@ const Header = (props) => {
                                             <>
                                                 <NavDropdown
                                                     title={<IoSettings />}
-                                                    className={darkMode.value ? "settings-true dropdown-light " : "settings-true dropdown-dark "} >
+                                                    className={themeState.value ? "settings-true theme-dropdown-light " : "settings-true theme-dropdown-dark "} >
                                                     <NavDropdown.Item
                                                         className='d-flex align-items-center gap-2'
                                                         onClick={() => handleShowModalProfile()}
@@ -148,16 +148,16 @@ const Header = (props) => {
 
                                         <NavDropdown
                                             title={
-                                                (darkMode.value ? <AiFillSun /> : <IoIosMoon />)
+                                                (themeState.value ? <AiFillSun /> : <IoIosMoon />)
                                             }
                                             id="basic-nav-dropdown"
-                                            className={darkMode.value ? "changeTheme dropdown-light" : "changeTheme dropdown-dark"}>
+                                            className={themeState.value ? "changeTheme theme-dropdown-light" : "changeTheme theme-dropdown-dark"}>
                                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeLight()}><AiFillSun />{t('homepage.header.light')}</NavDropdown.Item>
                                             <NavDropdown.Item className='d-flex align-items-center gap-2' onClick={() => handleChangeDark()}><IoIosMoon /> {t('homepage.header.dark')}</NavDropdown.Item>
 
                                         </NavDropdown>
                                         {/* <div className='language-change-container'> */}
-                                        <Language darkMode={darkMode.value} />
+                                        <Language themeState={themeState.value} />
                                         {/* </div> */}
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@ const Header = (props) => {
             <ModalProfile
                 show={showModalProfile}
                 setShow={setShowModalProfile}
-                darkMode={darkMode.value}
+                themeState={themeState.value}
             />
 
         </>

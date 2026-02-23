@@ -10,7 +10,7 @@ import ModalAddGroup from './ModalAddGroup';
 import ModalUpdateGroup from './ModalUpdateGroup';
 import ModalDeleteGroup from './ModalDeleteGroup';
 const ManageGroups = (props) => {
-    const { darkMode, breadCrumb, setBreadCrumb } = useOutletContext();
+    const { themeState, breadCrumb, setBreadCrumb } = useOutletContext();
     const { t } = useTranslation();
     const [listGroup, setListGroup] = useState("");
     const [dataUpdate, setDataUpdate] = useState("")
@@ -52,15 +52,15 @@ const ManageGroups = (props) => {
     
 
     return (
-        <div className={darkMode ? "manageGroups-container light" : "manageGroups-container dark"}>
+        <div className={themeState ? "manageGroups-container light" : "manageGroups-container dark"}>
 
             {/* Breadcrumb */}
             <Breadcrumb
                 breadCrumb={breadCrumb}
-                darkMode={darkMode}
+                themeState={themeState}
             />
 
-            <div className={darkMode ? "groups-content light-card" : "groups-content dark-card"}>
+            <div className={themeState ? "groups-content theme-card-light" : "groups-content theme-card-dark"}>
                 <div className="d-flex">
                     <div className="btn-common">
                         <button onClick={() => { handleBtnAddGroup() }} className='btn btn-primary d-flex align-items-center gap-1'><FaPlus className='i-size' /> {t('adminPage.groupsManagement.btnAddGroup')} </button>
@@ -75,21 +75,21 @@ const ManageGroups = (props) => {
                         pageCount={pageCount}
                         currentPage={currentPage}
                         setCurrentPage={setCurrentPage}
-                        darkMode={darkMode} />
+                        themeState={themeState} />
                 </div>
             </div>
 
             <ModalAddGroup
                 show={showModalAddGroup}
                 setShow={setShowModalAddGroup}
-                darkMode={darkMode}
+                themeState={themeState}
                 fetchListGroupsWithPagination={fetchListGroupsWithPagination}
                 setCurrentPage={setCurrentPage}
             />
             <ModalUpdateGroup
                 show={showModalUpdateGroup}
                 setShow={setShowModalUpdateGroup}
-                darkMode={darkMode}
+                themeState={themeState}
                 fetchListGroupsWithPagination={fetchListGroupsWithPagination}
                 setCurrentPage={setCurrentPage}
                 currentPage={currentPage}
@@ -98,7 +98,7 @@ const ManageGroups = (props) => {
             <ModalDeleteGroup
                 show={showModalDeleteGroup}
                 setShow={setShowModalDeleteGroup}
-                darkMode={darkMode}
+                themeState={themeState}
                 fetchListGroupsWithPagination={fetchListGroupsWithPagination}
                 setCurrentPage={setCurrentPage}
                 dataDelete={dataDelete}

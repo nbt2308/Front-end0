@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 const TableUserPaginate = (props) => {
     const { listUsers, handleBtnUpdateUser, handleBtnViewUser, handleBtnDeleteUser, fetchListUsersWithPaginate
-        , pageCount, currentPage, setCurrentPage, darkMode } = props;
+        , pageCount, currentPage, setCurrentPage, themeState } = props;
 
     const { t } = useTranslation();
     const handlePageClick = (event) => {
@@ -23,12 +23,12 @@ const TableUserPaginate = (props) => {
                         <table className="table table-bordered table-hover text-center">
                             <thead >
                                 <tr >
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>ID</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
-                                    <th scope="col" colspan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>ID</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.username')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.email')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.phone')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.role')}</th>
+                                    <th scope="col" colspan="3" className={themeState ? "action-col theme-th-light" : "action-col theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,31 +36,31 @@ const TableUserPaginate = (props) => {
                                     listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
                                         return (
                                             <tr key={`table-user-${index}`}>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.id}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.username}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.email}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.phone}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.Group.name}</td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.id}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.username}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.email}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.phone}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.Group.name}</td>
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-view btn-light border-0" : "btn btn-view btn-dark border-0"}
+                                                        className={themeState ? "btn btn-view btn-light border-0" : "btn btn-view btn-dark border-0"}
                                                         onClick={() => handleBtnViewUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="View"
                                                     ><FaEye />
                                                     </button>
                                                 </td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
+                                                        className={themeState ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         onClick={() => handleBtnUpdateUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                                     ><FaPen />
                                                     </button>
                                                 </td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
+                                                    <button className={themeState ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         onClick={() => handleBtnDeleteUser(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
@@ -75,7 +75,7 @@ const TableUserPaginate = (props) => {
                                 {
                                     listUsers && listUsers.length === 0 &&
                                     <tr>
-                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
+                                        <td colSpan={"6"} className={themeState ? "light" : "theme-card-dark"}>{t('adminPage.usersManagement.tableUsers.error')}</td>
                                     </tr>
                                 }
 
@@ -101,7 +101,7 @@ const TableUserPaginate = (props) => {
                 breakLabel="..."
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                containerClassName={`pagination ${themeState ? "pagination-light" : "pagination-dark"}`}
                 activeClassName="active"
                 renderOnZeroPageCount={null}
                 forcePage={currentPage - 1}

@@ -7,11 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import './footer.scss'
 export default function Footer(props) {
-    const { darkMode } = props;
+    const { themeState } = props;
     const { t } = useTranslation();
     const role = useSelector(state => state?.account?.groupWithRole?.name);
     return (
-        <MDBFooter className={darkMode.value?'text-center text-lg-start text-dark sticky-bottom footer-container-light':'text-center text-lg-start text-light sticky-bottom footer-container-dark'}>
+        <MDBFooter className={themeState.value?'text-center text-lg-start text-dark sticky-bottom theme-footer-container-light':'text-center text-lg-start text-light sticky-bottom theme-footer-container-dark'}>
             <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
                 <div className='me-5 d-none d-lg-block'>
                     <span>Get connected with us on social networks:</span>

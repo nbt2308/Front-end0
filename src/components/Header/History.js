@@ -5,7 +5,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { useTranslation } from 'react-i18next';
 const History = (props) => {
-    const {darkMode}=props
+    const {themeState}=props
     const [listHistory, setListHistory] = useState([]);
     const { t } = useTranslation();
     useEffect(() => {
@@ -32,7 +32,7 @@ const History = (props) => {
     }
     return (
         <>
-            <div className={darkMode ? "table-history-container mx-3 light-card" : "table-history-container mx-3 dark-card"}>
+            <div className={themeState ? "table-history-container mx-3 theme-card-light" : "table-history-container mx-3 theme-card-dark"}>
                 <div className="title mb-3 ms-3 mt-3">{t('adminPage.accountProfile.history.title')}</div>
 
                 <div className="table-content mb-3">
@@ -40,11 +40,11 @@ const History = (props) => {
                         <table className="table text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>ID</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.accountProfile.history.totalQuestions')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.accountProfile.history.totalCorrect')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.accountProfile.history.date')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>ID</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.quizzesManagement.tableQuiz.nameQuiz')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.accountProfile.history.totalQuestions')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.accountProfile.history.totalCorrect')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.accountProfile.history.date')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,11 +52,11 @@ const History = (props) => {
                                     listHistory && listHistory.length > 0 && listHistory.map((item, index) => {
                                         return (
                                             <tr key={`table-history-${index}`}>
-                                                <th scope="row" className={darkMode ? "light" : "dark-card"}>{item.id}</th>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.quiz_name}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.total_questions}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.total_correct}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.date}</td>
+                                                <th scope="row" className={themeState ? "light" : "theme-card-dark"}>{item.id}</th>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.quiz_name}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.total_questions}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.total_correct}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.date}</td>
                                             </tr>
                                         )
                                     })

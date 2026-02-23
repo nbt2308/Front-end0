@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 const TableRolesWithPaginate = (props) => {
     const { listRole, handleBtnUpdateRole, handleBtnDeleteRole, fetchListRoleWithPagination
-        , pageCount, currentPage, setCurrentPage, darkMode } = props;
+        , pageCount, currentPage, setCurrentPage, themeState } = props;
 
     const { t } = useTranslation();
     const handlePageClick = (event) => {
@@ -23,11 +23,11 @@ const TableRolesWithPaginate = (props) => {
                         <table className="table table-bordered table-hover text-center">
                             <thead >
                                 <tr >
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}><span className="ms-4">ID</span></th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
-                                    <th scope="col" className={darkMode ? "th-light" : "th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
-                                    <th scope="col" colSpan="3" className={darkMode ? "action-col th-light" : "action-col th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}><span className="ms-4">ID</span></th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleUrl')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleMethod')}</th>
+                                    <th scope="col" className={themeState ? "theme-th-light" : "theme-th-dark"}>{t('adminPage.rolesManagement.tableRoles.roleDescription')}</th>
+                                    <th scope="col" colSpan="3" className={themeState ? "action-col theme-th-light" : "action-col theme-th-dark"}>{t('adminPage.usersManagement.tableUsers.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,21 +35,21 @@ const TableRolesWithPaginate = (props) => {
                                     listRole && listRole.length > 0 && listRole.map((item, index) => {
                                         return (
                                             <tr key={`table-role-${index}`}>
-                                                <td className={darkMode ? "light" : "dark-card"}><span className="ms-4">{item.id}</span></td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.url}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.method}</td>
-                                                <td className={darkMode ? "light" : "dark-card"}>{item.description}</td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
+                                                <td className={themeState ? "light" : "theme-card-dark"}><span className="ms-4">{item.id}</span></td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.url}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.method}</td>
+                                                <td className={themeState ? "light" : "theme-card-dark"}>{item.description}</td>
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
                                                     <button
-                                                        className={darkMode ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
+                                                        className={themeState ? "btn btn-edit btn-light border-0" : "btn btn-edit btn-dark border-0"}
                                                         onClick={() => handleBtnUpdateRole(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.rolesManagement.tableRoles.tooltipEdit')}
                                                     ><FaPen />
                                                     </button>
                                                 </td>
-                                                <td className={darkMode ? "light action-col" : "dark-card action-col"}>
-                                                    <button className={darkMode ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
+                                                <td className={themeState ? "light action-col" : "theme-card-dark action-col"}>
+                                                    <button className={themeState ? "btn btn-delete btn-light border-0" : "btn btn-delete btn-dark border-0"}
                                                         onClick={() => handleBtnDeleteRole(item)}
                                                         type="button"
                                                         data-bs-toggle="tooltip" data-bs-placement="top" title={t('adminPage.rolesManagement.tableRoles.tooltipDelete')}
@@ -64,7 +64,7 @@ const TableRolesWithPaginate = (props) => {
                                 {
                                     listRole && listRole.length === 0 &&
                                     <tr>
-                                        <td colSpan={"6"} className={darkMode ? "light" : "dark-card"}>{t('adminPage.rolesManagement.tableRoles.error')}</td>
+                                        <td colSpan={"6"} className={themeState ? "light" : "theme-card-dark"}>{t('adminPage.rolesManagement.tableRoles.error')}</td>
                                     </tr>
                                 }
 
@@ -90,7 +90,7 @@ const TableRolesWithPaginate = (props) => {
                 breakLabel="..."
                 breakClassName="page-item"
                 breakLinkClassName="page-link"
-                containerClassName={`pagination ${darkMode ? "pagination-light" : "pagination-dark"}`}
+                containerClassName={`pagination ${themeState ? "pagination-light" : "pagination-dark"}`}
                 activeClassName="active"
                 renderOnZeroPageCount={null}
                 forcePage={currentPage - 1}

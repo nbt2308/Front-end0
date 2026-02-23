@@ -8,7 +8,7 @@ import History from './History';
 const ModalProfile = (props) => {
     const { t } = useTranslation();
     const [key, setKey] = useState('Personal Details');
-    const { show, setShow,darkMode } = props
+    const { show, setShow,themeState } = props
     const handleClose = () => {
         setShow(false)
     }
@@ -21,10 +21,10 @@ const ModalProfile = (props) => {
                 keyboard={false}
                 size='xl'
             >
-                <Modal.Header closeButton className={darkMode ? "light" : "dark"} closeVariant={darkMode ? "black" : "white"}>
+                <Modal.Header closeButton className={themeState ? "light" : "dark"} closeVariant={themeState ? "black" : "white"}>
                     <Modal.Title>{t('adminPage.accountProfile.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={darkMode ? "modal-body light" : "modal-body dark"}>
+                <Modal.Body className={themeState ? "modal-body light" : "modal-body dark"}>
                     <Tabs
                         id="controlled-tab-example"
                         activeKey={key}
@@ -33,13 +33,13 @@ const ModalProfile = (props) => {
                         justify
                     >
                         <Tab eventKey="Personal Details" title={t('adminPage.accountProfile.personalDetail.title1')}>
-                            <PersonalDetails darkMode={darkMode}/>
+                            <PersonalDetails themeState={themeState}/>
                         </Tab>
                         <Tab eventKey="Change Password" title={t('adminPage.accountProfile.changePassword.title')}>
-                            <ChangePassword darkMode={darkMode}/>
+                            <ChangePassword themeState={themeState}/>
                         </Tab>
                         <Tab eventKey="contact" title={t('adminPage.accountProfile.history.title1')} >
-                            <History darkMode={darkMode}/>
+                            <History themeState={themeState}/>
                         </Tab>
                     </Tabs>
                 </Modal.Body>
